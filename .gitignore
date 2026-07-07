@@ -1,0 +1,5 @@
+node_modules/
+npm-debug.log*
+
+# Raw uploaded originals (already organized into images/ and public/images/)
+WhatsApp Image*.jpeg

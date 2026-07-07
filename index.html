@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP) | Rashtriya Janahita Party</title>
+<meta name="description" content="ಅಧಿಕಾರಕ್ಕಾಗಿ ಅಲ್ಲ, ಜನಹಿತಕ್ಕಾಗಿ ಒಂದು ಹೊಸ ರಾಜಕೀಯ ಪಯಣ — ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP). Zero corruption, transparent, technology-driven governance for Karnataka and India.">
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Noto+Sans+Kannada:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --saffron:#F0A400;
+    --saffron-deep:#C8850A;
+    --green:#1B7A3D;
+    --green-deep:#0B3D22;
+    --navy:#16234A;
+    --cream:#FBF6EA;
+    --white:#FFFFFF;
+    --ink:#1D2430;
+    --line:rgba(22,35,74,0.12);
+    --shadow: 0 20px 45px -20px rgba(11,61,34,0.35);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Sans Kannada','Inter',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+
+  .eng, .eng-display{font-family:'Fraunces','Inter',serif;}
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces','Noto Sans Kannada',serif;
+    color:var(--navy);
+    margin:0 0 .5em;
+    letter-spacing:-0.01em;
+  }
+  h1{font-weight:600;}
+  h2{font-weight:600;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* signature tricolor rule — echoes the flag; used as the recurring divider motif */
+  .tricolor-rule{
+    height:6px;
+    width:100%;
+    background:linear-gradient(90deg,
+      var(--saffron) 0 33.33%,
+      #ffffff 33.33% 66.66%,
+      var(--green) 66.66% 100%);
+  }
+  .tricolor-rule.thin{height:3px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(251,246,234,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 24px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand img{width:46px; height:46px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px var(--white), 0 0 0 3px var(--saffron);}
+  .brand-text .kn{font-size:1.05rem; font-weight:700; color:var(--navy); line-height:1.1;}
+  .brand-text .en{font-family:'Fraunces',serif; font-size:.72rem; letter-spacing:.14em; color:var(--green-deep); text-transform:uppercase;}
+
+  nav.links{display:flex; gap:28px; align-items:center;}
+  nav.links a{
+    font-size:.95rem; font-weight:500; text-decoration:none; color:var(--navy);
+    padding:6px 2px; border-bottom:2px solid transparent; transition:border-color .2s ease;
+  }
+  nav.links a:hover{border-color:var(--saffron);}
+  .nav-cta{
+    background:var(--green);
+    color:var(--white) !important;
+    padding:10px 20px !important;
+    border-radius:999px;
+    border-bottom:none !important;
+    font-weight:600 !important;
+  }
+  .nav-cta:hover{background:var(--green-deep); border-color:transparent !important;}
+
+  .menu-btn{display:none; background:none; border:none; font-size:1.6rem; color:var(--navy); cursor:pointer;}
+
+  /* ---------- Hero (3-banner slider, full image, arrows + dots) ---------- */
+  .hero{
+    position:relative;
+    color:var(--white);
+    overflow:hidden;
+    height:clamp(380px, 46vw, 560px);
+    display:flex;
+    align-items:center;
+    background:var(--navy);
+  }
+  .hero .slide{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center;
+    z-index:0; opacity:0;
+    transition:opacity .8s ease;
+  }
+  .hero .slide.current{opacity:1; z-index:1;}
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,25,20,.55) 0%, rgba(11,35,20,.72) 55%, rgba(6,20,12,.9) 100%);
+    z-index:2;
+  }
+  .hero-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:4;
+    width:46px; height:46px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,.18); color:var(--white); font-size:1.3rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease;
+  }
+  .hero-nav:hover{background:rgba(255,255,255,.32);}
+  .hero-nav.prev{left:20px;}
+  .hero-nav.next{right:20px;}
+  .hero-dots{
+    position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:4;
+    display:flex; gap:8px;
+  }
+  .hero-dots .dot{
+    width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer;
+    background:rgba(255,255,255,.4); transition:width .2s ease, background .2s ease;
+  }
+  .hero-dots .dot.active{width:24px; border-radius:5px; background:var(--saffron);}
+  .hero-content{
+    position:relative; z-index:3;
+    max-width:1180px; margin:0 auto; padding:28px 24px 24px;
+    width:100%;
+  }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.35);
+    padding:6px 16px 6px 6px; border-radius:999px;
+    font-size:.8rem; margin-bottom:14px;
+  }
+  .hero-badge img{width:28px; height:28px; border-radius:50%;}
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(1.6rem, 3.4vw, 2.5rem);
+    font-weight:600;
+    max-width:820px;
+    margin-bottom:.35em;
+    line-height:1.25;
+  }
+  .hero .rjp-mark{
+    font-family:'Fraunces',serif; font-weight:700;
+    color:var(--saffron);
+    letter-spacing:.02em;
+  }
+  .hero p.lede{
+    max-width:640px;
+    font-size:.98rem;
+    color:rgba(255,255,255,0.88);
+    margin-bottom:1em;
+  }
+  .hero-cta-row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:600; font-size:1rem;
+    text-decoration:none;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--saffron); color:var(--navy); box-shadow:0 12px 30px -10px rgba(240,164,0,.6);}
+  .btn-ghost{background:rgba(255,255,255,.08); color:var(--white); border:1.5px solid rgba(255,255,255,.55);}
+
+  .hero-tagline{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    color:rgba(255,255,255,.85);
+    font-size:1.05rem;
+  }
+
+  /* ---------- section basics ---------- */
+  section{padding:88px 0; scroll-margin-top:84px;}
+  #top{scroll-margin-top:0;}
+  .section-alt{background:var(--white);}
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:.16em; font-size:.78rem;
+    color:var(--green-deep); font-weight:700; margin-bottom:14px; display:block;
+  }
+  .section-head{max-width:720px; margin-bottom:52px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .section-head p{color:#4a5364; font-size:1.05rem;}
+
+  /* ---------- Why RJP / About grid ---------- */
+  .about-grid{
+    display:grid; grid-template-columns: 1.05fr .95fr; gap:56px; align-items:stretch;
+  }
+  .about-grid img{
+    width:100%; height:100%; min-height:340px; object-fit:contain;
+    background:var(--cream); padding:18px;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .about-copy p{margin:0 0 1.2em; color:#333c4a;}
+  .pillars{list-style:none; margin:24px 0 0; padding:0; display:grid; gap:14px;}
+  .pillars li{
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--cream); border:1px solid var(--line);
+    padding:14px 18px; border-radius:12px; font-weight:500;
+  }
+  .pillars li .dot{
+    width:10px; height:10px; border-radius:50%; margin-top:8px; flex:none;
+    background:var(--saffron);
+  }
+  .pillars li:nth-child(2) .dot{background:var(--green);}
+  .pillars li:nth-child(3) .dot{background:var(--navy);}
+  .pillars li:nth-child(4) .dot{background:var(--saffron-deep);}
+
+  /* ---------- Ideology / values ---------- */
+  .ideology{
+    background:var(--navy);
+    color:#EAEFF7;
+    position:relative;
+  }
+  .ideology .section-head p{color:#c3cde3;}
+  .ideology .eyebrow{color:var(--saffron);}
+  .ideology h2{color:var(--white);}
+  .ideology-layout{display:grid; grid-template-columns:1fr 1.3fr; gap:48px; align-items:stretch;}
+  .ideology-layout img{
+    width:100%; height:100%; min-height:360px; object-fit:contain;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); padding:18px;
+    border-radius:var(--radius); box-shadow:0 25px 60px -25px rgba(0,0,0,.6);
+  }
+  .value-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:18px;
+  }
+  .value-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:16px; padding:24px;
+  }
+  .value-card .num{
+    font-family:'Fraunces',serif; font-size:1rem; color:var(--saffron); font-weight:600;
+  }
+  .value-card p{margin:.6em 0 0; color:#d7deed; font-size:.98rem;}
+
+  /* ---------- Difference (seal motif) ---------- */
+  .difference{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;
+  }
+  .seal-card{text-align:center; padding:8px;}
+  .seal{
+    width:96px; height:96px; margin:0 auto 20px;
+    border-radius:50%;
+    border:3px solid var(--saffron);
+    display:flex; align-items:center; justify-content:center;
+    background:var(--white);
+    box-shadow:0 10px 24px -12px rgba(27,122,61,.4);
+    position:relative;
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset:6px;
+    border-radius:50%;
+    border:1.5px dashed var(--green);
+  }
+  .seal span{font-family:'Fraunces',serif; font-weight:700; font-size:1.6rem; color:var(--navy);}
+  .seal-card h3{font-size:1.08rem;}
+  .seal-card p{color:#4a5364; font-size:.96rem;}
+
+  /* ---------- Agenda ---------- */
+  .agenda-layout{
+    display:grid; grid-template-columns: 1fr 1.15fr; gap:56px; align-items:start;
+  }
+  .agenda-layout img{border-radius:var(--radius); box-shadow:var(--shadow); position:sticky; top:110px;}
+  .agenda-list{list-style:none; margin:0; padding:0; display:grid; gap:14px;}
+  .agenda-list li{
+    display:grid; grid-template-columns:44px 1fr; gap:16px; align-items:flex-start;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .agenda-list li:last-child{border-bottom:none;}
+  .agenda-tag{
+    width:44px; height:44px; border-radius:12px;
+    background:linear-gradient(160deg, var(--saffron), var(--saffron-deep));
+    display:flex; align-items:center; justify-content:center;
+    color:var(--white); font-weight:700; font-family:'Fraunces',serif;
+  }
+  .agenda-list li:nth-child(3n+2) .agenda-tag{background:linear-gradient(160deg, var(--green), var(--green-deep));}
+  .agenda-list li:nth-child(3n) .agenda-tag{background:linear-gradient(160deg, var(--navy), #0c1730);}
+  .agenda-list h4{margin:0 0 4px; font-size:1.05rem; color:var(--navy);}
+  .agenda-list .en{font-family:'Inter',sans-serif; font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--green-deep); display:block; margin-bottom:2px;}
+  .agenda-list p{margin:0; color:#4a5364; font-size:.96rem;}
+
+  /* ---------- Dream Karnataka ---------- */
+  .dream{
+    background:linear-gradient(180deg, var(--green-deep), #06200f);
+    color:var(--white);
+    text-align:center;
+  }
+  .dream .wrap{max-width:820px;}
+  .dream .eyebrow{color:var(--saffron); text-align:center;}
+  .dream h2{color:var(--white);}
+  .dream-lines{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:1.25rem; line-height:1.9; color:#e7f2ea;
+    margin:24px 0 36px;
+  }
+  .dream-lines span{display:block;}
+  .dream-quote{
+    font-weight:700; font-size:1.15rem; color:var(--saffron);
+  }
+
+  /* ---------- Wings ---------- */
+  .wings{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+  }
+  .wing-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:34px;
+    box-shadow:0 18px 40px -28px rgba(22,35,74,.3);
+  }
+  .wing-card .icon{
+    width:56px; height:56px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; margin-bottom:18px;
+  }
+  .wing-card.youth .icon{background:rgba(240,164,0,.16); color:var(--saffron-deep);}
+  .wing-card.women .icon{background:rgba(27,122,61,.14); color:var(--green);}
+  .wing-card p{color:#4a5364;}
+
+  /* ---------- Transparency ---------- */
+  /* ---------- Launch event ---------- */
+  .launch{
+    background:var(--white);
+  }
+  .launch-grid{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:48px; align-items:stretch;
+  }
+  .launch-grid img{
+    width:100%; height:100%; min-height:360px; object-fit:contain;
+    background:var(--cream); padding:18px;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .launch-meta{display:flex; gap:22px; flex-wrap:wrap; margin:22px 0 28px;}
+  .launch-meta div{
+    background:var(--cream); border:1px solid var(--line); border-radius:12px;
+    padding:14px 20px; min-width:150px;
+  }
+  .launch-meta b{display:block; font-family:'Fraunces',serif; color:var(--navy); font-size:1.05rem;}
+  .launch-meta span{font-size:.85rem; color:#5a6070;}
+
+  .transparency{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;
+  }
+  .transparency-copy p{color:#333c4a; font-size:1.05rem;}
+  .stat-row{display:flex; gap:28px; margin-top:28px; flex-wrap:wrap;}
+  .stat{background:var(--cream); border:1px solid var(--line); border-radius:14px; padding:18px 22px; flex:1; min-width:150px;}
+  .stat b{font-family:'Fraunces',serif; font-size:1.5rem; color:var(--navy); display:block;}
+  .stat span{font-size:.88rem; color:#5a6070;}
+  .transparency-visual{
+    background:var(--navy); border-radius:var(--radius); padding:36px; color:var(--white);
+    box-shadow:var(--shadow);
+  }
+  .transparency-visual .tricolor-rule{margin-bottom:22px; border-radius:3px;}
+  .transparency-visual ul{margin:0; padding-left:20px; color:#d7deed;}
+  .transparency-visual li{margin-bottom:10px;}
+
+  /* ---------- Join / Membership ---------- */
+  .join{
+    background:var(--white);
+  }
+  .join-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;
+  }
+  .join-grid img{
+    width:100%; height:100%; min-height:320px; object-fit:contain;
+    background:var(--white); padding:20px;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .join-copy h2{margin-bottom:.3em;}
+  .join-steps{list-style:none; margin:24px 0; padding:0; counter-reset:step;}
+  .join-steps li{
+    counter-increment:step;
+    display:flex; gap:16px; margin-bottom:16px; align-items:flex-start;
+  }
+  .join-steps li::before{
+    content:counter(step);
+    flex:none; width:32px; height:32px; border-radius:50%;
+    background:var(--saffron); color:var(--navy); font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-size:.95rem;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:var(--cream);
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .contact-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px; box-shadow:0 18px 40px -28px rgba(22,35,74,.25);
+  }
+  .contact-card h3{font-size:1.2rem;}
+  .contact-list{list-style:none; margin:18px 0 0; padding:0; display:grid; gap:14px;}
+  .contact-list li{display:flex; gap:12px; align-items:center; font-size:.98rem;}
+  .contact-list a{text-decoration:none;}
+  .contact-list a:hover{color:var(--green-deep); text-decoration:underline;}
+  .contact-list .ic{
+    width:38px; height:38px; border-radius:10px; background:var(--cream);
+    display:flex; align-items:center; justify-content:center; flex:none; font-size:1.05rem;
+  }
+  .contact-form{display:grid; gap:14px;}
+  .contact-form input, .contact-form textarea{
+    width:100%; padding:13px 16px; border-radius:10px; border:1px solid var(--line);
+    font-family:inherit; font-size:.98rem; background:var(--cream);
+  }
+  .contact-form button{
+    justify-self:start;
+  }
+  .form-note{font-size:.82rem; color:#6b7280; margin-top:-4px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--green-deep); color:#dcecdf;
+  }
+  .footer-top{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:36px;
+    padding:56px 0 36px;
+  }
+  .footer-brand{display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;}
+  .footer-brand img{width:52px; height:52px; border-radius:50%; box-shadow:0 0 0 2px rgba(255,255,255,.5);}
+  .footer-brand .kn{font-weight:700; color:var(--white); font-size:1.05rem;}
+  .footer-brand .en{font-family:'Fraunces',serif; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--saffron);}
+  footer p{color:#b9d4c0; font-size:.94rem;}
+  footer h4{color:var(--white); font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:16px;}
+  footer ul{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  footer a{text-decoration:none; color:#cfe4d3; font-size:.94rem;}
+  footer a:hover{color:var(--saffron);}
+  .social-row{display:flex; gap:12px; margin-top:6px;}
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; background:var(--cream);
+    color:var(--green-deep);
+    display:flex; align-items:center; justify-content:center; font-size:1rem;
+    transition:background .2s ease, color .2s ease;
+  }
+  .social-row a:hover{background:var(--saffron); color:var(--navy);}
+  .social-row svg{width:18px; height:18px; display:block;}
+  .whatsapp-cta{
+    display:inline-flex; align-items:center; gap:10px; margin-top:14px;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25);
+    padding:10px 18px; border-radius:999px; font-size:.9rem;
+  }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.14);
+    padding:22px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:.85rem; color:#9fc2a7;
+  }
+
+  @media (max-width: 940px){
+    nav.links{display:none;}
+    .menu-btn{display:block;}
+    .about-grid, .agenda-layout, .join-grid, .transparency, .contact-grid, .wings, .difference, .ideology-layout, .launch-grid{
+      grid-template-columns:1fr !important;
+    }
+    .agenda-layout img{position:static;}
+    .footer-top{grid-template-columns:1fr 1fr;}
+    .hero{height:auto; min-height:320px;}
+    .hero-content{padding:26px 20px 22px;}
+  }
+  @media (max-width:600px){
+    .footer-top{grid-template-columns:1fr;}
+    section{padding:60px 0;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn:hover{transform:none;}
+    .hero .slide{transition:none;}
+  }
+
+  /* ---------- Gallery row (multi-visible carousel, Home page) ---------- */
+  .gallery-row{overflow:hidden;}
+  .gallery-row-track{display:flex; transition:transform .6s ease;}
+  .gallery-row-item{flex:0 0 25%; padding:0 10px; box-sizing:border-box;}
+  .gallery-row-card{
+    aspect-ratio:3/4; border-radius:14px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--line); background:var(--navy);
+  }
+  .gallery-row-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  @media (max-width:940px){
+    .gallery-row-item{flex:0 0 50%;}
+  }
+  @media (max-width:600px){
+    .gallery-row-item{flex:0 0 100%;}
+  }
+
+  /* ---------- Gallery grid (static, Gallery page) ---------- */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+  }
+  .gallery-grid a{
+    display:block; aspect-ratio:4/3; border-radius:14px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  .gallery-grid img{width:100%; height:100%; object-fit:cover; transition:transform .35s ease;}
+  .gallery-grid a:hover img{transform:scale(1.06);}
+
+  /* ---------- Lightbox (in-page image preview, no new tab) ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:500;
+    background:rgba(6,20,12,.92);
+    display:none; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:92vw; max-height:88vh; border-radius:12px; box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .lightbox-close{
+    position:absolute; top:20px; right:24px; z-index:501;
+    width:44px; height:44px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,.15); color:var(--white); font-size:1.4rem;
+    transition:background .2s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,.3);}
+
+  /* ---------- Gallery (one-at-a-time auto slider) ---------- */
+  .gallery-slider{position:relative; max-width:640px; margin:0 auto;}
+  .gallery-slides{
+    position:relative; width:100%; height:420px;
+    border-radius:var(--radius); overflow:hidden;
+    background:var(--navy); box-shadow:var(--shadow); border:1px solid var(--line);
+  }
+  .gallery-slide{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .6s ease; pointer-events:none;
+  }
+  .gallery-slide.active{opacity:1; pointer-events:auto;}
+  .gallery-slide img{width:100%; height:100%; object-fit:contain;}
+  .gallery-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+    width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,.9); color:var(--navy); font-size:1.1rem;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+  }
+  .gallery-nav:hover{background:var(--saffron);}
+  .gallery-nav.prev{left:-18px;}
+  .gallery-nav.next{right:-18px;}
+  .gallery-dots{display:flex; justify-content:center; gap:8px; margin-top:18px; flex-wrap:wrap;}
+  .gallery-dots .dot{
+    width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer;
+    background:var(--line); transition:width .2s ease, background .2s ease;
+  }
+  .gallery-dots .dot.active{width:22px; border-radius:5px; background:var(--saffron-deep);}
+  @media (max-width:600px){
+    .gallery-slides{height:300px;}
+    .gallery-nav{width:36px; height:36px;}
+    .gallery-nav.prev{left:2px;}
+    .gallery-nav.next{right:2px;}
+  }
+
+  /* ---------- Floating action buttons ---------- */
+  .floating-actions{
+    position:fixed; right:20px; bottom:20px; z-index:200;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .fab{
+    width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--white); box-shadow:0 12px 28px -10px rgba(0,0,0,.5);
+    transition:transform .18s ease;
+  }
+  .fab:hover{transform:scale(1.08);}
+  .fab svg{width:28px; height:28px;}
+  .fab-whatsapp{background:#25D366;}
+  .fab-call{background:var(--green-deep);}
+  @media (max-width:600px){
+    .floating-actions{right:14px; bottom:14px; gap:10px;}
+    .fab{width:48px; height:48px;}
+    .fab svg{width:24px; height:24px;}
+    .hero-nav{width:36px; height:36px; font-size:1rem;}
+    .hero-nav.prev{left:8px;}
+    .hero-nav.next{right:8px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .gallery-slide{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <a class="brand" href="#top">
+      <img src="images/logo.jpg" alt="RJP ಲೋಗೋ">
+      <div class="brand-text">
+        <div class="kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</div>
+        <div class="en">Rashtriya Janahita Party</div>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="#about">ನಮ್ಮ ಬಗ್ಗೆ</a>
+      <a href="#ideology">ಸಿದ್ಧಾಂತ</a>
+      <a href="#agenda">ಅಜೆಂಡಾ</a>
+      <a href="#wings">ಘಟಕಗಳು</a>
+      <a href="#transparency">ಪಾರದರ್ಶಕತೆ</a>
+      <a href="#gallery">ಗ್ಯಾಲರಿ</a>
+      <a href="#contact">ಸಂಪರ್ಕ</a>
+      <a class="nav-cta" href="#join">JOIN RJP</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mnav').classList.toggle('open')">☰</button>
+  </div>
+  <div id="mnav" style="display:none; flex-direction:column; padding:0 24px 18px; gap:12px;">
+    <a href="#about">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="#ideology">ಸಿದ್ಧಾಂತ</a>
+    <a href="#agenda">ಅಜೆಂಡಾ</a>
+    <a href="#wings">ಘಟಕಗಳು</a>
+    <a href="#transparency">ಪಾರದರ್ಶಕತೆ</a>
+    <a href="#gallery">ಗ್ಯಾಲರಿ</a>
+    <a href="#contact">ಸಂಪರ್ಕ</a>
+    <a class="nav-cta" style="width:fit-content;" href="#join">JOIN RJP</a>
+  </div>
+</header>
+
+<script>
+  const mbtn = document.querySelector('.menu-btn');
+  const mnav = document.getElementById('mnav');
+  mbtn.addEventListener('click', ()=>{
+    mnav.style.display = (mnav.style.display === 'none' || !mnav.style.display) ? 'flex' : 'none';
+  });
+</script>
+
+<section class="hero" id="top">
+  <img class="slide current" src="images/flag.jpg" alt="RJP ಧ್ವಜ ಹಾರಾಡುತ್ತಿದೆ">
+  <img class="slide" src="images/agenda-poster.jpg" alt="RJP ಅಭಿಯಾನ ಜಮಾಯೆತ್ತು ವಿಧಾನಸೌಧದ ಮುಂದೆ">
+  <img class="slide" src="images/gallery-5.jpg" alt="RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು">
+  <button class="hero-nav prev" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">&#10094;</button>
+  <button class="hero-nav next" aria-label="ಮುಂದಿನ ಚಿತ್ರ">&#10095;</button>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <img src="images/logo.jpg" alt="RJP seal">
+      <span class="eng">RASHTRIYA JANAHITA PARTY · 56/283/2019-2020/PPS-1</span>
+    </div>
+    <h1><span class="rjp-mark">ಅಧಿಕಾರಕ್ಕಾಗಿ ಅಲ್ಲ...</span><br>ಜನಹಿತಕ್ಕಾಗಿ ಒಂದು ಹೊಸ ರಾಜಕೀಯ ಪಯಣ</h1>
+    <p class="lede">ಸ್ವಾತಂತ್ರ್ಯ ಬಂದು ಎಂಟು ದಶಕಗಳಾದರೂ, ಒಬ್ಬ ಸಾಮಾನ್ಯ ರೈತ, ಒಬ್ಬ ನಿರುದ್ಯೋಗಿ ಯುವಕ, ಒಬ್ಬ ಮಧ್ಯಮ ವರ್ಗದ ತಂದೆ ಇನ್ನೂ ತನ್ನ ಕನಸುಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದಾನೆ. ಇದಕ್ಕೆ ಬೇಕಿರುವುದು ಹಳೆಯ ಪರಿಹಾರವಲ್ಲ, ಹೊಸ ಚಿಂತನೆ — ಅದೇ ಕಾರಣಕ್ಕೆ ಹುಟ್ಟಿದ್ದು ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP).</p>
+    <div class="hero-cta-row">
+      <a class="btn btn-primary" href="#join">ಚಳುವಳಿ ಸೇರಿ · Join RJP</a>
+      <a class="btn btn-ghost" href="#agenda">ನಮ್ಮ ಅಜೆಂಡಾ ನೋಡಿ</a>
+    </div>
+    <p class="hero-tagline">"ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ"</p>
+  </div>
+</section>
+<div class="tricolor-rule"></div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <span class="eyebrow">RJP ಹುಟ್ಟಿದ ಉದ್ದೇಶ</span>
+      <h2>ರಾಜಕೀಯ ಎಂದರೆ ಅಧಿಕಾರವಲ್ಲ — ಅದು ಸೇವೆ</h2>
+      <p>ಭ್ರಷ್ಟಾಚಾರ, ಆಡಳಿತದ ವಿಳಂಬ, ಜನ ಮತ್ತು ಸರ್ಕಾರದ ನಡುವಿನ ಅಂತರ — ಇವು ಇಂದಿಗೂ ಜನಸಾಮಾನ್ಯರ ದೈನಂದಿನ ಸವಾಲುಗಳಾಗಿವೆ. ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP) ಜನಸಾಮಾನ್ಯರ ಧ್ವನಿಯಾಗಿ, ಪಾರದರ್ಶಕ ಮತ್ತು ಹೊಣೆಗಾರಿಕೆಯುತ ಆಡಳಿತದ ಗುರಿಯೊಂದಿಗೆ ಸ್ಥಾಪನೆಗೊಂಡ ಪಕ್ಷ.</p>
+      <p>ವ್ಯಕ್ತಿಪೂಜೆಗಿಂತ ತತ್ವ, ಅಧಿಕಾರಕ್ಕಿಂತ ಸೇವೆ ಎಂಬ ನಂಬಿಕೆಯೊಂದಿಗೆ ನಾವು ಕಾರ್ಯ ನಿರ್ವಹಿಸುತ್ತೇವೆ.</p>
+      <ul class="pillars">
+        <li><span class="dot"></span> ರೈತನ ಬದುಕಿಗೆ ಭದ್ರತೆ</li>
+        <li><span class="dot"></span> ಯುವಕರ ಕನಸಿಗೆ ಅವಕಾಶ</li>
+        <li><span class="dot"></span> ಮಹಿಳೆಯರಿಗೆ ಗೌರವ ಮತ್ತು ಸುರಕ್ಷತೆ</li>
+        <li><span class="dot"></span> ಸಾಮಾನ್ಯ ನಾಗರಿಕನಿಗೆ ನ್ಯಾಯ ಮತ್ತು ಘನತೆ</li>
+      </ul>
+    </div>
+    <img src="images/agenda-poster.jpg" alt="ರೈತ ಮತ್ತು ಯುವಕ ವಿಧಾನಸೌಧದತ್ತ ನಡೆಯುತ್ತಿರುವುದು — RJP ಅಭಿಯಾನ ಪೋಸ್ಟರ್">
+  </div>
+</section>
+
+<section class="launch section-alt">
+  <div class="wrap launch-grid">
+    <img src="images/launch-poster.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ ಲಾಂಚ್ ಪೋಸ್ಟರ್">
+    <div>
+      <span class="eyebrow">ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ</span>
+      <h2>ಬದಲಾವಣೆಯ ಬಯಸುವಿರಾ? ಬದಲಾವಣೆಯ ಭಾಗವಾಗಿರಿ</h2>
+      <p>ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷದ ಸಾರ್ವಜನಿಕ ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಸದಸ್ಯತ್ವ ಅಭಿಯಾನದ ಇತ್ತೀಚಿನ ಮಾಹಿತಿಗಾಗಿ ನಮ್ಮ WhatsApp community ಮತ್ತು ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಪುಟಗಳನ್ನು ಅನುಸರಿಸಿ.</p>
+      <div class="launch-meta">
+        <div><b>ಸ್ಥಳ</b><span>ನಗರಭವನ ಮೈದಾನ, ಬೆಂಗಳೂರು</span></div>
+        <div><b>ಘೋಷ ವಾಕ್ಯ</b><span>ಹೊಸ ಚಿಂತನೆ · ಹೊಸ ರಾಜಕೀಯ · ಹೊಸ ಭವಿಷ್ಯ</span></div>
+      </div>
+      <a class="btn btn-primary" style="color:var(--white); background:var(--green);" href="#join">ಈಗಲೇ ಸೇರಿ · Join RJP</a>
+    </div>
+  </div>
+</section>
+
+<section id="ideology" class="ideology">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">ನಮ್ಮ ಸಿದ್ಧಾಂತ</span>
+      <h2>"ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ"</h2>
+      <p>ಪ್ರತಿ ನಿರ್ಧಾರದ ಹಿಂದೆ ಇರುವುದು ಒಂದೇ ಪ್ರಶ್ನೆ — ಇದರಿಂದ ಸಾಮಾನ್ಯ ಪ್ರಜೆಗೆ ಏನು ಪ್ರಯೋಜನ?</p>
+    </div>
+    <div class="ideology-layout">
+      <img src="images/values-poster.jpg" alt="ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ, ಕೋಟಿ ಜನರ ಆಶಯ — RJP ಪೋಸ್ಟರ್">
+      <div class="value-grid">
+        <div class="value-card"><div class="num">01</div><p>ಭ್ರಷ್ಟಾಚಾರ ಮುಕ್ತ ಆಡಳಿತ</p></div>
+        <div class="value-card"><div class="num">02</div><p>ಪಾರದರ್ಶಕ ಸರ್ಕಾರ</p></div>
+        <div class="value-card"><div class="num">03</div><p>ಜನರ ತೆರಿಗೆ ಹಣಕ್ಕೆ ಜನರ ಮುಂದೆ ಲೆಕ್ಕ</p></div>
+        <div class="value-card"><div class="num">04</div><p>ಅರ್ಹತೆಗೆ ಅವಕಾಶ, ಶಿಫಾರಸಿಗಲ್ಲ</p></div>
+        <div class="value-card"><div class="num">05</div><p>ಜಾತಿ-ಧರ್ಮದ ರಾಜಕೀಯಕ್ಕಿಂತ ಅಭಿವೃದ್ಧಿ ರಾಜಕೀಯ</p></div>
+        <div class="value-card"><div class="num">06</div><p>ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ, ಉದ್ಯೋಗಕ್ಕೆ ಮೊದಲ ಆದ್ಯತೆ</p></div>
+        <div class="value-card"><div class="num">07</div><p>ರೈತರು, ಕಾರ್ಮಿಕರು, ಮಧ್ಯಮ ವರ್ಗದ ರಕ್ಷಣೆ</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">RJP ಏಕೆ ವಿಭಿನ್ನ?</span>
+      <h2>ರಾಜಕೀಯ ಸಂಸ್ಕೃತಿಯ ಬದಲಾವಣೆಗಾಗಿ ಬಂದಿದ್ದೇವೆ</h2>
+      <p>ನಾವು ಕೇವಲ ರಾಜಕೀಯ ಬದಲಾವಣೆಗಾಗಿ ಬಂದಿಲ್ಲ — ನಾವು ಬಂದಿರುವುದು ರಾಜಕೀಯ ಸಂಸ್ಕೃತಿ ಬದಲಾವಣೆಗಾಗಿ. ಇಲ್ಲಿ ವ್ಯಕ್ತಿಪೂಜೆಗೆ ಜಾಗವಿಲ್ಲ; ಇರುವುದು ಕೇವಲ ಜನಹಿತದ ಬದ್ಧತೆ.</p>
+    </div>
+    <div class="difference">
+      <div class="seal-card">
+        <div class="seal"><span>ತ</span></div>
+        <h3>ನಾಯಕನಿಗಿಂತ ತತ್ವ ಮುಖ್ಯ</h3>
+        <p>ವ್ಯಕ್ತಿಗಳಲ್ಲ, ಮೌಲ್ಯಗಳೇ ನಮ್ಮ ರಾಜಕೀಯದ ಅಡಿಪಾಯ.</p>
+      </div>
+      <div class="seal-card">
+        <div class="seal"><span>ವ್ಯ</span></div>
+        <h3>ವ್ಯಕ್ತಿಗಿಂತ ವ್ಯವಸ್ಥೆ ದೊಡ್ಡದು</h3>
+        <p>ಗಟ್ಟಿಯಾದ ವ್ಯವಸ್ಥೆಯೊಂದೇ ದೀರ್ಘಕಾಲೀನ ಬದಲಾವಣೆ ತರುತ್ತದೆ.</p>
+      </div>
+      <div class="seal-card">
+        <div class="seal"><span>ಜ</span></div>
+        <h3>ಭರವಸೆಗಿಂತ ಜವಾಬ್ದಾರಿ ಮುಖ್ಯ</h3>
+        <p>ಪ್ರತಿ ಜನಪ್ರತಿನಿಧಿಗೂ ವಾರ್ಷಿಕ ಕಾರ್ಯಕ್ಷಮತೆ ವರದಿ ಕಡ್ಡಾಯ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agenda">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">ಹೊಸ ರಾಜಕೀಯ ಅಜೆಂಡಾ</span>
+      <h2>ಕಾರ್ಯಸಾಧ್ಯವಾದ, ಸ್ಪಷ್ಟ ಕಾರ್ಯಸೂಚಿ</h2>
+    </div>
+    <div class="agenda-layout">
+      <img src="images/vision-mission-poster.jpg" alt="RJP ದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ ಪೋಸ್ಟರ್">
+      <ul class="agenda-list">
+        <li>
+          <div class="agenda-tag">01</div>
+          <div>
+            <span class="en">Zero Corruption Governance</span>
+            <h4>ಲಂಚ ಮುಕ್ತ ಆಡಳಿತ ವ್ಯವಸ್ಥೆ</h4>
+            <p>ಪ್ರತಿ ಸೇವೆಯೂ ಲಂಚ ರಹಿತವಾಗಿ ಸಿಗುವಂತಹ ವ್ಯವಸ್ಥೆ ನಿರ್ಮಾಣ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">02</div>
+          <div>
+            <span class="en">Digital Transparent Administration</span>
+            <h4>ಪಾರದರ್ಶಕ ಡಿಜಿಟಲ್ ಆಡಳಿತ</h4>
+            <p>ಪ್ರತಿ ಫೈಲ್, ಪ್ರತಿ ನಿರ್ಧಾರ ಆನ್‌ಲೈನ್‌ನಲ್ಲಿ ಪಾರದರ್ಶಕ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">03</div>
+          <div>
+            <span class="en">Time Bound Government Services</span>
+            <h4>ನಿಗದಿತ ಸಮಯದೊಳಗೆ ಸೇವೆ</h4>
+            <p>ಸೇವೆ ವಿಳಂಬವಾದರೆ ಅಧಿಕಾರಿಗಳ ಹೊಣೆಗಾರಿಕೆ ಕಡ್ಡಾಯ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">04</div>
+          <div>
+            <span class="en">Accountability of Representatives</span>
+            <h4>ಜನಪ್ರತಿನಿಧಿಗಳ ಹೊಣೆಗಾರಿಕೆ</h4>
+            <p>ಪ್ರತಿ ಜನಪ್ರತಿನಿಧಿಗೂ ವಾರ್ಷಿಕ ಕಾರ್ಯಕ್ಷಮತೆ ವರದಿ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">05</div>
+          <div>
+            <span class="en">Clean Political Funding</span>
+            <h4>ಪಾರದರ್ಶಕ ದೇಣಿಗೆ ವ್ಯವಸ್ಥೆ</h4>
+            <p>ಪಕ್ಷದ ಪ್ರತಿ ದೇಣಿಗೆಯೂ ಸಾರ್ವಜನಿಕರ ಮುಂದೆ ದಾಖಲಾಗುತ್ತದೆ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">06</div>
+          <div>
+            <span class="en">Internal Party Democracy</span>
+            <h4>ಪಕ್ಷದೊಳಗೆ ಸ್ವತಂತ್ರ ಚುನಾವಣೆ</h4>
+            <p>ನ್ಯಾಯಸಮ್ಮತ, ಸ್ವತಂತ್ರ ಆಂತರಿಕ ಪ್ರಜಾಪ್ರಭುತ್ವ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">07</div>
+          <div>
+            <span class="en">Youth &amp; Women Leadership</span>
+            <h4>ಯುವಕರಿಗೆ ಮತ್ತು ಮಹಿಳೆಯರಿಗೆ ಮುಂಚೂಣಿ ಪಾತ್ರ</h4>
+            <p>ನಿರ್ಧಾರ ಕೈಗೊಳ್ಳುವ ವೇದಿಕೆಯಲ್ಲಿ ಯುವಕರು ಮತ್ತು ಮಹಿಳೆಯರಿಗೆ ಆದ್ಯತೆ.</p>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-tag">08</div>
+          <div>
+            <span class="en">Technology Based Governance</span>
+            <h4>ತಂತ್ರಜ್ಞಾನ ಆಧಾರಿತ ಜನಸ್ನೇಹಿ ಆಡಳಿತ</h4>
+            <p>ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ, ಉದ್ಯೋಗಕ್ಕೆ ಮೊದಲ ಆದ್ಯತೆ ನೀಡುವ ಡಿಜಿಟಲ್ ವ್ಯವಸ್ಥೆ.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="dream">
+  <div class="wrap">
+    <span class="eyebrow">ನಮ್ಮ ಕನಸಿನ ಕರ್ನಾಟಕ</span>
+    <h2>ಇದೇ ನಮ್ಮ ಕನಸು. ಇದೇ ನಮ್ಮ ಬದ್ಧತೆ.</h2>
+    <p class="dream-lines">
+      <span>ಅಲ್ಲಿ... ಲಂಚವಿಲ್ಲದೆ ಕೆಲಸ ಆಗಬೇಕು.</span>
+      <span>ಅಲ್ಲಿ... ಪ್ರತಿಭೆಗೆ ಅವಕಾಶ ಸಿಗಬೇಕು, ಶಿಫಾರಸಿಗಲ್ಲ.</span>
+      <span>ಅಲ್ಲಿ... ರೈತ ಗೌರವದಿಂದ ಬದುಕಬೇಕು.</span>
+      <span>ಅಲ್ಲಿ... ಯುವಕ ಉದ್ಯೋಗಕ್ಕಾಗಿ ಊರು ಬಿಡುವ ಪರಿಸ್ಥಿತಿ ಕಡಿಮೆಯಾಗಬೇಕು.</span>
+      <span>ಅಲ್ಲಿ... ಸಾಮಾನ್ಯ ನಾಗರಿಕನ ಧ್ವನಿ ಅಧಿಕಾರದ ಕೇಂದ್ರಕ್ಕೆ ತಲುಪಬೇಕು.</span>
+    </p>
+    <p class="dream-quote">"ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ... ಕೋಟಿ ಜನರ ಆಶಯ"</p>
+  </div>
+</section>
+
+<section id="wings" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">ಘಟಕಗಳು</span>
+      <h2>ಯುವ ಘಟಕ ಮತ್ತು ಮಹಿಳಾ ಘಟಕ</h2>
+    </div>
+    <div class="wings">
+      <div class="wing-card youth">
+        <div class="icon">👦</div>
+        <h3>YOUTH WING</h3>
+        <p>ಕರ್ನಾಟಕದ ಭವಿಷ್ಯ ಬರೆಯುವವರು ಇಂದಿನ ಯುವಕರು. RJP ಯುವ ಘಟಕ ಯುವಕರಿಗೆ ನಾಯಕತ್ವ, ತರಬೇತಿ ಮತ್ತು ನಿರ್ಧಾರ ಕೈಗೊಳ್ಳುವ ವೇದಿಕೆ ಒದಗಿಸುತ್ತದೆ.</p>
+      </div>
+      <div class="wing-card women">
+        <div class="icon">👩</div>
+        <h3>WOMEN WING</h3>
+        <p>ಮಹಿಳೆಯರ ಸುರಕ್ಷತೆ, ಗೌರವ ಮತ್ತು ನಾಯಕತ್ವ RJP ಯ ಆದ್ಯತೆ. ಮಹಿಳಾ ಘಟಕ ರಾಜಕೀಯದಲ್ಲಿ ಮಹಿಳೆಯರ ಸಶಕ್ತ ಪಾಲ್ಗೊಳ್ಳುವಿಕೆಗೆ ದಾರಿ ಮಾಡಿಕೊಡುತ್ತದೆ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="transparency">
+  <div class="wrap transparency">
+    <div class="transparency-copy">
+      <span class="eyebrow">TRANSPARENCY POLICY</span>
+      <h2>ಪ್ರತಿ ದೇಣಿಗೆ, ಪ್ರತಿ ಖರ್ಚು — ಸಾರ್ವಜನಿಕರ ಮುಂದೆ</h2>
+      <p>RJP ಪ್ರತಿ ದೇಣಿಗೆ, ಪ್ರತಿ ಖರ್ಚು, ಪ್ರತಿ ನಿರ್ಧಾರವನ್ನು ಸಾರ್ವಜನಿಕರ ಮುಂದೆ ಪಾರದರ್ಶಕವಾಗಿ ಇಡಲು ಬದ್ಧವಾಗಿದೆ. ಇದೇ ನಮ್ಮ ವಿಶ್ವಾಸಾರ್ಹತೆಯ ಅಡಿಪಾಯ.</p>
+      <div class="stat-row">
+        <div class="stat"><b>100%</b><span>ಸಾರ್ವಜನಿಕ ಲೆಕ್ಕಪತ್ರ</span></div>
+        <div class="stat"><b>0</b><span>ಶಿಫಾರಸು ಆಧಾರಿತ ಹುದ್ದೆ</span></div>
+        <div class="stat"><b>ವಾರ್ಷಿಕ</b><span>ಕಾರ್ಯಕ್ಷಮತೆ ವರದಿ</span></div>
+      </div>
+    </div>
+    <div class="transparency-visual">
+      <div class="tricolor-rule"></div>
+      <h3 style="color:#fff;">ನಮ್ಮ ಬದ್ಧತೆ</h3>
+      <ul>
+        <li>ಪ್ರತಿಯೊಬ್ಬ ನಾಗರಿಕನಿಗೂ ಪಕ್ಷದ ಲೆಕ್ಕಪತ್ರ ವೀಕ್ಷಿಸುವ ಹಕ್ಕು.</li>
+        <li>ಯಾವುದೇ ನಿರ್ಧಾರ ಮುಚ್ಚುಮರೆ ಇಲ್ಲದೆ ಪ್ರಕಟ.</li>
+        <li>ಡಿಜಿಟಲ್ ಮೆಂಬರ್‌ಷಿಪ್ ದಾಖಲೆ, QR ಮೂಲಕ ಪರಿಶೀಲನೆ.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="join" class="join">
+  <div class="wrap join-grid">
+    <img src="images/membership-card.jpg" alt="RJP ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್">
+    <div class="join-copy">
+      <span class="eyebrow">JOIN THE MOVEMENT</span>
+      <h2>ಇದು ಒಂದು ಪಕ್ಷವಲ್ಲ, ಒಂದು ಚಳುವಳಿ</h2>
+      <p>ಬದಲಾವಣೆ ಬಯಸುವ ಪ್ರತಿಯೊಬ್ಬ ಪ್ರಜೆಗೂ ಇಲ್ಲಿ ಸ್ಥಾನವಿದೆ. ನಮ್ಮೊಂದಿಗೆ ಕೈಜೋಡಿಸಿ, ಹೊಸ ರಾಜಕೀಯ ಸಂಸ್ಕೃತಿಯ ಭಾಗವಾಗಿ.</p>
+      <ul class="join-steps">
+        <li>ಸದಸ್ಯತ್ವ ನೋಂದಣಿ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ.</li>
+        <li>QR ಕೋಡ್ ಮೂಲಕ ದೃಢೀಕರಿಸಿದ ಡಿಜಿಟಲ್ ಮೆಂಬರ್‌ಷಿಪ್ ಕಾರ್ಡ್ ಪಡೆಯಿರಿ.</li>
+        <li>ನಿಮ್ಮ ಕ್ಷೇತ್ರದ RJP ತಂಡದೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಿ.</li>
+      </ul>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" style="color:var(--white); background:var(--green);" href="#contact">ಸದಸ್ಯತ್ವ ಪಡೆಯಿರಿ</a>
+        <a class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);" href="tel:18001232024">📞 1800 123 2024</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tricolor-rule thin"></div>
+
+<section id="gallery" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">GALLERY</span>
+      <h2>ಫೋಟೋ ಗ್ಯಾಲರಿ</h2>
+      <p>RJP ಅಭಿಯಾನ, ಲೋಕಾರ್ಪಣೆ ಮತ್ತು ಬೆಂಬಲಿಗರ ಕ್ಷಣಗಳು — ಒಂದೇ ನೋಟದಲ್ಲಿ.</p>
+    </div>
+    <div class="gallery-row" id="galleryRow">
+      <div class="gallery-row-track">
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/logo.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಗೋ" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/flag.jpg" alt="RJP ಧ್ವಜ ಹಾರಾಡುತ್ತಿದೆ" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/flag-2.jpg" alt="RJP ಧ್ವಜ ನೀಲಾಕಾಶದಲ್ಲಿ ಹಾರಾಡುತ್ತಿದೆ" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/agenda-poster.jpg" alt="ರೈತ ಮತ್ತು ಯುವಕ ವಿಧಾನಸೌಧದತ್ತ ನಡೆಯುತ್ತಿರುವುದು — RJP ಅಭಿಯಾನ ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/vision-mission-poster.jpg" alt="RJP ದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/values-poster.jpg" alt="ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ, ಕೋಟಿ ಜನರ ಆಶಯ — RJP ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/launch-poster.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ ಲಾಂಚ್ ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/membership-card.jpg" alt="RJP ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/gallery-1.jpg" alt="ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ, ಕೋಟಿ ಜನರ ಆಶಯ — RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/gallery-2.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಗೋ" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/gallery-3.jpg" alt="RJP ದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/gallery-4.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ ಪೋಸ್ಟರ್" loading="lazy"></div></div>
+        <div class="gallery-row-item"><div class="gallery-row-card"><img src="images/gallery-5.jpg" alt="RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು" loading="lazy"></div></div>
+      </div>
+    </div>
+    <div class="gallery-dots" id="galleryRowDots"></div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-card">
+      <span class="eyebrow">CONTACT US</span>
+      <h3>ನಿಮ್ಮ ಧ್ವನಿ, ನಮ್ಮ ಆದ್ಯತೆ</h3>
+      <p>ನಿಮ್ಮ ಧ್ವನಿ, ನಿಮ್ಮ ಸಲಹೆ, ನಿಮ್ಮ ಪ್ರಶ್ನೆ — ಇವೆಲ್ಲಕ್ಕೂ ನಾವು ಕಿವಿಯಾಗಿದ್ದೇವೆ. ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ, ಚಳುವಳಿಯ ಭಾಗವಾಗಿ.</p>
+      <ul class="contact-list">
+        <li><span class="ic">🌐</span> <a href="https://www.rjpindia.com" target="_blank" rel="noopener">www.rjpindia.com</a></li>
+        <li><span class="ic">✉️</span> <a href="mailto:info@rjpindia.com">info@rjpindia.com</a></li>
+        <li><span class="ic">📞</span> <a href="tel:18001232024">RJP Helpline: 1800 123 2024</a></li>
+      </ul>
+      <div class="social-row">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.877h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06Z"/></svg></a>
+        <a href="#" aria-label="Twitter / X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231ZM17.083 19.77h1.833L7.084 4.126H5.117Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069ZM12 0C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.332 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0Zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324Zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.406-10.845a1.44 1.44 0 1 1 0-2.881 1.44 1.44 0 0 1 0 2.881Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.997 2.997 0 0 0-2.11-2.117C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.524A2.997 2.997 0 0 0 .502 6.186 31.36 31.36 0 0 0 0 12a31.36 31.36 0 0 0 .502 5.814 2.997 2.997 0 0 0 2.11 2.117C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.524a2.997 2.997 0 0 0 2.11-2.117A31.36 31.36 0 0 0 24 12a31.36 31.36 0 0 0-.502-5.814ZM9.75 15.568V8.432L15.818 12Z"/></svg></a>
+      </div>
+    </div>
+    <form class="contact-card contact-form" onsubmit="event.preventDefault(); alert('ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಸಂದೇಶ ತಲುಪಿದೆ.');">
+      <h3>ಸಂದೇಶ ಕಳುಹಿಸಿ</h3>
+      <input type="text" placeholder="ಪೂರ್ಣ ಹೆಸರು" required>
+      <input type="tel" placeholder="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" required>
+      <input type="text" placeholder="ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ / ಜಿಲ್ಲೆ">
+      <textarea rows="4" placeholder="ನಿಮ್ಮ ಸಂದೇಶ"></textarea>
+      <button class="btn btn-primary" type="submit">ಕಳುಹಿಸಿ</button>
+      <p class="form-note">ಈ ಫಾರ್ಮ್ ಅನ್ನು ಲೈವ್ ಆಗಿಸಲು ಇದನ್ನು ನಿಮ್ಮ ಇಮೇಲ್ ಅಥವಾ CRM ಗೆ ಸಂಪರ್ಕಿಸಬೇಕಾಗುತ್ತದೆ (ಉದಾ. Formspree, Google Forms).</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="tricolor-rule"></div>
+  <div class="wrap footer-top">
+    <div>
+      <div class="footer-brand">
+        <img src="images/logo.jpg" alt="RJP ಲೋಗೋ">
+        <div>
+          <div class="kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</div>
+          <div class="en">Rashtriya Janahita Party</div>
+        </div>
+      </div>
+      <p>"ಹೊಸ ಚಿಂತನೆ... ಹೊಸ ರಾಜಕೀಯ... ಹೊಸ ಭವಿಷ್ಯ..."</p>
+      <a class="whatsapp-cta" href="https://chat.whatsapp.com/DAfOFN7Dgaz8vxCm77Lncv" target="_blank" rel="noopener">💬 WhatsApp Community ಸೇರಿ</a>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#about">ನಮ್ಮ ಬಗ್ಗೆ</a></li>
+        <li><a href="#ideology">ಸಿದ್ಧಾಂತ</a></li>
+        <li><a href="#agenda">ಅಜೆಂಡಾ</a></li>
+        <li><a href="#wings">ಘಟಕಗಳು</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Party</h4>
+      <ul>
+        <li><a href="#transparency">Transparency Policy</a></li>
+        <li><a href="#join">Membership</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Registration</h4>
+      <ul>
+        <li>Reg. No. 56/283/2019-2020/PPS-1</li>
+        <li><a href="mailto:info@rjpindia.com">info@rjpindia.com</a></li>
+        <li><a href="tel:18001232024">1800 123 2024</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© <span id="year"></span> Rashtriya Janahita Party (RJP). All rights reserved.</span>
+    <span>ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ</span>
+  </div>
+</footer>
+
+<div class="floating-actions">
+  <a class="fab fab-whatsapp" href="https://chat.whatsapp.com/DAfOFN7Dgaz8vxCm77Lncv" target="_blank" rel="noopener" aria-label="WhatsApp Community ಸೇರಿ">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.876.51 3.632 1.396 5.137L2 22l4.965-1.354A9.945 9.945 0 0 0 12 22c5.523 0 10-4.477 10-10S17.524 2 12.001 2Zm0 18.06c-1.596 0-3.087-.435-4.367-1.191l-.313-.185-3.191.87.85-3.113-.203-.32A8.043 8.043 0 0 1 3.94 12c0-4.44 3.617-8.06 8.06-8.06 4.44 0 8.06 3.62 8.06 8.06 0 4.443-3.62 8.06-8.06 8.06Zm4.472-6.038c-.245-.123-1.45-.716-1.675-.798-.225-.082-.389-.123-.553.123-.164.246-.633.798-.776.961-.143.164-.286.185-.532.062-.245-.123-1.036-.382-1.973-1.218-.729-.65-1.222-1.453-1.365-1.699-.143-.246-.015-.379.108-.501.11-.11.245-.287.368-.43.123-.144.164-.246.246-.41.082-.164.041-.308-.02-.43-.062-.123-.553-1.33-.758-1.821-.2-.48-.402-.415-.553-.423-.143-.006-.307-.008-.471-.008-.164 0-.43.062-.655.308-.225.246-.86.84-.86 2.046 0 1.207.88 2.372 1.003 2.536.123.164 1.732 2.645 4.197 3.71.586.253 1.043.404 1.4.517.588.187 1.123.16 1.546.097.472-.07 1.45-.593 1.655-1.166.205-.573.205-1.064.143-1.167-.061-.102-.225-.164-.47-.287Z"/></svg>
+  </a>
+  <a class="fab fab-call" href="tel:18001232024" aria-label="RJP Helpline: 1800 123 2024 ಗೆ ಕರೆ ಮಾಡಿ">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/></svg>
+  </a>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function makeSlider(root, {slideSel, dotsSel, activeClass, interval}){
+    if(!root) return;
+    const slides = root.querySelectorAll(slideSel);
+    const dotsWrap = root.querySelector(dotsSel);
+    if(!slides.length || !dotsWrap) return;
+    slides.forEach((_, i)=>{
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'ಚಿತ್ರ ' + (i + 1));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('.dot');
+    let idx = 0, timer;
+    function show(i){
+      slides[idx].classList.remove(activeClass);
+      dots[idx].classList.remove('active');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add(activeClass);
+      dots[idx].classList.add('active');
+    }
+    function start(){ timer = setInterval(()=> show(idx + 1), interval); }
+    function restart(){ clearInterval(timer); start(); }
+    const prevBtn = root.querySelector('.prev');
+    const nextBtn = root.querySelector('.next');
+    if(prevBtn) prevBtn.addEventListener('click', ()=>{ show(idx - 1); restart(); });
+    if(nextBtn) nextBtn.addEventListener('click', ()=>{ show(idx + 1); restart(); });
+    dots.forEach((dot, i)=> dot.addEventListener('click', ()=>{ show(i); restart(); }));
+    root.addEventListener('mouseenter', ()=> clearInterval(timer));
+    root.addEventListener('mouseleave', start);
+    start();
+  }
+
+  makeSlider(document.querySelector('.hero'), {slideSel:'.slide', dotsSel:'.hero-dots', activeClass:'current', interval:5000});
+
+  function initGalleryRow(root, dotsWrap){
+    if(!root || !dotsWrap) return;
+    const track = root.querySelector('.gallery-row-track');
+    const items = track.querySelectorAll('.gallery-row-item');
+    if(!items.length) return;
+    const step = items[0].getBoundingClientRect().width;
+    const visible = Math.max(1, Math.round(root.clientWidth / step));
+    const maxIndex = Math.max(0, items.length - visible);
+    for(let i=0; i<=maxIndex; i++){
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'ಗುಂಪು ' + (i + 1));
+      dotsWrap.appendChild(dot);
+    }
+    const dots = dotsWrap.querySelectorAll('.dot');
+    let idx = 0, timer;
+    function show(i){
+      dots[idx].classList.remove('active');
+      idx = i < 0 ? maxIndex : (i > maxIndex ? 0 : i);
+      dots[idx].classList.add('active');
+      track.style.transform = 'translateX(' + (-idx * step) + 'px)';
+    }
+    function start(){ timer = setInterval(()=> show(idx + 1), 2600); }
+    function restart(){ clearInterval(timer); start(); }
+    dots.forEach((dot, i)=> dot.addEventListener('click', ()=>{ show(i); restart(); }));
+    root.addEventListener('mouseenter', ()=> clearInterval(timer));
+    root.addEventListener('mouseleave', start);
+    start();
+  }
+  initGalleryRow(document.getElementById('galleryRow'), document.getElementById('galleryRowDots'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section id="gallery" class="section-alt" style="padding-top:48px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">GALLERY</span>
+      <h2>ಫೋಟೋ ಗ್ಯಾಲರಿ</h2>
+      <p>RJP ಅಭಿಯಾನ, ಲೋಕಾರ್ಪಣೆ ಮತ್ತು ಬೆಂಬಲಿಗರ ಕ್ಷಣಗಳು — ಒಂದೇ ನೋಟದಲ್ಲಿ.</p>
+    </div>
+    <div class="gallery-grid">
+      <a href="/images/logo.jpg" class="lightbox-trigger"><img src="/images/logo.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಗೋ" loading="lazy"></a>
+      <a href="/images/flag.jpg" class="lightbox-trigger"><img src="/images/flag.jpg" alt="RJP ಧ್ವಜ ಹಾರಾಡುತ್ತಿದೆ" loading="lazy"></a>
+      <a href="/images/flag-2.jpg" class="lightbox-trigger"><img src="/images/flag-2.jpg" alt="RJP ಧ್ವಜ ನೀಲಾಕಾಶದಲ್ಲಿ ಹಾರಾಡುತ್ತಿದೆ" loading="lazy"></a>
+      <a href="/images/agenda-poster.jpg" class="lightbox-trigger"><img src="/images/agenda-poster.jpg" alt="ರೈತ ಮತ್ತು ಯುವಕ ವಿಧಾನಸೌಧದತ್ತ ನಡೆಯುತ್ತಿರುವುದು — RJP ಅಭಿಯಾನ ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/vision-mission-poster.jpg" class="lightbox-trigger"><img src="/images/vision-mission-poster.jpg" alt="RJP ದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/values-poster.jpg" class="lightbox-trigger"><img src="/images/values-poster.jpg" alt="ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ, ಕೋಟಿ ಜನರ ಆಶಯ — RJP ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/launch-poster.jpg" class="lightbox-trigger"><img src="/images/launch-poster.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ ಲಾಂಚ್ ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/membership-card.jpg" class="lightbox-trigger"><img src="/images/membership-card.jpg" alt="RJP ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್" loading="lazy"></a>
+      <a href="/images/gallery-1.jpg" class="lightbox-trigger"><img src="/images/gallery-1.jpg" alt="ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಕನಸಲ್ಲ, ಕೋಟಿ ಜನರ ಆಶಯ — RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು" loading="lazy"></a>
+      <a href="/images/gallery-2.jpg" class="lightbox-trigger"><img src="/images/gallery-2.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಗೋ" loading="lazy"></a>
+      <a href="/images/gallery-3.jpg" class="lightbox-trigger"><img src="/images/gallery-3.jpg" alt="RJP ದೃಷ್ಟಿ ಮತ್ತು ಧ್ಯೇಯ ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/gallery-4.jpg" class="lightbox-trigger"><img src="/images/gallery-4.jpg" alt="RJP ಅಧಿಕೃತ ಲೋಕಾರ್ಪಣೆ ಪೋಸ್ಟರ್" loading="lazy"></a>
+      <a href="/images/gallery-5.jpg" class="lightbox-trigger"><img src="/images/gallery-5.jpg" alt="RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="ಮುಚ್ಚಿ">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<%- include('partials/footer') %>
+</body>
+</html>

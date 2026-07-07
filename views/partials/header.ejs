@@ -1,0 +1,32 @@
+<header>
+  <div class="nav-row">
+    <a class="brand" href="/">
+      <img src="/images/logo.jpg" alt="RJP ಲೋಗೋ">
+      <div class="brand-text">
+        <div class="kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</div>
+        <div class="en">Rashtriya Janahita Party</div>
+      </div>
+    </a>
+    <nav class="links">
+      <a href="/about" class="<%= page==='about' ? 'active' : '' %>">ನಮ್ಮ ಬಗ್ಗೆ</a>
+      <a href="/ideology" class="<%= page==='ideology' ? 'active' : '' %>">ಸಿದ್ಧಾಂತ</a>
+      <a href="/agenda" class="<%= page==='agenda' ? 'active' : '' %>">ಅಜೆಂಡಾ</a>
+      <a href="/wings" class="<%= page==='wings' ? 'active' : '' %>">ಘಟಕಗಳು</a>
+      <a href="/transparency" class="<%= page==='transparency' ? 'active' : '' %>">ಪಾರದರ್ಶಕತೆ</a>
+      <a href="/gallery" class="<%= page==='gallery' ? 'active' : '' %>">ಗ್ಯಾಲರಿ</a>
+      <a href="/contact" class="<%= page==='contact' ? 'active' : '' %>">ಸಂಪರ್ಕ</a>
+      <a class="nav-cta" href="/join">JOIN RJP</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mnav').classList.toggle('open')">☰</button>
+  </div>
+  <div id="mnav" style="display:none; flex-direction:column; padding:0 24px 18px; gap:12px;">
+    <a href="/about">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="/ideology">ಸಿದ್ಧಾಂತ</a>
+    <a href="/agenda">ಅಜೆಂಡಾ</a>
+    <a href="/wings">ಘಟಕಗಳು</a>
+    <a href="/transparency">ಪಾರದರ್ಶಕತೆ</a>
+    <a href="/gallery">ಗ್ಯಾಲರಿ</a>
+    <a href="/contact">ಸಂಪರ್ಕ</a>
+    <a class="nav-cta" style="width:fit-content;" href="/join">JOIN RJP</a>
+  </div>
+</header>

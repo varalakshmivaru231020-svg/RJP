@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section id="contact" class="contact" style="padding-top:48px;">
+  <div class="wrap contact-grid">
+    <div class="contact-card">
+      <span class="eyebrow">CONTACT US</span>
+      <h3>ನಿಮ್ಮ ಧ್ವನಿ, ನಮ್ಮ ಆದ್ಯತೆ</h3>
+      <p>ನಿಮ್ಮ ಧ್ವನಿ, ನಿಮ್ಮ ಸಲಹೆ, ನಿಮ್ಮ ಪ್ರಶ್ನೆ — ಇವೆಲ್ಲಕ್ಕೂ ನಾವು ಕಿವಿಯಾಗಿದ್ದೇವೆ. ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ, ಚಳುವಳಿಯ ಭಾಗವಾಗಿ.</p>
+      <ul class="contact-list">
+        <li><span class="ic">🌐</span> <a href="https://www.rjpindia.com" target="_blank" rel="noopener">www.rjpindia.com</a></li>
+        <li><span class="ic">✉️</span> <a href="mailto:info@rjpindia.com">info@rjpindia.com</a></li>
+        <li><span class="ic">📞</span> <a href="tel:18001232024">RJP Helpline: 1800 123 2024</a></li>
+      </ul>
+      <div class="social-row">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06C2 17.083 5.657 21.245 10.438 22v-7.03H7.898v-2.91h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.196 2.238.196v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.877h2.773l-.443 2.91h-2.33V22C18.343 21.245 22 17.083 22 12.06Z"/></svg></a>
+        <a href="#" aria-label="Twitter / X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231ZM17.083 19.77h1.833L7.084 4.126H5.117Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069ZM12 0C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.332 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0Zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324Zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.406-10.845a1.44 1.44 0 1 1 0-2.881 1.44 1.44 0 0 1 0 2.881Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.997 2.997 0 0 0-2.11-2.117C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.524A2.997 2.997 0 0 0 .502 6.186 31.36 31.36 0 0 0 0 12a31.36 31.36 0 0 0 .502 5.814 2.997 2.997 0 0 0 2.11 2.117C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.524a2.997 2.997 0 0 0 2.11-2.117A31.36 31.36 0 0 0 24 12a31.36 31.36 0 0 0-.502-5.814ZM9.75 15.568V8.432L15.818 12Z"/></svg></a>
+      </div>
+    </div>
+    <form class="contact-card contact-form" onsubmit="event.preventDefault(); alert('ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಸಂದೇಶ ತಲುಪಿದೆ.');">
+      <h3>ಸಂದೇಶ ಕಳುಹಿಸಿ</h3>
+      <input type="text" placeholder="ಪೂರ್ಣ ಹೆಸರು" required>
+      <input type="tel" placeholder="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" required>
+      <input type="text" placeholder="ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ / ಜಿಲ್ಲೆ">
+      <textarea rows="4" placeholder="ನಿಮ್ಮ ಸಂದೇಶ"></textarea>
+      <button class="btn btn-primary" type="submit">ಕಳುಹಿಸಿ</button>
+      <p class="form-note">ಈ ಫಾರ್ಮ್ ಅನ್ನು ಲೈವ್ ಆಗಿಸಲು ಇದನ್ನು ನಿಮ್ಮ ಇಮೇಲ್ ಅಥವಾ CRM ಗೆ ಸಂಪರ್ಕಿಸಬೇಕಾಗುತ್ತದೆ (ಉದಾ. Formspree, Google Forms).</p>
+    </form>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

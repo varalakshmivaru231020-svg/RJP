@@ -197,6 +197,43 @@ router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
   });
 }));
 
+const PROFILE_EDIT_FIELDS = [
+  'guardianName', 'dob', 'gender', 'whatsapp', 'email', 'aadhaar', 'address',
+  'district', 'taluk', 'assembly', 'occupation', 'education', 'socialMedia'
+];
+const PROFILE_EDIT_COLUMNS = {
+  guardianName: 'guardian_name', dob: 'dob', gender: 'gender', whatsapp: 'whatsapp',
+  email: 'email', aadhaar: 'aadhaar', address: 'address', district: 'district',
+  taluk: 'taluk', assembly: 'assembly', occupation: 'occupation', education: 'education',
+  socialMedia: 'social_media'
+};
+
+router.get('/dashboard/profile', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
+  if (!member) return res.redirect('/login');
+  res.render('profile', {
+    page: 'profile',
+    meta: { title: 'My Profile | RJP' },
+    member,
+    districts: KARNATAKA_DISTRICTS,
+    updated: req.query.updated === '1'
+  });
+}));
+
+router.post('/dashboard/profile', requireMemberAuth, asyncHandler(async (req, res) => {
+  const setClauses = PROFILE_EDIT_FIELDS.map((f) => `${PROFILE_EDIT_COLUMNS[f]} = ?`);
+  const values = PROFILE_EDIT_FIELDS.map((f) => req.body[f] || null);
+  values.push(req.session.memberId);
+
+  await db.run(`UPDATE members SET ${setClauses.join(', ')} WHERE id = ?`, values);
+  await db.run(
+    'INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)',
+    [req.session.memberId, 'Profile Updated', 'Updated via member portal']
+  );
+
+  res.redirect('/dashboard/profile?updated=1');
+}));
+
 router.get('/my-photo', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT photo_path FROM members WHERE id = ?', [req.session.memberId]);
   if (!member || !member.photo_path) return res.status(404).end();

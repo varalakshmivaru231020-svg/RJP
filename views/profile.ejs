@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/member.css">
+</head>
+<body class="member-portal">
+
+<%- include('partials/member-shell-open', { member, activity: [], active: 'profile' }) %>
+
+    <div class="mp-panel mp-fade-in">
+      <div class="mp-panel-head">
+        <h3>👤 My Profile</h3>
+        <button type="button" class="mp-link" id="mpProfileEditBtn">✏️ Edit Profile</button>
+      </div>
+
+      <% if (updated) { %>
+        <div class="mp-rejected-banner" style="background:#ECFDF5; color:#065F46; border-color:#A7F3D0;">✅ Profile updated successfully.</div>
+      <% } %>
+
+      <div class="mp-info-grid" style="margin-bottom:24px;">
+        <div class="mp-info-field"><span class="l">Full Name</span><span class="v"><%= member.full_name %></span></div>
+        <div class="mp-info-field"><span class="l">Membership ID</span><span class="v"><%= member.application_number %></span></div>
+        <div class="mp-info-field"><span class="l">Mobile</span><span class="v"><%= member.mobile %></span></div>
+        <div class="mp-info-field"><span class="l">Status</span><span class="v"><%= member.status %></span></div>
+        <div class="mp-info-field"><span class="l">Application Date</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+      </div>
+
+      <form method="POST" action="/dashboard/profile" class="mp-profile-form mode-view" id="mpProfileForm">
+        <div class="mp-form-grid">
+          <label class="mp-field"><span>Father / Mother Name</span>
+            <input type="text" name="guardianName" value="<%= member.guardian_name || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Date of Birth</span>
+            <input type="date" name="dob" value="<%= member.dob || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Gender</span>
+            <select name="gender" disabled>
+              <option value="">—</option>
+              <option value="Male" <%= member.gender === 'Male' ? 'selected' : '' %>>Male</option>
+              <option value="Female" <%= member.gender === 'Female' ? 'selected' : '' %>>Female</option>
+              <option value="Other" <%= member.gender === 'Other' ? 'selected' : '' %>>Other</option>
+            </select>
+          </label>
+          <label class="mp-field"><span>WhatsApp Number</span>
+            <input type="tel" name="whatsapp" value="<%= member.whatsapp || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Email</span>
+            <input type="email" name="email" value="<%= member.email || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Aadhaar Number</span>
+            <input type="text" name="aadhaar" value="<%= member.aadhaar || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>District</span>
+            <select name="district" disabled>
+              <option value="">—</option>
+              <% districts.forEach(function(d){ %>
+                <option value="<%= d %>" <%= member.district === d ? 'selected' : '' %>><%= d %></option>
+              <% }); %>
+            </select>
+          </label>
+          <label class="mp-field"><span>Taluk</span>
+            <input type="text" name="taluk" value="<%= member.taluk || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Assembly Constituency</span>
+            <input type="text" name="assembly" value="<%= member.assembly || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Occupation</span>
+            <input type="text" name="occupation" value="<%= member.occupation || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Education</span>
+            <input type="text" name="education" value="<%= member.education || '' %>" readonly>
+          </label>
+          <label class="mp-field"><span>Social Media</span>
+            <input type="text" name="socialMedia" value="<%= member.social_media || '' %>" readonly>
+          </label>
+          <label class="mp-field" style="grid-column:1/-1;"><span>Address</span>
+            <textarea name="address" rows="3" readonly><%= member.address || '' %></textarea>
+          </label>
+        </div>
+
+        <div class="mp-form-actions" id="mpProfileFormActions" style="display:none;">
+          <button type="submit" class="mp-cta-primary">💾 Save Changes</button>
+          <button type="button" class="mp-link" id="mpProfileCancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+<%- include('partials/member-shell-close') %>
+</body>
+</html>

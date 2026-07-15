@@ -10,37 +10,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const profileBtn = document.getElementById('mpProfileBtn');
-  const profileMenu = document.getElementById('mpProfileMenu');
-  if (profileBtn && profileMenu) {
-    profileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileMenu.classList.toggle('open');
-    });
-    document.addEventListener('click', () => profileMenu.classList.remove('open'));
-  }
-
-  const bell = document.getElementById('mpBell');
-  if (bell) {
-    bell.addEventListener('click', () => {
-      const target = document.getElementById('mp-notifications');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
   const activityToggle = document.getElementById('mpActivityToggle');
   const activityList = document.getElementById('mpActivityList');
+  function expandActivity() {
+    if (!activityList) return;
+    activityList.removeAttribute('data-collapsed');
+    if (activityToggle) activityToggle.textContent = 'Show Less';
+  }
   if (activityToggle && activityList) {
     activityToggle.addEventListener('click', () => {
       const collapsed = activityList.hasAttribute('data-collapsed');
       if (collapsed) {
-        activityList.removeAttribute('data-collapsed');
-        activityToggle.textContent = 'Show Less';
+        expandActivity();
       } else {
         activityList.setAttribute('data-collapsed', '');
         activityToggle.textContent = 'View All';
       }
     });
+  }
+  if (window.location.hash === '#mp-notifications') expandActivity();
+
+  const bell = document.getElementById('mpBell');
+  if (bell) {
+    bell.addEventListener('click', () => {
+      const target = document.getElementById('mp-notifications');
+      if (target) {
+        expandActivity();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.href = '/dashboard#mp-notifications';
+      }
+    });
+  }
+
+  const profileForm = document.getElementById('mpProfileForm');
+  const profileEditBtn = document.getElementById('mpProfileEditBtn');
+  const profileFormActions = document.getElementById('mpProfileFormActions');
+  const profileCancelBtn = document.getElementById('mpProfileCancelBtn');
+  if (profileForm && profileEditBtn) {
+    profileEditBtn.addEventListener('click', () => {
+      profileForm.classList.remove('mode-view');
+      profileForm.classList.add('mode-edit');
+      profileForm.querySelectorAll('input, select, textarea').forEach((el) => {
+        el.removeAttribute('readonly');
+        el.removeAttribute('disabled');
+      });
+      profileEditBtn.style.display = 'none';
+      if (profileFormActions) profileFormActions.style.display = 'flex';
+    });
+    if (profileCancelBtn) {
+      profileCancelBtn.addEventListener('click', () => window.location.reload());
+    }
   }
 
   document.querySelectorAll('.mp-progress-fill').forEach((el) => {

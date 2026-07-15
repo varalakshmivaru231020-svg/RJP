@@ -7,3 +7,6 @@ WhatsApp Image*.jpeg
 # Membership system runtime data (local SQLite DB + member-submitted files)
 data/
 uploads/
+
+# Real secrets — never commit. Copy .env.example to .env and fill in real values.
+.env

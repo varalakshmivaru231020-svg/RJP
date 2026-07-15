@@ -238,22 +238,6 @@ html:has(.admin-login-body){height:100%;}
 .activity-list b{display:block; color:var(--a-primary);}
 .activity-list span{font-size:.82rem; color:var(--a-text-muted);}
 
-/* ---------- Membership card (kept on-brand — this is the member-facing artifact, not admin chrome) ---------- */
-.member-card{
-  width:360px; border-radius:18px; overflow:hidden; background:linear-gradient(160deg, #16234A, #0c1730);
-  color:#fff; padding:24px; box-shadow:0 25px 60px -25px rgba(0,0,0,.6); margin:0 auto;
-}
-.member-card-head{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
-.member-card-head img{width:38px; height:38px; border-radius:50%;}
-.member-card-head b{font-family:'Fraunces',serif; font-size:.95rem;}
-.member-card-body{display:flex; gap:16px; align-items:center;}
-.member-card-photo{width:84px; height:84px; border-radius:12px; object-fit:cover; background:rgba(255,255,255,.1); border:2px solid #F0A400;}
-.member-card-body h4{color:#fff; margin:0 0 4px; font-size:1.1rem;}
-.member-card-body span{display:block; font-size:.82rem; color:#c3cde3;}
-.member-card-qr{background:#fff; padding:8px; border-radius:10px; margin-left:auto;}
-.member-card-qr img{width:64px; height:64px; display:block;}
-.member-card-foot{margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.18); font-size:.72rem; color:#9fb0d0; display:flex; justify-content:space-between;}
-
 @media (max-width:940px){
   .admin-sidebar{position:fixed; left:-240px; z-index:200; transition:left .2s ease; box-shadow:0 0 0 100vmax rgba(0,0,0,0);}
   .admin-sidebar.open{left:0; box-shadow:0 0 0 100vmax rgba(0,0,0,.4);}

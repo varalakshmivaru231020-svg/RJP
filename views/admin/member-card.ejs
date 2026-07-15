@@ -2,35 +2,76 @@
 <html lang="en">
 <head>
 <%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <%- include('partials/sidebar') %>
 
 <div class="admin-panel" style="text-align:center;">
-  <div class="member-card">
-    <div class="member-card-head">
-      <img src="/images/logo.jpg" alt="RJP">
-      <b>Rashtriya Janahita Party</b>
-    </div>
-    <div class="member-card-body">
-      <% if (member.photo_path) { %>
-        <img class="member-card-photo" src="/admin/members/<%= member.id %>/photo" alt="<%= member.full_name %>">
-      <% } else { %>
-        <div class="member-card-photo" style="display:flex;align-items:center;justify-content:center;color:#c3cde3;font-size:.75rem;">No Photo</div>
-      <% } %>
-      <div>
-        <h4><%= member.full_name %></h4>
-        <span>ID: <%= member.application_number %></span>
-        <span>District: <%= member.district || '-' %></span>
-        <span>Status: <%= member.status %></span>
+  <div class="rjp-card-wrap">
+    <div class="rjp-card front active" id="rjpCardFront">
+      <div class="rjp-card-header">
+        <div class="rjp-card-seal"><img src="/images/logo.jpg" alt="RJP"></div>
+        <div class="rjp-card-brand-en">RJP</div>
+        <div class="rjp-card-brand-kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</div>
+        <div class="rjp-card-brand-full">RASHTRIYA JANAHITA PARTY</div>
+        <div class="rjp-card-tagline">ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ</div>
       </div>
-      <div class="member-card-qr"><img src="<%= qrDataUrl %>" alt="QR verification code"></div>
+      <div style="text-align:center;"><span class="rjp-card-badge">DIGITAL MEMBERSHIP CARD</span></div>
+      <div class="rjp-card-body">
+        <% if (member.photo_path) { %>
+          <img class="rjp-card-photo" src="/admin/members/<%= member.id %>/photo" alt="<%= member.full_name %>">
+        <% } else { %>
+          <div class="rjp-card-photo placeholder">No Photo</div>
+        <% } %>
+        <div class="rjp-card-fields">
+          <div class="row"><span class="l">ಹೆಸರು</span><span class="v"><%= member.full_name %></span></div>
+          <div class="row"><span class="l">ID</span><span class="v"><%= member.application_number %></span></div>
+          <div class="row"><span class="l">ಜಿಲ್ಲೆ</span><span class="v"><%= member.district || '-' %></span></div>
+          <div class="row"><span class="l">ಕ್ಷೇತ್ರ</span><span class="v"><%= member.assembly || '-' %></span></div>
+          <div class="row"><span class="l">ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+        </div>
+      </div>
+      <div class="rjp-card-sign">
+        <span class="rjp-card-sign-line">Authorised Signatory</span>
+        <span class="rjp-card-seal-mini">✓</span>
+      </div>
+      <div class="rjp-card-foot">
+        <span>rjpindia.com</span>
+        <span>Reg. No. 56/283/2019-2020/PPS-1</span>
+      </div>
     </div>
-    <div class="member-card-foot">
-      <span>Reg. No. 56/283/2019-2020/PPS-1</span>
-      <span>rjpindia.com</span>
+
+    <div class="rjp-card back" id="rjpCardBack">
+      <div class="rjp-card-back-header">
+        <div class="kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP)</div>
+        <div class="en">RASHTRIYA JANAHITA PARTY</div>
+        <div class="tag">ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ</div>
+      </div>
+      <div class="rjp-card-points">
+        <div class="rjp-card-point"><span class="ic">👥</span> ಜನರೊಂದಿಗೆ... ಜನರಿಗಾಗಿ... ಜನಹಿತಕ್ಕಾಗಿ</div>
+        <div class="rjp-card-point"><span class="ic">🛡️</span> ಪಾರದರ್ಶಕತೆ ನಮ್ಮ ಬದ್ಧತೆ</div>
+        <div class="rjp-card-point"><span class="ic">⚖️</span> ನ್ಯಾಯ, ಸಮಾನತೆ, ಅಭಿವೃದ್ಧಿ ನಮ್ಮ ಗುರಿ</div>
+        <div class="rjp-card-point"><span class="ic">🤝</span> ಸೇವೆ ನಮ್ಮ ಧರ್ಮ</div>
+        <div class="rjp-card-point"><span class="ic">📈</span> ಸಮೃದ್ಧ ಭಾರತ ನಮ್ಮ ಕನಸು</div>
+      </div>
+      <div class="rjp-card-qr-row">
+        <img src="<%= qrDataUrl %>" alt="QR verification code">
+        <p>ನಿಮ್ಮ ಸದಸ್ಯತ್ವವನ್ನು ಪರಿಶೀಲಿಸಲು<br>QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</p>
+      </div>
+      <div class="rjp-card-compliance">
+        <div class="row">✅ ಈ ಕಾರ್ಡ್ ನಮ್ಮ ಪಕ್ಷದ ಅಧಿಕೃತ ಸದಸ್ಯತ್ವದ ಆಧಾರವಾಗಿದೆ.</div>
+        <div class="row">✅ ಈ ಕಾರ್ಡ್ ಅನ್ನು ಇನ್ನೊಬ್ಬರಿಗೆ ವರ್ಗಾಯಿಸುವುದು ಅಮಾನ್ಯ.</div>
+        <div class="row">✅ ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ www.rjpindia.com ಗೆ ಭೇಟಿ ನೀಡಿ.</div>
+      </div>
+      <div class="rjp-card-foot">
+        <span>📞 1800 123 2024</span>
+        <span>info@rjpindia.com</span>
+      </div>
     </div>
   </div>
+
+  <button type="button" class="rjp-card-flip-btn" id="rjpCardFlip">🔄 Flip to Back</button>
 
   <div class="admin-actions no-print" style="justify-content:center; margin-top:24px;">
     <a href="/admin/members/<%= member.id %>/card/pdf" class="primary">⬇ Download PDF</a>
@@ -40,5 +81,12 @@
 </div>
 
 <%- include('partials/scripts') %>
+<script>
+  document.getElementById('rjpCardFlip').addEventListener('click', function () {
+    document.getElementById('rjpCardFront').classList.toggle('active');
+    document.getElementById('rjpCardBack').classList.toggle('active');
+    this.textContent = document.getElementById('rjpCardBack').classList.contains('active') ? '🔄 Flip to Front' : '🔄 Flip to Back';
+  });
+</script>
 </body>
 </html>

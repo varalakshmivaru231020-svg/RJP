@@ -30,6 +30,18 @@
 
     <% if (isRejected) { %>
       <div class="mp-rejected-banner">❌ Your application was not approved. Contact your booth coordinator or <a href="/contact" style="color:inherit;">reach out to us</a> for details.</div>
+    <% } else if (member.payment_status === 'Not Paid') { %>
+      <div class="mp-rejected-banner" style="background:#FFFBEB; color:#92400E; border-color:#FDE68A;">
+        💳 Pay your ₹<%= paymentFee %> membership fee to unlock your digital card. <a href="/dashboard/payment" style="color:inherit; font-weight:700; text-decoration:underline;">Pay now →</a>
+      </div>
+    <% } else if (member.payment_status === 'Submitted') { %>
+      <div class="mp-rejected-banner" style="background:#EFF6FF; color:#1E40AF; border-color:#BFDBFE;">
+        ⏳ Your ₹<%= paymentFee %> payment proof is under review. We'll notify you once it's verified.
+      </div>
+    <% } else if (member.payment_status === 'Rejected') { %>
+      <div class="mp-rejected-banner">
+        ❌ Your payment proof was not accepted. <a href="/dashboard/payment" style="color:inherit; font-weight:700; text-decoration:underline;">Resubmit →</a>
+      </div>
     <% } %>
 
     <div class="mp-stats-grid">

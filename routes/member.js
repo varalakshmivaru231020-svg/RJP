@@ -3,9 +3,9 @@ const path = require('path');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const db = require('../db');
-const { upload, PHOTO_DIR } = require('../lib/upload');
+const { upload, paymentUpload, PHOTO_DIR, PAYMENT_DIR } = require('../lib/upload');
 const { nextApplicationNumber } = require('../lib/applicationNumber');
-const { KARNATAKA_DISTRICTS, AREAS_OF_INTEREST, STATUS_ORDER } = require('../lib/constants');
+const { KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, AREAS_OF_INTEREST, STATUS_ORDER, PAYMENT_FEE_AMOUNT } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
 const { getCmsSection, parseLine } = require('../lib/cms');
@@ -37,6 +37,7 @@ router.get('/register', (req, res) => {
     page: 'register',
     meta: { title: 'Become a Member | RJP' },
     districts: KARNATAKA_DISTRICTS,
+    taluks: KARNATAKA_TALUKS,
     interests: AREAS_OF_INTEREST,
     error: null,
     old: collectOld({})
@@ -56,6 +57,7 @@ router.post('/register', (req, res, next) => {
         page: 'register',
         meta: { title: 'Become a Member | RJP' },
         districts: KARNATAKA_DISTRICTS,
+        taluks: KARNATAKA_TALUKS,
         interests: AREAS_OF_INTEREST,
         error: message,
         old
@@ -96,8 +98,9 @@ router.post('/register', (req, res, next) => {
       1, passwordHash, 'Pending Approval'
     ];
 
+    let result;
     try {
-      const result = await db.run(
+      result = await db.run(
         `INSERT INTO members (${columns.join(', ')}) VALUES (${columns.map(() => '?').join(', ')})`,
         values
       );
@@ -109,10 +112,13 @@ router.post('/register', (req, res, next) => {
       return fail('Something went wrong saving your application. Please try again.');
     }
 
+    req.session.memberId = result.insertId;
+
     res.render('register-success', {
       page: 'register-success',
       meta: { title: 'Application Submitted | RJP' },
-      applicationNumber
+      applicationNumber,
+      paymentFee: PAYMENT_FEE_AMOUNT
     });
    } catch (err) {
      next(err);
@@ -183,6 +189,8 @@ router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
     .map((line) => parseLine(line, ['date', 'title', 'body']))
     .slice(0, 3);
 
+  const isCardReady = ['Approved', 'Active'].includes(member.status) && member.payment_status === 'Verified';
+
   res.render('dashboard', {
     page: 'dashboard',
     meta: { title: 'My Dashboard | RJP' },
@@ -193,7 +201,9 @@ router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
     checklist,
     profileCompletion,
     activity,
-    announcements
+    announcements,
+    isCardReady,
+    paymentFee: PAYMENT_FEE_AMOUNT
   });
 }));
 
@@ -234,15 +244,87 @@ router.post('/dashboard/profile', requireMemberAuth, asyncHandler(async (req, re
   res.redirect('/dashboard/profile?updated=1');
 }));
 
+router.get('/dashboard/payment', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
+  if (!member) return res.redirect('/login');
+  res.render('dashboard-payment', {
+    page: 'payment',
+    meta: { title: 'Membership Payment | RJP' },
+    member,
+    paymentFee: PAYMENT_FEE_AMOUNT,
+    submitted: req.query.submitted === '1'
+  });
+}));
+
+router.post('/dashboard/payment', requireMemberAuth, (req, res, next) => {
+  paymentUpload.single('paymentProof')(req, res, async (uploadErr) => {
+    try {
+      const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
+      if (!member) return res.redirect('/login');
+
+      if (uploadErr) {
+        return res.status(400).render('dashboard-payment', {
+          page: 'payment',
+          meta: { title: 'Membership Payment | RJP' },
+          member,
+          paymentFee: PAYMENT_FEE_AMOUNT,
+          submitted: false,
+          error: uploadErr.message
+        });
+      }
+      if (!req.file) {
+        return res.status(400).render('dashboard-payment', {
+          page: 'payment',
+          meta: { title: 'Membership Payment | RJP' },
+          member,
+          paymentFee: PAYMENT_FEE_AMOUNT,
+          submitted: false,
+          error: 'Please upload proof of payment (screenshot or receipt).'
+        });
+      }
+
+      if (member.payment_proof_path) {
+        fs.unlink(path.join(PAYMENT_DIR, member.payment_proof_path), () => {});
+      }
+
+      await db.run(
+        `UPDATE members SET payment_proof_path = ?, payment_status = 'Submitted', payment_submitted_at = NOW() WHERE id = ?`,
+        [path.basename(req.file.path), member.id]
+      );
+      await db.run(
+        'INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)',
+        [member.id, 'Payment Proof Submitted', `₹${PAYMENT_FEE_AMOUNT} membership fee — awaiting verification`]
+      );
+
+      res.redirect('/dashboard/payment?submitted=1');
+    } catch (err) {
+      next(err);
+    }
+  });
+});
+
 router.get('/my-photo', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT photo_path FROM members WHERE id = ?', [req.session.memberId]);
   if (!member || !member.photo_path) return res.status(404).end();
   res.sendFile(path.join(PHOTO_DIR, member.photo_path));
 }));
 
+function isCardEligible(member) {
+  return ['Approved', 'Active'].includes(member.status) && member.payment_status === 'Verified';
+}
+
 router.get('/dashboard/card', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');
+
+  if (!isCardEligible(member)) {
+    return res.render('card-locked', {
+      page: 'card-locked',
+      meta: { title: 'Membership Card | RJP' },
+      member
+    });
+  }
+
   const qrDataUrl = await cardQrDataUrl(req, member.application_number);
   res.render('member-card', {
     page: 'member-card',
@@ -257,6 +339,7 @@ router.get('/dashboard/card', requireMemberAuth, asyncHandler(async (req, res) =
 router.get('/dashboard/card/pdf', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');
+  if (!isCardEligible(member)) return res.redirect('/dashboard/card');
   const qrBuffer = await cardQrBuffer(req, member.application_number);
   await streamCardPdf(res, member, qrBuffer);
 }));

@@ -96,10 +96,25 @@ const SCHEMA = [
 const DEFAULT_ADMIN_EMAIL = 'admin@rjp.local';
 const DEFAULT_ADMIN_PASSWORD = 'Admin@123';
 
+async function ensureColumn(table, column, definition) {
+  const [rows] = await pool.query(
+    `SELECT COUNT(*) AS n FROM information_schema.COLUMNS
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = ?`,
+    [table, column]
+  );
+  if (rows[0].n === 0) {
+    await pool.query(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  }
+}
+
 async function init() {
   for (const statement of SCHEMA) {
     await pool.query(statement);
   }
+
+  await ensureColumn('members', 'payment_status', "VARCHAR(20) NOT NULL DEFAULT 'Not Paid'");
+  await ensureColumn('members', 'payment_proof_path', 'VARCHAR(255)');
+  await ensureColumn('members', 'payment_submitted_at', 'DATETIME NULL');
 
   const adminCount = await pool.get('SELECT COUNT(*) AS n FROM admins');
   if (adminCount.n === 0) {

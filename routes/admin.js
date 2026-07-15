@@ -4,9 +4,9 @@ const express = require('express');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const db = require('../db');
-const { upload, PHOTO_DIR, ID_DIR } = require('../lib/upload');
+const { upload, PHOTO_DIR, ID_DIR, PAYMENT_DIR } = require('../lib/upload');
 const { SETTINGS_DEFAULTS, getAllSettings, setSettings } = require('../lib/settings');
-const { KARNATAKA_DISTRICTS, AREAS_OF_INTEREST, ALL_STATUSES } = require('../lib/constants');
+const { KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, AREAS_OF_INTEREST, ALL_STATUSES } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
 const { streamReportPdf } = require('../lib/reportPdf');
@@ -228,6 +228,7 @@ router.get('/admin/members/:id/edit', asyncHandler(async (req, res) => {
     meta: { title: `Edit ${member.full_name} | RJP Admin` },
     member,
     districts: KARNATAKA_DISTRICTS,
+    taluks: KARNATAKA_TALUKS,
     interests: AREAS_OF_INTEREST,
     selectedInterests: (member.areas_of_interest || '').split(',').map((s) => s.trim()).filter(Boolean),
     statuses: ALL_STATUSES,
@@ -250,6 +251,7 @@ router.post('/admin/members/:id/edit', (req, res, next) => {
           meta: { title: `Edit ${member.full_name} | RJP Admin` },
           member: { ...member, ...mapBodyToMemberFields(req.body) },
           districts: KARNATAKA_DISTRICTS,
+          taluks: KARNATAKA_TALUKS,
           interests: AREAS_OF_INTEREST,
           selectedInterests: [].concat(req.body.areasOfInterest || []),
           statuses: ALL_STATUSES,
@@ -331,11 +333,34 @@ router.post('/admin/members/:id/reject', asyncHandler(async (req, res) => {
   res.redirect(req.get('referer') || '/admin/members');
 }));
 
+router.post('/admin/members/:id/payment/verify', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
+  if (!member) return res.status(404).end();
+  await db.run("UPDATE members SET payment_status = 'Verified' WHERE id = ?", [member.id]);
+  await logActivity(member.id, 'Payment Verified', null, req.session.adminEmail);
+  res.redirect(req.get('referer') || `/admin/members/${member.id}`);
+}));
+
+router.post('/admin/members/:id/payment/reject', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
+  if (!member) return res.status(404).end();
+  await db.run("UPDATE members SET payment_status = 'Rejected' WHERE id = ?", [member.id]);
+  await logActivity(member.id, 'Payment Rejected', req.body.reason || null, req.session.adminEmail);
+  res.redirect(req.get('referer') || `/admin/members/${member.id}`);
+}));
+
+router.get('/admin/members/:id/payment-proof', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT payment_proof_path FROM members WHERE id = ?', [req.params.id]);
+  if (!member || !member.payment_proof_path) return res.status(404).end();
+  res.sendFile(path.join(PAYMENT_DIR, member.payment_proof_path));
+}));
+
 router.post('/admin/members/:id/delete', asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
   if (member.photo_path) fs.unlink(path.join(PHOTO_DIR, member.photo_path), () => {});
   if (member.id_upload_path) fs.unlink(path.join(ID_DIR, member.id_upload_path), () => {});
+  if (member.payment_proof_path) fs.unlink(path.join(PAYMENT_DIR, member.payment_proof_path), () => {});
   await db.run('DELETE FROM members WHERE id = ?', [member.id]);
   res.redirect('/admin/members');
 }));

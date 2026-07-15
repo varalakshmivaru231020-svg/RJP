@@ -688,3 +688,82 @@
     .wizard-steps li{font-size:.72rem;}
     .wizard-card{padding:24px 18px;}
   }
+
+  /* ---------- Digital Membership Card (front + back) ---------- */
+  .rjp-card-wrap{max-width:380px; margin:0 auto;}
+  .rjp-card-flip-btn{
+    display:block; margin:14px auto 0; background:var(--navy); color:#fff; border:none; border-radius:999px;
+    padding:10px 22px; font-weight:700; font-size:.88rem; cursor:pointer; font-family:inherit;
+  }
+  .rjp-card{
+    width:100%; border-radius:22px; overflow:hidden; background:var(--white);
+    box-shadow:0 30px 60px -28px rgba(11,20,50,.4); font-family:'Poppins','Noto Sans Kannada',sans-serif;
+    display:none;
+  }
+  .rjp-card.active{display:block;}
+
+  .rjp-card-header{
+    background:linear-gradient(120deg, #FBDD86 0%, #F0A400 45%, var(--green) 100%);
+    padding:22px 20px 32px; text-align:center; position:relative;
+    border-radius:0 0 50% 50% / 0 0 22px 22px;
+  }
+  .rjp-card-seal{
+    width:72px; height:72px; border-radius:50%; background:#fff; padding:5px; margin:0 auto 8px;
+    box-shadow:0 6px 16px rgba(0,0,0,.22);
+  }
+  .rjp-card-seal img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;}
+  .rjp-card-brand-en{font-weight:800; font-size:1.5rem; color:var(--navy); letter-spacing:.01em; line-height:1.1;}
+  .rjp-card-brand-kn{font-weight:700; color:var(--navy); font-size:1rem; margin-top:3px;}
+  .rjp-card-brand-full{font-size:.68rem; color:#5a3d00; margin-top:2px; font-weight:600;}
+  .rjp-card-tagline{margin-top:8px; font-size:.7rem; color:var(--navy); font-weight:600;}
+
+  .rjp-card-badge{
+    display:inline-block; margin-top:-16px; position:relative; z-index:2;
+    background:var(--green); color:#fff; font-weight:700; font-size:.78rem;
+    padding:8px 22px; border-radius:999px; box-shadow:0 10px 20px -6px rgba(27,122,61,.5);
+  }
+
+  .rjp-card-body{padding:24px 20px 14px; display:flex; gap:14px; align-items:flex-start;}
+  .rjp-card-photo{width:84px; height:100px; border-radius:10px; object-fit:cover; border:3px solid var(--saffron); flex:none; background:#eef0f5;}
+  .rjp-card-photo.placeholder{display:flex; align-items:center; justify-content:center; color:#9aa3b5; font-size:.68rem; text-align:center;}
+  .rjp-card-fields{display:grid; gap:6px; flex:1; min-width:0;}
+  .rjp-card-fields .row{display:flex; gap:6px; font-size:.78rem; align-items:baseline;}
+  .rjp-card-fields .l{color:#6b7280; min-width:70px; flex:none;}
+  .rjp-card-fields .v{color:var(--navy); font-weight:700; overflow-wrap:anywhere;}
+
+  .rjp-card-sign{display:flex; align-items:center; justify-content:space-between; padding:6px 20px 18px; gap:12px;}
+  .rjp-card-sign-line{font-size:.64rem; color:#6b7280; border-top:1px solid var(--line); padding-top:6px; width:130px; text-align:center;}
+  .rjp-card-seal-mini{
+    width:42px; height:42px; border-radius:50%; background:var(--green); color:#fff; flex:none;
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem; box-shadow:0 6px 14px -4px rgba(27,122,61,.5);
+  }
+
+  .rjp-card-foot{
+    background:var(--navy); color:#fff; padding:10px 20px; display:flex; align-items:center;
+    justify-content:space-between; font-size:.7rem; gap:10px;
+  }
+  .rjp-card-foot .social{display:flex; gap:8px;}
+  .rjp-card-foot .social a{color:#fff; opacity:.85;}
+  .rjp-card-foot .social svg{width:14px; height:14px; display:block;}
+
+  .rjp-card-back-header{
+    background:linear-gradient(120deg, var(--green), var(--green-deep));
+    color:#fff; padding:22px 20px 18px; text-align:center;
+  }
+  .rjp-card-back-header .kn{font-weight:800; font-size:1.05rem;}
+  .rjp-card-back-header .en{font-size:.76rem; opacity:.9; margin-top:2px;}
+  .rjp-card-back-header .tag{font-size:.66rem; opacity:.85; margin-top:8px;}
+
+  .rjp-card-points{padding:18px 20px 6px; display:grid; gap:12px;}
+  .rjp-card-point{display:flex; gap:10px; align-items:flex-start; font-size:.78rem; color:var(--navy);}
+  .rjp-card-point .ic{
+    width:28px; height:28px; border-radius:50%; background:var(--cream); flex:none;
+    display:flex; align-items:center; justify-content:center; font-size:.9rem;
+  }
+
+  .rjp-card-qr-row{display:flex; gap:14px; align-items:center; padding:6px 20px 16px;}
+  .rjp-card-qr-row img{width:72px; height:72px; border:2px solid var(--line); border-radius:8px; flex:none;}
+  .rjp-card-qr-row p{font-size:.7rem; color:var(--navy); font-weight:600; margin:0;}
+
+  .rjp-card-compliance{padding:0 20px 14px; display:grid; gap:6px; font-size:.68rem; color:#3a4152;}
+  .rjp-card-compliance .row{display:flex; gap:6px; align-items:flex-start;}

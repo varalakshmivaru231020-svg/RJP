@@ -35,6 +35,7 @@
     <button type="button" data-tab="political">Political</button>
     <button type="button" data-tab="education">Education</button>
     <button type="button" data-tab="uploads">Uploads</button>
+    <button type="button" data-tab="payment">Payment</button>
     <button type="button" data-tab="activity">Activity</button>
   </div>
 
@@ -106,6 +107,34 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="admin-tab-panel" data-tab="payment">
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap;">
+      <span class="status-pill <%= member.payment_status==='Verified' ? 'approved' : (member.payment_status==='Rejected' ? 'rejected' : (member.payment_status==='Submitted' ? 'under-review' : 'pending')) %>">₹100 — <%= member.payment_status %></span>
+      <% if (member.payment_submitted_at) { %><span class="form-note">Submitted <%= member.payment_submitted_at %></span><% } %>
+      <% if (member.payment_status !== 'Verified') { %>
+        <form method="POST" action="/admin/members/<%= member.id %>/payment/verify" style="display:inline;">
+          <button type="submit" class="primary">Verify Payment</button>
+        </form>
+      <% } %>
+      <% if (member.payment_status !== 'Rejected') { %>
+        <form method="POST" action="/admin/members/<%= member.id %>/payment/reject" style="display:inline;">
+          <button type="submit" class="danger">Reject Payment</button>
+        </form>
+      <% } %>
+    </div>
+    <% if (member.payment_proof_path) { %>
+      <div class="upload-card">
+        <img src="/admin/members/<%= member.id %>/payment-proof" alt="Payment proof" style="width:96px; height:96px; object-fit:cover; border-radius:10px;" onerror="this.replaceWith(Object.assign(document.createElement('div'), {textContent:'📄', style:'width:96px;height:96px;display:flex;align-items:center;justify-content:center;background:var(--white);border-radius:10px;font-size:1.6rem;'}))">
+        <div>
+          <b>Payment Proof</b>
+          <p class="form-note" style="margin:4px 0 0;"><a href="/admin/members/<%= member.id %>/payment-proof" target="_blank" rel="noopener">View / Download</a></p>
+        </div>
+      </div>
+    <% } else { %>
+      <p class="admin-empty">No payment proof uploaded yet.</p>
+    <% } %>
   </div>
 
   <div class="admin-tab-panel" data-tab="activity">

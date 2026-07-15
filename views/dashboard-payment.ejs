@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/member.css">
+</head>
+<body class="member-portal">
+
+<%- include('partials/member-shell-open', { member, activity: [], active: 'dashboard' }) %>
+
+    <div class="mp-panel mp-fade-in">
+      <div class="mp-panel-head"><h3>💳 Membership Payment — ₹<%= paymentFee %></h3></div>
+
+      <% if (submitted) { %>
+        <div class="mp-rejected-banner" style="background:#ECFDF5; color:#065F46; border-color:#A7F3D0;">✅ Payment proof submitted. Our team will verify it shortly — your membership card unlocks once it's confirmed.</div>
+      <% } %>
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="mp-rejected-banner"><%= error %></div>
+      <% } %>
+
+      <% if (member.payment_status === 'Verified') { %>
+        <div class="mp-rejected-banner" style="background:#ECFDF5; color:#065F46; border-color:#A7F3D0;">✅ Your payment is verified. <a href="/dashboard/card" style="color:inherit; text-decoration:underline;">View your membership card →</a></div>
+      <% } else { %>
+
+        <% if (member.payment_status === 'Submitted') { %>
+          <p class="mp-badge review" style="margin-bottom:16px;">⏳ Submitted — awaiting verification</p>
+        <% } else if (member.payment_status === 'Rejected') { %>
+          <div class="mp-rejected-banner">❌ Your last payment proof was not accepted. Please re-check the amount/screenshot and submit again.</div>
+        <% } %>
+
+        <p>ಪ್ರತಿ ಸದಸ್ಯರು ₹<%= paymentFee %> ಸದಸ್ಯತ್ವ ಶುಲ್ಕ ಪಾವತಿಸಬೇಕು. ಕೆಳಗಿನ ಬ್ಯಾಂಕ್/UPI ವಿವರಗಳನ್ನು ಬಳಸಿ ಪಾವತಿಸಿ, ನಂತರ ಪಾವತಿಯ ಸ್ಕ್ರೀನ್‌ಶಾಟ್/ರಶೀದಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.</p>
+
+        <div class="mp-two-col" style="grid-template-columns:1fr 1fr; margin:20px 0;">
+          <div class="mp-panel" style="margin-bottom:0;">
+            <ul class="mp-checklist" style="gap:14px;">
+              <li class="done"><span class="mark">🏦</span> Rashtriya Janahita Party</li>
+              <li class="done"><span class="mark">🏛️</span> City Union Bank — Vidyaranyapura Branch</li>
+              <li class="done"><span class="mark">💳</span> Current Account: 510909010169682</li>
+              <li class="done"><span class="mark">🔢</span> IFSC: CIUB0000567</li>
+              <li class="done"><span class="mark">📲</span> UPI ID: EZE0437212@CUB</li>
+            </ul>
+          </div>
+          <div class="mp-panel" style="margin-bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+            <img src="/images/party-payment-qr.jpg" alt="RJP Scan & Pay QR code" style="max-width:260px; width:100%; border-radius:12px;">
+          </div>
+        </div>
+
+        <form method="POST" action="/dashboard/payment" enctype="multipart/form-data">
+          <label class="mp-field" style="margin-bottom:16px;">
+            <span>Upload Payment Proof (screenshot/receipt — JPG, PNG or PDF)</span>
+            <input type="file" name="paymentProof" accept=".jpg,.jpeg,.png,.pdf" required style="border:1px solid var(--mp-border); background:var(--mp-bg); padding:10px 12px; border-radius:10px;">
+          </label>
+          <button type="submit" class="mp-cta-primary">Submit Payment Proof</button>
+        </form>
+      <% } %>
+    </div>
+
+<%- include('partials/member-shell-close') %>
+</body>
+</html>

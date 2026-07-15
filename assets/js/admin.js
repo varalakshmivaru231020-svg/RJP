@@ -1,4 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const districtSelect = document.getElementById('districtSelect');
+  const talukSelect = document.getElementById('talukSelect');
+  if (districtSelect && talukSelect && window.RJP_TALUKS) {
+    const populateTaluks = (preserveSelected) => {
+      const taluks = window.RJP_TALUKS[districtSelect.value] || [];
+      const selected = preserveSelected ? talukSelect.dataset.selected : '';
+      talukSelect.innerHTML = '';
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = taluks.length ? 'Select' : 'Select district first';
+      talukSelect.appendChild(placeholder);
+      taluks.forEach((t) => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        if (t === selected) opt.selected = true;
+        talukSelect.appendChild(opt);
+      });
+    };
+    populateTaluks(true);
+    districtSelect.addEventListener('change', () => populateTaluks(false));
+  }
+
   const menuBtn = document.getElementById('adminMenuBtn');
   const sidebar = document.querySelector('.admin-sidebar');
   if (menuBtn && sidebar) {

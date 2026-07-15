@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/member.css">
+</head>
+<body class="member-portal">
+
+<%- include('partials/member-shell-open', { member, activity: [], active: 'card' }) %>
+
+    <div class="mp-panel mp-fade-in" style="text-align:center; padding:48px 24px;">
+      <span style="font-size:2.5rem; display:block; margin-bottom:12px;">🔒</span>
+      <h3 style="margin-bottom:10px;">Membership Card Not Ready Yet</h3>
+
+      <% if (member.status !== 'Approved' && member.status !== 'Active') { %>
+        <p>Your application is still <b><%= member.status %></b>. The card unlocks once your membership is approved and your payment is verified.</p>
+      <% } else if (member.payment_status !== 'Verified') { %>
+        <p>Your membership is approved 🎉 — the card unlocks once your ₹100 payment is verified.</p>
+        <% if (member.payment_status === 'Not Paid') { %>
+          <a class="mp-cta-primary" style="margin-top:16px; display:inline-block;" href="/dashboard/payment">Pay Membership Fee →</a>
+        <% } else if (member.payment_status === 'Submitted') { %>
+          <p class="mp-badge review">⏳ Payment submitted — awaiting verification</p>
+        <% } else if (member.payment_status === 'Rejected') { %>
+          <div class="mp-rejected-banner" style="max-width:420px; margin:12px auto 0;">❌ Your payment proof was not accepted.</div>
+          <a class="mp-cta-primary" style="margin-top:16px; display:inline-block;" href="/dashboard/payment">Resubmit Payment Proof →</a>
+        <% } %>
+      <% } %>
+
+      <div style="margin-top:20px;"><a class="mp-link" href="/dashboard">← Back to Dashboard</a></div>
+    </div>
+
+<%- include('partials/member-shell-close') %>
+</body>
+</html>

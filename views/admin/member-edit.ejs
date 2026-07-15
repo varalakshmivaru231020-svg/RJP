@@ -56,7 +56,7 @@
         <input type="text" name="state" value="<%= member.state %>">
       </label>
       <label>District
-        <select name="district">
+        <select name="district" id="districtSelect">
           <option value="">Select</option>
           <% districts.forEach(function(d){ %>
             <option value="<%= d %>" <%= member.district===d ? 'selected' : '' %>><%= d %></option>
@@ -64,7 +64,9 @@
         </select>
       </label>
       <label>Taluk
-        <input type="text" name="taluk" value="<%= member.taluk %>">
+        <select name="taluk" id="talukSelect" data-selected="<%= member.taluk %>">
+          <option value="">Select district first</option>
+        </select>
       </label>
       <label>Assembly
         <input type="text" name="assembly" value="<%= member.assembly %>">
@@ -137,6 +139,7 @@
   </form>
 </div>
 
+<script>window.RJP_TALUKS = <%- JSON.stringify(taluks) %>;</script>
 <%- include('partials/scripts') %>
 </body>
 </html>

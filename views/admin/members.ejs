@@ -47,6 +47,7 @@
         <th>District</th>
         <th>Assembly</th>
         <th>Status</th>
+        <th>Payment</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -66,6 +67,7 @@
           <td><%= m.district || '—' %></td>
           <td><%= m.assembly || '—' %></td>
           <td><span class="status-pill <%= m.status==='Rejected' ? 'rejected' : (m.status==='Approved' ? 'approved' : (m.status==='Active' ? 'active' : (m.status==='Under Review' ? 'under-review' : 'pending'))) %>"><%= m.status %></span></td>
+          <td><span class="status-pill <%= m.payment_status==='Verified' ? 'approved' : (m.payment_status==='Rejected' ? 'rejected' : (m.payment_status==='Submitted' ? 'under-review' : 'pending')) %>"><%= m.payment_status %></span></td>
           <td>
             <div class="admin-actions">
               <a href="/admin/members/<%= m.id %>">View</a>

@@ -79,7 +79,7 @@
               <input type="text" name="state" value="<%= old.state || 'Karnataka' %>">
             </label>
             <label>ಜಿಲ್ಲೆ
-              <select name="district">
+              <select name="district" id="districtSelect">
                 <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
                 <% districts.forEach(function(d){ %>
                   <option value="<%= d %>" <%= old.district===d ? 'selected' : '' %>><%= d %></option>
@@ -87,7 +87,9 @@
               </select>
             </label>
             <label>ತಾಲೂಕು
-              <input type="text" name="taluk" value="<%= old.taluk %>">
+              <select name="taluk" id="talukSelect" data-selected="<%= old.taluk %>">
+                <option value="">ಮೊದಲು ಜಿಲ್ಲೆ ಆಯ್ಕೆಮಾಡಿ</option>
+              </select>
             </label>
             <label>ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ
               <input type="text" name="assembly" value="<%= old.assembly %>">
@@ -170,6 +172,7 @@
 </section>
 
 <%- include('partials/footer') %>
+<script>window.RJP_TALUKS = <%- JSON.stringify(taluks) %>;</script>
 <script src="/js/register.js"></script>
 </body>
 </html>

@@ -711,8 +711,11 @@
 
   .rjp-card-header{
     background:linear-gradient(120deg, #FBDD86 0%, #F0A400 45%, var(--green) 100%);
-    padding:22px 20px 32px; text-align:center; position:relative;
-    border-radius:0 0 50% 50% / 0 0 22px 22px;
+    padding:22px 20px 44px; text-align:center; position:relative;
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 180' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L340,0 L340,128 C265.2,168 197.2,118 122.4,142 C61.2,162 27.2,172 0,148 Z'/%3E%3C/svg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 180' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L340,0 L340,128 C265.2,168 197.2,118 122.4,142 C61.2,162 27.2,172 0,148 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size:100% 100%; mask-size:100% 100%;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
   }
   .rjp-card-seal{
     width:72px; height:72px; border-radius:50%; background:#fff; padding:5px; margin:0 auto 8px;

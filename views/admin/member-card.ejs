@@ -27,10 +27,7 @@
         <div class="rjp-card-fields">
           <div class="row"><span class="l">ಹೆಸರು</span><span class="v"><%= member.full_name %></span></div>
           <div class="row"><span class="l">ID</span><span class="v"><%= member.application_number %></span></div>
-          <div class="row"><span class="l">ಜಿಲ್ಲೆ</span><span class="v"><%= member.district || '-' %></span></div>
-          <div class="row"><span class="l">ಕ್ಷೇತ್ರ</span><span class="v"><%= member.assembly || '-' %></span></div>
-          <div class="row"><span class="l">ಅರ್ಜಿ ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
-          <div class="row"><span class="l">ಅನುಮೋದನೆ ದಿನಾಂಕ</span><span class="v"><%= member.approved_at ? member.approved_at.split(' ')[0] : '-' %></span></div>
+          <div class="row"><span class="l">ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
         </div>
       </div>
       <div class="rjp-card-sign">

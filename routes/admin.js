@@ -147,6 +147,18 @@ async function logActivity(memberId, action, note, adminEmail) {
   );
 }
 
+// Once a member is both formally Approved and their payment is Verified,
+// there's nothing left pending — promote them straight to Active. Called
+// after whichever of the two conditions is satisfied second.
+async function maybeActivate(status, paymentStatus, memberId, adminEmail) {
+  if (status === 'Approved' && paymentStatus === 'Verified') {
+    await db.run("UPDATE members SET status = 'Active' WHERE id = ?", [memberId]);
+    await logActivity(memberId, 'Status Changed', 'Approved → Active (auto, payment verified)', adminEmail);
+    return true;
+  }
+  return false;
+}
+
 function mapBodyToMemberFields(body) {
   return {
     full_name: body.fullName || '',
@@ -313,6 +325,7 @@ router.post('/admin/members/:id/edit', (req, res, next) => {
       if (['Approved', 'Active'].includes(status) && !member.approved_at) {
         await db.run("UPDATE members SET approved_at = NOW() WHERE id = ? AND approved_at IS NULL", [member.id]);
       }
+      await maybeActivate(status, member.payment_status, member.id, req.session.adminEmail);
       await logActivity(member.id, 'Profile Updated', null, req.session.adminEmail);
 
       res.redirect(`/admin/members/${member.id}`);
@@ -327,6 +340,7 @@ router.post('/admin/members/:id/approve', asyncHandler(async (req, res) => {
   if (!member) return res.status(404).end();
   await db.run("UPDATE members SET status = 'Approved', approved_at = NOW() WHERE id = ?", [member.id]);
   await logActivity(member.id, 'Approved', null, req.session.adminEmail);
+  await maybeActivate('Approved', member.payment_status, member.id, req.session.adminEmail);
   res.redirect(req.get('referer') || '/admin/members');
 }));
 
@@ -343,6 +357,7 @@ router.post('/admin/members/:id/payment/verify', asyncHandler(async (req, res) =
   if (!member) return res.status(404).end();
   await db.run("UPDATE members SET payment_status = 'Verified' WHERE id = ?", [member.id]);
   await logActivity(member.id, 'Payment Verified', null, req.session.adminEmail);
+  await maybeActivate(member.status, 'Verified', member.id, req.session.adminEmail);
   res.redirect(req.get('referer') || `/admin/members/${member.id}`);
 }));
 

@@ -119,45 +119,21 @@
       </div>
     </div>
 
-    <div class="mp-two-col" style="grid-template-columns:1fr 1fr;" id="mp-notifications">
-      <div class="mp-panel">
-        <div class="mp-panel-head">
-          <h3>📢 Notifications</h3>
-          <% if (activity.length > 4) { %><button class="mp-link" id="mpActivityToggle" type="button">View All</button><% } %>
-        </div>
-        <% if (!activity.length) { %>
-          <div class="mp-empty"><span class="ic">🔔</span><p>No notifications yet.</p></div>
-        <% } else { %>
-          <ul class="mp-activity-list" id="mpActivityList" <%= activity.length > 4 ? 'data-collapsed' : '' %>>
-            <% activity.forEach(function(a){ %>
-              <li>
-                <span class="dot"></span>
-                <div>
-                  <b><%= a.action %></b>
-                  <span><%= a.created_at %><%= a.note ? ' · ' + a.note : '' %></span>
-                </div>
-              </li>
-            <% }); %>
-          </ul>
-        <% } %>
-      </div>
-
-      <div class="mp-panel">
-        <div class="mp-panel-head"><h3>📣 Latest Party Announcements</h3></div>
-        <% if (!announcements.length) { %>
-          <div class="mp-empty"><span class="ic">📭</span><p>No announcements yet. Check back soon.</p></div>
-        <% } else { %>
-          <ul class="mp-announce-list">
-            <% announcements.forEach(function(a){ %>
-              <li class="mp-announce-item">
-                <span><%= a.date %></span>
-                <b><%= a.title %></b>
-                <p><%= a.body %></p>
-              </li>
-            <% }); %>
-          </ul>
-        <% } %>
-      </div>
+    <div class="mp-panel">
+      <div class="mp-panel-head"><h3>📣 Latest Party Announcements</h3></div>
+      <% if (!announcements.length) { %>
+        <div class="mp-empty"><span class="ic">📭</span><p>No announcements yet. Check back soon.</p></div>
+      <% } else { %>
+        <ul class="mp-announce-list">
+          <% announcements.forEach(function(a){ %>
+            <li class="mp-announce-item">
+              <span><%= a.date %></span>
+              <b><%= a.title %></b>
+              <p><%= a.body %></p>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
     </div>
 
 <%- include('partials/member-shell-close') %>

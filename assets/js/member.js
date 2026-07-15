@@ -10,39 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const activityToggle = document.getElementById('mpActivityToggle');
-  const activityList = document.getElementById('mpActivityList');
-  function expandActivity() {
-    if (!activityList) return;
-    activityList.removeAttribute('data-collapsed');
-    if (activityToggle) activityToggle.textContent = 'Show Less';
-  }
-  if (activityToggle && activityList) {
-    activityToggle.addEventListener('click', () => {
-      const collapsed = activityList.hasAttribute('data-collapsed');
-      if (collapsed) {
-        expandActivity();
-      } else {
-        activityList.setAttribute('data-collapsed', '');
-        activityToggle.textContent = 'View All';
-      }
-    });
-  }
-  if (window.location.hash === '#mp-notifications') expandActivity();
-
-  const bell = document.getElementById('mpBell');
-  if (bell) {
-    bell.addEventListener('click', () => {
-      const target = document.getElementById('mp-notifications');
-      if (target) {
-        expandActivity();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        window.location.href = '/dashboard#mp-notifications';
-      }
-    });
-  }
-
   const profileForm = document.getElementById('mpProfileForm');
   const profileEditBtn = document.getElementById('mpProfileEditBtn');
   const profileFormActions = document.getElementById('mpProfileFormActions');

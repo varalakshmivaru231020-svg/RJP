@@ -32,7 +32,7 @@ body.member-portal{background:var(--mp-bg); color:var(--mp-text); font-family:'I
 .mp-topbar-brand b{font-family:'Poppins',sans-serif; font-size:.96rem;}
 .mp-menu-btn{display:none; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--mp-text);}
 .mp-topbar-actions{margin-left:auto; display:flex; align-items:center; gap:14px;}
-.mp-bell{position:relative; background:none; border:none; font-size:1.25rem; cursor:pointer; color:var(--mp-text-muted); padding:6px; border-radius:8px;}
+.mp-bell{position:relative; background:none; border:none; font-size:1.25rem; cursor:pointer; color:var(--mp-text-muted); padding:6px; border-radius:8px; text-decoration:none; display:inline-flex;}
 .mp-bell:hover{background:var(--mp-bg);}
 .mp-bell .dot{position:absolute; top:4px; right:4px; width:8px; height:8px; border-radius:50%; background:var(--mp-danger); border:2px solid var(--mp-card);}
 .mp-profile{position:relative;}

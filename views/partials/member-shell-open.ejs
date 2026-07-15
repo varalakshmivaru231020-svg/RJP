@@ -9,10 +9,10 @@
     <b>RJP Member Portal</b>
   </a>
   <div class="mp-topbar-actions">
-    <button class="mp-bell" id="mpBell" aria-label="Notifications">
+    <a class="mp-bell" href="/dashboard/notifications" aria-label="Notifications">
       🔔
       <% if (navActivity.length) { %><span class="dot"></span><% } %>
-    </button>
+    </a>
     <a class="mp-profile-btn" id="mpProfileBtn" href="/dashboard/profile" aria-label="My Profile">
       <% if (member.photo_path) { %>
         <img class="mp-avatar" src="/my-photo" alt="<%= member.full_name %>">
@@ -38,7 +38,7 @@
       <a href="/dashboard" class="<%= navActive === 'dashboard' ? 'active' : '' %>">📊 Dashboard</a>
       <a href="/dashboard/profile" class="<%= navActive === 'profile' ? 'active' : '' %>">👤 My Profile</a>
       <a href="/dashboard/card" class="<%= navActive === 'card' ? 'active' : '' %>">🪪 Membership Card</a>
-      <a href="/dashboard#mp-notifications">📢 Notifications</a>
+      <a href="/dashboard/notifications" class="<%= navActive === 'notifications' ? 'active' : '' %>">📢 Notifications</a>
       <form method="POST" action="/logout"><button type="submit">🚪 Logout</button></form>
     </nav>
   </aside>

@@ -225,6 +225,21 @@ const PROFILE_EDIT_COLUMNS = {
   socialMedia: 'social_media'
 };
 
+router.get('/dashboard/notifications', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
+  if (!member) return res.redirect('/login');
+  const activity = await db.all(
+    'SELECT action, note, created_at FROM member_activity WHERE member_id = ? ORDER BY created_at DESC, id DESC',
+    [member.id]
+  );
+  res.render('notifications', {
+    page: 'notifications',
+    meta: { title: 'Notifications | RJP' },
+    member,
+    activity
+  });
+}));
+
 router.get('/dashboard/profile', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');

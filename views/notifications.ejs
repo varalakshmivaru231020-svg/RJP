@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/member.css">
+</head>
+<body class="member-portal">
+
+<%- include('partials/member-shell-open', { member, activity: [], active: 'notifications' }) %>
+
+    <div class="mp-panel mp-fade-in">
+      <div class="mp-panel-head"><h3>📢 Notifications</h3></div>
+      <% if (!activity.length) { %>
+        <div class="mp-empty"><span class="ic">🔔</span><p>No notifications yet.</p></div>
+      <% } else { %>
+        <ul class="mp-activity-list">
+          <% activity.forEach(function(a){ %>
+            <li>
+              <span class="dot"></span>
+              <div>
+                <b><%= a.action %></b>
+                <span><%= a.created_at %><%= a.note ? ' · ' + a.note : '' %></span>
+              </div>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </div>
+
+<%- include('partials/member-shell-close') %>
+</body>
+</html>

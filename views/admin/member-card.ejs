@@ -29,7 +29,8 @@
           <div class="row"><span class="l">ID</span><span class="v"><%= member.application_number %></span></div>
           <div class="row"><span class="l">ಜಿಲ್ಲೆ</span><span class="v"><%= member.district || '-' %></span></div>
           <div class="row"><span class="l">ಕ್ಷೇತ್ರ</span><span class="v"><%= member.assembly || '-' %></span></div>
-          <div class="row"><span class="l">ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+          <div class="row"><span class="l">ಅರ್ಜಿ ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+          <div class="row"><span class="l">ಅನುಮೋದನೆ ದಿನಾಂಕ</span><span class="v"><%= member.approved_at ? member.approved_at.split(' ')[0] : '-' %></span></div>
         </div>
       </div>
       <div class="rjp-card-sign">
@@ -74,7 +75,6 @@
   <button type="button" class="rjp-card-flip-btn" id="rjpCardFlip">🔄 Flip to Back</button>
 
   <div class="admin-actions no-print" style="justify-content:center; margin-top:24px;">
-    <a href="/admin/members/<%= member.id %>/card/pdf" class="primary">⬇ Download PDF</a>
     <button type="button" onclick="window.print()">Print</button>
     <a href="/admin/members/<%= member.id %>">← Back</a>
   </div>

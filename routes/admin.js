@@ -315,6 +315,9 @@ router.post('/admin/members/:id/edit', (req, res, next) => {
       if (status !== member.status) {
         await logActivity(member.id, 'Status Changed', `${member.status} → ${status}`, req.session.adminEmail);
       }
+      if (['Approved', 'Active'].includes(status) && !member.approved_at) {
+        await db.run("UPDATE members SET approved_at = NOW() WHERE id = ? AND approved_at IS NULL", [member.id]);
+      }
       await logActivity(member.id, 'Profile Updated', null, req.session.adminEmail);
 
       res.redirect(`/admin/members/${member.id}`);
@@ -327,7 +330,7 @@ router.post('/admin/members/:id/edit', (req, res, next) => {
 router.post('/admin/members/:id/approve', asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
-  await db.run("UPDATE members SET status = 'Approved' WHERE id = ?", [member.id]);
+  await db.run("UPDATE members SET status = 'Approved', approved_at = NOW() WHERE id = ?", [member.id]);
   await logActivity(member.id, 'Approved', null, req.session.adminEmail);
   res.redirect(req.get('referer') || '/admin/members');
 }));

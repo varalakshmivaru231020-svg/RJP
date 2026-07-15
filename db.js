@@ -115,6 +115,7 @@ async function init() {
   await ensureColumn('members', 'payment_status', "VARCHAR(20) NOT NULL DEFAULT 'Not Paid'");
   await ensureColumn('members', 'payment_proof_path', 'VARCHAR(255)');
   await ensureColumn('members', 'payment_submitted_at', 'DATETIME NULL');
+  await ensureColumn('members', 'approved_at', 'DATETIME NULL');
 
   const adminCount = await pool.get('SELECT COUNT(*) AS n FROM admins');
   if (adminCount.n === 0) {

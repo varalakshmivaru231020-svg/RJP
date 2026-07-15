@@ -3,6 +3,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const express = require('express');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 const db = require('./db');
 const memberRoutes = require('./routes/member');
@@ -18,10 +19,18 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'assets')));
 
+const sessionStore = new MySQLStore({
+  createDatabaseTable: true,
+  expiration: 1000 * 60 * 60 * 8,
+  clearExpired: true,
+  checkExpirationInterval: 1000 * 60 * 15
+}, db);
+
 app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
+  store: sessionStore,
   secret: process.env.SESSION_SECRET || 'rjp-dev-secret-change-me',
   resave: false,
   saveUninitialized: false,

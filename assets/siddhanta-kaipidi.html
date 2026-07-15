@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ — ಸಿದ್ಧಾಂತ, ನೀತಿ ಮತ್ತು ಸಂವಿಧಾನ ಕೈಪಿಡಿ</title>
+<meta name="description" content="ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP) — ಅಧಿಕೃತ ಸಿದ್ಧಾಂತ, ನೀತಿ ಮತ್ತು ಸಂವಿಧಾನ ಕೈಪಿಡಿ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Kannada:wght@400;600;700&family=Noto+Sans+Kannada:wght@400;500;600&family=Spectral:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c2a3a;
+    --ink-soft: #3c4b5c;
+    --paper: #faf7ef;
+    --paper-deep: #f2ede0;
+    --rule: #d8cfb8;
+    --rust: #b75b23;
+    --rust-deep: #954a1b;
+    --green: #2f5d3a;
+    --gold: #a9862e;
+    --navy: #1c2a3a;
+    --card: #ffffff;
+    --max: 880px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans Kannada', 'Noto Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Noto Serif Kannada', 'Spectral', serif;
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  a { color: var(--rust-deep); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Cover ---------- */
+  #top { position: relative; }
+  .cover {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(169,134,46,0.10), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(183,91,35,0.08), transparent 45%),
+      var(--navy);
+    color: #f4ecd8;
+    padding: 72px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 6px solid var(--gold);
+  }
+  .cover::before, .cover::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(244,236,216,0.18);
+  }
+  .cover-wheel {
+    width: 74px; height: 74px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    border: 2px solid #d9b969;
+    position: relative;
+  }
+  .cover-wheel::before {
+    content: "";
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(217,185,105,0.6);
+  }
+  .cover-wheel span {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 2px; height: 37px;
+    background: rgba(217,185,105,0.75);
+    transform-origin: top center;
+    margin-left: -1px;
+  }
+  .eyebrow {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    color: #d9b969;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .party-name {
+    font-size: clamp(30px, 6vw, 46px);
+    margin: 0 0 6px;
+    color: #fbf5e6;
+  }
+  .doc-title {
+    font-size: clamp(18px, 3.4vw, 24px);
+    font-weight: 600;
+    color: #d9b969;
+    margin: 0 0 22px;
+    font-family: 'Noto Serif Kannada', serif;
+  }
+  .tagline {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: #cdd7de;
+    margin: 0;
+  }
+  .cover-meta {
+    margin-top: 30px;
+    font-size: 13px;
+    color: rgba(244,236,216,0.55);
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Intro / Prastavane ---------- */
+  .intro {
+    padding: 52px 0 8px;
+  }
+  .intro h2 {
+    font-size: 26px;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .intro h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .intro p {
+    color: var(--ink-soft);
+    font-size: 17.5px;
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    margin: 40px 0 8px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 28px 26px 10px;
+  }
+  .toc-heading {
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust-deep);
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    margin: 0 0 14px;
+  }
+  .toc ul { list-style: none; margin: 0; padding: 0 0 18px; display: grid; gap: 2px; }
+  .toc li a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 9px 4px;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 15.5px;
+  }
+  .toc li:last-child a { border-bottom: none; }
+  .toc li a:hover { color: var(--rust-deep); }
+  .toc-num {
+    font-family: 'Spectral', serif; font-weight: 600; font-style: italic;
+    color: var(--rust); flex-shrink: 0; font-size: 14px;
+  }
+  .toc-title { flex: 1; }
+  .toc-range { color: #9a927c; font-size: 13px; font-family: 'Spectral', serif; }
+
+  /* ---------- Part divider ---------- */
+  .part { padding-top: 54px; }
+  .part-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 30px;
+  }
+  .wheel {
+    width: 46px; height: 46px; flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    position: relative;
+  }
+  .wheel::before {
+    content: "";
+    position: absolute; inset: 12px;
+    border-radius: 50%;
+    background: var(--rust);
+    opacity: 0.85;
+  }
+  .part-head-text { flex: 1; }
+  .part-eyebrow {
+    margin: 0 0 4px; font-size: 12.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--rust-deep); font-family: 'Spectral', serif;
+  }
+  .part-title { margin: 0; font-size: clamp(21px, 3.6vw, 27px); }
+  .part-range { margin: 0; font-family: 'Spectral', serif; font-style: italic; color: #9a927c; font-size: 14px; flex-shrink: 0; }
+
+  /* ---------- Chapter card ---------- */
+  .chapter {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 18px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .chapter:last-child { border-bottom: none; }
+  .chapter-num {
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--rust);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .chapter-title {
+    margin: 0 0 14px;
+    font-size: 19.5px;
+    color: var(--navy);
+  }
+  dl.six { margin: 0; display: grid; gap: 10px; }
+  .six-row {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .six-row dt {
+    margin: 0;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    font-weight: 600;
+    font-family: 'Noto Sans Kannada', sans-serif;
+    padding-top: 2px;
+  }
+  .six-row dd {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+  }
+  .six-row.guri dt { color: var(--rust-deep); }
+  .six-row.guri dd { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Pledges ---------- */
+  .pledges-wrap { padding-top: 54px; }
+  .pledge {
+    margin: 0 0 22px;
+    background: var(--card);
+    border-left: 4px solid var(--gold);
+    padding: 22px 26px;
+    border-radius: 2px;
+  }
+  .pledge-num { margin: 0 0 4px; font-family: 'Spectral', serif; font-size: 13px; color: var(--rust); }
+  .pledge-title { margin: 0 0 10px; font-family: 'Noto Serif Kannada', serif; font-weight: 700; font-size: 17px; }
+  .pledge-text { margin: 0; font-family: 'Spectral', serif; font-style: italic; color: var(--ink-soft); font-size: 17px; line-height: 1.8; }
+
+  /* ---------- Symbols ---------- */
+  .symbols-wrap { padding-top: 46px; }
+  .symbol { padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .symbol:last-child { border-bottom: none; }
+  .symbol-num { margin: 0 0 4px; font-family: 'Spectral', serif; font-size: 13px; color: var(--rust); }
+  .symbol-title { margin: 0 0 8px; font-size: 18px; }
+  .symbol-text { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- Samaropa ---------- */
+  .samaropa {
+    margin: 60px 0 0;
+    background: var(--navy);
+    color: #f4ecd8;
+    padding: 54px 30px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .samaropa h2 { color: #fbf5e6; font-size: 24px; margin: 0 0 20px; }
+  .samaropa p { color: #cdd7de; max-width: 640px; margin: 0 auto 22px; font-size: 16.5px; }
+  .samaropa .final-slogan {
+    font-family: 'Noto Serif Kannada', serif;
+    font-weight: 700;
+    color: #d9b969;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 40px 24px 60px;
+    text-align: center;
+    color: #9a927c;
+    font-size: 13.5px;
+  }
+  footer a { color: var(--rust-deep); text-decoration: none; }
+  .foot-rule { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 18px; }
+
+  /* ---------- Back to top ---------- */
+  .totop {
+    position: fixed;
+    right: 18px; bottom: 18px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #d9b969;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    font-family: 'Spectral', serif;
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    z-index: 40;
+  }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .chapter { grid-template-columns: 40px 1fr; gap: 12px; }
+    .chapter-num { font-size: 22px; }
+    .six-row { grid-template-columns: 1fr; gap: 3px; }
+    .six-row dt::after { content: " :"; }
+  }
+
+  @media print {
+    .totop { display: none; }
+    .cover { border-bottom: 2px solid #000; }
+    .chapter, .part { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div id="top"></div>
+
+<header class="cover">
+  <div class="cover-wheel" aria-hidden="true">
+    <span style="transform:rotate(0deg)"></span><span style="transform:rotate(30deg)"></span>
+    <span style="transform:rotate(60deg)"></span><span style="transform:rotate(90deg)"></span>
+    <span style="transform:rotate(120deg)"></span><span style="transform:rotate(150deg)"></span>
+    <span style="transform:rotate(180deg)"></span><span style="transform:rotate(210deg)"></span>
+    <span style="transform:rotate(240deg)"></span><span style="transform:rotate(270deg)"></span>
+    <span style="transform:rotate(300deg)"></span><span style="transform:rotate(330deg)"></span>
+  </div>
+  <p class="eyebrow">Rashtriya Janahita Party</p>
+  <h1 class="party-name">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</h1>
+  <p class="doc-title">ಸಿದ್ಧಾಂತ, ನೀತಿ ಮತ್ತು ಸಂವಿಧಾನ ಕೈಪಿಡಿ</p>
+  <p class="tagline">"ರಾಷ್ಟ್ರ ಮೊದಲು... ಜನಹಿತ ಎಂದೆಂದಿಗೂ."</p>
+  <p class="cover-meta">ಅಧಿಕೃತ ಆವೃತ್ತಿ · 91 ವಿಭಾಗಗಳು · ಒಂಬತ್ತು ಭಾಗಗಳು</p>
+</header>
+
+<main class="wrap">
+
+  <section class="intro">
+    <h2>ಪ್ರಸ್ತಾವನೆ</h2>
+    <p>ಒಂದು ರಾಷ್ಟ್ರದ ಶಕ್ತಿ ಇರುವುದು ಅದರ ಸೇನೆಯಲ್ಲಿ ಅಷ್ಟೇ ಅಲ್ಲ, ಅದರ ಆಡಳಿತದ ಪ್ರಾಮಾಣಿಕತೆಯಲ್ಲಿ. ಕರ್ನಾಟಕ ಸಂಸ್ಕೃತಿ, ಜ್ಞಾನ, ಕೃಷಿ ಮತ್ತು ಉದ್ಯಮದ ನಾಡು. ಆದರೆ ಇಂದು ರಾಜಕೀಯ ಎಂಬುದು ಜನಹಿತದಿಂದ ದೂರ ಸರಿದು, ಸ್ವಾರ್ಥ ಮತ್ತು ಕುಟುಂಬ ರಾಜಕಾರಣದ ಸುತ್ತ ಸುತ್ತುತ್ತಿದೆ ಎಂಬ ಭಾವನೆ ಜನಸಾಮಾನ್ಯರಲ್ಲಿ ಬಲವಾಗಿ ಬೇರೂರಿದೆ. ಈ ಹಿನ್ನೆಲೆಯಲ್ಲಿ, ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP) ಹುಟ್ಟಿಕೊಂಡಿದೆ — ವ್ಯಕ್ತಿ ಅಥವಾ ಕುಟುಂಬ ಕೇಂದ್ರಿತವಲ್ಲದ, ಸಂವಿಧಾನ ಮತ್ತು ಜನಹಿತ ಕೇಂದ್ರಿತ ಪಕ್ಷವಾಗಿ. ಈ ದಸ್ತಾವೇಜು ಚುನಾವಣಾ ಭರವಸೆಗಳ ಪಟ್ಟಿಯಲ್ಲ; ಇದು ಮುಂದಿನ ಹಲವು ದಶಕಗಳಿಗೆ ಪಕ್ಷದ ಪ್ರತಿಯೊಬ್ಬ ಕಾರ್ಯಕರ್ತ ಮತ್ತು ಜನಪ್ರತಿನಿಧಿಗೆ ದಿಕ್ಸೂಚಿಯಾಗುವ ತಾತ್ವಿಕ ಅಡಿಪಾಯ.</p>
+  </section>
+
+  <nav class="toc" aria-label="ಪರಿವಿಡಿ">
+    <p class="toc-heading">ಪರಿವಿಡಿ</p>
+    <ul>
+      <li><a href="#part-1"><span class="toc-num">ಭಾಗ 01</span><span class="toc-title">ಅಡಿಪಾಯ</span><span class="toc-range">1–8</span></a></li>
+<li><a href="#part-2"><span class="toc-num">ಭಾಗ 02</span><span class="toc-title">ಆಡಳಿತ, ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ನ್ಯಾಯ</span><span class="toc-range">9–20</span></a></li>
+<li><a href="#part-3"><span class="toc-num">ಭಾಗ 03</span><span class="toc-title">ಪ್ರಾದೇಶಿಕ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ಜಲ ನೀತಿ</span><span class="toc-range">21–32</span></a></li>
+<li><a href="#part-4"><span class="toc-num">ಭಾಗ 04</span><span class="toc-title">ಆರ್ಥಿಕತೆ, ಯುವಜನತೆ ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣ</span><span class="toc-range">33–44</span></a></li>
+<li><a href="#part-5"><span class="toc-num">ಭಾಗ 05</span><span class="toc-title">ಆರೋಗ್ಯ, ಸಂಸ್ಕೃತಿ ಮತ್ತು ಪರಿಸರ</span><span class="toc-range">45–53</span></a></li>
+<li><a href="#part-6"><span class="toc-num">ಭಾಗ 06</span><span class="toc-title">ಆರ್ಥಿಕ ನೀತಿ ಮತ್ತು ಸಾಮಾಜಿಕ ನ್ಯಾಯ</span><span class="toc-range">54–61</span></a></li>
+<li><a href="#part-7"><span class="toc-num">ಭಾಗ 07</span><span class="toc-title">ಪ್ರಜೆ, ಭದ್ರತೆ ಮತ್ತು ಭವಿಷ್ಯದ ದೃಷ್ಟಿಕೋನ</span><span class="toc-range">62–68</span></a></li>
+<li><a href="#part-8"><span class="toc-num">ಭಾಗ 08</span><span class="toc-title">ಪಕ್ಷ ಸಂಘಟನೆ ಮತ್ತು ಆಂತರಿಕ ಆಡಳಿತ</span><span class="toc-range">69–78</span></a></li>
+<li><a href="#part-9"><span class="toc-num">ಭಾಗ 09</span><span class="toc-title">ನೈತಿಕತೆ, ಆಡಳಿತ ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ಸಮಾರೋಪ</span><span class="toc-range">79–84</span></a></li>
+      <li><a href="#pledges"><span class="toc-num">85–87</span><span class="toc-title">ಪ್ರತಿಜ್ಞೆಗಳು</span><span class="toc-range"></span></a></li>
+      <li><a href="#symbols"><span class="toc-num">88–90</span><span class="toc-title">ಧ್ವಜ, ಚಿಹ್ನೆ ಮತ್ತು ಘೋಷವಾಕ್ಯ</span><span class="toc-range"></span></a></li>
+      <li><a href="#samaropa"><span class="toc-num">91</span><span class="toc-title">ಸಮಾರೋಪ</span><span class="toc-range"></span></a></li>
+    </ul>
+  </nav>
+
+  
+    <section class="part" id="part-1">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 01 / ೦೯</p>
+          <h2 class="part-title">ಅಡಿಪಾಯ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 1–8</p>
+      </div>
+      
+      <article class="chapter" id="ch-1">
+        <div class="chapter-num" aria-hidden="true">01</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ತತ್ವ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ರಾಜಕೀಯ ಎಂಬುದು ಅಧಿಕಾರದ ಸಾಧನವಲ್ಲ, ಜನಸೇವೆಯ ಮಾರ್ಗ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಇಂದಿನ ಬಹುತೇಕ ಪಕ್ಷಗಳು ವ್ಯಕ್ತಿ ಅಥವಾ ಕುಟುಂಬ ಕೇಂದ್ರಿತವಾಗಿ ಬೆಳೆದಿದ್ದು, ಸಿದ್ಧಾಂತ ಎಂಬುದು ಚುನಾವಣೆಗೆ ಮಾತ್ರ ಸೀಮಿತವಾಗಿದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಂವಿಧಾನ, ಪ್ರಾಮಾಣಿಕತೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸಾಮಾಜಿಕ ನ್ಯಾಯ ಎಂಬ ನಾಲ್ಕು ಆಧಾರಸ್ತಂಭಗಳ ಮೇಲೆ ನಿಂತ ಪಕ್ಷ ಸಂರಚನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಯಾವುದೇ ನಿರ್ಧಾರ ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಇಚ್ಛೆಯಲ್ಲ, ಪಕ್ಷದ ಸಾಮೂಹಿಕ ಸಿದ್ಧಾಂತದ ಪ್ರತಿಬಿಂಬವಾಗಿರಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ಹಂತದ ಸಮಿತಿಗಳಲ್ಲಿ ಸಾಮೂಹಿಕ ನಿರ್ಧಾರ ಪದ್ಧತಿ; ವ್ಯಕ್ತಿ ಆರಾಧನೆಗೆ ಅವಕಾಶವಿಲ್ಲ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>50 ವರ್ಷಗಳ ನಂತರವೂ RJP ಒಂದು ವ್ಯಕ್ತಿಯ ಹೆಸರಿನಿಂದಲ್ಲ, ತತ್ವದಿಂದ ಗುರುತಿಸಲ್ಪಡಬೇಕು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-2">
+        <div class="chapter-num" aria-hidden="true">02</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ಧ್ಯೇಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>&quot;ರಾಷ್ಟ್ರ ಮೊದಲು... ಜನಹಿತ ಎಂದೆಂದಿಗೂ.&quot;</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪ್ರಾದೇಶಿಕ ಮತ್ತು ಜಾತಿ ರಾಜಕಾರಣ ರಾಷ್ಟ್ರೀಯ ಏಕತೆಯನ್ನು ಶಿಥಿಲಗೊಳಿಸುತ್ತಿದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ರಾಷ್ಟ್ರಹಿತ ಮತ್ತು ಜನಹಿತ ಒಂದೇ ನಾಣ್ಯದ ಎರಡು ಮುಖಗಳು ಎಂಬ ಸ್ಪಷ್ಟ ನಿಲುವು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ನೀತಿ ನಿರೂಪಣೆಯ ಮೊದಲು &quot;ಇದು ಜನಸಾಮಾನ್ಯರಿಗೆ ಎಷ್ಟು ಉಪಯುಕ್ತ&quot; ಎಂಬ ಪ್ರಶ್ನೆ ಕೇಳುವುದು ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ಚುನಾವಣಾ ಪ್ರಣಾಳಿಕೆ ಈ ಧ್ಯೇಯದೊಂದಿಗೆ ತಾಳೆಯಾಗಬೇಕು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ರಾಷ್ಟ್ರಹಿತ ಮತ್ತು ಜನಹಿತ ವಿರೋಧಾಭಾಸವಲ್ಲ ಎಂಬ ಮಾದರಿ ಆಡಳಿತವನ್ನು ದೇಶಕ್ಕೆ ತೋರಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-3">
+        <div class="chapter-num" aria-hidden="true">03</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ದೃಷ್ಟಿಕೋನ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕರ್ನಾಟಕದಿಂದ ಆರಂಭವಾಗಿ, ರಾಷ್ಟ್ರಮಟ್ಟದಲ್ಲಿ ಬೆಳೆಯುವ ಪಕ್ಷ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪ್ರಾದೇಶಿಕ ಪಕ್ಷಗಳು ಒಂದು ರಾಜ್ಯಕ್ಕೆ ಸೀಮಿತಗೊಂಡು, ರಾಷ್ಟ್ರೀಯ ದೃಷ್ಟಿಕೋನ ಕಳೆದುಕೊಳ್ಳುತ್ತವೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>&quot;ಬಲಿಷ್ಠ ಕರ್ನಾಟಕ – ಬಲಿಷ್ಠ ಭಾರತ&quot; ಎಂಬ ತತ್ವದಡಿ, ಸ್ಥಳೀಯ ಬೇರುಗಳಿಂದ ರಾಷ್ಟ್ರೀಯ ವಿಸ್ತಾರದೆಡೆಗೆ ಬೆಳವಣಿಗೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ರಾಜ್ಯದ ವಿಶಿಷ್ಟ ಸಂಸ್ಕೃತಿ ಮತ್ತು ಭಾಷೆಯನ್ನು ಗೌರವಿಸುತ್ತಲೇ ರಾಷ್ಟ್ರೀಯ ಏಕತೆ ಕಾಪಾಡುವುದು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಕರ್ನಾಟಕದಲ್ಲಿ ಮಾದರಿ ಆಡಳಿತ ಸ್ಥಾಪಿಸಿ, ಅದನ್ನು ಇತರ ರಾಜ್ಯಗಳಿಗೆ ವಿಸ್ತರಿಸುವುದು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>2047ರ ವೇಳೆಗೆ RJP ಒಂದು ರಾಷ್ಟ್ರೀಯ ಪರ್ಯಾಯ ಶಕ್ತಿಯಾಗಿ ಗುರುತಿಸಲ್ಪಡಬೇಕು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-4">
+        <div class="chapter-num" aria-hidden="true">04</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಭಾರತದ ಸಂವಿಧಾನದ ಬಗ್ಗೆ ಬದ್ಧತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಂವಿಧಾನವೇ ಅಂತಿಮ ಗ್ರಂಥ, ಅದಕ್ಕಿಂತ ಮೇಲ್ಪಟ್ಟದ್ದು ಯಾವುದೂ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನೇಕ ಬಾರಿ ರಾಜಕೀಯ ಅನುಕೂಲಕ್ಕಾಗಿ ಸಂವಿಧಾನಬದ್ಧ ಸಂಸ್ಥೆಗಳ ಮೇಲೆ ಒತ್ತಡ ಹೇರಲಾಗುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಚುನಾವಣಾ ಆಯೋಗ, ನ್ಯಾಯಾಂಗ, ಸಿಎಜಿಯಂತಹ ಸಂಸ್ಥೆಗಳ ಸ್ವಾಯತ್ತತೆಯನ್ನು ಸಂಪೂರ್ಣ ಗೌರವಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಮಾನತೆ, ಸ್ವಾತಂತ್ರ್ಯ, ಭ್ರಾತೃತ್ವ ಎಂಬ ಸಂವಿಧಾನದ ಮೂಲ ಮೌಲ್ಯಗಳನ್ನು ಪ್ರತಿ ನೀತಿಯಲ್ಲಿ ಅಳವಡಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪಕ್ಷದ ಪ್ರತಿ ಪದಾಧಿಕಾರಿಗೆ ಸಂವಿಧಾನ ಮೌಲ್ಯಗಳ ಕುರಿತು ಕಡ್ಡಾಯ ತರಬೇತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸಂವಿಧಾನ ಸಾಕ್ಷರತೆಯನ್ನು ಜನಸಾಮಾನ್ಯರ ಮಟ್ಟಕ್ಕೆ ಕೊಂಡೊಯ್ಯುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-5">
+        <div class="chapter-num" aria-hidden="true">05</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ರಾಷ್ಟ್ರ ನಿರ್ಮಾಣ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ರಾಷ್ಟ್ರ ನಿರ್ಮಾಣ ಎಂದರೆ ಕೇವಲ ಮೂಲಸೌಕರ್ಯವಲ್ಲ, ಪ್ರಜೆಗಳ ಚಿಂತನೆಯ ನಿರ್ಮಾಣ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಆರ್ಥಿಕ ಬೆಳವಣಿಗೆ ಮತ್ತು ಸಾಮಾಜಿಕ ಸಾಮರಸ್ಯದ ನಡುವೆ ಅಸಮತೋಲನ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಶಿಕ್ಷಣ, ಆರ್ಥಿಕತೆ ಮತ್ತು ನೈತಿಕತೆ ಮೂರನ್ನೂ ಸಮಾನಾಂತರವಾಗಿ ಬಲಪಡಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ ಸಾಮಾಜಿಕ ಸಾಮರಸ್ಯವನ್ನು ಗಮನದಲ್ಲಿಟ್ಟುಕೊಂಡು ರೂಪುಗೊಳ್ಳಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಷ್ಟ್ರ ನಿರ್ಮಾಣ ಸೂಚ್ಯಂಕ (Nation Building Index) ಸಿದ್ಧಪಡಿಸಿ ಪ್ರತಿ ವರ್ಷ ಪರಾಮರ್ಶೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಆರ್ಥಿಕವಾಗಿ ಬಲಿಷ್ಠ, ಸಾಮಾಜಿಕವಾಗಿ ಸಾಮರಸ್ಯದ ಭಾರತ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-6">
+        <div class="chapter-num" aria-hidden="true">06</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕರ್ನಾಟಕ ಪುನರ್‌ನಿರ್ಮಾಣ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ಆಡಳಿತ, ಶಿಕ್ಷಣ ಮತ್ತು ಕೈಗಾರಿಕೆಯಲ್ಲಿ ದೇಶಕ್ಕೆ ಮಾದರಿಯಾಗಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪ್ರಾದೇಶಿಕ ಅಸಮಾನತೆ — ಬೆಂಗಳೂರು ಮತ್ತು ಉಳಿದ ಕರ್ನಾಟಕದ ನಡುವಿನ ಅಂತರ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ವಿಭಾಗಕ್ಕೂ (ಉತ್ತರ, ದಕ್ಷಿಣ, ಕರಾವಳಿ, ಮಲೆನಾಡು, ಕಲ್ಯಾಣ ಕರ್ನಾಟಕ) ಪ್ರತ್ಯೇಕ ಅಭಿವೃದ್ಧಿ ಮಾದರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಂಪನ್ಮೂಲ ಹಂಚಿಕೆ ಜನಸಂಖ್ಯೆ ಮಾತ್ರವಲ್ಲ, ಹಿಂದುಳಿದಿರುವಿಕೆಯ ಆಧಾರದ ಮೇಲೂ ನಿರ್ಧಾರವಾಗಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರಾದೇಶಿಕ ಅಭಿವೃದ್ಧಿ ಮಂಡಳಿಗಳಿಗೆ ಹೆಚ್ಚಿನ ಅಧಿಕಾರ ಮತ್ತು ಹಣಕಾಸು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>2050ರ ವೇಳೆಗೆ ಕರ್ನಾಟಕದ ಪ್ರತಿ ಜಿಲ್ಲೆಯೂ ಸಮಾನ ಅಭಿವೃದ್ಧಿ ಸೂಚ್ಯಂಕ ಹೊಂದುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-7">
+        <div class="chapter-num" aria-hidden="true">07</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಉತ್ತಮ ಆಡಳಿತ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಆಡಳಿತ ಎಂದರೆ ಅಧಿಕಾರ ಚಲಾವಣೆಯಲ್ಲ, ಸೇವಾ ವಿತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸರ್ಕಾರಿ ಸೇವೆಗಳಿಗಾಗಿ ಜನಸಾಮಾನ್ಯರು ಇಂದಿಗೂ ಕಚೇರಿಯಿಂದ ಕಚೇರಿಗೆ ಅಲೆಯಬೇಕಾದ ಸ್ಥಿತಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸೇವಾ ಖಾತರಿ ಕಾಯ್ದೆಯನ್ನು ಬಲಪಡಿಸಿ, ಪ್ರತಿ ಸೇವೆಗೆ ಕಾಲಮಿತಿ ನಿಗದಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಇಲಾಖೆ ತನ್ನ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ಸಾರ್ವಜನಿಕವಾಗಿ ಪ್ರಕಟಿಸಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ಆಡಳಿತ ಕಾರ್ಯಕ್ಷಮತೆ ಆಯೋಗ ರಚನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ದೇಶದಲ್ಲೇ ಅತ್ಯುತ್ತಮ ಆಡಳಿತ ಸೂಚ್ಯಂಕ ಹೊಂದಿದ ರಾಜ್ಯವಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-8">
+        <div class="chapter-num" aria-hidden="true">08</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಭ್ರಷ್ಟಾಚಾರ ನಿರ್ಮೂಲನೆ ಮತ್ತು ಶೂನ್ಯ ಭ್ರಷ್ಟಾಚಾರ ನೀತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಭ್ರಷ್ಟಾಚಾರ ಎಂಬುದು ಜನಹಿತದ ವಿರುದ್ಧದ ಅತಿ ದೊಡ್ಡ ಅಪರಾಧ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಭ್ರಷ್ಟಾಚಾರ ಸಣ್ಣ ಮಟ್ಟದಿಂದ ಹಿಡಿದು ದೊಡ್ಡ ಮಟ್ಟದವರೆಗೆ ವ್ಯವಸ್ಥೆಯ ಪ್ರತಿ ಹಂತದಲ್ಲೂ ಬೇರೂರಿದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಶೂನ್ಯ ಸಹಿಷ್ಣುತೆ ನೀತಿ — ಪಕ್ಷದ ಒಳಗೂ, ಸರ್ಕಾರದ ಒಳಗೂ ಸಮಾನವಾಗಿ ಅನ್ವಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಆಸ್ತಿ ಘೋಷಣೆ ಕಡ್ಡಾಯ, ಸ್ವತಂತ್ರ ತನಿಖಾ ಸಂಸ್ಥೆಗಳಿಗೆ ರಾಜಕೀಯ ಹಸ್ತಕ್ಷೇಪ ಮುಕ್ತ ಕಾರ್ಯಾಚರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಡಿಜಿಟಲ್ ಆಡಳಿತದ ಮೂಲಕ ಮಾನವ ಸಂಪರ್ಕ ಕಡಿಮೆ ಮಾಡಿ, ಭ್ರಷ್ಟಾಚಾರಕ್ಕೆ ಅವಕಾಶ ಕುಗ್ಗಿಸುವುದು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಭ್ರಷ್ಟಾಚಾರ ಮುಕ್ತ ಕರ್ನಾಟಕ ಎಂಬುದು ಘೋಷಣೆಯಲ್ಲ, ಅಳೆಯಬಹುದಾದ ವಾಸ್ತವವಾಗಬೇಕು.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-2">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 02 / ೦೯</p>
+          <h2 class="part-title">ಆಡಳಿತ, ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ನ್ಯಾಯ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 9–20</p>
+      </div>
+      
+      <article class="chapter" id="ch-9">
+        <div class="chapter-num" aria-hidden="true">09</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಜನಸ್ನೇಹಿ ಆಡಳಿತ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸರ್ಕಾರ ಜನರ ಬಾಗಿಲಿಗೆ ಬರಬೇಕು, ಜನ ಸರ್ಕಾರದ ಬಾಗಿಲಿಗೆ ಅಲೆಯಬಾರದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾಮಾನ್ಯ ಪ್ರಮಾಣಪತ್ರಕ್ಕೂ ಜನಸಾಮಾನ್ಯರು ಹಲವು ದಿನ ಕಾಯಬೇಕಾದ ಸ್ಥಿತಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಗ್ರಾಮ ಮಟ್ಟದಲ್ಲಿ ಏಕಗವಾಕ್ಷಿ ಸೇವಾ ಕೇಂದ್ರಗಳ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಸೇವೆಗೆ ಗರಿಷ್ಠ ಕಾಲಮಿತಿ ಮತ್ತು ವಿಳಂಬಕ್ಕೆ ಹೊಣೆಗಾರಿಕೆ ನಿಗದಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮೊಬೈಲ್ ಆಧಾರಿತ ಸೇವಾ ಟ್ರ್ಯಾಕಿಂಗ್ ವ್ಯವಸ್ಥೆ ಪ್ರತಿ ಇಲಾಖೆಯಲ್ಲಿ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸರ್ಕಾರಿ ಸೇವೆ ಪಡೆಯುವುದು ಒಂದು ಒತ್ತಡವಲ್ಲ, ಸರಳ ಹಕ್ಕು ಎಂಬ ಅನುಭವ ನೀಡುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-10">
+        <div class="chapter-num" aria-hidden="true">10</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಾರದರ್ಶಕ ಸರ್ಕಾರ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ರಹಸ್ಯ ಆಡಳಿತ ಭ್ರಷ್ಟಾಚಾರದ ತಾಯಿಬೇರು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾರ್ವಜನಿಕ ಹಣ ಎಲ್ಲಿಗೆ ಹೋಗುತ್ತದೆ ಎಂಬುದು ಸಾಮಾನ್ಯ ಪ್ರಜೆಗೆ ತಿಳಿಯುವುದೇ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಯೋಜನೆಯ ಹಣಕಾಸು ವಿವರ ಸಾರ್ವಜನಿಕ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ಪ್ರಕಟ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮಾಹಿತಿ ಹಕ್ಕು ಕಾಯ್ದೆಯನ್ನು ಬಲಪಡಿಸಿ, ಸ್ವಯಂಪ್ರೇರಿತ ಮಾಹಿತಿ ಪ್ರಕಟಣೆ ಕಡ್ಡಾಯಗೊಳಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಜಿಲ್ಲಾವಾರು, ಇಲಾಖಾವಾರು ಬಜೆಟ್ ಬಳಕೆ ವರದಿ ತ್ರೈಮಾಸಿಕ ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ರೂಪಾಯಿಯ ಲೆಕ್ಕ ಜನರಿಗೆ ತಿಳಿಯುವ ಸಂಪೂರ್ಣ ಪಾರದರ್ಶಕ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-11">
+        <div class="chapter-num" aria-hidden="true">11</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಡಿಜಿಟಲ್ ಆಡಳಿತ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ತಂತ್ರಜ್ಞಾನ ಎಂಬುದು ಆಡಳಿತದ ಆತ್ಮಸಾಕ್ಷಿಯಾಗಬೇಕು, ಕೇವಲ ಸಾಧನವಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಹಲವು ಡಿಜಿಟಲ್ ಯೋಜನೆಗಳು ಗ್ರಾಮೀಣ ಜನರನ್ನು ತಲುಪುತ್ತಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಡಿಜಿಟಲ್ ಮತ್ತು ಭೌತಿಕ ಸೇವಾ ವ್ಯವಸ್ಥೆ ಎರಡನ್ನೂ ಸಮಾನಾಂತರವಾಗಿ ಬಲಪಡಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಗ್ರಾಮ ಪಂಚಾಯತಿಗೆ ಡಿಜಿಟಲ್ ಸಾಕ್ಷರತಾ ಕೇಂದ್ರ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ಥಳೀಯ ಭಾಷೆಯಲ್ಲಿ (ಕನ್ನಡದಲ್ಲಿ) ಎಲ್ಲಾ ಸರ್ಕಾರಿ ಆ್ಯಪ್ ಮತ್ತು ಪೋರ್ಟಲ್ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕ ದೇಶದ Digital Governance ಮಾದರಿ ರಾಜ್ಯವಾಗುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-12">
+        <div class="chapter-num" aria-hidden="true">12</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Artificial Intelligence (AI) ಕುರಿತು ಪಕ್ಷದ ಅಧಿಕೃತ ನಿಲುವು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>AI ಮಾನವ ಶ್ರಮವನ್ನು ಬದಲಿಸುವ ಶಕ್ತಿಯಲ್ಲ, ಬಲಪಡಿಸುವ ಶಕ್ತಿಯಾಗಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>AI ಬಳಕೆಯಿಂದ ಉದ್ಯೋಗ ನಷ್ಟದ ಆತಂಕ, ಮತ್ತು ಸ್ಪಷ್ಟ ನೀತಿಯ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಶಿಕ್ಷಣ, ಕೃಷಿ, ಆರೋಗ್ಯ, ಆಡಳಿತದಲ್ಲಿ AI ಅನ್ನು ಸಹಾಯಕ ಸಾಧನವಾಗಿ ಬಳಸುವ ಸ್ಪಷ್ಟ ಚೌಕಟ್ಟು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>AI ಬಳಕೆಯಲ್ಲಿ ಮಾನವ ನಿರ್ಧಾರವೇ ಅಂತಿಮ; ಸೂಕ್ಷ್ಮ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ (ನ್ಯಾಯ, ಪೊಲೀಸ್) ಸಂಪೂರ್ಣ ಸ್ವಯಂಚಾಲಿತ ನಿರ್ಧಾರ ನಿಷೇಧ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಜ್ಯ ಮಟ್ಟದ AI ನೀತಿ ಆಯೋಗ ರಚನೆ; ಕೌಶಲ್ಯ ಮರುತರಬೇತಿ ಯೋಜನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ಜವಾಬ್ದಾರಿಯುತ AI ಬಳಕೆಯ ಜಾಗತಿಕ ಮಾದರಿಯಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-13">
+        <div class="chapter-num" aria-hidden="true">13</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">AI Ethics</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ತಂತ್ರಜ್ಞಾನ ಎಷ್ಟೇ ಮುಂದುವರಿದರೂ, ಮಾನವೀಯತೆ ಅದರ ಮೂಲ ಮಾರ್ಗದರ್ಶಿಯಾಗಿರಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>AI ಪಕ್ಷಪಾತ (bias), ತಪ್ಪು ನಿರ್ಧಾರ ಮತ್ತು ಉತ್ತರದಾಯಿತ್ವದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸರ್ಕಾರಿ ಬಳಕೆಯ ಪ್ರತಿ AI ವ್ಯವಸ್ಥೆಗೆ ಕಡ್ಡಾಯ ನೈತಿಕ ಪರಿಶೀಲನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪಾರದರ್ಶಕ AI (Explainable AI) ಮಾತ್ರ ಸಾರ್ವಜನಿಕ ಸೇವೆಯಲ್ಲಿ ಬಳಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ AI ಲೆಕ್ಕಪರಿಶೋಧನಾ ಸಂಸ್ಥೆ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನೈತಿಕತೆ ಮತ್ತು ತಂತ್ರಜ್ಞಾನ ಜೊತೆಜೊತೆಯಾಗಿ ಸಾಗುವ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-14">
+        <div class="chapter-num" aria-hidden="true">14</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Data Privacy</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಜೆಯ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಅವನ ಸ್ವಂತ ಆಸ್ತಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸರ್ಕಾರಿ ಮತ್ತು ಖಾಸಗಿ ಸಂಸ್ಥೆಗಳ ಬಳಿ ಇರುವ ದತ್ತಾಂಶ ದುರ್ಬಳಕೆಯ ಅಪಾಯ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ದತ್ತಾಂಶ ಸಂರಕ್ಷಣಾ ಕಾಯ್ದೆಯ ಕಟ್ಟುನಿಟ್ಟಿನ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರಜೆಯ ಸಮ್ಮತಿ ಇಲ್ಲದೆ ಯಾವುದೇ ದತ್ತಾಂಶ ಬಳಕೆ ಅಸಾಧ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಜ್ಯ ದತ್ತಾಂಶ ಸಂರಕ್ಷಣಾ ಪ್ರಾಧಿಕಾರ ರಚನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಡಿಜಿಟಲ್ ಯುಗದಲ್ಲಿ ಪ್ರಜೆಯ ಖಾಸಗಿತನ ಸಂಪೂರ್ಣ ಸುರಕ್ಷಿತ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-15">
+        <div class="chapter-num" aria-hidden="true">15</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Cyber Security</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಡಿಜಿಟಲ್ ಸುರಕ್ಷತೆ ಎಂಬುದು ಇಂದಿನ ರಾಷ್ಟ್ರೀಯ ಭದ್ರತೆಯ ಭಾಗ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸೈಬರ್ ವಂಚನೆ, ಬ್ಯಾಂಕ್ ಖಾತೆ ಹ್ಯಾಕಿಂಗ್ ಪ್ರಕರಣಗಳ ತೀವ್ರ ಏರಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ರಾಜ್ಯಮಟ್ಟದ ಸೈಬರ್ ಸುರಕ್ಷತಾ ಪಡೆ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಜಿಲ್ಲೆಯಲ್ಲಿ ಸೈಬರ್ ದೂರು ಕೇಂದ್ರ ಮತ್ತು ತ್ವರಿತ ಸ್ಪಂದನಾ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಾಲಾ ಹಂತದಿಂದಲೇ ಸೈಬರ್ ಸುರಕ್ಷತಾ ಶಿಕ್ಷಣ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸೈಬರ್ ಅಪರಾಧ ಮುಕ್ತ, ಡಿಜಿಟಲ್ ಸುರಕ್ಷಿತ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-16">
+        <div class="chapter-num" aria-hidden="true">16</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Fake News ಮತ್ತು Deepfake ವಿರುದ್ಧ ನೀತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸುಳ್ಳು ಸುದ್ದಿ ಪ್ರಜಾಪ್ರಭುತ್ವಕ್ಕೆ ಬೆಂಕಿಗಿಂತ ಅಪಾಯಕಾರಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾಮಾಜಿಕ ಜಾಲತಾಣಗಳಲ್ಲಿ Deepfake ಮತ್ತು ತಪ್ಪು ಮಾಹಿತಿಯ ವೇಗದ ಹರಡುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸ್ವತಂತ್ರ ಸತ್ಯಶೋಧನಾ (Fact-Check) ವ್ಯವಸ್ಥೆಯ ಸ್ಥಾಪನೆ, ಆದರೆ ಅಭಿವ್ಯಕ್ತಿ ಸ್ವಾತಂತ್ರ್ಯಕ್ಕೆ ಧಕ್ಕೆಯಾಗದಂತೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>Deepfake ಮೂಲಕ ಮಾನಹಾನಿ ಮಾಡುವುದನ್ನು ಗಂಭೀರ ಅಪರಾಧವಾಗಿ ಪರಿಗಣಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಾಧ್ಯಮ ಸಾಕ್ಷರತೆ ಆಂದೋಲನ ಮತ್ತು ತಾಂತ್ರಿಕ ಪತ್ತೆ ಸಾಧನಗಳ ಅಭಿವೃದ್ಧಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸತ್ಯ ಮತ್ತು ಪಾರದರ್ಶಕತೆಯ ಮೇಲೆ ನಿಂತ ಮಾಹಿತಿ ಪರಿಸರ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-17">
+        <div class="chapter-num" aria-hidden="true">17</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ನ್ಯಾಯಾಂಗ ಸುಧಾರಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ವಿಳಂಬಿತ ನ್ಯಾಯ ಎಂದರೆ ನ್ಯಾಯ ನಿರಾಕರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಲಕ್ಷಾಂತರ ಪ್ರಕರಣಗಳು ವರ್ಷಗಟ್ಟಲೆ ನ್ಯಾಯಾಲಯಗಳಲ್ಲಿ ಬಾಕಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ನ್ಯಾಯಾಧೀಶರ ಸಂಖ್ಯೆ ಹೆಚ್ಚಳ, ತ್ವರಿತ ನ್ಯಾಯಾಲಯಗಳ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಣ್ಣ ಪ್ರಕರಣಗಳಿಗೆ ಲೋಕ ಅದಾಲತ್ ಮತ್ತು ಮಧ್ಯಸ್ಥಿಕೆ ವ್ಯವಸ್ಥೆಗೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ನ್ಯಾಯಾಂಗ ಡಿಜಿಟಲೀಕರಣ, ಪ್ರಕರಣ ಟ್ರ್ಯಾಕಿಂಗ್ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಪ್ರಕರಣಕ್ಕೆ ನಿಗದಿತ ಕಾಲಮಿತಿಯೊಳಗೆ ನ್ಯಾಯ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-18">
+        <div class="chapter-num" aria-hidden="true">18</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪೊಲೀಸ್ ಸುಧಾರಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪೊಲೀಸ್ ವ್ಯವಸ್ಥೆ ಆಡಳಿತದ ಸಾಧನವಲ್ಲ, ಪ್ರಜೆಗಳ ರಕ್ಷಕ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯ ಹಸ್ತಕ್ಷೇಪ, ಸಿಬ್ಬಂದಿ ಕೊರತೆ ಮತ್ತು ಒತ್ತಡ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪೊಲೀಸ್ ವ್ಯವಸ್ಥೆಗೆ ಕಾರ್ಯಾಚರಣಾ ಸ್ವಾಯತ್ತತೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ವರ್ಗಾವಣೆ-ನೇಮಕಾತಿ ಸ್ವತಂತ್ರ ಪೊಲೀಸ್ ಸ್ಥಾಪನಾ ಮಂಡಳಿ ಮೂಲಕ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಆಧುನಿಕ ತರಬೇತಿ, ಫೋರೆನ್ಸಿಕ್ ಸೌಲಭ್ಯ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಜನಸ್ನೇಹಿ, ಒತ್ತಡಮುಕ್ತ, ವೃತ್ತಿಪರ ಪೊಲೀಸ್ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-19">
+        <div class="chapter-num" aria-hidden="true">19</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ತ್ವರಿತ ನ್ಯಾಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ನ್ಯಾಯ ವಿಳಂಬವಾದಷ್ಟೂ ಜನರ ವಿಶ್ವಾಸ ಕುಸಿಯುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಮಹಿಳೆಯರು, ಮಕ್ಕಳ ಮೇಲಿನ ಅಪರಾಧ ಪ್ರಕರಣಗಳಲ್ಲೂ ವಿಳಂಬ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸೂಕ್ಷ್ಮ ಪ್ರಕರಣಗಳಿಗೆ ವಿಶೇಷ ತ್ವರಿತ ನ್ಯಾಯಾಲಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಇಂತಹ ಪ್ರಕರಣಗಳಿಗೆ ನಿಗದಿತ ಗರಿಷ್ಠ ಕಾಲಮಿತಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಹೆಚ್ಚುವರಿ ನ್ಯಾಯಾಧೀಶರ ನೇಮಕ, ಸಾಕ್ಷ್ಯ ಸಂಗ್ರಹ ಡಿಜಿಟಲೀಕರಣ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನ್ಯಾಯ ವಿಳಂಬ ಎಂಬ ಪದವೇ ಇಲ್ಲದ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-20">
+        <div class="chapter-num" aria-hidden="true">20</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಚುನಾವಣಾ ಸುಧಾರಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಜಾಪ್ರಭುತ್ವದ ಬುನಾದಿ ಸ್ವಚ್ಛ ಚುನಾವಣೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಹಣ, ತೋಳ್ಬಲ ಮತ್ತು ಸುಳ್ಳು ಭರವಸೆಗಳ ಪ್ರಭಾವ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಚುನಾವಣಾ ವೆಚ್ಚದ ಕಟ್ಟುನಿಟ್ಟಿನ ಪಾರದರ್ಶಕತೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಅಪರಾಧ ಹಿನ್ನೆಲೆಯ ಅಭ್ಯರ್ಥಿಗಳಿಗೆ ಟಿಕೆಟ್ ನಿರಾಕರಣೆ ಸ್ವಯಂಪ್ರೇರಿತ ನೀತಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಆಂತರಿಕ ಅಭ್ಯರ್ಥಿ ಆಯ್ಕೆ ಪ್ರಕ್ರಿಯೆ ಸಾರ್ವಜನಿಕ ಪರಿಶೀಲನೆಗೆ ಮುಕ್ತ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸಾಮರ್ಥ್ಯ ಮತ್ತು ಪ್ರಾಮಾಣಿಕತೆಯೇ ಟಿಕೆಟ್ ಆಯ್ಕೆಯ ಏಕೈಕ ಮಾನದಂಡ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-3">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 03 / ೦೯</p>
+          <h2 class="part-title">ಪ್ರಾದೇಶಿಕ ಅಭಿವೃದ್ಧಿ ಮತ್ತು ಜಲ ನೀತಿ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 21–32</p>
+      </div>
+      
+      <article class="chapter" id="ch-21">
+        <div class="chapter-num" aria-hidden="true">21</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸ್ಥಳೀಯ ಸ್ವರಾಜ್ಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಅಧಿಕಾರ ಗ್ರಾಮ ಮಟ್ಟದಿಂದ ಆರಂಭವಾಗಬೇಕು, ರಾಜಧಾನಿಯಿಂದಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪಂಚಾಯತಿಗಳಿಗೆ ಅಧಿಕಾರವಿದ್ದರೂ ಹಣಕಾಸು ಮತ್ತು ಸಿಬ್ಬಂದಿ ಸ್ವಾಯತ್ತತೆ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>73ನೇ ಮತ್ತು 74ನೇ ಸಂವಿಧಾನ ತಿದ್ದುಪಡಿಯ ಸಂಪೂರ್ಣ ಆಶಯ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಗ್ರಾಮ ಪಂಚಾಯತಿಗಳಿಗೆ ನೇರ ಅನುದಾನ ಮತ್ತು ಸ್ವಂತ ಆದಾಯ ಮೂಲ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗ್ರಾಮ ಸಭೆಗಳನ್ನು ಕಡ್ಡಾಯ ಮತ್ತು ನಿರ್ಣಾಯಕವಾಗಿಸುವುದು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನಿಜವಾದ ಅಧಿಕಾರ ವಿಕೇಂದ್ರೀಕರಣ ಹೊಂದಿದ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-22">
+        <div class="chapter-num" aria-hidden="true">22</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಗ್ರಾಮೀಣಾಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಗ್ರಾಮ ಬಲಗೊಂಡರೆ ಮಾತ್ರ ರಾಷ್ಟ್ರ ಬಲಗೊಳ್ಳುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಉದ್ಯೋಗ, ಆರೋಗ್ಯ, ಶಿಕ್ಷಣಕ್ಕಾಗಿ ಗ್ರಾಮೀಣ ಜನರ ನಗರ ವಲಸೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಗ್ರಾಮ ಮಟ್ಟದಲ್ಲೇ ಉದ್ಯೋಗ ಮತ್ತು ಮೂಲಸೌಕರ್ಯ ಸೃಷ್ಟಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಗ್ರಾಮೀಣ ಕೈಗಾರಿಕಾ ಪಾರ್ಕ್ ಮತ್ತು ಸ್ಥಳೀಯ ಸಂಸ್ಕರಣಾ ಘಟಕಗಳ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗ್ರಾಮ ಮಟ್ಟದ ಕೌಶಲ್ಯ ತರಬೇತಿ ಕೇಂದ್ರಗಳ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ವಲಸೆ ಒತ್ತಾಯವಲ್ಲ, ಆಯ್ಕೆಯಾಗುವ ಸ್ಥಿತಿ ನಿರ್ಮಾಣ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-23">
+        <div class="chapter-num" aria-hidden="true">23</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ನಗರಾಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ನಗರಗಳು ಅವ್ಯವಸ್ಥಿತವಾಗಿ ಬೆಳೆಯಬಾರದು, ಯೋಜನಾಬದ್ಧವಾಗಿ ಬೆಳೆಯಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಚಾರ ದಟ್ಟಣೆ, ಕೊಳಚೆ ಪ್ರದೇಶ, ಕುಡಿಯುವ ನೀರಿನ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಎರಡು/ಮೂರನೇ ಹಂತದ ನಗರಗಳ ಯೋಜನಾಬದ್ಧ ಅಭಿವೃದ್ಧಿ, ಬೆಂಗಳೂರಿನ ಹೊರೆ ಹಂಚಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ನಗರಕ್ಕೆ ಸಮಗ್ರ ಮಾಸ್ಟರ್ ಪ್ಲಾನ್ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಾರ್ವಜನಿಕ ಸಾರಿಗೆ ಜಾಲ ವಿಸ್ತರಣೆ, ಕೊಳಚೆ ಪುನರ್ವಸತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ವಾಸಯೋಗ್ಯ, ಸುಸ್ಥಿರ ನಗರಗಳ ಜಾಲ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-24">
+        <div class="chapter-num" aria-hidden="true">24</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಬೆಂಗಳೂರು Vision</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಬೆಂಗಳೂರು ಜಾಗತಿಕ ನಗರವಾಗಬೇಕು, ಆದರೆ ಕನ್ನಡ ಬೇರುಗಳನ್ನು ಕಳೆದುಕೊಳ್ಳಬಾರದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಚಾರ ದಟ್ಟಣೆ, ಮೂಲಸೌಕರ್ಯದ ಮೇಲಿನ ಅತಿಯಾದ ಒತ್ತಡ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಉಪನಗರ ಕೇಂದ್ರಗಳ (Satellite Towns) ಅಭಿವೃದ್ಧಿ ಮೂಲಕ ಒತ್ತಡ ಹಂಚಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮೆಟ್ರೋ, ಉಪನಗರ ರೈಲು ಜಾಲದ ತ್ವರಿತ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಂಚಾರ ನಿರ್ವಹಣಾ ಪ್ರಾಧಿಕಾರಕ್ಕೆ ಸ್ವಾಯತ್ತತೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಜಾಗತಿಕ ಟೆಕ್ ನಗರ, ಆದರೂ ಕನ್ನಡದ ಹೃದಯ ಉಳಿಸಿಕೊಂಡ ಬೆಂಗಳೂರು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-25">
+        <div class="chapter-num" aria-hidden="true">25</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಉತ್ತರ ಕರ್ನಾಟಕ ಅಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಾದೇಶಿಕ ಅಸಮಾನತೆ ಪ್ರಜಾಪ್ರಭುತ್ವದ ವೈಫಲ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ, ಕೈಗಾರಿಕೆಯಲ್ಲಿ ದಶಕಗಳ ಹಿಂದುಳಿದಿರುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ವಿಶೇಷ ಅಭಿವೃದ್ಧಿ ಪ್ಯಾಕೇಜ್ ಮತ್ತು ಹೂಡಿಕೆ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಬಜೆಟ್‌ನಲ್ಲಿ ಉತ್ತರ ಕರ್ನಾಟಕಕ್ಕೆ ಪ್ರತ್ಯೇಕ, ಖಾತರಿಯುತ ಅನುದಾನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರಾದೇಶಿಕ ಕೈಗಾರಿಕಾ ಕಾರಿಡಾರ್ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಉತ್ತರ-ದಕ್ಷಿಣ ಕರ್ನಾಟಕದ ಅಂತರ ಸಂಪೂರ್ಣ ನಿವಾರಣೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-26">
+        <div class="chapter-num" aria-hidden="true">26</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕಲ್ಯಾಣ ಕರ್ನಾಟಕ ಅಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>371(ಜೆ) ವಿಧಿಯ ಆಶಯ ಸಂಪೂರ್ಣ ಈಡೇರಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಮೀಸಲಾತಿ ಮತ್ತು ಅನುದಾನ ಇದ್ದರೂ ಅನುಷ್ಠಾನದಲ್ಲಿ ವಿಳಂಬ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕಲ್ಯಾಣ ಕರ್ನಾಟಕ ಪ್ರದೇಶ ಅಭಿವೃದ್ಧಿ ಮಂಡಳಿಗೆ ಹೆಚ್ಚಿನ ಅಧಿಕಾರ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸ್ಥಳೀಯ ಉದ್ಯೋಗ ಮತ್ತು ಶಿಕ್ಷಣ ಸಂಸ್ಥೆಗಳಲ್ಲಿ ಮೀಸಲಾತಿಯ ಕಟ್ಟುನಿಟ್ಟಿನ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ವಾರ್ಷಿಕ ಪ್ರಗತಿ ಪರಿಶೀಲನೆ ಸಾರ್ವಜನಿಕವಾಗಿ ಪ್ರಕಟ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕಲ್ಯಾಣ ಕರ್ನಾಟಕ ಹೆಸರಿಗೆ ತಕ್ಕಂತೆ ನಿಜವಾದ ಕಲ್ಯಾಣ ಕಾಣುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-27">
+        <div class="chapter-num" aria-hidden="true">27</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕರಾವಳಿ ಅಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕರಾವಳಿ ಸಂಪತ್ತು, ಸಂಸ್ಕೃತಿ ಮತ್ತು ಸಾಮರಸ್ಯದ ನಾಡು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಮೀನುಗಾರರ ಜೀವನೋಪಾಯ ಸಂಕಷ್ಟ, ಬಂದರು ಮೂಲಸೌಕರ್ಯ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಮೀನುಗಾರಿಕಾ ಆಧುನೀಕರಣ ಮತ್ತು ಬಂದರು ಆಧಾರಿತ ಕೈಗಾರಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮೀನುಗಾರರಿಗೆ ವಿಮೆ, ಇಂಧನ ಸಬ್ಸಿಡಿ ಖಾತರಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಕರಾವಳಿ ಪ್ರವಾಸೋದ್ಯಮ ಮತ್ತು ಬಂದರು ಜಾಲ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರಾವಳಿ ಆರ್ಥಿಕತೆಯ ಪ್ರಮುಖ ಶಕ್ತಿಕೇಂದ್ರವಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-28">
+        <div class="chapter-num" aria-hidden="true">28</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಲೆನಾಡು ಅಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪರಿಸರ ಸಂರಕ್ಷಣೆ ಮತ್ತು ಜನಜೀವನ ಒಟ್ಟಿಗೆ ಸಾಗಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ವನ್ಯಜೀವಿ-ಮಾನವ ಸಂಘರ್ಷ, ಕೃಷಿ ಸಂಕಷ್ಟ, ರಸ್ತೆ ಸಂಪರ್ಕ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪರಿಸರ ಸ್ನೇಹಿ ಅಭಿವೃದ್ಧಿ ಮಾದರಿ, ಸಂಘರ್ಷ ಪರಿಹಾರ ಕ್ರಮಗಳು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಅರಣ್ಯ ಅಂಚಿನ ರೈತರಿಗೆ ವಿಶೇಷ ಪರಿಹಾರ ಮತ್ತು ರಕ್ಷಣಾ ಯೋಜನೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಲೆನಾಡು ಸಂಪರ್ಕ ರಸ್ತೆ ಮತ್ತು ಆರೋಗ್ಯ ಸೌಲಭ್ಯ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರಕೃತಿ ಮತ್ತು ಜನಜೀವನ ಸಮತೋಲನದ ಮಲೆನಾಡು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-29">
+        <div class="chapter-num" aria-hidden="true">29</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ರೈತರ ನೀತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ರೈತ ಅನ್ನದಾತ, ಅವನ ಘನತೆ ರಾಷ್ಟ್ರದ ಘನತೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಬೆಳೆ ನಷ್ಟ, ಸಾಲಬಾಧೆ, ಸೂಕ್ತ ಬೆಲೆ ಸಿಗದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಖಾತರಿ ಕನಿಷ್ಠ ಬೆಂಬಲ ಬೆಲೆ ಮತ್ತು ನೇರ ಮಾರುಕಟ್ಟೆ ಸಂಪರ್ಕ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಬೆಳೆ ವಿಮೆ ಪ್ರಕ್ರಿಯೆ ಸರಳೀಕರಣ, ತ್ವರಿತ ಪರಿಹಾರ ವಿತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ತಾಲೂಕಿಗೆ ಆಧುನಿಕ ಶೈತ್ಯಾಗಾರ ಮತ್ತು ಸಂಸ್ಕರಣಾ ಘಟಕ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕೃಷಿಯನ್ನು ಗೌರವಯುತ, ಲಾಭದಾಯಕ ವೃತ್ತಿಯಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-30">
+        <div class="chapter-num" aria-hidden="true">30</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ನೀರಾವರಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ನೀರು ಜೀವ, ಅದರ ಸಮಾನ ಹಂಚಿಕೆ ನ್ಯಾಯದ ಪ್ರಶ್ನೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನೇಕ ನೀರಾವರಿ ಯೋಜನೆಗಳು ದಶಕಗಳಿಂದ ಅಪೂರ್ಣ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಬಾಕಿ ಇರುವ ಎಲ್ಲಾ ನೀರಾವರಿ ಯೋಜನೆಗಳಿಗೆ ಕಾಲಮಿತಿ ನಿಗದಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸೂಕ್ಷ್ಮ ನೀರಾವರಿ (ಹನಿ/ತುಂತುರು) ಪದ್ಧತಿಗೆ ಸಬ್ಸಿಡಿ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ನೀರಾವರಿ ಯೋಜನಾ ಪರಿಶೀಲನಾ ಸಮಿತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಬರಪೀಡಿತ ಪ್ರದೇಶಗಳಿಗೂ ಖಾತರಿಯ ನೀರಾವರಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-31">
+        <div class="chapter-num" aria-hidden="true">31</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಜಲ ಸಂರಕ್ಷಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಇಂದಿನ ಜಲ ಸಂರಕ್ಷಣೆ, ನಾಳಿನ ಜೀವ ರಕ್ಷಣೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಂತರ್ಜಲ ಮಟ್ಟ ಕುಸಿತ, ಕೆರೆ-ಕಟ್ಟೆಗಳ ಒತ್ತುವರಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕೆರೆ ಪುನಶ್ಚೇತನ ಆಂದೋಲನ ರಾಜ್ಯವ್ಯಾಪಿ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮಳೆನೀರು ಕೊಯ್ಲು ಪ್ರತಿ ಹೊಸ ಕಟ್ಟಡಕ್ಕೆ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಒತ್ತುವರಿ ತೆರವು, ಕೆರೆ ಒತ್ತುವರಿದಾರರ ಮೇಲೆ ಕಠಿಣ ಕ್ರಮ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಗ್ರಾಮಕ್ಕೂ ಸ್ವಂತ ಜಲ ಸ್ವಾವಲಂಬನೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-32">
+        <div class="chapter-num" aria-hidden="true">32</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕಾವೇರಿ ಸೇರಿದಂತೆ ಕರ್ನಾಟಕದ ಜಲ ಹಕ್ಕುಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕರ್ನಾಟಕದ ಜಲ ಹಕ್ಕು ರಾಜಿಯಾಗದ ವಿಷಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಂತರರಾಜ್ಯ ಜಲ ವಿವಾದಗಳಲ್ಲಿ ಕರ್ನಾಟಕದ ಹಿತಾಸಕ್ತಿ ಸಾಕಷ್ಟು ಬಲವಾಗಿ ಮಂಡನೆಯಾಗದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕಾನೂನು ಮತ್ತು ವೈಜ್ಞಾನಿಕ ದತ್ತಾಂಶ ಆಧಾರಿತ ಬಲಿಷ್ಠ ಪ್ರಾತಿನಿಧ್ಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪಕ್ಷಭೇದ ಮರೆತು ಕರ್ನಾಟಕದ ಜಲ ಹಕ್ಕುಗಳ ವಿಷಯದಲ್ಲಿ ಏಕಧ್ವನಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಾಶ್ವತ ರಾಜ್ಯ ಜಲ ವಿವಾದ ಕಾನೂನು ಕೋಶ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕದ ನದಿ ನೀರಿನ ನ್ಯಾಯಯುತ, ಶಾಶ್ವತ ಪಾಲು ಖಾತರಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-4">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 04 / ೦೯</p>
+          <h2 class="part-title">ಆರ್ಥಿಕತೆ, ಯುವಜನತೆ ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 33–44</p>
+      </div>
+      
+      <article class="chapter" id="ch-33">
+        <div class="chapter-num" aria-hidden="true">33</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕೈಗಾರಿಕೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕೈಗಾರಿಕೆ ರಾಜ್ಯದ ಬೆನ್ನೆಲುಬು, ಆದರೆ ಸಮತೋಲಿತವಾಗಿ ಹಂಚಿಕೆಯಾಗಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಬಹುತೇಕ ಕೈಗಾರಿಕೆ ಬೆಂಗಳೂರು ಸುತ್ತಮುತ್ತ ಕೇಂದ್ರೀಕೃತ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ದ್ವಿತೀಯ-ತೃತೀಯ ಹಂತದ ನಗರಗಳಲ್ಲಿ ಕೈಗಾರಿಕಾ ವಲಯ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಹಿಂದುಳಿದ ಜಿಲ್ಲೆಗಳಲ್ಲಿ ಹೂಡಿಕೆಗೆ ವಿಶೇಷ ತೆರಿಗೆ ರಿಯಾಯಿತಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಏಕಗವಾಕ್ಷಿ ಕೈಗಾರಿಕಾ ಅನುಮತಿ ವ್ಯವಸ್ಥೆ ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳಿಗೆ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕದ ಪ್ರತಿ ಜಿಲ್ಲೆಯೂ ಕೈಗಾರಿಕಾ ಕೇಂದ್ರವಾಗುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-34">
+        <div class="chapter-num" aria-hidden="true">34</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸ್ಟಾರ್ಟ್‌ಅಪ್</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಯುವ ಚಿಂತನೆ ಬಂಡವಾಳಕ್ಕಿಂತ ದೊಡ್ಡ ಸಂಪತ್ತು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಬಂಡವಾಳ, ಮಾರ್ಗದರ್ಶನ ಕೊರತೆಯಿಂದ ಅನೇಕ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಗ್ರಾಮೀಣ ಭಾಗದಿಂದ ಹೊರಹೊಮ್ಮುತ್ತಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಜಿಲ್ಲಾ ಮಟ್ಟದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಇನ್‌ಕ್ಯುಬೇಷನ್ ಕೇಂದ್ರಗಳು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಆರಂಭಿಕ ಹಂತದ ಸ್ಟಾರ್ಟ್‌ಅಪ್‌ಗಳಿಗೆ ತೆರಿಗೆ ರಜೆ ಮತ್ತು ಬೀಜ ನಿಧಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಕಾಲೇಜು ಹಂತದಿಂದಲೇ ಉದ್ಯಮಶೀಲತಾ ಪಠ್ಯಕ್ರಮ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ಗ್ರಾಮೀಣ ಸ್ಟಾರ್ಟ್‌ಅಪ್‌ಗಳ ರಾಜಧಾನಿಯಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-35">
+        <div class="chapter-num" aria-hidden="true">35</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">MSME</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಣ್ಣ ಉದ್ಯಮ ಎಂದರೆ ಸಣ್ಣ ಕನಸಲ್ಲ, ಆರ್ಥಿಕತೆಯ ಬೆನ್ನೆಲುಬು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾಲ ಸೌಲಭ್ಯ, ಮಾರುಕಟ್ಟೆ ಸಂಪರ್ಕದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸರಳೀಕೃತ ಸಾಲ ಪ್ರಕ್ರಿಯೆ ಮತ್ತು ಸರ್ಕಾರಿ ಖರೀದಿಯಲ್ಲಿ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸ್ಥಳೀಯ ಉತ್ಪನ್ನಗಳಿಗೆ ಸರ್ಕಾರಿ ಟೆಂಡರ್‌ಗಳಲ್ಲಿ ಮೀಸಲಾತಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ತಾಲೂಕಿಗೆ MSME ಸಹಾಯ ಕೇಂದ್ರ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸ್ಥಳೀಯ ಉದ್ಯಮಗಳ ಮೂಲಕ ಸ್ಥಳೀಯ ಉದ್ಯೋಗ ಸೃಷ್ಟಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-36">
+        <div class="chapter-num" aria-hidden="true">36</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಯುವಜನ ನೀತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಯುವಶಕ್ತಿಯೇ ಕರ್ನಾಟಕದ ನಿಜವಾದ ಸಂಪತ್ತು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಕೌಶಲ್ಯ-ಉದ್ಯೋಗದ ನಡುವಿನ ಅಂತರ, ದಿಕ್ಕುತಪ್ಪಿದ ಯುವಜನತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕೌಶಲ್ಯಾಧಾರಿತ ಶಿಕ್ಷಣ ಮತ್ತು ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಕಾಲೇಜಿಗೆ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ ಕೋಶ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಯುವ ಸಂಸತ್ತು ಸ್ಥಾಪಿಸಿ ನೀತಿ ನಿರೂಪಣೆಯಲ್ಲಿ ಯುವ ಧ್ವನಿಗೆ ಅವಕಾಶ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಯುವಕ-ಯುವತಿಗೆ ಗುರಿ, ಕೌಶಲ್ಯ ಮತ್ತು ಅವಕಾಶ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-37">
+        <div class="chapter-num" aria-hidden="true">37</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಉದ್ಯೋಗ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಉದ್ಯೋಗ ಎಂಬುದು ಘನತೆಯ ಜೀವನದ ಮೂಲ ಆಧಾರ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪದವಿ ಪಡೆದರೂ ಸೂಕ್ತ ಉದ್ಯೋಗ ಸಿಗದ ಸ್ಥಿತಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕೈಗಾರಿಕೆ-ಶಿಕ್ಷಣ ಸಂಸ್ಥೆಗಳ ನಡುವೆ ನೇರ ಸಂಪರ್ಕ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ದೊಡ್ಡ ಹೂಡಿಕೆ ಯೋಜನೆಯಲ್ಲಿ ಸ್ಥಳೀಯರಿಗೆ ಉದ್ಯೋಗ ಮೀಸಲಾತಿ ಷರತ್ತು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಜಿಲ್ಲಾ ಉದ್ಯೋಗ ವಿನಿಮಯ ಕೇಂದ್ರಗಳ ಆಧುನೀಕರಣ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನಿರುದ್ಯೋಗ ಮುಕ್ತ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-38">
+        <div class="chapter-num" aria-hidden="true">38</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಹಿಳಾ ಸಬಲೀಕರಣ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಮಹಿಳೆಯ ಸಬಲೀಕರಣವಿಲ್ಲದೆ ಸಮಾಜದ ಪೂರ್ಣ ಪ್ರಗತಿ ಅಸಾಧ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಆರ್ಥಿಕ ಸ್ವಾತಂತ್ರ್ಯ, ಸುರಕ್ಷತೆ ಮತ್ತು ನಾಯಕತ್ವದ ಅವಕಾಶಗಳ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಮಹಿಳಾ ಸ್ವಸಹಾಯ ಗುಂಪುಗಳ ಮೂಲಕ ಆರ್ಥಿಕ ಸಬಲೀಕರಣ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ರಾಜಕೀಯ, ಆಡಳಿತ ಮತ್ತು ಉದ್ಯಮದಲ್ಲಿ ಮಹಿಳಾ ಪ್ರಾತಿನಿಧ್ಯ ಹೆಚ್ಚಳ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಹಿಳಾ ಸುರಕ್ಷತಾ ಆ್ಯಪ್, ರಾತ್ರಿ ಗಸ್ತು ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಕ್ಷೇತ್ರದಲ್ಲೂ ಮಹಿಳೆಯ ಸಮಾನ ನಾಯಕತ್ವ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-39">
+        <div class="chapter-num" aria-hidden="true">39</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಹಿರಿಯ ನಾಗರಿಕರು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಹಿರಿಯರ ಅನುಭವ ಸಮಾಜದ ಮಾರ್ಗದರ್ಶಿ ಬೆಳಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಒಂಟಿತನ, ಆರೋಗ್ಯ ವೆಚ್ಚ, ಸಾಮಾಜಿಕ ಭದ್ರತೆಯ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪಿಂಚಣಿ ಮೊತ್ತ ಪರಿಷ್ಕರಣೆ ಮತ್ತು ಆರೋಗ್ಯ ವಿಮೆ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ತಾಲೂಕಿಗೆ ಹಿರಿಯ ನಾಗರಿಕರ ಆರೈಕೆ ಕೇಂದ್ರ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮನೆ-ಬಾಗಿಲಿಗೆ ಆರೋಗ್ಯ ತಪಾಸಣಾ ಸೇವೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಗೌರವಯುತ, ಸುರಕ್ಷಿತ ವೃದ್ಧಾಪ್ಯ ಖಾತರಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-40">
+        <div class="chapter-num" aria-hidden="true">40</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ದಿವ್ಯಾಂಗರು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಾಮರ್ಥ್ಯ ದೈಹಿಕ ಸ್ಥಿತಿಯಿಂದ ಅಳೆಯಲಾಗದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾರ್ವಜನಿಕ ಸ್ಥಳ, ಸಾರಿಗೆ, ಉದ್ಯೋಗದಲ್ಲಿ ಪ್ರವೇಶಯೋಗ್ಯತೆಯ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಎಲ್ಲಾ ಸಾರ್ವಜನಿಕ ಕಟ್ಟಡ-ಸಾರಿಗೆಗೆ ಕಡ್ಡಾಯ ಪ್ರವೇಶಯೋಗ್ಯತೆ ಮಾನದಂಡ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸರ್ಕಾರಿ-ಖಾಸಗಿ ಉದ್ಯೋಗದಲ್ಲಿ ಮೀಸಲಾತಿಯ ಕಟ್ಟುನಿಟ್ಟಿನ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ದಿವ್ಯಾಂಗ ಸ್ನೇಹಿ ಕೌಶಲ್ಯ ತರಬೇತಿ ಕೇಂದ್ರಗಳ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸಂಪೂರ್ಣ ಸೇರ್ಪಡೆಯ (Inclusive) ಸಮಾಜ ನಿರ್ಮಾಣ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-41">
+        <div class="chapter-num" aria-hidden="true">41</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಕ್ಕಳ ಹಕ್ಕುಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಮಕ್ಕಳ ಸುರಕ್ಷತೆ ಮತ್ತು ಶಿಕ್ಷಣ ರಾಷ್ಟ್ರದ ಭವಿಷ್ಯದ ಹೂಡಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಬಾಲಕಾರ್ಮಿಕ ಪದ್ಧತಿ, ಶಾಲಾ ಮಧ್ಯದ ಶಿಕ್ಷಣ ತ್ಯಜಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಮಗುವಿನ ಶಿಕ್ಷಣ ಹಕ್ಕಿನ ಕಟ್ಟುನಿಟ್ಟಿನ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಬಡ ಕುಟುಂಬಗಳಿಗೆ ಮಕ್ಕಳ ಶಿಕ್ಷಣಕ್ಕಾಗಿ ಪ್ರೋತ್ಸಾಹಧನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಾಲಾ ತ್ಯಜಿಸುವಿಕೆ ಪತ್ತೆ ಮತ್ತು ಮರುಸೇರ್ಪಡೆ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಮಗುವೂ ಶಾಲೆಯಲ್ಲಿ, ಬಾಲಕಾರ್ಮಿಕ ಮುಕ್ತ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-42">
+        <div class="chapter-num" aria-hidden="true">42</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಶಿಕ್ಷಣ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಶಿಕ್ಷಣ ಎಂದರೆ ಅಂಕ ಗಳಿಕೆಯಲ್ಲ, ಚಿಂತನಾ ಶಕ್ತಿಯ ನಿರ್ಮಾಣ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಗ್ರಾಮೀಣ-ನಗರ ಶಿಕ್ಷಣ ಗುಣಮಟ್ಟದ ಅಂತರ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸರ್ಕಾರಿ ಶಾಲೆಗಳ ಗುಣಮಟ್ಟವನ್ನು ಖಾಸಗಿ ಶಾಲೆಗಳಿಗೆ ಸಮಾನವಾಗಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮಾತೃಭಾಷೆ (ಕನ್ನಡ) ಮಾಧ್ಯಮಕ್ಕೆ ಆದ್ಯತೆ, ಜೊತೆಗೆ ಇಂಗ್ಲಿಷ್ ಕೌಶಲ್ಯ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಿಕ್ಷಕರ ನಿರಂತರ ತರಬೇತಿ, ಡಿಜಿಟಲ್ ತರಗತಿ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಗುಣಮಟ್ಟದ ಶಿಕ್ಷಣ ಪ್ರತಿ ಮಗುವಿನ ಸಮಾನ ಹಕ್ಕು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-43">
+        <div class="chapter-num" aria-hidden="true">43</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಉನ್ನತ ಶಿಕ್ಷಣ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಉನ್ನತ ಶಿಕ್ಷಣ ಸಂಶೋಧನೆ ಮತ್ತು ಉದ್ಯೋಗಾವಕಾಶ ಎರಡನ್ನೂ ಸೃಷ್ಟಿಸಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಶೋಧನಾ ಬಜೆಟ್ ಕೊರತೆ, ಪಠ್ಯಕ್ರಮ ಮಾರುಕಟ್ಟೆಗೆ ಹೊಂದಿಕೆಯಾಗದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ವಿಶ್ವವಿದ್ಯಾಲಯ-ಕೈಗಾರಿಕೆ ಸಹಭಾಗಿತ್ವ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಂಶೋಧನಾ ಅನುದಾನ ಗಣನೀಯ ಹೆಚ್ಚಳ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಜ್ಯ ವಿಶ್ವವಿದ್ಯಾಲಯಗಳಿಗೆ ಸ್ವಾಯತ್ತತೆ ಮತ್ತು ಗುಣಮಟ್ಟ ಪರಿಶೀಲನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ಜ್ಞಾನ ಆರ್ಥಿಕತೆಯ ಕೇಂದ್ರವಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-44">
+        <div class="chapter-num" aria-hidden="true">44</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಆರೋಗ್ಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಆರೋಗ್ಯ ಪ್ರತಿ ಪ್ರಜೆಯ ಮೂಲಭೂತ ಹಕ್ಕು, ಸೌಲಭ್ಯವಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಗ್ರಾಮೀಣ ಪ್ರದೇಶದಲ್ಲಿ ವೈದ್ಯರು, ಆಸ್ಪತ್ರೆ ಸೌಲಭ್ಯದ ತೀವ್ರ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಗ್ರಾಮ ಪಂಚಾಯತಿಗೆ ಪ್ರಾಥಮಿಕ ಆರೋಗ್ಯ ಕೇಂದ್ರ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಾರ್ವತ್ರಿಕ ಆರೋಗ್ಯ ವಿಮೆ ಎಲ್ಲಾ ಕುಟುಂಬಗಳಿಗೆ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗ್ರಾಮೀಣ ಸೇವೆಗೆ ವೈದ್ಯರಿಗೆ ವಿಶೇಷ ಪ್ರೋತ್ಸಾಹಧನ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಗುಣಮಟ್ಟದ ಆರೋಗ್ಯ ಸೇವೆ ಪ್ರತಿ ಮನೆಬಾಗಿಲಿಗೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-5">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 05 / ೦೯</p>
+          <h2 class="part-title">ಆರೋಗ್ಯ, ಸಂಸ್ಕೃತಿ ಮತ್ತು ಪರಿಸರ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 45–53</p>
+      </div>
+      
+      <article class="chapter" id="ch-45">
+        <div class="chapter-num" aria-hidden="true">45</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಾನಸಿಕ ಆರೋಗ್ಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ದೈಹಿಕ ಆರೋಗ್ಯದಷ್ಟೇ ಮಾನಸಿಕ ಆರೋಗ್ಯವೂ ಮುಖ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾಮಾಜಿಕ ಕಳಂಕದಿಂದಾಗಿ ಮಾನಸಿಕ ಸಮಸ್ಯೆ ಇರುವವರು ಚಿಕಿತ್ಸೆ ಪಡೆಯದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಶಾಲಾ-ಕಾಲೇಜು ಹಂತದಿಂದಲೇ ಮಾನಸಿಕ ಆರೋಗ್ಯ ಜಾಗೃತಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ತಾಲೂಕು ಆಸ್ಪತ್ರೆಯಲ್ಲಿ ಉಚಿತ ಮಾನಸಿಕ ಆರೋಗ್ಯ ಸಮಾಲೋಚನೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಹಾಯವಾಣಿ ಬಲಪಡಿಸುವಿಕೆ, ಮಾನಸಿಕ ತಜ್ಞರ ಸಂಖ್ಯೆ ಹೆಚ್ಚಳ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಮಾನಸಿಕ ಆರೋಗ್ಯದ ಬಗ್ಗೆ ಮುಕ್ತವಾಗಿ ಮಾತನಾಡುವ ಸಮಾಜ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-46">
+        <div class="chapter-num" aria-hidden="true">46</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕ್ರೀಡೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಆರೋಗ್ಯವಂತ ದೇಹದಲ್ಲಿ ಆರೋಗ್ಯವಂತ ಮನಸ್ಸು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಗ್ರಾಮೀಣ ಪ್ರತಿಭೆಗಳಿಗೆ ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಅವಕಾಶದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ತಾಲೂಕಿಗೆ ಕ್ರೀಡಾ ಸಂಕೀರ್ಣ ಮತ್ತು ತರಬೇತಿ ಕೇಂದ್ರ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿಭಾವಂತ ಗ್ರಾಮೀಣ ಕ್ರೀಡಾಪಟುಗಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಾಲಾ ಹಂತದಿಂದಲೇ ಪ್ರತಿಭಾ ಶೋಧ ಕಾರ್ಯಕ್ರಮ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಒಲಿಂಪಿಕ್ಸ್ ಮಟ್ಟದಲ್ಲಿ ಕರ್ನಾಟಕದ ಕ್ರೀಡಾಪಟುಗಳ ಛಾಪು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-47">
+        <div class="chapter-num" aria-hidden="true">47</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ವಿಜ್ಞಾನ ಮತ್ತು ಸಂಶೋಧನೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ವೈಜ್ಞಾನಿಕ ಮನೋಭಾವ ಸಂವಿಧಾನದ ಆಶಯ ಮತ್ತು ಪ್ರಗತಿಯ ಅಡಿಪಾಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಶೋಧನೆಗೆ ಅನುದಾನ ಮತ್ತು ಪ್ರೋತ್ಸಾಹದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ರಾಜ್ಯ ವಿಜ್ಞಾನ ಮತ್ತು ತಂತ್ರಜ್ಞಾನ ನಿಧಿ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸ್ಥಳೀಯ ಸಮಸ್ಯೆಗಳಿಗೆ ಪರಿಹಾರ ಒದಗಿಸುವ ಸಂಶೋಧನೆಗೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಾಲಾ ಹಂತದಿಂದ ವಿಜ್ಞಾನ ಪ್ರಯೋಗಾಲಯ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ಸಂಶೋಧನಾ ಕೇಂದ್ರವಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-48">
+        <div class="chapter-num" aria-hidden="true">48</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪರಿಸರ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಕೃತಿ ಎರವಲು ಪಡೆದದ್ದು, ಮುಂದಿನ ಪೀಳಿಗೆಗೆ ಸುರಕ್ಷಿತವಾಗಿ ಒಪ್ಪಿಸಬೇಕಾದದ್ದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅರಣ್ಯನಾಶ, ಮಾಲಿನ್ಯ, ಅನಿಯಂತ್ರಿತ ನಗರೀಕರಣ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಅಭಿವೃದ್ಧಿ ಮತ್ತು ಪರಿಸರ ಸಂರಕ್ಷಣೆಯ ನಡುವೆ ಸಮತೋಲನ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಗೆ ಕಡ್ಡಾಯ ಪರಿಸರ ಪ್ರಭಾವ ಮೌಲ್ಯಮಾಪನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಅರಣ್ಯ ಪ್ರದೇಶ ವಿಸ್ತರಣೆ, ನಗರ ಹಸಿರೀಕರಣ ಆಂದೋಲನ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಹಸಿರು, ಸುಸ್ಥಿರ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-49">
+        <div class="chapter-num" aria-hidden="true">49</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಹವಾಮಾನ ಬದಲಾವಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಹವಾಮಾನ ಬದಲಾವಣೆ ಜಾಗತಿಕ ಸಮಸ್ಯೆ, ಆದರೆ ಸ್ಥಳೀಯ ಪರಿಹಾರ ಅಗತ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನಿಯಮಿತ ಮಳೆ, ಬರ, ಕೃಷಿಯ ಮೇಲಿನ ಪರಿಣಾಮ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಹವಾಮಾನ ಸ್ಥಿತಿಸ್ಥಾಪಕ ಕೃಷಿ ಪದ್ಧತಿಗಳ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ನವೀಕರಿಸಬಹುದಾದ ಇಂಧನ ಬಳಕೆಗೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಜ್ಯ ಹವಾಮಾನ ಕ್ರಿಯಾ ಯೋಜನೆ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಇಂಗಾಲ ತಟಸ್ಥ (Carbon Neutral) ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-50">
+        <div class="chapter-num" aria-hidden="true">50</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕನ್ನಡ ಭಾಷೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಕನ್ನಡ ನಮ್ಮ ಉಸಿರು, ನಮ್ಮ ಅಸ್ಮಿತೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಆಂಗ್ಲ ಮಾಧ್ಯಮದ ಒತ್ತಡದಲ್ಲಿ ಕನ್ನಡ ಬಳಕೆ ಕುಸಿಯುತ್ತಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಆಡಳಿತ, ಶಿಕ್ಷಣ, ವ್ಯಾಪಾರದಲ್ಲಿ ಕನ್ನಡ ಕಡ್ಡಾಯ ಬಳಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಎಲ್ಲಾ ಸರ್ಕಾರಿ ಸೇವೆ, ನಾಮಫಲಕಗಳಲ್ಲಿ ಕನ್ನಡ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಕನ್ನಡ ಅಭಿವೃದ್ಧಿ ಪ್ರಾಧಿಕಾರಕ್ಕೆ ಹೆಚ್ಚಿನ ಅಧಿಕಾರ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಜಗತ್ತಿನಾದ್ಯಂತ ಕನ್ನಡ ಹೆಮ್ಮೆಯ ಭಾಷೆಯಾಗುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-51">
+        <div class="chapter-num" aria-hidden="true">51</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕನ್ನಡ ಸಂಸ್ಕೃತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಂಸ್ಕೃತಿ ಎಂಬುದು ಜೀವಂತ ಪರಂಪರೆ, ವಸ್ತುಸಂಗ್ರಹಾಲಯದ ವಸ್ತುವಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆ, ಸಂಗೀತ, ಸಾಹಿತ್ಯ ಆಧುನಿಕತೆಯ ಒತ್ತಡದಲ್ಲಿ ಮರೆಯಾಗುತ್ತಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಜಾನಪದ, ಶಾಸ್ತ್ರೀಯ ಕಲೆಗಳಿಗೆ ಸಾಂಸ್ಥಿಕ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಕಲಾವಿದರಿಗೆ ಮಾಸಿಕ ಗೌರವಧನ ಮತ್ತು ವೇದಿಕೆ ಒದಗಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ಜಿಲ್ಲೆಗೆ ಸಾಂಸ್ಕೃತಿಕ ಕೇಂದ್ರ ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕನ್ನಡ ಸಂಸ್ಕೃತಿಯ ಮುಂದಿನ ಪೀಳಿಗೆಗೆ ಸಂಪೂರ್ಣ ವರ್ಗಾವಣೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-52">
+        <div class="chapter-num" aria-hidden="true">52</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಕರ್ನಾಟಕದ ಪರಂಪರೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಇತಿಹಾಸ ಗೊತ್ತಿಲ್ಲದವರಿಗೆ ಭವಿಷ್ಯ ನಿರ್ಮಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಐತಿಹಾಸಿಕ ಸ್ಮಾರಕಗಳ ನಿರ್ಲಕ್ಷ್ಯ ಮತ್ತು ಒತ್ತುವರಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪಾರಂಪರಿಕ ತಾಣಗಳ ಸಂರಕ್ಷಣೆಗೆ ವಿಶೇಷ ನಿಧಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಸ್ಮಾರಕಕ್ಕೆ ಕಾನೂನುಬದ್ಧ ಸಂರಕ್ಷಣಾ ವಲಯ ಘೋಷಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ಥಳೀಯ ಸಮುದಾಯದ ಸಹಭಾಗಿತ್ವದಲ್ಲಿ ಪರಂಪರೆ ಸಂರಕ್ಷಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕದ ಪರಂಪರೆ ಜಾಗತಿಕ ಮನ್ನಣೆ ಪಡೆಯುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-53">
+        <div class="chapter-num" aria-hidden="true">53</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪ್ರವಾಸೋದ್ಯಮ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರವಾಸೋದ್ಯಮ ಸಂಸ್ಕೃತಿ ಮತ್ತು ಆರ್ಥಿಕತೆಯ ಸೇತುವೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಪಾರ ಸಾಮರ್ಥ್ಯ ಇದ್ದರೂ ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಪ್ರಚಾರದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಕರಾವಳಿ, ಮಲೆನಾಡು, ಐತಿಹಾಸಿಕ ತಾಣಗಳ ಸಮಗ್ರ ಪ್ರವಾಸ ಸರ್ಕ್ಯೂಟ್.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸ್ಥಳೀಯರಿಗೆ ಪ್ರವಾಸೋದ್ಯಮ ಆಧಾರಿತ ಉದ್ಯೋಗಕ್ಕೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರವಾಸಿ ತಾಣಗಳಲ್ಲಿ ಸುರಕ್ಷತೆ, ಸ್ವಚ್ಛತೆ, ಸಂಪರ್ಕ ಸುಧಾರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕವನ್ನು ದೇಶದ ನಂಬರ್ ಒನ್ ಪ್ರವಾಸಿ ತಾಣವಾಗಿಸುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-6">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 06 / ೦೯</p>
+          <h2 class="part-title">ಆರ್ಥಿಕ ನೀತಿ ಮತ್ತು ಸಾಮಾಜಿಕ ನ್ಯಾಯ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 54–61</p>
+      </div>
+      
+      <article class="chapter" id="ch-54">
+        <div class="chapter-num" aria-hidden="true">54</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಹೂಡಿಕೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಹೂಡಿಕೆ ಎಂಬುದು ವಿಶ್ವಾಸದ ಪ್ರತಿಬಿಂಬ, ಒತ್ತಡದಿಂದ ತರಲಾಗದ್ದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಕೀರ್ಣ ಅನುಮತಿ ಪ್ರಕ್ರಿಯೆ ಹೂಡಿಕೆದಾರರನ್ನು ಹಿಂದೆ ಸರಿಸುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಏಕಗವಾಕ್ಷಿ, ಕಾಲಮಿತಿಯ ಅನುಮತಿ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸ್ಥಳೀಯ ಉದ್ಯೋಗ ಸೃಷ್ಟಿಸುವ ಹೂಡಿಕೆಗೆ ಹೆಚ್ಚಿನ ಆದ್ಯತೆ ಮತ್ತು ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಜಿಲ್ಲಾವಾರು ಹೂಡಿಕೆ ಆಕರ್ಷಣಾ ಶೃಂಗಸಭೆಗಳು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಕರ್ನಾಟಕ ದೇಶದ ನಂಬರ್ ಒನ್ ಹೂಡಿಕೆ ತಾಣ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-55">
+        <div class="chapter-num" aria-hidden="true">55</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಆರ್ಥಿಕ ನೀತಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಆರ್ಥಿಕ ಬೆಳವಣಿಗೆ ಎಲ್ಲರನ್ನೂ ಒಳಗೊಳ್ಳಬೇಕು, ಕೆಲವರನ್ನು ಮಾತ್ರವಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಬೆಳವಣಿಗೆ ಇದ್ದರೂ ಅದರ ಫಲ ಎಲ್ಲರಿಗೂ ತಲುಪದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಮಗ್ರ ಬೆಳವಣಿಗೆ (Inclusive Growth) ಮಾದರಿ ಅಳವಡಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಆದಾಯ ಅಸಮಾನತೆ ಕಡಿಮೆ ಮಾಡುವ ನೀತಿಗಳಿಗೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ವಾರ್ಷಿಕ ಆರ್ಥಿಕ ಸಮೀಕ್ಷೆ ಆಧಾರಿತ ನೀತಿ ಪರಿಷ್ಕರಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಎಲ್ಲರನ್ನೂ ಒಳಗೊಂಡ ಸಮೃದ್ಧ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-56">
+        <div class="chapter-num" aria-hidden="true">56</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ತೆರಿಗೆ ಸುಧಾರಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ತೆರಿಗೆ ಸರಳ, ನ್ಯಾಯಯುತ ಮತ್ತು ಪಾರದರ್ಶಕವಾಗಿರಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸಂಕೀರ್ಣ ತೆರಿಗೆ ವ್ಯವಸ್ಥೆ ಸಣ್ಣ ವ್ಯಾಪಾರಿಗಳಿಗೆ ಹೊರೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಣ್ಣ ವ್ಯಾಪಾರಿಗಳಿಗೆ ಸರಳೀಕೃತ ತೆರಿಗೆ ಪ್ರಕ್ರಿಯೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ತೆರಿಗೆ ವಂಚನೆ ತಡೆಗೆ ಡಿಜಿಟಲ್ ಪತ್ತೆ ವ್ಯವಸ್ಥೆ, ಪ್ರಾಮಾಣಿಕ ತೆರಿಗೆದಾರರಿಗೆ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ತೆರಿಗೆ ಪಾವತಿ ಸಂಪೂರ್ಣ ಆನ್‌ಲೈನ್ ಮತ್ತು ತ್ವರಿತ ಮರುಪಾವತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸರಳ, ಜನಸ್ನೇಹಿ ತೆರಿಗೆ ವ್ಯವಸ್ಥೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-57">
+        <div class="chapter-num" aria-hidden="true">57</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸಹಕಾರಿ ಕ್ಷೇತ್ರ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಹಕಾರ ಎಂಬುದು ಕರ್ನಾಟಕದ ಗ್ರಾಮೀಣ ಆರ್ಥಿಕತೆಯ ಜೀವಾಳ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯ ಹಸ್ತಕ್ಷೇಪ ಮತ್ತು ಆಡಳಿತ ಲೋಪಗಳಿಂದ ಸಹಕಾರಿ ಸಂಸ್ಥೆಗಳ ದುರ್ಬಲತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಹಕಾರಿ ಸಂಸ್ಥೆಗಳಿಗೆ ವೃತ್ತಿಪರ ಆಡಳಿತ ಮಂಡಳಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಹಕಾರಿ ಬ್ಯಾಂಕ್‌ಗಳ ಸಾಲ ವಿತರಣೆಯಲ್ಲಿ ಪಾರದರ್ಶಕತೆ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ಸಹಕಾರಿ ಲೆಕ್ಕಪರಿಶೋಧನಾ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಬಲಿಷ್ಠ, ಭ್ರಷ್ಟಾಚಾರ ಮುಕ್ತ ಸಹಕಾರಿ ಜಾಲ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-58">
+        <div class="chapter-num" aria-hidden="true">58</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸಾಮಾಜಿಕ ನ್ಯಾಯ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಮಾನತೆ ಇಲ್ಲದೆ ಪ್ರಜಾಪ್ರಭುತ್ವ ಅಪೂರ್ಣ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಶತಮಾನಗಳ ಸಾಮಾಜಿಕ ಅಸಮಾನತೆಯ ಪರಿಣಾಮ ಇಂದಿಗೂ ಮುಂದುವರಿದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಾಮಾಜಿಕ ನ್ಯಾಯದ ಸಾಂವಿಧಾನಿಕ ಆಶಯದ ಸಂಪೂರ್ಣ ಜಾರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಶಿಕ್ಷಣ, ಉದ್ಯೋಗದಲ್ಲಿ ಮೀಸಲಾತಿ ನೀತಿಯ ಪ್ರಾಮಾಣಿಕ ಅನುಷ್ಠಾನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಾಮಾಜಿಕ-ಆರ್ಥಿಕ ಸಮೀಕ್ಷೆ ಆಧಾರಿತ ನೀತಿ ರೂಪಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಅವಕಾಶದ ಸಮಾನತೆ ಹೊಂದಿದ ಸಮಾಜ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-59">
+        <div class="chapter-num" aria-hidden="true">59</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">SC/ST/OBC ಅಭಿವೃದ್ಧಿ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಬಲೀಕರಣ ಎಂದರೆ ಕೇವಲ ಮೀಸಲಾತಿಯಲ್ಲ, ಅವಕಾಶಗಳ ಸೃಷ್ಟಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಮೀಸಲಾತಿ ಇದ್ದರೂ ಗುಣಮಟ್ಟದ ಶಿಕ್ಷಣ, ಉದ್ಯೋಗ ತಲುಪದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಮೀಸಲಾತಿ ಜೊತೆಗೆ ಗುಣಮಟ್ಟದ ಶಿಕ್ಷಣ, ಕೌಶಲ್ಯ ತರಬೇತಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ವಿದ್ಯಾರ್ಥಿ ವೇತನ, ವಸತಿ ನಿಲಯಗಳ ಗುಣಮಟ್ಟ ಸುಧಾರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಮುದಾಯ ಆಧಾರಿತ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಗಳ ನೇರ ಅನುಷ್ಠಾನ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಸಮುದಾಯಕ್ಕೂ ಸಮಾನ ಅವಕಾಶ ಮತ್ತು ಘನತೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-60">
+        <div class="chapter-num" aria-hidden="true">60</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಅಲ್ಪಸಂಖ್ಯಾತರ ಹಕ್ಕುಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ವೈವಿಧ್ಯತೆಯೇ ಭಾರತದ ಶಕ್ತಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಕೆಲವು ಸಮುದಾಯಗಳಲ್ಲಿ ಶಿಕ್ಷಣ-ಆರ್ಥಿಕ ಹಿಂದುಳಿದಿರುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಂವಿಧಾನದತ್ತ ಹಕ್ಕುಗಳ ಸಂಪೂರ್ಣ ರಕ್ಷಣೆ ಮತ್ತು ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಶಿಕ್ಷಣ-ಉದ್ಯೋಗದಲ್ಲಿ ಅಲ್ಪಸಂಖ್ಯಾತ ಸಮುದಾಯದ ಪ್ರಾತಿನಿಧ್ಯ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಅಲ್ಪಸಂಖ್ಯಾತ ಕಲ್ಯಾಣ ಇಲಾಖೆಯ ಪಾರದರ್ಶಕ ಕಾರ್ಯನಿರ್ವಹಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಎಲ್ಲಾ ಸಮುದಾಯಗಳ ಸಾಮರಸ್ಯದ, ಸುರಕ್ಷಿತ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-61">
+        <div class="chapter-num" aria-hidden="true">61</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಾನವ ಹಕ್ಕುಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಘನತೆಯ ಜೀವನ ಪ್ರತಿಯೊಬ್ಬ ಮನುಷ್ಯನ ಜನ್ಮಸಿದ್ಧ ಹಕ್ಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ದೌರ್ಜನ್ಯ, ತಾರತಮ್ಯ ಮತ್ತು ಹಕ್ಕುಗಳ ಉಲ್ಲಂಘನೆ ಪ್ರಕರಣಗಳು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಮಾನವ ಹಕ್ಕುಗಳ ಆಯೋಗಕ್ಕೆ ಬಲಪಡಿಸಿದ ಅಧಿಕಾರ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪೊಲೀಸ್ ವಶದಲ್ಲಿನ ದೌರ್ಜನ್ಯ ಪ್ರಕರಣಗಳ ಕಟ್ಟುನಿಟ್ಟಿನ ತನಿಖೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಾನವ ಹಕ್ಕುಗಳ ಶಿಕ್ಷಣ ಪೊಲೀಸ್-ಆಡಳಿತ ತರಬೇತಿಯಲ್ಲಿ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಘನತೆ ಮತ್ತು ನ್ಯಾಯ ಪ್ರತಿ ಪ್ರಜೆಗೂ ಖಾತರಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-7">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 07 / ೦೯</p>
+          <h2 class="part-title">ಪ್ರಜೆ, ಭದ್ರತೆ ಮತ್ತು ಭವಿಷ್ಯದ ದೃಷ್ಟಿಕೋನ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 62–68</p>
+      </div>
+      
+      <article class="chapter" id="ch-62">
+        <div class="chapter-num" aria-hidden="true">62</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ನಾಗರಿಕರ ಹಕ್ಕುಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಜೆಯ ಹಕ್ಕುಗಳು ಸರ್ಕಾರದ ದಯೆಯಲ್ಲ, ಸಂವಿಧಾನದ ಖಾತರಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನೇಕ ಪ್ರಜೆಗಳಿಗೆ ತಮ್ಮ ಮೂಲಭೂತ ಹಕ್ಕುಗಳ ಬಗ್ಗೆ ಸಂಪೂರ್ಣ ಅರಿವಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಹಕ್ಕುಗಳ ಬಗ್ಗೆ ವ್ಯಾಪಕ ಕಾನೂನು ಸಾಕ್ಷರತಾ ಆಂದೋಲನ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಹಕ್ಕು ಉಲ್ಲಂಘನೆಗೆ ತ್ವರಿತ, ಸುಲಭ ಪರಿಹಾರ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗ್ರಾಮ ಮಟ್ಟದಲ್ಲಿ ಉಚಿತ ಕಾನೂನು ನೆರವು ಕೇಂದ್ರ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಪ್ರಜೆಗೂ ತನ್ನ ಹಕ್ಕುಗಳ ಸಂಪೂರ್ಣ ಅರಿವು ಮತ್ತು ರಕ್ಷಣೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-63">
+        <div class="chapter-num" aria-hidden="true">63</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ನಾಗರಿಕರ ಕರ್ತವ್ಯಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಹಕ್ಕು ಮತ್ತು ಕರ್ತವ್ಯ ಒಂದೇ ನಾಣ್ಯದ ಎರಡು ಮುಖಗಳು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಹಕ್ಕುಗಳ ಬಗ್ಗೆ ಮಾತನಾಡುವಷ್ಟು ಕರ್ತವ್ಯದ ಬಗ್ಗೆ ಜಾಗೃತಿ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸಂವಿಧಾನದ ಮೂಲಭೂತ ಕರ್ತವ್ಯಗಳ ಬಗ್ಗೆ ಶಾಲಾ ಹಂತದಿಂದಲೇ ಶಿಕ್ಷಣ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ತೆರಿಗೆ ಪಾವತಿ, ಸಾರ್ವಜನಿಕ ಆಸ್ತಿ ರಕ್ಷಣೆಯಂತಹ ಕರ್ತವ್ಯಗಳ ಬಗ್ಗೆ ಜಾಗೃತಿ ಆಂದೋಲನ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸಮುದಾಯ ಸೇವಾ ಚಟುವಟಿಕೆಗಳಿಗೆ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಹಕ್ಕು-ಕರ್ತವ್ಯ ಸಮತೋಲನದ ಜವಾಬ್ದಾರಿಯುತ ಪ್ರಜೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-64">
+        <div class="chapter-num" aria-hidden="true">64</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ರಾಷ್ಟ್ರೀಯ ಭದ್ರತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ರಾಷ್ಟ್ರದ ಭದ್ರತೆ ಎಲ್ಲಾ ಅಭಿವೃದ್ಧಿಗಿಂತ ಮೊದಲು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಆಂತರಿಕ ಮತ್ತು ಬಾಹ್ಯ ಭದ್ರತಾ ಸವಾಲುಗಳು ನಿರಂತರವಾಗಿ ಬದಲಾಗುತ್ತಿವೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ರಾಜ್ಯ ಮಟ್ಟದ ಗುಪ್ತಚರ ಮತ್ತು ಸಮನ್ವಯ ವ್ಯವಸ್ಥೆ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಭದ್ರತಾ ವಿಷಯದಲ್ಲಿ ಪಕ್ಷ ರಾಜಕಾರಣಕ್ಕೆ ಅವಕಾಶವಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಕೇಂದ್ರ-ರಾಜ್ಯ ಭದ್ರತಾ ಸಂಸ್ಥೆಗಳ ನಡುವೆ ನಿರಂತರ ಸಮನ್ವಯ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸುರಕ್ಷಿತ, ಸ್ಥಿರ ಕರ್ನಾಟಕ ಮತ್ತು ಭಾರತ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-65">
+        <div class="chapter-num" aria-hidden="true">65</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಗಡಿ ಭದ್ರತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಗಡಿ ಸುರಕ್ಷತೆ ರಾಷ್ಟ್ರೀಯ ಸಾರ್ವಭೌಮತ್ವದ ಪ್ರಶ್ನೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಂತರರಾಜ್ಯ ಗಡಿ ಭಾಗದ ಗ್ರಾಮಗಳಲ್ಲಿ ಮೂಲಸೌಕರ್ಯ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಗಡಿ ಗ್ರಾಮಗಳ ವಿಶೇಷ ಅಭಿವೃದ್ಧಿ ಯೋಜನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಕನ್ನಡಿಗರ ಗಡಿ ಪ್ರದೇಶದ ಭಾಷಾ-ಸಾಂಸ್ಕೃತಿಕ ಹಕ್ಕುಗಳ ರಕ್ಷಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗಡಿ ಪ್ರದೇಶ ಅಭಿವೃದ್ಧಿ ಪ್ರಾಧಿಕಾರ ಬಲಪಡಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸುಭದ್ರ, ಸಮೃದ್ಧ ಗಡಿ ಪ್ರದೇಶಗಳು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-66">
+        <div class="chapter-num" aria-hidden="true">66</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ವಿಪತ್ತು ನಿರ್ವಹಣೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ವಿಪತ್ತಿಗೆ ಸಿದ್ಧತೆ, ಪ್ರತಿಕ್ರಿಯೆಗಿಂತ ಮುಖ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪ್ರವಾಹ, ಬರ, ಭೂಕುಸಿತ ಸಂದರ್ಭದಲ್ಲಿ ವಿಳಂಬಿತ ಸ್ಪಂದನೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಜಿಲ್ಲೆಗೆ ಸುಸಜ್ಜಿತ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ತಂಡ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಮುನ್ಸೂಚನಾ ವ್ಯವಸ್ಥೆ ಆಧುನೀಕರಣ ಮತ್ತು ಸ್ಥಳೀಯ ಭಾಷೆಯಲ್ಲಿ ಎಚ್ಚರಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ವಿಪತ್ತು ಪೀಡಿತ ಪ್ರದೇಶಗಳಲ್ಲಿ ಸಮುದಾಯ ಸಿದ್ಧತಾ ತರಬೇತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ವಿಪತ್ತು ಸ್ಥಿತಿಸ್ಥಾಪಕ (Disaster Resilient) ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-67">
+        <div class="chapter-num" aria-hidden="true">67</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಭವಿಷ್ಯದ ಕರ್ನಾಟಕ – Vision 2050</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಗುರಿ ಇಲ್ಲದ ಪ್ರಯಾಣ ದಿಕ್ಕಿಲ್ಲದ ಪ್ರಯಾಣ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ದೀರ್ಘಾವಧಿ ಯೋಜನೆಗಳ ಕೊರತೆ, ಚುನಾವಣಾ ಕೇಂದ್ರಿತ ಚಿಂತನೆ ಮಾತ್ರ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>25 ವರ್ಷಗಳ ಸ್ಪಷ್ಟ ಅಭಿವೃದ್ಧಿ ರೋಡ್‌ಮ್ಯಾಪ್.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಶಿಕ್ಷಣ, ಆರೋಗ್ಯ, ಆರ್ಥಿಕತೆಯಲ್ಲಿ ಜಾಗತಿಕ ಗುಣಮಟ್ಟದ ಗುರಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ಐದು ವರ್ಷಕ್ಕೊಮ್ಮೆ Vision 2050 ಪ್ರಗತಿ ಪರಿಶೀಲನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>2050ರ ವೇಳೆಗೆ ಕರ್ನಾಟಕ ಜಗತ್ತಿನ ಮಾದರಿ ರಾಜ್ಯ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-68">
+        <div class="chapter-num" aria-hidden="true">68</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಭವಿಷ್ಯದ ಭಾರತ – Vision 2047</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸ್ವಾತಂತ್ರ್ಯದ ಶತಮಾನೋತ್ಸವ ಒಂದು ಸಂಭ್ರಮವಲ್ಲ, ಒಂದು ಜವಾಬ್ದಾರಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪ್ರಾದೇಶಿಕ ಅಸಮಾನತೆ ರಾಷ್ಟ್ರೀಯ ಗುರಿಗಳಿಗೆ ಅಡ್ಡಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ರಾಜ್ಯದ ಸಾಮರ್ಥ್ಯ ಆಧಾರಿತ ರಾಷ್ಟ್ರೀಯ ಬೆಳವಣಿಗೆ ಮಾದರಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಕರ್ನಾಟಕದ ಕೊಡುಗೆ ರಾಷ್ಟ್ರೀಯ ಗುರಿಗಳಿಗೆ ಪೂರಕವಾಗಿ ರೂಪಿಸುವುದು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ರಾಷ್ಟ್ರೀಯ ಮಟ್ಟದಲ್ಲಿ RJP ಈ ದೃಷ್ಟಿಕೋನದ ಪ್ರತಿಪಾದಕ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>2047ರ ವೇಳೆಗೆ ಅಭಿವೃದ್ಧಿ ಹೊಂದಿದ ಭಾರತ, ಇದರಲ್ಲಿ ಬಲಿಷ್ಠ ಕರ್ನಾಟಕದ ಪಾತ್ರ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-8">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 08 / ೦೯</p>
+          <h2 class="part-title">ಪಕ್ಷ ಸಂಘಟನೆ ಮತ್ತು ಆಂತರಿಕ ಆಡಳಿತ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 69–78</p>
+      </div>
+      
+      <article class="chapter" id="ch-69">
+        <div class="chapter-num" aria-hidden="true">69</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ಸಂಘಟನೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಬಲಿಷ್ಠ ಸಂಘಟನೆಯೇ ಬಲಿಷ್ಠ ಪಕ್ಷದ ಅಡಿಪಾಯ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನೇಕ ಪಕ್ಷಗಳಲ್ಲಿ ಸಂಘಟನೆ ಕೇವಲ ಚುನಾವಣಾ ಸಮಯದಲ್ಲಿ ಮಾತ್ರ ಸಕ್ರಿಯ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಗ್ರಾಮ, ಹೋಬಳಿ, ತಾಲೂಕು, ಜಿಲ್ಲಾ ಹಂತದವರೆಗೆ ವರ್ಷಪೂರ್ತಿ ಸಕ್ರಿಯ ರಚನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಹಂತದ ಸಮಿತಿಗೆ ಸ್ಪಷ್ಟ ಜವಾಬ್ದಾರಿ ಮತ್ತು ವರದಿ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಾಸಿಕ ಸಂಘಟನಾ ಸಭೆ, ಡಿಜಿಟಲ್ ಸದಸ್ಯ ನಿರ್ವಹಣಾ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಗ್ರಾಮದಲ್ಲೂ ಸಕ್ರಿಯ RJP ಘಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-70">
+        <div class="chapter-num" aria-hidden="true">70</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸದಸ್ಯತ್ವ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪಕ್ಷದ ಸದಸ್ಯತ್ವ ಒಂದು ಜವಾಬ್ದಾರಿ, ಕೇವಲ ಗುರುತಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನೇಕ ಪಕ್ಷಗಳಲ್ಲಿ ಸದಸ್ಯತ್ವ ನಾಮಮಾತ್ರ, ಪರಿಶೀಲನೆ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪಾರದರ್ಶಕ, ಪರಿಶೀಲಿತ ಸದಸ್ಯತ್ವ ನೋಂದಣಿ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಸದಸ್ಯನಿಗೆ ಪಕ್ಷದ ಸಿದ್ಧಾಂತದ ಬಗ್ಗೆ ಕಡ್ಡಾಯ ಪರಿಚಯ ತರಬೇತಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ ಮತ್ತು ಕೇಂದ್ರೀಕೃತ ದತ್ತಾಂಶ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಗುಣಮಟ್ಟ ಆಧಾರಿತ, ಬದ್ಧತೆಯುಳ್ಳ ಸದಸ್ಯ ಬಳಗ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-71">
+        <div class="chapter-num" aria-hidden="true">71</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸದಸ್ಯರ ಕರ್ತವ್ಯಗಳು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರತಿ ಸದಸ್ಯ ಪಕ್ಷದ ಸಿದ್ಧಾಂತದ ರಾಯಭಾರಿ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಸ್ಪಷ್ಟ ಕರ್ತವ್ಯ ವಿವರಣೆ ಇಲ್ಲದೆ ಸದಸ್ಯರ ಪಾತ್ರ ಅಸ್ಪಷ್ಟ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಸದಸ್ಯನಿಗೆ ಲಿಖಿತ ಕರ್ತವ್ಯ ಸಂಹಿತೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಸಮುದಾಯ ಸೇವೆ, ಜನಹಿತ ಕಾರ್ಯಕ್ರಮದಲ್ಲಿ ಕಡ್ಡಾಯ ಭಾಗವಹಿಸುವಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ವಾರ್ಷಿಕ ಸದಸ್ಯ ಕಾರ್ಯಕ್ಷಮತೆ ಪರಾಮರ್ಶೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ಸದಸ್ಯನೂ ಜನಹಿತದ ಸಕ್ರಿಯ ಕಾರ್ಯಕರ್ತ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-72">
+        <div class="chapter-num" aria-hidden="true">72</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಆಂತರಿಕ ಪ್ರಜಾಪ್ರಭುತ್ವ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರಜಾಪ್ರಭುತ್ವವನ್ನು ಬೋಧಿಸುವ ಪಕ್ಷ ಮೊದಲು ತನ್ನೊಳಗೆ ಅದನ್ನು ಪಾಲಿಸಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಹೆಚ್ಚಿನ ಪಕ್ಷಗಳಲ್ಲಿ ಆಂತರಿಕ ಚುನಾವಣೆ ನಾಮಮಾತ್ರ ಅಥವಾ ಇಲ್ಲವೇ ಇಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಹಂತದ ಪದಾಧಿಕಾರಿ ಆಯ್ಕೆಗೆ ನಿಯಮಿತ ಆಂತರಿಕ ಚುನಾವಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಯಾವುದೇ ಹುದ್ದೆಗೆ ಗರಿಷ್ಠ ಅವಧಿ ಮಿತಿ ನಿಗದಿ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ಆಂತರಿಕ ಚುನಾವಣಾ ಸಮಿತಿ ರಚನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಆಂತರಿಕ ಪ್ರಜಾಪ್ರಭುತ್ವದಲ್ಲಿ ದೇಶಕ್ಕೆ ಮಾದರಿ ಪಕ್ಷ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-73">
+        <div class="chapter-num" aria-hidden="true">73</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಮಹಿಳೆಯರಿಗೆ ಪ್ರತಿನಿಧಿತ್ವ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಮಹಿಳಾ ನಾಯಕತ್ವವಿಲ್ಲದ ಪಕ್ಷ ಅರ್ಧ ಸಮಾಜವನ್ನು ಪ್ರತಿನಿಧಿಸುವುದಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯದಲ್ಲಿ ಮಹಿಳಾ ಪ್ರಾತಿನಿಧ್ಯ ಇಂದಿಗೂ ಕಡಿಮೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪಕ್ಷದ ಎಲ್ಲಾ ಹಂತಗಳಲ್ಲಿ ಕನಿಷ್ಠ ಮೂರನೇ ಒಂದು ಭಾಗ ಮಹಿಳಾ ಪ್ರಾತಿನಿಧ್ಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಟಿಕೆಟ್ ಹಂಚಿಕೆಯಲ್ಲಿ ಮಹಿಳೆಯರಿಗೆ ಖಾತರಿಯ ಪಾಲು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಮಹಿಳಾ ನಾಯಕತ್ವ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಕ್ರಮ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪಕ್ಷದ ಪ್ರತಿ ನಿರ್ಧಾರ ಮಂಡಳಿಯಲ್ಲಿ ಸಮಾನ ಮಹಿಳಾ ಧ್ವನಿ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-74">
+        <div class="chapter-num" aria-hidden="true">74</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಯುವಕರಿಗೆ ಪ್ರತಿನಿಧಿತ್ವ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಯುವಶಕ್ತಿಗೆ ಅವಕಾಶ ನೀಡದ ಪಕ್ಷಕ್ಕೆ ಭವಿಷ್ಯವಿಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯದಲ್ಲಿ ಯುವಕರಿಗೆ ನಿರ್ಧಾರ ಮಟ್ಟದ ಅವಕಾಶ ವಿರಳ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಸಮಿತಿಯಲ್ಲಿ ಯುವ ಪ್ರಾತಿನಿಧ್ಯ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>35 ವರ್ಷದೊಳಗಿನವರಿಗೆ ಟಿಕೆಟ್ ಹಂಚಿಕೆಯಲ್ಲಿ ಖಾತರಿಯ ಪಾಲು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಯುವ ಘಟಕದ ಮೂಲಕ ನಾಯಕತ್ವ ತರಬೇತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪಕ್ಷದ ಭವಿಷ್ಯದ ನಾಯಕತ್ವ ಯುವಕರಿಂದಲೇ ಬೆಳೆಯುವುದು.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-75">
+        <div class="chapter-num" aria-hidden="true">75</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಅಭ್ಯರ್ಥಿ ಆಯ್ಕೆ ಮಾನದಂಡ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಾಮರ್ಥ್ಯ ಮತ್ತು ಪ್ರಾಮಾಣಿಕತೆಯೇ ಏಕೈಕ ಅರ್ಹತೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಹಣ, ಜಾತಿ, ಕುಟುಂಬ ಹಿನ್ನೆಲೆ ಆಧಾರದ ಟಿಕೆಟ್ ಹಂಚಿಕೆ ಪದ್ಧತಿ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸ್ಪಷ್ಟ, ಪಾರದರ್ಶಕ ಆಯ್ಕೆ ಮಾನದಂಡ ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಅಪರಾಧ ಹಿನ್ನೆಲೆ, ಆಸ್ತಿ ವಿವರ ಕಡ್ಡಾಯ ಘೋಷಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ಅಭ್ಯರ್ಥಿ ಪರಿಶೀಲನಾ ಸಮಿತಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸಮರ್ಥ, ಪ್ರಾಮಾಣಿಕ ಜನಪ್ರತಿನಿಧಿಗಳ ಪೀಳಿಗೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-76">
+        <div class="chapter-num" aria-hidden="true">76</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ಶಿಸ್ತು</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಶಿಸ್ತಿಲ್ಲದ ಸಂಘಟನೆ ದಿಕ್ಕಿಲ್ಲದ ಹಡಗು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಶಿಸ್ತು ಉಲ್ಲಂಘನೆಗೆ ಸ್ಪಷ್ಟ ಕ್ರಮಗಳ ಕೊರತೆ ಅನೇಕ ಪಕ್ಷಗಳಲ್ಲಿ ಕಂಡುಬರುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಲಿಖಿತ ಶಿಸ್ತು ಸಂಹಿತೆ, ಎಲ್ಲರಿಗೂ ಸಮಾನ ಅನ್ವಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪಕ್ಷ ವಿರೋಧಿ ಚಟುವಟಿಕೆಗೆ ಸ್ಪಷ್ಟ, ಪೂರ್ವನಿರ್ಧರಿತ ಕ್ರಮ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಶಿಸ್ತು ಸಮಿತಿ ಸ್ವತಂತ್ರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವುದು.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಶಿಸ್ತು ಮತ್ತು ನ್ಯಾಯಯುತತೆಗೆ ಹೆಸರಾದ ಪಕ್ಷ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-77">
+        <div class="chapter-num" aria-hidden="true">77</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಹಣಕಾಸಿನ ಪಾರದರ್ಶಕತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪಕ್ಷದ ಹಣ ಸಾರ್ವಜನಿಕ ವಿಶ್ವಾಸದ ಪ್ರಶ್ನೆ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯ ಪಕ್ಷಗಳ ದೇಣಿಗೆ ಮೂಲ ಅನೇಕ ಬಾರಿ ಅಪಾರದರ್ಶಕ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಎಲ್ಲಾ ದೇಣಿಗೆ ಮತ್ತು ವೆಚ್ಚದ ಸಾರ್ವಜನಿಕ ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ವಾರ್ಷಿಕ ಸ್ವತಂತ್ರ ಲೆಕ್ಕಪರಿಶೋಧನೆ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪಕ್ಷದ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಹಣಕಾಸು ವರದಿ ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಹಣಕಾಸಿನ ವಿಷಯದಲ್ಲಿ ಸಂಪೂರ್ಣ ಪಾರದರ್ಶಕ ಪಕ್ಷ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-78">
+        <div class="chapter-num" aria-hidden="true">78</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಆಂತರಿಕ ಲೋಕಪಾಲ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸ್ವಯಂ ಪರಿಶೀಲನೆ ಇಲ್ಲದ ಪಕ್ಷ ಜನಹಿತ ಎಂದು ಹೇಳಿಕೊಳ್ಳಲಾಗದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಪಕ್ಷದ ಒಳಗಿನ ದೂರುಗಳಿಗೆ ಸ್ವತಂತ್ರ ಪರಿಹಾರ ವ್ಯವಸ್ಥೆ ಇಲ್ಲದಿರುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸ್ವತಂತ್ರ ಆಂತರಿಕ ಲೋಕಪಾಲ ಹುದ್ದೆ ಸೃಷ್ಟಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಯಾವುದೇ ಸದಸ್ಯ, ಪದಾಧಿಕಾರಿ ವಿರುದ್ಧ ದೂರು ನೇರವಾಗಿ ಸಲ್ಲಿಸುವ ಹಕ್ಕು.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಲೋಕಪಾಲರ ವರದಿ ವಾರ್ಷಿಕವಾಗಿ ಸಾರ್ವಜನಿಕ ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸ್ವಯಂ ಹೊಣೆಗಾರಿಕೆಯ ಸಂಸ್ಕೃತಿ ಹೊಂದಿದ ಪಕ್ಷ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="part" id="part-9">
+      <div class="part-head">
+        <div class="wheel" aria-hidden="true"></div>
+        <div class="part-head-text">
+          <p class="part-eyebrow">ಭಾಗ 09 / ೦೯</p>
+          <h2 class="part-title">ನೈತಿಕತೆ, ಆಡಳಿತ ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ಸಮಾರೋಪ</h2>
+        </div>
+        <p class="part-range">ಅಧ್ಯಾಯ 79–84</p>
+      </div>
+      
+      <article class="chapter" id="ch-79">
+        <div class="chapter-num" aria-hidden="true">79</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಪಕ್ಷದ ನೈತಿಕ ಸಂಹಿತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಿದ್ಧಾಂತ ಎಷ್ಟೇ ಉತ್ತಮವಿದ್ದರೂ, ನೈತಿಕತೆ ಇಲ್ಲದಿದ್ದರೆ ಅದು ಬರಿಯ ಮಾತು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ರಾಜಕೀಯದಲ್ಲಿ ನೈತಿಕ ಮೌಲ್ಯಗಳ ಕುಸಿತ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಪದಾಧಿಕಾರಿಗೆ ಲಿಖಿತ ನೈತಿಕ ಸಂಹಿತೆ ಕಡ್ಡಾಯ ಸಹಿ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ನೈತಿಕ ಸಂಹಿತೆ ಉಲ್ಲಂಘನೆಗೆ ತ್ವರಿತ, ಪಾರದರ್ಶಕ ಕ್ರಮ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ವಾರ್ಷಿಕ ನೈತಿಕ ಮೌಲ್ಯಮಾಪನ ಪರಿಶೀಲನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನೈತಿಕತೆಗೆ ಹೆಸರಾದ ರಾಜಕೀಯ ಪಕ್ಷ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-80">
+        <div class="chapter-num" aria-hidden="true">80</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸಾರ್ವಜನಿಕ ಜೀವನದ ನೈತಿಕತೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಸಾರ್ವಜನಿಕ ಹುದ್ದೆ ಸೇವೆಗಾಗಿ, ಸ್ವಾರ್ಥಕ್ಕಾಗಿ ಅಲ್ಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಧಿಕಾರ ಸಿಕ್ಕ ನಂತರ ಜನಪ್ರತಿನಿಧಿಗಳ ಜೀವನಶೈಲಿ ಜನರಿಂದ ದೂರವಾಗುವುದು.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಸರಳ ಜೀವನಶೈಲಿ, ಜನರೊಂದಿಗೆ ನಿರಂತರ ಸಂಪರ್ಕ ಕಡ್ಡಾಯ ಮೌಲ್ಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಜನಪ್ರತಿನಿಧಿಗಳ ಆಸ್ತಿ ವಾರ್ಷಿಕ ಘೋಷಣೆ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಜನಪ್ರತಿನಿಧಿಗಳ ಕಾರ್ಯಕ್ಷಮತೆ ವರದಿ ಕ್ಷೇತ್ರವಾರು ಪ್ರಕಟಣೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಜನರ ವಿಶ್ವಾಸ ಗಳಿಸಿದ, ಸರಳ ಜೀವನದ ನಾಯಕತ್ವ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-81">
+        <div class="chapter-num" aria-hidden="true">81</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ಸಾರ್ವಜನಿಕ ಹಣದ ಜವಾಬ್ದಾರಿಯುತ ಬಳಕೆ</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಪ್ರತಿ ರೂಪಾಯಿ ಜನರ ಬೆವರಿನ ಫಲ.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅನಗತ್ಯ ವೆಚ್ಚ, ಅಸಮರ್ಪಕ ಯೋಜನಾ ಅನುಷ್ಠಾನ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಯೋಜನೆಗೂ ವೆಚ್ಚ-ಲಾಭ ವಿಶ್ಲೇಷಣೆ ಕಡ್ಡಾಯ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಅನುತ್ಪಾದಕ ಸರ್ಕಾರಿ ವೆಚ್ಚ ಕಡಿತ, ಅಭಿವೃದ್ಧಿ ವೆಚ್ಚಕ್ಕೆ ಆದ್ಯತೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಸ್ವತಂತ್ರ ಸಾರ್ವಜನಿಕ ವೆಚ್ಚ ಲೆಕ್ಕಪರಿಶೋಧನಾ ವ್ಯವಸ್ಥೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಪ್ರತಿ ರೂಪಾಯಿ ಜನಹಿತಕ್ಕೆ ಸದ್ಬಳಕೆ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-82">
+        <div class="chapter-num" aria-hidden="true">82</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">ತಂತ್ರಜ್ಞಾನ ಆಧಾರಿತ ಆಡಳಿತ, Smart Government, Paperless Government, Open Governance</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಆಡಳಿತ ಸರಳ, ವೇಗ ಮತ್ತು ಮಾನವ ಹಸ್ತಕ್ಷೇಪ ಮುಕ್ತವಾಗಿರಬೇಕು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಕಾಗದ ಆಧಾರಿತ ವ್ಯವಸ್ಥೆ ವಿಳಂಬ ಮತ್ತು ಭ್ರಷ್ಟಾಚಾರಕ್ಕೆ ಎಡೆಮಾಡುತ್ತದೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಎಲ್ಲಾ ಸರ್ಕಾರಿ ಪ್ರಕ್ರಿಯೆಗಳ ಸಂಪೂರ್ಣ ಡಿಜಿಟಲೀಕರಣ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಪ್ರತಿ ಸರ್ಕಾರಿ ನಿರ್ಧಾರದ ಮಾಹಿತಿ ಸಾರ್ವಜನಿಕ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಲಭ್ಯ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಹಂತಹಂತವಾಗಿ ಎಲ್ಲಾ ಇಲಾಖೆಗಳ Paperless ಪರಿವರ್ತನೆ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಸಂಪೂರ್ಣ ಪಾರದರ್ಶಕ, ವೇಗದ Smart Governance.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-83">
+        <div class="chapter-num" aria-hidden="true">83</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Innovation Policy, Digital Karnataka, Digital India</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ನಾವೀನ್ಯತೆ ಅಭಿವೃದ್ಧಿಯ ಎಂಜಿನ್.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ನಾವೀನ್ಯತೆಗೆ ಪ್ರೋತ್ಸಾಹ ಮತ್ತು ಸೂಕ್ತ ವಾತಾವರಣದ ಕೊರತೆ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ನಾವೀನ್ಯತಾ ಕೇಂದ್ರಗಳ ಜಿಲ್ಲಾವಾರು ಸ್ಥಾಪನೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>Digital Karnataka ಯೋಜನೆಯನ್ನು Digital India ಆಶಯಕ್ಕೆ ಪೂರಕವಾಗಿ ವಿಸ್ತರಣೆ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಗ್ರಾಮೀಣ ಭಾಗಕ್ಕೂ ಗುಣಮಟ್ಟದ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ನಾವೀನ್ಯತೆಯ ಮೂಲಕ ಜಾಗತಿಕ ಮಟ್ಟದ ಕರ್ನಾಟಕ.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="chapter" id="ch-84">
+        <div class="chapter-num" aria-hidden="true">84</div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Sustainable Development, Green Karnataka, Green India</h3>
+          <dl class="six">
+            <div class="six-row"><dt>ತತ್ವ</dt><dd>ಇಂದಿನ ಅಭಿವೃದ್ಧಿ ನಾಳಿನ ಪೀಳಿಗೆಯ ಹಕ್ಕನ್ನು ಕಸಿಯಬಾರದು.</dd></div>
+            <div class="six-row"><dt>ಸಮಸ್ಯೆ</dt><dd>ಅಭಿವೃದ್ಧಿಯ ಹೆಸರಿನಲ್ಲಿ ಪರಿಸರ ನಾಶ.</dd></div>
+            <div class="six-row"><dt>ಪರಿಹಾರ</dt><dd>ಪ್ರತಿ ಯೋಜನೆಯಲ್ಲಿ ಸುಸ್ಥಿರತೆಯ ಮಾನದಂಡ ಅಳವಡಿಕೆ.</dd></div>
+            <div class="six-row"><dt>ನೀತಿ</dt><dd>ಹಸಿರು ಇಂಧನ, ಹಸಿರು ಕಟ್ಟಡ ನಿರ್ಮಾಣಕ್ಕೆ ಪ್ರೋತ್ಸಾಹ.</dd></div>
+            <div class="six-row"><dt>ಅನುಷ್ಠಾನ</dt><dd>ಪ್ರತಿ ಜಿಲ್ಲೆಯಲ್ಲಿ ವಾರ್ಷಿಕ ಅರಣ್ಯೀಕರಣ ಗುರಿ ನಿಗದಿ.</dd></div>
+            <div class="six-row guri"><dt>ದೀರ್ಘಾವಧಿಯ ಗುರಿ</dt><dd>ಹಸಿರು ಕರ್ನಾಟಕ, ಹಸಿರು ಭಾರತ.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+  <section class="pledges-wrap" id="pledges">
+    <div class="part-head">
+      <div class="wheel" aria-hidden="true"></div>
+      <div class="part-head-text">
+        <p class="part-eyebrow">ಪ್ರತಿಜ್ಞೆಗಳು</p>
+        <h2 class="part-title">RJP ಪ್ರತಿಜ್ಞೆಗಳು</h2>
+      </div>
+      <p class="part-range">85–87</p>
+    </div>
+    
+      <blockquote class="pledge" id="ch-85">
+        <p class="pledge-num">85</p>
+        <p class="pledge-title">RJP ರಾಷ್ಟ್ರೀಯ ಪ್ರತಿಜ್ಞೆ</p>
+        <p class="pledge-text">“ನಾನು ಭಾರತದ ಸಂವಿಧಾನ, ಸಾರ್ವಭೌಮತ್ವ ಮತ್ತು ಏಕತೆಗೆ ನಿಷ್ಠನಾಗಿರುತ್ತೇನೆ. ರಾಷ್ಟ್ರಹಿತ ಮತ್ತು ಜನಹಿತವನ್ನು ಎಲ್ಲಕ್ಕಿಂತ ಮಿಗಿಲಾಗಿ ಗೌರವಿಸುತ್ತೇನೆ. ಪ್ರಾಮಾಣಿಕತೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸಾಮಾಜಿಕ ನ್ಯಾಯದ ಮಾರ್ಗದಲ್ಲಿ ಸದಾ ನಡೆಯುತ್ತೇನೆ.”</p>
+      </blockquote>
+
+      <blockquote class="pledge" id="ch-86">
+        <p class="pledge-num">86</p>
+        <p class="pledge-title">RJP ಕಾರ್ಯಕರ್ತರ ಪ್ರತಿಜ್ಞೆ</p>
+        <p class="pledge-text">“ನಾನು ಪಕ್ಷದ ಸಿದ್ಧಾಂತಕ್ಕೆ ಬದ್ಧನಾಗಿ, ಸ್ವಾರ್ಥವಿಲ್ಲದೆ ಜನಸೇವೆಗೆ ನನ್ನನ್ನು ಸಮರ್ಪಿಸುತ್ತೇನೆ. ಪಕ್ಷದ ಶಿಸ್ತು ಮತ್ತು ನೈತಿಕ ಸಂಹಿತೆಯನ್ನು ಪ್ರಾಮಾಣಿಕವಾಗಿ ಪಾಲಿಸುತ್ತೇನೆ.”</p>
+      </blockquote>
+
+      <blockquote class="pledge" id="ch-87">
+        <p class="pledge-num">87</p>
+        <p class="pledge-title">RJP ಜನಪ್ರತಿನಿಧಿಗಳ ಪ್ರತಿಜ್ಞೆ</p>
+        <p class="pledge-text">“ನಾನು ನನ್ನ ಕ್ಷೇತ್ರದ ಪ್ರತಿ ಪ್ರಜೆಗೆ ಪಾರದರ್ಶಕ, ಜವಾಬ್ದಾರಿಯುತ ಆಡಳಿತ ನೀಡುತ್ತೇನೆ. ಅಧಿಕಾರವನ್ನು ಸೇವೆಯ ಸಾಧನವಾಗಿ ಬಳಸುತ್ತೇನೆಯೇ ಹೊರತು ಸ್ವಾರ್ಥಕ್ಕಲ್ಲ.”</p>
+      </blockquote>
+  </section>
+
+  <section class="symbols-wrap" id="symbols">
+    <div class="part-head">
+      <div class="wheel" aria-hidden="true"></div>
+      <div class="part-head-text">
+        <p class="part-eyebrow">ಸಂಕೇತಗಳು</p>
+        <h2 class="part-title">ಧ್ವಜ, ಚಿಹ್ನೆ ಮತ್ತು ಘೋಷವಾಕ್ಯ</h2>
+      </div>
+      <p class="part-range">88–90</p>
+    </div>
+    
+      <article class="symbol" id="ch-88">
+        <p class="symbol-num">88</p>
+        <h3 class="symbol-title">ಪಕ್ಷದ ಧ್ವಜದ ತಾತ್ವಿಕ ಅರ್ಥ</h3>
+        <p class="symbol-text">ಪಕ್ಷದ ಧ್ವಜದ ಬಣ್ಣಗಳು ರಾಷ್ಟ್ರಹಿತ, ಶಾಂತಿ ಮತ್ತು ಜನಹಿತದ ಪ್ರಗತಿಯನ್ನು ಸಂಕೇತಿಸುತ್ತವೆ. ಇದು ಕೇವಲ ಗುರುತಲ್ಲ, ಪ್ರತಿ ಕಾರ್ಯಕರ್ತನ ಹೃದಯದಲ್ಲಿ ಜನಹಿತದ ಬದ್ಧತೆಯ ಪ್ರತೀಕ.</p>
+      </article>
+
+      <article class="symbol" id="ch-89">
+        <p class="symbol-num">89</p>
+        <h3 class="symbol-title">ಪಕ್ಷದ ಚಿಹ್ನೆಯ ತಾತ್ವಿಕ ಅರ್ಥ</h3>
+        <p class="symbol-text">ಪಕ್ಷದ ಚಿಹ್ನೆ ಸರಳತೆ, ಸ್ಥಿರತೆ ಮತ್ತು ಜನಹಿತದ ದಿಕ್ಸೂಚಿಯನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ — ಇದು ಜನಸಾಮಾನ್ಯರಿಗೆ ಸುಲಭವಾಗಿ ಗುರುತಿಸುವ, ನಂಬಿಕೆ ಮೂಡಿಸುವ ಸಂಕೇತವಾಗಿ ರೂಪುಗೊಂಡಿದೆ.</p>
+      </article>
+
+      <article class="symbol" id="ch-90">
+        <p class="symbol-num">90</p>
+        <h3 class="symbol-title">ಪಕ್ಷದ ಘೋಷವಾಕ್ಯಗಳ ವಿವರಣೆ</h3>
+        <p class="symbol-text">&quot;ರಾಷ್ಟ್ರ ಮೊದಲು... ಜನಹಿತ ಎಂದೆಂದಿಗೂ&quot; — ಇದು ರಾಷ್ಟ್ರೀಯತೆ ಮತ್ತು ಜನಸೇವೆ ಪರಸ್ಪರ ವಿರೋಧಿಗಳಲ್ಲ ಎಂಬ ನಿಲುವು. &quot;ಪ್ರಾಮಾಣಿಕ ರಾಜಕೀಯ – ಜನಹಿತದ ಆಡಳಿತ&quot; — ಇದು ರಾಜಕೀಯ ಶುದ್ಧತೆ ಮತ್ತು ಫಲಿತಾಂಶ ಆಧಾರಿತ ಆಡಳಿತದ ಸಂಕಲ್ಪ. &quot;ಬಲಿಷ್ಠ ಕರ್ನಾಟಕ – ಬಲಿಷ್ಠ ಭಾರತ&quot; — ಇದು ಪ್ರಾದೇಶಿಕ ಬೇರುಗಳಿಂದ ರಾಷ್ಟ್ರೀಯ ಬಲದೆಡೆಗಿನ ಪಯಣ.</p>
+      </article>
+  </section>
+
+  <section class="samaropa" id="samaropa">
+    <h2>91. ಸಮಾರೋಪ</h2>
+    <p>ಈ ದಸ್ತಾವೇಜು ಕೇವಲ ಪದಗಳ ಸಂಗ್ರಹವಲ್ಲ; ಇದು ಒಂದು ಪ್ರತಿಜ್ಞೆ. ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ ಕರ್ನಾಟಕದ ಮಣ್ಣಿನಿಂದ ಹುಟ್ಟಿ, ಭಾರತದ ಭವಿಷ್ಯಕ್ಕೆ ಕೊಡುಗೆ ನೀಡುವ ಗುರಿ ಹೊಂದಿದೆ. ಇದು ಒಂದು ಚುನಾವಣಾ ಪಕ್ಷವಲ್ಲ; ಇದು ಪ್ರಾಮಾಣಿಕತೆ, ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸಂವಿಧಾನ ಮೌಲ್ಯಗಳ ಮೇಲೆ ನಿಂತ ಒಂದು ಚಳುವಳಿ. ಮುಂದಿನ ದಶಕಗಳಲ್ಲಿ ಈ ದಸ್ತಾವೇಜು ಪ್ರತಿ ಕಾರ್ಯಕರ್ತ, ಪ್ರತಿ ಜನಪ್ರತಿನಿಧಿ ಮತ್ತು ಪ್ರತಿ ಪ್ರಜೆಗೆ ದಾರಿದೀಪವಾಗಲಿ ಎಂಬ ಸಂಕಲ್ಪದೊಂದಿಗೆ, ಈ ಸಿದ್ಧಾಂತ ದಸ್ತಾವೇಜನ್ನು ಸಮರ್ಪಿಸಲಾಗಿದೆ.</p>
+    <p class="final-slogan">"ರಾಷ್ಟ್ರ ಮೊದಲು... ಜನಹಿತ ಎಂದೆಂದಿಗೂ."</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-rule"></div>
+  <p>ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ · ಸಿದ್ಧಾಂತ, ನೀತಿ ಮತ್ತು ಸಂವಿಧಾನ ಕೈಪಿಡಿ<br>ಈ ದಸ್ತಾವೇಜು ಪಕ್ಷದ ಅಧಿಕೃತ ಸಿದ್ಧಾಂತ ಮತ್ತು ನೀತಿ ಆಶಯವನ್ನು ಪ್ರತಿಬಿಂಬಿಸುತ್ತದೆ.</p>
+</footer>
+
+<a href="#top" class="totop" aria-label="ಮೇಲಕ್ಕೆ ಹೋಗಿ">↑</a>
+
+</body>
+</html>

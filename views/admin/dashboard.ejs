@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<%
+  const trendMarkup = (t) => {
+    const arrow = t.dir === 'up' ? '↗' : (t.dir === 'down' ? '↘' : '→');
+    return `<span class="admin-kpi-trend ${t.dir}">${arrow} ${t.pct}%</span>`;
+  };
+%>
+
+<div class="admin-cards">
+  <div class="admin-kpi tone-total">
+    <div class="admin-kpi-top"><span class="admin-kpi-icon">👥</span><%- trendMarkup(trends.total) %></div>
+    <span class="n"><%= cards.total.toLocaleString('en-IN') %></span><span class="l">Total Members</span>
+  </div>
+  <div class="admin-kpi tone-pending">
+    <div class="admin-kpi-top"><span class="admin-kpi-icon">⏳</span><%- trendMarkup(trends.pending) %></div>
+    <span class="n"><%= cards.pending.toLocaleString('en-IN') %></span><span class="l">Pending</span>
+  </div>
+  <div class="admin-kpi tone-approved">
+    <div class="admin-kpi-top"><span class="admin-kpi-icon">✅</span><%- trendMarkup(trends.approved) %></div>
+    <span class="n"><%= cards.approved.toLocaleString('en-IN') %></span><span class="l">Approved</span>
+  </div>
+  <div class="admin-kpi tone-rejected">
+    <div class="admin-kpi-top"><span class="admin-kpi-icon">❌</span><%- trendMarkup(trends.rejected) %></div>
+    <span class="n"><%= cards.rejected.toLocaleString('en-IN') %></span><span class="l">Rejected</span>
+  </div>
+  <div class="admin-kpi tone-today">
+    <div class="admin-kpi-top"><span class="admin-kpi-icon">📅</span><%- trendMarkup(trends.today) %></div>
+    <span class="n"><%= cards.today.toLocaleString('en-IN') %></span><span class="l">Today's Registrations</span>
+  </div>
+</div>
+
+<div class="quick-actions">
+  <a class="quick-action" href="/register" target="_blank" rel="noopener"><span class="ic">➕</span> Add Member</a>
+  <a class="quick-action" href="/admin/reports"><span class="ic">📊</span> Reports</a>
+  <a class="quick-action" href="/admin/members/export.xlsx"><span class="ic">📥</span> Export Data</a>
+  <a class="quick-action" href="/admin/settings"><span class="ic">⚙️</span> Settings</a>
+</div>
+
+<div class="admin-panel">
+  <h3>📈 Monthly Membership Trend</h3>
+  <div class="chart-frame tall"><canvas id="chartMonthly"></canvas></div>
+</div>
+
+<div class="admin-chart-grid">
+  <div class="admin-panel">
+    <h3>🗺️ District Wise</h3>
+    <div class="chart-frame"><canvas id="chartDistrict"></canvas></div>
+  </div>
+  <div class="admin-panel">
+    <h3>⚧ Gender Wise</h3>
+    <div class="chart-frame"><canvas id="chartGender"></canvas></div>
+  </div>
+  <div class="admin-panel">
+    <h3>💼 Occupation Wise</h3>
+    <div class="chart-frame"><canvas id="chartOccupation"></canvas></div>
+  </div>
+</div>
+
+<div class="admin-chart-grid" style="grid-template-columns:1.3fr 1fr;">
+  <div class="admin-panel">
+    <div class="admin-panel-head">
+      <h3>🕒 Recent Registrations</h3>
+      <a class="admin-link-muted" href="/admin/members">View All →</a>
+    </div>
+    <% if (!recent.length) { %>
+      <p class="admin-empty">No registrations yet.</p>
+    <% } else { %>
+      <div class="admin-table-wrap" style="box-shadow:none; border:1px solid var(--a-border);">
+        <table class="admin-table" style="min-width:0;">
+          <thead><tr><th>Name</th><th>District</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody>
+            <% recent.forEach(function(m){ %>
+              <tr>
+                <td><a href="/admin/members/<%= m.id %>" style="text-decoration:none; color:var(--a-primary); font-weight:600;"><%= m.full_name %></a></td>
+                <td><%= m.district || '—' %></td>
+                <td><span class="status-pill <%= m.status==='Rejected' ? 'rejected' : (m.status==='Approved' ? 'approved' : (m.status==='Active' ? 'active' : (m.status==='Under Review' ? 'under-review' : 'pending'))) %>"><%= m.status %></span></td>
+                <td><%= m.created_at.split(' ')[0] %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="admin-panel">
+    <h3>📶 Membership Status</h3>
+    <div class="status-bars">
+      <div class="status-bar-row">
+        <span class="label">Approved</span>
+        <div class="status-bar-track"><div class="status-bar-fill approved" style="width:<%= statusBars.approved %>%"></div></div>
+        <span class="pct"><%= statusBars.approved %>%</span>
+      </div>
+      <div class="status-bar-row">
+        <span class="label">Pending</span>
+        <div class="status-bar-track"><div class="status-bar-fill pending" style="width:<%= statusBars.pending %>%"></div></div>
+        <span class="pct"><%= statusBars.pending %>%</span>
+      </div>
+      <div class="status-bar-row">
+        <span class="label">Rejected</span>
+        <div class="status-bar-track"><div class="status-bar-fill rejected" style="width:<%= statusBars.rejected %>%"></div></div>
+        <span class="pct"><%= statusBars.rejected %>%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/scripts') %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="/js/charts.js"></script>
+<script>
+  const CHART_DATA = <%- JSON.stringify(charts) %>;
+  RJPCharts.applyChartDefaults(Chart);
+  Chart.register(RJPCharts.centerTextPlugin, RJPCharts.barValueLabelsPlugin);
+
+  new Chart(document.getElementById('chartMonthly'), {
+    type: 'line',
+    data: {
+      labels: CHART_DATA.monthly.map(r => r.ym),
+      datasets: [{
+        label: 'New Members',
+        data: CHART_DATA.monthly.map(r => r.n),
+        borderColor: '#1E3A8A',
+        borderWidth: 2.5,
+        backgroundColor: RJPCharts.verticalGradient([[0, 'rgba(30,58,138,.28)'], [1, 'rgba(30,58,138,0)']]),
+        fill: true,
+        tension: .35,
+        pointRadius: 4,
+        pointBackgroundColor: '#1E3A8A',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: 'rgba(15,23,42,.06)' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartDistrict'), {
+    type: 'bar',
+    data: {
+      labels: CHART_DATA.district.map(r => r.label),
+      datasets: [{
+        label: 'Members',
+        data: CHART_DATA.district.map(r => r.n),
+        backgroundColor: RJPCharts.verticalGradient([[0, '#F59E0B'], [1, '#C2790A']]),
+        borderRadius: 6,
+        borderSkipped: false,
+        barPercentage: 0.55,
+        categoryPercentage: 0.7,
+        maxBarThickness: 56
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: { padding: { top: 22 } },
+      plugins: { legend: { display: false }, barValueLabels: {} },
+      scales: {
+        y: { beginAtZero: true, grace: '15%', ticks: { precision: 0 }, grid: { color: 'rgba(15,23,42,.06)' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const genderTotal = CHART_DATA.gender.reduce((s, r) => s + r.n, 0);
+  new Chart(document.getElementById('chartGender'), {
+    type: 'doughnut',
+    data: {
+      labels: CHART_DATA.gender.map(r => r.label),
+      datasets: [{
+        data: CHART_DATA.gender.map(r => r.n),
+        backgroundColor: RJPCharts.colorsForLabels(CHART_DATA.gender.map(r => r.label), RJPCharts.GENDER_COLORS, RJPCharts.PALETTE),
+        borderColor: '#fff', borderWidth: 3, hoverOffset: 8
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: { position: 'bottom' },
+        centerText: { text: String(genderTotal), sub: 'Members' }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('chartOccupation'), {
+    type: 'bar',
+    data: {
+      labels: CHART_DATA.occupation.map(r => r.label),
+      datasets: [{
+        label: 'Members',
+        data: CHART_DATA.occupation.map(r => r.n),
+        backgroundColor: RJPCharts.horizontalGradient([[0, '#0F172A'], [1, '#334155']]),
+        borderRadius: 6,
+        borderSkipped: false,
+        barPercentage: 0.6,
+        categoryPercentage: 0.7,
+        maxBarThickness: 30
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      layout: { padding: { right: 40 } },
+      plugins: { legend: { display: false }, barValueLabels: {} },
+      scales: {
+        x: { beginAtZero: true, grace: '15%', ticks: { precision: 0 }, grid: { color: 'rgba(15,23,42,.06)' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+</script>
+</body>
+</html>

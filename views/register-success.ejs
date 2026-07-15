@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section class="join" style="padding-top:48px;">
+  <div class="wrap" style="max-width:560px; text-align:center;">
+    <div class="success-badge">✓</div>
+    <h2>ಧನ್ಯವಾದಗಳು!</h2>
+    <p>ನಿಮ್ಮ ಸದಸ್ಯತ್ವ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ.</p>
+
+    <div class="app-number-card">
+      <span class="eyebrow">APPLICATION NUMBER</span>
+      <b><%= applicationNumber %></b>
+      <span class="status-pill pending">Pending Approval</span>
+    </div>
+
+    <p class="form-note">ದಯವಿಟ್ಟು ಈ ಅರ್ಜಿ ಸಂಖ್ಯೆಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಇರಿಸಿಕೊಳ್ಳಿ. ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಬಳಸಿ ಲಾಗಿನ್ ಆಗಿ ನಿಮ್ಮ ಅರ್ಜಿಯ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಬಹುದು.</p>
+
+    <div class="hero-cta-row" style="justify-content:center;">
+      <a class="btn btn-primary" style="color:var(--navy);" href="/login">ಸದಸ್ಯರ ಲಾಗಿನ್‌ಗೆ ಹೋಗಿ</a>
+      <a class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);" href="/">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

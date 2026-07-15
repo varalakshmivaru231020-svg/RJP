@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section class="join" style="padding-top:48px;">
+  <div class="wrap" style="max-width:500px; text-align:center;">
+    <span class="eyebrow">DIGITAL MEMBERSHIP CARD</span>
+    <h2 style="margin-bottom:28px;">ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</h2>
+
+    <div class="member-card">
+      <div class="member-card-head">
+        <img src="/images/logo.jpg" alt="RJP">
+        <b>Rashtriya Janahita Party</b>
+      </div>
+      <div class="member-card-body">
+        <% if (member.photo_path) { %>
+          <img class="member-card-photo" src="/my-photo" alt="<%= member.full_name %>">
+        <% } else { %>
+          <div class="member-card-photo" style="display:flex;align-items:center;justify-content:center;color:#c3cde3;font-size:.75rem;">No Photo</div>
+        <% } %>
+        <div>
+          <h4><%= member.full_name %></h4>
+          <span>ID: <%= member.application_number %></span>
+          <span>District: <%= member.district || '-' %></span>
+          <span>Status: <%= member.status %></span>
+        </div>
+        <div class="member-card-qr"><img src="<%= qrDataUrl %>" alt="QR verification code"></div>
+      </div>
+      <div class="member-card-foot">
+        <span>Reg. No. 56/283/2019-2020/PPS-1</span>
+        <span>rjpindia.com</span>
+      </div>
+    </div>
+
+    <div class="hero-cta-row" style="justify-content:center; margin-top:28px;">
+      <a class="btn btn-primary" style="color:var(--navy);" href="<%= downloadPdfUrl %>">⬇ Download PDF</a>
+      <a class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);" href="<%= backUrl %>">← Back</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

@@ -8,9 +8,9 @@
 <%- include('partials/header') %>
 
 <section class="hero" id="top">
-  <img class="slide current" src="/images/flag.jpg" alt="RJP ಧ್ವಜ ಹಾರಾಡುತ್ತಿದೆ">
-  <img class="slide" src="/images/agenda-poster.jpg" alt="RJP ಅಭಿಯಾನ ಜಮಾಯೆತ್ತು ವಿಧಾನಸೌಧದ ಮುಂದೆ">
-  <img class="slide" src="/images/gallery-5.jpg" alt="RJP ಬೆಂಬಲಿಗರ ಜಮಾಯೆತ್ತು">
+  <% banner.slides.forEach(function(slide, i){ %>
+    <img class="slide<%= i===0 ? ' current' : '' %>" src="<%= slide.image %>" alt="<%= slide.alt %>">
+  <% }); %>
   <button class="hero-nav prev" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">&#10094;</button>
   <button class="hero-nav next" aria-label="ಮುಂದಿನ ಚಿತ್ರ">&#10095;</button>
   <div class="hero-dots"></div>
@@ -19,8 +19,8 @@
       <img src="/images/logo.jpg" alt="RJP seal">
       <span class="eng">RASHTRIYA JANAHITA PARTY · 56/283/2019-2020/PPS-1</span>
     </div>
-    <h1><span class="rjp-mark">ಅಧಿಕಾರಕ್ಕಾಗಿ ಅಲ್ಲ...</span><br>ಜನಹಿತಕ್ಕಾಗಿ ಒಂದು ಹೊಸ ರಾಜಕೀಯ ಪಯಣ</h1>
-    <p class="lede">ಸ್ವಾತಂತ್ರ್ಯ ಬಂದು ಎಂಟು ದಶಕಗಳಾದರೂ, ಒಬ್ಬ ಸಾಮಾನ್ಯ ರೈತ, ಒಬ್ಬ ನಿರುದ್ಯೋಗಿ ಯುವಕ, ಒಬ್ಬ ಮಧ್ಯಮ ವರ್ಗದ ತಂದೆ ಇನ್ನೂ ತನ್ನ ಕನಸುಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದಾನೆ. ಇದಕ್ಕೆ ಬೇಕಿರುವುದು ಹಳೆಯ ಪರಿಹಾರವಲ್ಲ, ಹೊಸ ಚಿಂತನೆ — ಅದೇ ಕಾರಣಕ್ಕೆ ಹುಟ್ಟಿದ್ದು ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP).</p>
+    <h1><%= banner.heading %></h1>
+    <p class="lede"><%= banner.lede %></p>
     <div class="hero-cta-row">
       <a class="btn btn-primary" href="/join">ಚಳುವಳಿ ಸೇರಿ · Join RJP</a>
       <a class="btn btn-ghost" href="/agenda">ನಮ್ಮ ಅಜೆಂಡಾ ನೋಡಿ</a>
@@ -264,8 +264,8 @@
         <li>ನಿಮ್ಮ ಕ್ಷೇತ್ರದ RJP ತಂಡದೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಿ.</li>
       </ul>
       <div class="hero-cta-row">
-        <a class="btn btn-primary" style="color:var(--white); background:var(--green);" href="/contact">ಸದಸ್ಯತ್ವ ಪಡೆಯಿರಿ</a>
-        <a class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);" href="tel:18001232024">📞 1800 123 2024</a>
+        <a class="btn btn-primary" style="color:var(--white); background:var(--green);" href="/register">Become a Member</a>
+        <a class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);" href="/login">ಈಗಾಗಲೇ ಸದಸ್ಯರೇ? ಲಾಗಿನ್</a>
       </div>
     </div>
   </div>

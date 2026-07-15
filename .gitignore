@@ -3,3 +3,7 @@ npm-debug.log*
 
 # Raw uploaded originals (already organized into images/ and public/images/)
 WhatsApp Image*.jpeg
+
+# Membership system runtime data (local SQLite DB + member-submitted files)
+data/
+uploads/

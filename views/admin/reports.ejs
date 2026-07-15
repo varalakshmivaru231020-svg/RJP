@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<%
+  function qs(overrides) {
+    const merged = Object.assign({ type }, filterQuery, overrides);
+    const parts = [];
+    Object.keys(merged).forEach((k) => { if (merged[k]) parts.push(`${k}=${encodeURIComponent(merged[k])}`); });
+    return '?' + parts.join('&');
+  }
+%>
+
+<div class="admin-tabs" style="background:var(--a-card); border-radius:14px 14px 0 0; padding:0 12px; border:1px solid var(--a-border); border-bottom:none;">
+  <% reportKeys.forEach(function(key){ %>
+    <a href="<%= qs({ type: key }) %>" style="text-decoration:none; padding:12px 16px; font-weight:600; font-size:.88rem; border-bottom:2px solid <%= type===key ? 'var(--a-secondary)' : 'transparent' %>; color:<%= type===key ? 'var(--a-primary)' : 'var(--a-text-muted)' %>;"><%= reportTypes[key].title %></a>
+  <% }); %>
+</div>
+
+<div class="admin-panel" style="border-radius:0 0 16px 16px; margin-top:0; margin-bottom:20px;">
+  <form class="report-filters" method="GET" action="/admin/reports" style="box-shadow:none; margin-bottom:0; padding:0; border:none;">
+    <input type="hidden" name="type" value="<%= type %>">
+    <div class="report-filters-grid">
+      <label>From Date <input type="date" name="dateFrom" value="<%= filterQuery.dateFrom %>"></label>
+      <label>To Date <input type="date" name="dateTo" value="<%= filterQuery.dateTo %>"></label>
+      <label>District
+        <select name="district">
+          <option value="">All</option>
+          <% filterOptions.districts.forEach(function(d){ %><option value="<%= d %>" <%= filterQuery.district===d?'selected':'' %>><%= d %></option><% }); %>
+        </select>
+      </label>
+      <label>Assembly
+        <select name="assembly">
+          <option value="">All</option>
+          <% filterOptions.assemblies.forEach(function(a){ %><option value="<%= a %>" <%= filterQuery.assembly===a?'selected':'' %>><%= a %></option><% }); %>
+        </select>
+      </label>
+      <label>Gender
+        <select name="gender">
+          <option value="">All</option>
+          <% filterOptions.genders.forEach(function(g){ %><option value="<%= g %>" <%= filterQuery.gender===g?'selected':'' %>><%= g %></option><% }); %>
+        </select>
+      </label>
+      <label>Occupation
+        <select name="occupation">
+          <option value="">All</option>
+          <% filterOptions.occupations.forEach(function(o){ %><option value="<%= o %>" <%= filterQuery.occupation===o?'selected':'' %>><%= o %></option><% }); %>
+        </select>
+      </label>
+      <label>Religion
+        <select name="religion">
+          <option value="">All</option>
+          <% filterOptions.religions.forEach(function(r){ %><option value="<%= r %>" <%= filterQuery.religion===r?'selected':'' %>><%= r %></option><% }); %>
+        </select>
+      </label>
+      <label>Status
+        <select name="status">
+          <option value="">All</option>
+          <% filterOptions.statuses.forEach(function(s){ %><option value="<%= s %>" <%= filterQuery.status===s?'selected':'' %>><%= s %></option><% }); %>
+        </select>
+      </label>
+      <label>Age Group
+        <select name="ageGroup">
+          <option value="">All</option>
+          <% filterOptions.ageGroups.forEach(function(a){ %><option value="<%= a.key %>" <%= filterQuery.ageGroup===a.key?'selected':'' %>><%= a.label %></option><% }); %>
+        </select>
+      </label>
+      <div class="report-filters-actions">
+        <button type="submit" class="btn-search">🔍 Search</button>
+        <a href="<%= qs({ dateFrom:'', dateTo:'', district:'', assembly:'', gender:'', occupation:'', religion:'', status:'', ageGroup:'' }) %>" class="btn-reset">Reset</a>
+      </div>
+    </div>
+  </form>
+  <% if (appliedFilters.length) { %>
+    <div class="applied-filter-chips">
+      <% appliedFilters.forEach(function(f){ %><span class="applied-filter-chip"><%= f %></span><% }); %>
+    </div>
+  <% } %>
+</div>
+
+<div class="admin-panel" id="reportPrintArea">
+  <div class="admin-panel-head">
+    <h3 style="margin:0;"><%= title %> Report <span class="form-note" style="color:var(--a-text-muted); font-weight:400;">(Total: <%= total %>)</span></h3>
+    <div class="admin-actions">
+      <a href="/admin/reports/export.xlsx<%= qs({}) %>">⬇ Download Excel</a>
+      <a href="/admin/reports/export.pdf<%= qs({}) %>">⬇ Download PDF</a>
+      <button type="button" onclick="window.print()">🖨 Print Report</button>
+    </div>
+  </div>
+
+  <% if (!rows.length) { %>
+    <p class="admin-empty">No data available for this report yet.</p>
+  <% } else { %>
+    <%
+      const ct = reportTypes[type].chartType;
+      const frameHeight = (ct === 'bar-h') ? Math.min(560, Math.max(200, rows.length * 46 + 60)) : 320;
+    %>
+    <div class="admin-chart-grid" style="grid-template-columns:1fr 1.1fr;">
+      <div class="chart-frame" style="height:<%= frameHeight %>px;"><canvas id="reportChart"></canvas></div>
+      <table class="admin-table" style="min-width:0;">
+        <thead>
+          <tr>
+            <th><%= type==='assembly' ? 'Assembly Constituency' : title %></th>
+            <% if (type==='assembly') { %><th>District</th><% } %>
+            <th>Members</th><th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach(function(r){ %>
+            <tr>
+              <td><%= r.label %></td>
+              <% if (type==='assembly') { %><td><%= r.district %></td><% } %>
+              <td><%= r.n %></td>
+              <td><%= total ? ((r.n/total)*100).toFixed(1) : 0 %>%</td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/scripts') %>
+<% if (rows.length) { %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="/js/charts.js"></script>
+<script>
+  const ROWS = <%- JSON.stringify(rows) %>;
+  const CHART_TYPE = <%- JSON.stringify(reportTypes[type].chartType) %>;
+  const REPORT_KEY = <%- JSON.stringify(type) %>;
+  const TOTAL = <%= total %>;
+
+  RJPCharts.applyChartDefaults(Chart);
+  Chart.register(RJPCharts.centerTextPlugin, RJPCharts.barValueLabelsPlugin);
+
+  const labels = ROWS.map(r => r.label);
+  const values = ROWS.map(r => r.n);
+  const colors = REPORT_KEY === 'gender'
+    ? RJPCharts.colorsForLabels(labels, RJPCharts.GENDER_COLORS, RJPCharts.PALETTE)
+    : RJPCharts.PALETTE;
+  const ctxEl = document.getElementById('reportChart');
+
+  const CONFIGS = {
+    'bar-h': {
+      type: 'bar',
+      data: { labels, datasets: [{ data: values, backgroundColor: RJPCharts.horizontalGradient([[0, '#1E3A8A'], [1, '#3B5BC4']]), borderRadius: 6, borderSkipped: false, barPercentage: 0.6, categoryPercentage: 0.7, maxBarThickness: 34 }] },
+      options: {
+        maintainAspectRatio: false, indexAxis: 'y',
+        layout: { padding: { right: 46 } },
+        plugins: { legend: { display: false }, barValueLabels: { showPct: true } },
+        scales: {
+          x: { beginAtZero: true, grace: '15%', ticks: { precision: 0 }, grid: { color: 'rgba(15,23,42,.06)' } },
+          y: { grid: { display: false } }
+        }
+      }
+    },
+    'bar-v': {
+      type: 'bar',
+      data: { labels, datasets: [{ data: values, backgroundColor: RJPCharts.verticalGradient([[0, '#F59E0B'], [1, '#C2790A']]), borderRadius: 6, borderSkipped: false, barPercentage: 0.55, categoryPercentage: 0.7, maxBarThickness: 56 }] },
+      options: {
+        maintainAspectRatio: false,
+        layout: { padding: { top: 22 } },
+        plugins: { legend: { display: false }, barValueLabels: { showPct: true } },
+        scales: {
+          y: { beginAtZero: true, grace: '15%', ticks: { precision: 0 }, grid: { color: 'rgba(15,23,42,.06)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    },
+    doughnut: {
+      type: 'doughnut',
+      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#fff', borderWidth: 3, hoverOffset: 8 }] },
+      options: { maintainAspectRatio: false, cutout: '68%', plugins: { legend: { position: 'bottom' }, centerText: { text: String(TOTAL), sub: 'Members' } } }
+    },
+    pie: {
+      type: 'pie',
+      data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: '#fff', borderWidth: 2, hoverOffset: 10 }] },
+      options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    }
+  };
+
+  new Chart(ctxEl, CONFIGS[CHART_TYPE] || CONFIGS['bar-h']);
+</script>
+<% } %>
+</body>
+</html>

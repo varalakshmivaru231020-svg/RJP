@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<div class="admin-panel-head" style="margin-bottom:16px;">
+  <h3 style="margin:0;">Members <span class="form-note" style="color:var(--a-text-muted); font-weight:400;">(<%= members.length %>)</span></h3>
+  <div class="admin-actions">
+    <a href="/admin/members/export.xlsx" class="primary">📥 Export Data</a>
+  </div>
+</div>
+
+<form class="admin-filters" method="GET" action="/admin/members">
+  <input type="text" name="q" placeholder="Search name, mobile, membership ID" value="<%= filters.q %>">
+  <select name="district">
+    <option value="">All Districts</option>
+    <% districts.forEach(function(d){ %>
+      <option value="<%= d %>" <%= filters.district===d ? 'selected' : '' %>><%= d %></option>
+    <% }); %>
+  </select>
+  <select name="status">
+    <option value="">All Statuses</option>
+    <% statuses.forEach(function(s){ %>
+      <option value="<%= s %>" <%= filters.status===s ? 'selected' : '' %>><%= s %></option>
+    <% }); %>
+  </select>
+  <button type="submit" class="btn btn-primary" style="padding:10px 20px;">Filter</button>
+  <% if (filters.q || filters.district || filters.status) { %>
+    <a class="btn btn-ghost" style="padding:10px 20px;" href="/admin/members">Clear</a>
+  <% } %>
+</form>
+
+<div class="admin-table-wrap">
+  <% if (!members.length) { %>
+    <p class="admin-empty">No members found.</p>
+  <% } else { %>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Membership ID</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>District</th>
+        <th>Assembly</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% members.forEach(function(m){ %>
+        <tr>
+          <td>
+            <% if (m.photo_path) { %>
+              <img class="admin-photo-thumb" src="/admin/members/<%= m.id %>/photo" alt="">
+            <% } else { %>
+              <span class="admin-photo-thumb placeholder">—</span>
+            <% } %>
+          </td>
+          <td><%= m.application_number %></td>
+          <td><%= m.full_name %></td>
+          <td><%= m.mobile %></td>
+          <td><%= m.district || '—' %></td>
+          <td><%= m.assembly || '—' %></td>
+          <td><span class="status-pill <%= m.status==='Rejected' ? 'rejected' : (m.status==='Approved' ? 'approved' : (m.status==='Active' ? 'active' : (m.status==='Under Review' ? 'under-review' : 'pending'))) %>"><%= m.status %></span></td>
+          <td>
+            <div class="admin-actions">
+              <a href="/admin/members/<%= m.id %>">View</a>
+              <a href="/admin/members/<%= m.id %>/edit">Edit</a>
+              <a href="/admin/members/<%= m.id %>/card">Card</a>
+              <form method="POST" action="/admin/members/<%= m.id %>/approve" style="display:inline;">
+                <button type="submit" class="primary">Approve</button>
+              </form>
+              <form method="POST" action="/admin/members/<%= m.id %>/reject" style="display:inline;">
+                <button type="submit" class="danger">Reject</button>
+              </form>
+              <form method="POST" action="/admin/members/<%= m.id %>/delete" style="display:inline;" data-confirm="Delete <%= m.full_name %>'s application permanently?">
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

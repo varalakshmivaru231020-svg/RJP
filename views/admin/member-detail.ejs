@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<div class="admin-panel" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <% if (member.photo_path) { %>
+      <img class="admin-photo-thumb" style="width:64px; height:64px;" src="/admin/members/<%= member.id %>/photo" alt="">
+    <% } %>
+    <div>
+      <h3 style="margin-bottom:2px;"><%= member.full_name %></h3>
+      <span class="form-note"><%= member.application_number %> · <%= member.mobile %></span>
+      <div style="margin-top:6px;">
+        <span class="status-pill <%= member.status==='Rejected' ? 'rejected' : (member.status==='Approved' ? 'approved' : (member.status==='Active' ? 'active' : (member.status==='Under Review' ? 'under-review' : 'pending'))) %>"><%= member.status %></span>
+      </div>
+    </div>
+  </div>
+  <div class="admin-actions no-print">
+    <form method="POST" action="/admin/members/<%= member.id %>/approve"><button type="submit" class="primary">Approve</button></form>
+    <form method="POST" action="/admin/members/<%= member.id %>/reject"><button type="submit" class="danger">Reject</button></form>
+    <button type="button" onclick="window.print()">Print</button>
+    <a href="/admin/members/<%= member.id %>/card/pdf">Download PDF</a>
+    <a href="/admin/members/<%= member.id %>/edit">Edit</a>
+    <a href="/admin/members">← Back to list</a>
+  </div>
+</div>
+
+<div class="admin-panel">
+  <div class="admin-tabs">
+    <button type="button" class="active" data-tab="personal">Personal</button>
+    <button type="button" data-tab="political">Political</button>
+    <button type="button" data-tab="education">Education</button>
+    <button type="button" data-tab="uploads">Uploads</button>
+    <button type="button" data-tab="activity">Activity</button>
+  </div>
+
+  <div class="admin-tab-panel active" data-tab="personal">
+    <div class="detail-grid">
+      <div class="detail-field"><span class="l">Full Name</span><span class="v"><%= member.full_name %></span></div>
+      <div class="detail-field"><span class="l">Father/Mother Name</span><span class="v"><%= member.guardian_name || '—' %></span></div>
+      <div class="detail-field"><span class="l">DOB</span><span class="v"><%= member.dob || '—' %></span></div>
+      <div class="detail-field"><span class="l">Gender</span><span class="v"><%= member.gender || '—' %></span></div>
+      <div class="detail-field"><span class="l">Mobile</span><span class="v"><%= member.mobile %></span></div>
+      <div class="detail-field"><span class="l">WhatsApp</span><span class="v"><%= member.whatsapp || '—' %></span></div>
+      <div class="detail-field"><span class="l">Email</span><span class="v"><%= member.email || '—' %></span></div>
+      <div class="detail-field"><span class="l">Aadhaar</span><span class="v"><%= member.aadhaar || '—' %></span></div>
+      <div class="detail-field" style="grid-column:1/-1;"><span class="l">Address</span><span class="v"><%= member.address || '—' %></span></div>
+    </div>
+  </div>
+
+  <div class="admin-tab-panel" data-tab="political">
+    <div class="detail-grid">
+      <div class="detail-field"><span class="l">State</span><span class="v"><%= member.state || '—' %></span></div>
+      <div class="detail-field"><span class="l">District</span><span class="v"><%= member.district || '—' %></span></div>
+      <div class="detail-field"><span class="l">Taluk</span><span class="v"><%= member.taluk || '—' %></span></div>
+      <div class="detail-field"><span class="l">Assembly</span><span class="v"><%= member.assembly || '—' %></span></div>
+      <div class="detail-field"><span class="l">Parliament</span><span class="v"><%= member.parliament || '—' %></span></div>
+      <div class="detail-field"><span class="l">Ward</span><span class="v"><%= member.ward || '—' %></span></div>
+      <div class="detail-field"><span class="l">Booth</span><span class="v"><%= member.booth || '—' %></span></div>
+    </div>
+  </div>
+
+  <div class="admin-tab-panel" data-tab="education">
+    <div class="detail-grid">
+      <div class="detail-field"><span class="l">Occupation</span><span class="v"><%= member.occupation || '—' %></span></div>
+      <div class="detail-field"><span class="l">Education</span><span class="v"><%= member.education || '—' %></span></div>
+      <div class="detail-field"><span class="l">Religion</span><span class="v"><%= member.religion || '—' %></span></div>
+      <div class="detail-field"><span class="l">Caste</span><span class="v"><%= member.caste || '—' %></span></div>
+      <div class="detail-field"><span class="l">Sub Caste</span><span class="v"><%= member.sub_caste || '—' %></span></div>
+      <div class="detail-field"><span class="l">Social Media</span><span class="v"><%= member.social_media || '—' %></span></div>
+      <div class="detail-field" style="grid-column:1/-1;">
+        <span class="l">Areas of Interest</span>
+        <span class="v"><%= interests.length ? interests.join(', ') : '—' %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-tab-panel" data-tab="uploads">
+    <div style="display:grid; gap:16px;">
+      <div class="upload-card">
+        <% if (member.photo_path) { %>
+          <img src="/admin/members/<%= member.id %>/photo" alt="Photo">
+        <% } else { %>
+          <div style="width:96px;height:96px;display:flex;align-items:center;justify-content:center;background:var(--white);border-radius:10px;color:#9aa3b5;font-size:.8rem;">No Photo</div>
+        <% } %>
+        <div>
+          <b>Photo</b>
+          <p class="form-note" style="margin:4px 0 0;"><%= member.photo_path ? 'Uploaded' : 'Not uploaded' %></p>
+        </div>
+      </div>
+      <div class="upload-card">
+        <div style="width:96px;height:96px;display:flex;align-items:center;justify-content:center;background:var(--white);border-radius:10px;font-size:1.6rem;">📄</div>
+        <div>
+          <b>ID Document</b>
+          <p class="form-note" style="margin:4px 0 0;">
+            <% if (member.id_upload_path) { %>
+              <a href="/admin/members/<%= member.id %>/id-upload" target="_blank" rel="noopener">View / Download</a>
+            <% } else { %>
+              Not uploaded
+            <% } %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-tab-panel" data-tab="activity">
+    <% if (!activity.length) { %>
+      <p class="admin-empty">No activity recorded yet.</p>
+    <% } else { %>
+      <ul class="activity-list">
+        <% activity.forEach(function(a){ %>
+          <li>
+            <span class="dot"></span>
+            <div>
+              <b><%= a.action %></b>
+              <span><%= a.created_at %><%= a.admin_email ? ' · by ' + a.admin_email : '' %></span>
+              <% if (a.note) { %><p style="margin:4px 0 0; font-size:.88rem;"><%= a.note %></p><% } %>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

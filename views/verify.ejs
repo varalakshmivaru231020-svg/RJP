@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section class="join" style="padding-top:48px;">
+  <div class="wrap" style="max-width:480px; text-align:center;">
+    <span class="eyebrow">MEMBERSHIP VERIFICATION</span>
+    <% if (member) { %>
+      <h2>✓ Verified RJP Member</h2>
+      <div class="app-number-card" style="text-align:left;">
+        <div class="detail-field" style="margin-bottom:12px;"><span class="l">NAME</span><span class="v"><%= member.full_name %></span></div>
+        <div class="detail-field" style="margin-bottom:12px;"><span class="l">MEMBERSHIP ID</span><span class="v"><%= member.application_number %></span></div>
+        <div class="detail-field" style="margin-bottom:12px;"><span class="l">DISTRICT</span><span class="v"><%= member.district || '-' %></span></div>
+        <div class="detail-field"><span class="l">STATUS</span><span class="status-pill <%= member.status==='Rejected' ? 'rejected' : (member.status==='Approved' || member.status==='Active' ? 'approved' : 'pending') %>"><%= member.status %></span></div>
+      </div>
+    <% } else { %>
+      <h2>✗ Not Found</h2>
+      <p>ಈ ಸದಸ್ಯತ್ವ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ.</p>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

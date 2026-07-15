@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<div class="admin-tabs" style="background:var(--a-card); border-radius:14px 14px 0 0; padding:0 12px; border:1px solid var(--a-border); border-bottom:none; flex-wrap:wrap;">
+  <% sectionKeys.forEach(function(key){ %>
+    <a href="/admin/cms?section=<%= key %>" style="text-decoration:none; padding:12px 16px; font-weight:600; font-size:.88rem; border-bottom:2px solid <%= section===key ? 'var(--a-secondary)' : 'transparent' %>; color:<%= section===key ? 'var(--a-primary)' : 'var(--a-text-muted)' %>;"><%= sections[key].title %></a>
+  <% }); %>
+</div>
+
+<div class="admin-panel" style="border-radius:0 0 16px 16px; margin-top:0;">
+  <h3><%= sections[section].title %></h3>
+
+  <% if (saved) { %>
+    <p class="form-note" style="background:rgba(27,122,61,.1); color:var(--green-deep); padding:10px 14px; border-radius:10px; display:inline-block;">✓ Saved successfully.</p>
+  <% } %>
+
+  <form method="POST" action="/admin/cms/<%= section %>" class="form-grid" style="grid-template-columns:1fr; margin-top:16px;">
+    <% fields.forEach(function(f){ %>
+      <label>
+        <%= f.label %>
+        <% if (f.type === 'text') { %>
+          <input type="text" name="<%= f.name %>" value="<%= data[f.name] || '' %>">
+        <% } else if (f.type === 'textarea') { %>
+          <textarea name="<%= f.name %>" rows="4"><%= data[f.name] || '' %></textarea>
+        <% } else if (f.type === 'lines') { %>
+          <textarea name="<%= f.name %>" rows="6"><%= (data[f.name] || []).join('\n') %></textarea>
+        <% } %>
+      </label>
+    <% }); %>
+    <button type="submit" class="btn btn-primary" style="color:var(--navy); justify-self:start;">Save <%= sections[section].title %></button>
+  </form>
+
+  <% if (section === 'banner' || section === 'contact') { %>
+    <p class="form-note" style="margin-top:18px;">✓ This section is live on the public website.</p>
+  <% } else { %>
+    <p class="form-note" style="margin-top:18px;">ℹ️ Saved here for editorial use. Publishing this section onto its public page is not wired up yet — ask to have it connected if you'd like it live.</p>
+  <% } %>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

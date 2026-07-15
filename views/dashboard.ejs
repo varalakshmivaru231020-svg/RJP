@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section class="join" style="padding-top:48px;">
+  <div class="wrap dashboard-layout">
+
+    <aside class="dashboard-menu">
+      <div class="dashboard-avatar">
+        <% if (member.photo_path) { %>
+          <img src="/my-photo" alt="<%= member.full_name %>">
+        <% } else { %>
+          <span><%= member.full_name.charAt(0) %></span>
+        <% } %>
+      </div>
+      <b><%= member.full_name %></b>
+      <span class="form-note" style="margin:2px 0 18px;"><%= member.mobile %></span>
+      <nav class="dashboard-nav">
+        <a class="active" href="/dashboard">📊 Dashboard</a>
+        <a href="/dashboard/card">🪪 Membership Card</a>
+        <form method="POST" action="/logout"><button type="submit">🚪 Logout</button></form>
+      </nav>
+    </aside>
+
+    <div class="dashboard-main">
+      <h2 style="margin-bottom:24px;">ಸ್ವಾಗತ, <%= member.full_name %></h2>
+
+      <div class="dashboard-cards">
+        <div class="dash-card">
+          <span class="eyebrow">MEMBERSHIP ID</span>
+          <b><%= member.application_number %></b>
+        </div>
+        <div class="dash-card">
+          <span class="eyebrow">STATUS</span>
+          <span class="status-pill <%= member.status === 'Rejected' ? 'rejected' : 'pending' %>"><%= member.status %></span>
+        </div>
+        <div class="dash-card">
+          <span class="eyebrow">DISTRICT</span>
+          <b><%= member.district || '—' %></b>
+        </div>
+        <div class="dash-card">
+          <span class="eyebrow">ASSEMBLY</span>
+          <b><%= member.assembly || '—' %></b>
+        </div>
+        <div class="dash-card">
+          <span class="eyebrow">APPLICATION DATE</span>
+          <b><%= member.created_at.split(' ')[0] %></b>
+        </div>
+      </div>
+
+      <h3 style="margin-top:36px;">ಅರ್ಜಿಯ ಪ್ರಗತಿ</h3>
+      <ol class="progress-tracker">
+        <% progress.forEach(function(p){ %>
+          <li class="<%= p.done ? 'done' : '' %>"><span class="dot">✓</span><%= p.label %></li>
+        <% }); %>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section id="register" class="join" style="padding-top:48px;">
+  <div class="wrap" style="max-width:820px;">
+    <span class="eyebrow">JOIN THE MOVEMENT</span>
+    <h2 style="margin-bottom:28px;">ಸದಸ್ಯತ್ವ ನೋಂದಣಿ ಫಾರ್ಮ್</h2>
+
+    <div class="wizard-card">
+      <ol class="wizard-steps" id="wizardSteps">
+        <li class="active" data-step="1"><span class="num">1</span> ವೈಯಕ್ತಿಕ ವಿವರ</li>
+        <li data-step="2"><span class="num">2</span> ರಾಜಕೀಯ ವಿವರ</li>
+        <li data-step="3"><span class="num">3</span> ಹೆಚ್ಚುವರಿ ವಿವರ</li>
+      </ol>
+
+      <% if (error) { %>
+        <p class="form-error"><%= error %></p>
+      <% } %>
+
+      <form id="registerForm" method="POST" action="/register" enctype="multipart/form-data" novalidate>
+
+        <div class="wizard-panel active" data-panel="1">
+          <div class="form-grid">
+            <label>ಪೂರ್ಣ ಹೆಸರು *
+              <input type="text" name="fullName" value="<%= old.fullName %>" required>
+            </label>
+            <label>ತಂದೆ/ತಾಯಿಯ ಹೆಸರು
+              <input type="text" name="guardianName" value="<%= old.guardianName %>">
+            </label>
+            <label>ಹುಟ್ಟಿದ ದಿನಾಂಕ
+              <input type="date" name="dob" value="<%= old.dob %>">
+            </label>
+            <label>ಲಿಂಗ
+              <select name="gender">
+                <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+                <option value="Male" <%= old.gender==='Male' ? 'selected' : '' %>>ಪುರುಷ</option>
+                <option value="Female" <%= old.gender==='Female' ? 'selected' : '' %>>ಮಹಿಳೆ</option>
+                <option value="Other" <%= old.gender==='Other' ? 'selected' : '' %>>ಇತರೆ</option>
+              </select>
+            </label>
+            <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ *
+              <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" placeholder="10 ಅಂಕಿಗಳ ಸಂಖ್ಯೆ" value="<%= old.mobile %>" required>
+            </label>
+            <label>WhatsApp ಸಂಖ್ಯೆ
+              <input type="tel" name="whatsapp" pattern="[0-9]{10}" maxlength="10" value="<%= old.whatsapp %>">
+            </label>
+            <label>ಇಮೇಲ್
+              <input type="email" name="email" value="<%= old.email %>">
+            </label>
+            <label>ಆಧಾರ್ ಸಂಖ್ಯೆ
+              <input type="text" name="aadhaar" pattern="[0-9]{12}" maxlength="12" placeholder="12 ಅಂಕಿಗಳ ಸಂಖ್ಯೆ" value="<%= old.aadhaar %>">
+            </label>
+            <label class="span-2">ವಿಳಾಸ
+              <textarea name="address" rows="3"><%= old.address %></textarea>
+            </label>
+            <label>ಪಾಸ್‌ವರ್ಡ್ ರಚಿಸಿ *
+              <input type="password" name="password" minlength="6" required autocomplete="new-password">
+            </label>
+            <label>ಪಾಸ್‌ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ *
+              <input type="password" name="confirmPassword" minlength="6" required autocomplete="new-password">
+            </label>
+          </div>
+          <p class="form-note">ಈ ಪಾಸ್‌ವರ್ಡ್ ಮತ್ತು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸಿ ಮುಂದೆ ಸದಸ್ಯರ ಲಾಗಿನ್‌ಗೆ ಪ್ರವೇಶಿಸಬಹುದು.</p>
+          <div class="wizard-actions">
+            <span></span>
+            <button type="button" class="btn btn-primary wizard-next">ಮುಂದೆ →</button>
+          </div>
+        </div>
+
+        <div class="wizard-panel" data-panel="2">
+          <div class="form-grid">
+            <label>ರಾಜ್ಯ
+              <input type="text" name="state" value="<%= old.state || 'Karnataka' %>">
+            </label>
+            <label>ಜಿಲ್ಲೆ
+              <select name="district">
+                <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+                <% districts.forEach(function(d){ %>
+                  <option value="<%= d %>" <%= old.district===d ? 'selected' : '' %>><%= d %></option>
+                <% }); %>
+              </select>
+            </label>
+            <label>ತಾಲೂಕು
+              <input type="text" name="taluk" value="<%= old.taluk %>">
+            </label>
+            <label>ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ
+              <input type="text" name="assembly" value="<%= old.assembly %>">
+            </label>
+            <label>ಲೋಕಸಭಾ ಕ್ಷೇತ್ರ
+              <input type="text" name="parliament" value="<%= old.parliament %>">
+            </label>
+            <label>ವಾರ್ಡ್
+              <input type="text" name="ward" value="<%= old.ward %>">
+            </label>
+            <label>ಬೂತ್ ಸಂಖ್ಯೆ
+              <input type="text" name="booth" value="<%= old.booth %>">
+            </label>
+          </div>
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-ghost wizard-prev" style="color:var(--navy); border-color:var(--line);">← ಹಿಂದೆ</button>
+            <button type="button" class="btn btn-primary wizard-next">ಮುಂದೆ →</button>
+          </div>
+        </div>
+
+        <div class="wizard-panel" data-panel="3">
+          <div class="form-grid">
+            <label>ಉದ್ಯೋಗ
+              <input type="text" name="occupation" value="<%= old.occupation %>">
+            </label>
+            <label>ವಿದ್ಯಾರ್ಹತೆ
+              <input type="text" name="education" value="<%= old.education %>">
+            </label>
+            <label>ಧರ್ಮ
+              <input type="text" name="religion" value="<%= old.religion %>">
+            </label>
+            <label>ಜಾತಿ
+              <input type="text" name="caste" value="<%= old.caste %>">
+            </label>
+            <label>ಉಪಜಾತಿ
+              <input type="text" name="subCaste" value="<%= old.subCaste %>">
+            </label>
+            <label>ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ (ಐಚ್ಛಿಕ)
+              <input type="text" name="socialMedia" placeholder="Instagram / Facebook handle" value="<%= old.socialMedia %>">
+            </label>
+          </div>
+
+          <fieldset class="form-fieldset">
+            <legend>ಆಸಕ್ತಿಯ ಕ್ಷೇತ್ರಗಳು</legend>
+            <div class="checkbox-grid">
+              <% interests.forEach(function(i){ %>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="areasOfInterest" value="<%= i %>" <%= old.areasOfInterest.includes(i) ? 'checked' : '' %>>
+                  <%= i %>
+                </label>
+              <% }); %>
+            </div>
+          </fieldset>
+
+          <div class="form-grid" style="margin-top:20px;">
+            <label>ಫೋಟೋ ಅಪ್‌ಲೋಡ್ <span class="hint">(JPG/PNG, 3MB ವರೆಗೆ)</span>
+              <input type="file" name="photo" accept=".jpg,.jpeg,.png">
+            </label>
+            <label>ಗುರುತಿನ ಚೀಟಿ ಅಪ್‌ಲೋಡ್ <span class="hint">(ಆಧಾರ್/ವೋಟರ್ ಐಡಿ, JPG/PNG/PDF)</span>
+              <input type="file" name="idUpload" accept=".jpg,.jpeg,.png,.pdf">
+            </label>
+          </div>
+
+          <label class="checkbox-item declaration">
+            <input type="checkbox" name="declaration" value="yes" required>
+            ನಾನು ನೀಡಿದ ಎಲ್ಲಾ ಮಾಹಿತಿ ನಿಜವೆಂದು ಹಾಗೂ ಸರಿಯಾಗಿದೆ ಎಂದು ಘೋಷಿಸುತ್ತೇನೆ ಮತ್ತು ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷದ ಸಿದ್ಧಾಂತಗಳನ್ನು ಒಪ್ಪುತ್ತೇನೆ. *
+          </label>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-ghost wizard-prev" style="color:var(--navy); border-color:var(--line);">← ಹಿಂದೆ</button>
+            <button type="submit" class="btn btn-primary">ಸಲ್ಲಿಸಿ</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <p class="form-note" style="margin-top:18px;">ಈಗಾಗಲೇ ಸದಸ್ಯರೇ? <a href="/login" style="color:var(--green-deep); font-weight:600;">ಇಲ್ಲಿ ಲಾಗಿನ್ ಮಾಡಿ</a></p>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+<script src="/js/register.js"></script>
+</body>
+</html>

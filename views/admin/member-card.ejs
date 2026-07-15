@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<div class="admin-panel" style="text-align:center;">
+  <div class="member-card">
+    <div class="member-card-head">
+      <img src="/images/logo.jpg" alt="RJP">
+      <b>Rashtriya Janahita Party</b>
+    </div>
+    <div class="member-card-body">
+      <% if (member.photo_path) { %>
+        <img class="member-card-photo" src="/admin/members/<%= member.id %>/photo" alt="<%= member.full_name %>">
+      <% } else { %>
+        <div class="member-card-photo" style="display:flex;align-items:center;justify-content:center;color:#c3cde3;font-size:.75rem;">No Photo</div>
+      <% } %>
+      <div>
+        <h4><%= member.full_name %></h4>
+        <span>ID: <%= member.application_number %></span>
+        <span>District: <%= member.district || '-' %></span>
+        <span>Status: <%= member.status %></span>
+      </div>
+      <div class="member-card-qr"><img src="<%= qrDataUrl %>" alt="QR verification code"></div>
+    </div>
+    <div class="member-card-foot">
+      <span>Reg. No. 56/283/2019-2020/PPS-1</span>
+      <span>rjpindia.com</span>
+    </div>
+  </div>
+
+  <div class="admin-actions no-print" style="justify-content:center; margin-top:24px;">
+    <a href="/admin/members/<%= member.id %>/card/pdf" class="primary">⬇ Download PDF</a>
+    <button type="button" onclick="window.print()">Print</button>
+    <a href="/admin/members/<%= member.id %>">← Back</a>
+  </div>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

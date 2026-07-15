@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<div class="admin-panel">
+  <h3>Edit Member — <%= member.full_name %></h3>
+
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+
+  <form method="POST" action="/admin/members/<%= member.id %>/edit" enctype="multipart/form-data">
+    <h4 style="margin:18px 0 12px;">Personal Details</h4>
+    <div class="form-grid">
+      <label>Full Name *
+        <input type="text" name="fullName" value="<%= member.full_name %>" required>
+      </label>
+      <label>Father/Mother Name
+        <input type="text" name="guardianName" value="<%= member.guardian_name %>">
+      </label>
+      <label>DOB
+        <input type="date" name="dob" value="<%= member.dob %>">
+      </label>
+      <label>Gender
+        <select name="gender">
+          <option value="">Select</option>
+          <option value="Male" <%= member.gender==='Male' ? 'selected' : '' %>>Male</option>
+          <option value="Female" <%= member.gender==='Female' ? 'selected' : '' %>>Female</option>
+          <option value="Other" <%= member.gender==='Other' ? 'selected' : '' %>>Other</option>
+        </select>
+      </label>
+      <label>Mobile Number *
+        <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" value="<%= member.mobile %>" required>
+      </label>
+      <label>WhatsApp
+        <input type="tel" name="whatsapp" pattern="[0-9]{10}" maxlength="10" value="<%= member.whatsapp %>">
+      </label>
+      <label>Email
+        <input type="email" name="email" value="<%= member.email %>">
+      </label>
+      <label>Aadhaar
+        <input type="text" name="aadhaar" pattern="[0-9]{12}" maxlength="12" value="<%= member.aadhaar %>">
+      </label>
+      <label class="span-2">Address
+        <textarea name="address" rows="2"><%= member.address %></textarea>
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">Political Details</h4>
+    <div class="form-grid">
+      <label>State
+        <input type="text" name="state" value="<%= member.state %>">
+      </label>
+      <label>District
+        <select name="district">
+          <option value="">Select</option>
+          <% districts.forEach(function(d){ %>
+            <option value="<%= d %>" <%= member.district===d ? 'selected' : '' %>><%= d %></option>
+          <% }); %>
+        </select>
+      </label>
+      <label>Taluk
+        <input type="text" name="taluk" value="<%= member.taluk %>">
+      </label>
+      <label>Assembly
+        <input type="text" name="assembly" value="<%= member.assembly %>">
+      </label>
+      <label>Parliament
+        <input type="text" name="parliament" value="<%= member.parliament %>">
+      </label>
+      <label>Ward
+        <input type="text" name="ward" value="<%= member.ward %>">
+      </label>
+      <label>Booth
+        <input type="text" name="booth" value="<%= member.booth %>">
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">Additional Details</h4>
+    <div class="form-grid">
+      <label>Occupation
+        <input type="text" name="occupation" value="<%= member.occupation %>">
+      </label>
+      <label>Education
+        <input type="text" name="education" value="<%= member.education %>">
+      </label>
+      <label>Religion
+        <input type="text" name="religion" value="<%= member.religion %>">
+      </label>
+      <label>Caste
+        <input type="text" name="caste" value="<%= member.caste %>">
+      </label>
+      <label>Sub Caste
+        <input type="text" name="subCaste" value="<%= member.sub_caste %>">
+      </label>
+      <label>Social Media
+        <input type="text" name="socialMedia" value="<%= member.social_media %>">
+      </label>
+      <label>Status *
+        <select name="status" required>
+          <% statuses.forEach(function(s){ %>
+            <option value="<%= s %>" <%= member.status===s ? 'selected' : '' %>><%= s %></option>
+          <% }); %>
+        </select>
+      </label>
+    </div>
+
+    <fieldset class="form-fieldset">
+      <legend>Areas of Interest</legend>
+      <div class="checkbox-grid">
+        <% interests.forEach(function(i){ %>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areasOfInterest" value="<%= i %>" <%= selectedInterests.includes(i) ? 'checked' : '' %>>
+            <%= i %>
+          </label>
+        <% }); %>
+      </div>
+    </fieldset>
+
+    <div class="form-grid" style="margin-top:20px;">
+      <label>Replace Photo <span class="hint">(leave blank to keep existing)</span>
+        <input type="file" name="photo" accept=".jpg,.jpeg,.png">
+      </label>
+      <label>Replace ID Upload <span class="hint">(leave blank to keep existing)</span>
+        <input type="file" name="idUpload" accept=".jpg,.jpeg,.png,.pdf">
+      </label>
+    </div>
+
+    <div class="wizard-actions">
+      <a href="/admin/members/<%= member.id %>" class="btn btn-ghost" style="color:var(--navy); border-color:var(--line);">Cancel</a>
+      <button type="submit" class="btn btn-primary" style="color:var(--navy);">Save Changes</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

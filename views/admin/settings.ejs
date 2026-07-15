@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/sidebar') %>
+
+<% if (error) { %>
+  <p class="form-error"><%= error %></p>
+<% } %>
+
+<div class="admin-panel">
+  <h3>Party Logo</h3>
+  <% if (logoSaved) { %>
+    <p class="form-note" style="background:rgba(27,122,61,.1); color:var(--green-deep); padding:10px 14px; border-radius:10px; display:inline-block; margin-bottom:12px;">✓ Logo updated.</p>
+  <% } %>
+  <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+    <img src="/images/logo.jpg?t=<%= Date.now() %>" alt="Current logo" style="width:64px; height:64px; border-radius:50%; object-fit:cover; border:1px solid var(--line);">
+    <form method="POST" action="/admin/settings/logo" enctype="multipart/form-data" style="display:flex; align-items:center; gap:12px;">
+      <input type="file" name="logo" accept=".jpg,.jpeg" required>
+      <button type="submit" class="btn btn-primary" style="color:var(--navy);">Upload New Logo</button>
+    </form>
+  </div>
+  <p class="form-note" style="margin-top:10px;">JPG only. Replaces the logo shown across the header, footer, membership cards and admin sidebar.</p>
+</div>
+
+<div class="admin-panel">
+  <h3>Settings</h3>
+  <% if (saved) { %>
+    <p class="form-note" style="background:rgba(27,122,61,.1); color:var(--green-deep); padding:10px 14px; border-radius:10px; display:inline-block; margin-bottom:12px;">✓ Settings saved.</p>
+  <% } %>
+
+  <form method="POST" action="/admin/settings">
+    <h4 style="margin:6px 0 12px;">General</h4>
+    <div class="form-grid">
+      <label>Membership Prefix <span class="hint">(2-6 letters/numbers, e.g. RJP)</span>
+        <input type="text" name="membership_prefix" value="<%= settings.membership_prefix %>" maxlength="6" required>
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">Theme &amp; QR Code <span class="form-note" style="font-weight:400;">— also used for the membership card PDF template</span></h4>
+    <div class="form-grid">
+      <label>Primary Accent Color
+        <input type="color" name="primary_color" value="<%= settings.primary_color %>" style="height:44px; padding:4px;">
+      </label>
+      <label>QR Code Color
+        <input type="color" name="qr_color" value="<%= settings.qr_color %>" style="height:44px; padding:4px;">
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">Email</h4>
+    <div class="form-grid">
+      <label>From Address
+        <input type="email" name="email_from" value="<%= settings.email_from %>">
+      </label>
+      <label>SMTP Host
+        <input type="text" name="email_smtp_host" value="<%= settings.email_smtp_host %>">
+      </label>
+      <label>SMTP Username
+        <input type="text" name="email_smtp_user" value="<%= settings.email_smtp_user %>">
+      </label>
+      <label>SMTP Password
+        <input type="password" name="email_smtp_pass" value="<%= settings.email_smtp_pass %>">
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">SMS</h4>
+    <div class="form-grid">
+      <label>SMS API Key
+        <input type="text" name="sms_api_key" value="<%= settings.sms_api_key %>">
+      </label>
+      <label>Sender ID
+        <input type="text" name="sms_sender_id" value="<%= settings.sms_sender_id %>">
+      </label>
+    </div>
+
+    <h4 style="margin:26px 0 12px;">WhatsApp API</h4>
+    <div class="form-grid">
+      <label>API Token
+        <input type="text" name="whatsapp_api_token" value="<%= settings.whatsapp_api_token %>">
+      </label>
+      <label>Business Number
+        <input type="text" name="whatsapp_api_number" value="<%= settings.whatsapp_api_number %>">
+      </label>
+    </div>
+
+    <p class="form-note" style="margin-top:18px;">ℹ️ Membership Prefix, Theme and QR Color are live everywhere right now. Email/SMS/WhatsApp credentials are stored here for future use — no messages are actually sent yet, since that needs a connected provider account.</p>
+
+    <div class="wizard-actions">
+      <span></span>
+      <button type="submit" class="btn btn-primary" style="color:var(--navy);">Save Settings</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/scripts') %>
+</body>
+</html>

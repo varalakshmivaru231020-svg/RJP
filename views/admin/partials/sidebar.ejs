@@ -1,0 +1,28 @@
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="/admin/dashboard">
+      <img src="/images/logo.jpg" alt="RJP">
+      <span>RJP Admin</span>
+    </a>
+    <nav class="admin-nav">
+      <a href="/admin/dashboard" class="<%= active==='dashboard' ? 'active' : '' %>">📊 Dashboard</a>
+      <a href="/admin/members" class="<%= active==='members' ? 'active' : '' %>">👥 Members</a>
+      <a href="/admin/reports" class="<%= active==='reports' ? 'active' : '' %>">📈 Reports</a>
+      <a href="/admin/settings" class="<%= active==='settings' ? 'active' : '' %>">⚙️ Settings</a>
+    </nav>
+    <form method="POST" action="/admin/logout" class="admin-logout-form">
+      <button type="submit">🚪 Logout</button>
+    </form>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="admin-menu-btn" id="adminMenuBtn" aria-label="Menu">☰</button>
+      <span class="admin-topbar-title"><%= meta.title.split(' | ')[0] %></span>
+      <span class="admin-topbar-date">Today: <%= new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) %></span>
+      <span class="admin-topbar-user">
+        <span class="admin-avatar-chip"><%= (admin.name || admin.email || '?').charAt(0).toUpperCase() %></span>
+        <%= admin.name || admin.email %>
+      </span>
+    </header>
+    <main class="admin-content">

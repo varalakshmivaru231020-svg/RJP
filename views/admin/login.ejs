@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head') %>
+</head>
+<body class="admin-login-body">
+
+<div class="admin-login-card">
+  <img src="/images/logo.jpg" alt="RJP" class="admin-login-logo">
+  <h2>Admin Login</h2>
+  <p class="form-note">Rashtriya Janahita Party — Membership Management</p>
+
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+
+  <form method="POST" action="/admin/login" class="form-grid" style="grid-template-columns:1fr;">
+    <label>Email
+      <input type="email" name="email" required autofocus>
+    </label>
+    <label>Password
+      <input type="password" name="password" required>
+    </label>
+    <button type="submit" class="btn btn-primary" style="color:var(--navy); justify-self:start;">Login</button>
+  </form>
+</div>
+
+</body>
+</html>

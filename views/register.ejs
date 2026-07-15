@@ -92,10 +92,20 @@
               </select>
             </label>
             <label>ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ
-              <input type="text" name="assembly" value="<%= old.assembly %>">
+              <select name="assembly">
+                <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+                <% assemblies.forEach(function(a){ %>
+                  <option value="<%= a %>" <%= old.assembly===a ? 'selected' : '' %>><%= a %></option>
+                <% }); %>
+              </select>
             </label>
             <label>ಲೋಕಸಭಾ ಕ್ಷೇತ್ರ
-              <input type="text" name="parliament" value="<%= old.parliament %>">
+              <select name="parliament">
+                <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+                <% parliaments.forEach(function(p){ %>
+                  <option value="<%= p %>" <%= old.parliament===p ? 'selected' : '' %>><%= p %></option>
+                <% }); %>
+              </select>
             </label>
             <label>ವಾರ್ಡ್
               <input type="text" name="ward" value="<%= old.ward %>">

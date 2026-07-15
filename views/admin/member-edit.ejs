@@ -69,10 +69,20 @@
         </select>
       </label>
       <label>Assembly
-        <input type="text" name="assembly" value="<%= member.assembly %>">
+        <select name="assembly">
+          <option value="">Select</option>
+          <% assemblies.forEach(function(a){ %>
+            <option value="<%= a %>" <%= member.assembly===a ? 'selected' : '' %>><%= a %></option>
+          <% }); %>
+        </select>
       </label>
       <label>Parliament
-        <input type="text" name="parliament" value="<%= member.parliament %>">
+        <select name="parliament">
+          <option value="">Select</option>
+          <% parliaments.forEach(function(p){ %>
+            <option value="<%= p %>" <%= member.parliament===p ? 'selected' : '' %>><%= p %></option>
+          <% }); %>
+        </select>
       </label>
       <label>Ward
         <input type="text" name="ward" value="<%= member.ward %>">

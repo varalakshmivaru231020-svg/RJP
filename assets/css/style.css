@@ -70,18 +70,25 @@
   .brand-text .kn{font-size:1.05rem; font-weight:700; color:var(--navy); line-height:1.1;}
   .brand-text .en{font-family:'Fraunces',serif; font-size:.72rem; letter-spacing:.14em; color:var(--green-deep); text-transform:uppercase;}
 
-  nav.links{display:flex; gap:28px; align-items:center;}
+  nav.links{display:flex; gap:20px; align-items:center;}
   nav.links a{
-    font-size:.95rem; font-weight:500; text-decoration:none; color:var(--navy);
+    font-size:.95rem; font-weight:500; text-decoration:none; color:var(--navy); white-space:nowrap;
     padding:6px 2px; border-bottom:2px solid transparent; transition:border-color .2s ease;
   }
   nav.links a:hover, nav.links a.active{border-color:var(--saffron);}
+  .nav-login-btn{
+    color:var(--navy) !important; padding:9px 18px !important; border-radius:999px;
+    border:1.5px solid var(--line) !important; font-weight:600 !important; font-size:.9rem;
+    white-space:nowrap; text-decoration:none; transition:background .2s ease, border-color .2s ease;
+  }
+  .nav-login-btn:hover{background:var(--cream); border-color:var(--saffron) !important;}
   .nav-cta{
     background:var(--green);
     color:var(--white) !important;
     padding:10px 20px !important;
     border-radius:999px;
     border-bottom:none !important;
+    white-space:nowrap;
     font-weight:600 !important;
   }
   .nav-cta:hover{background:var(--green-deep); border-color:transparent !important;}

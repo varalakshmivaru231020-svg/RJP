@@ -25,14 +25,19 @@
           <div class="rjp-card-photo placeholder">No Photo</div>
         <% } %>
         <div class="rjp-card-fields">
-          <div class="row"><span class="l">ಹೆಸರು</span><span class="v"><%= member.full_name %></span></div>
-          <div class="row"><span class="l">ID</span><span class="v"><%= member.application_number %></span></div>
-          <div class="row"><span class="l">ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+          <div class="row"><span class="l">ಸದಸ್ಯ ಹೆಸರು</span><span class="v"><%= member.full_name %></span></div>
+          <div class="row"><span class="l">ಸದಸ್ಯ ID</span><span class="v"><%= member.application_number %></span></div>
+          <div class="row"><span class="l">ಜಿಲ್ಲೆ</span><span class="v"><%= member.district || '-' %></span></div>
+          <div class="row"><span class="l">ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ</span><span class="v"><%= member.assembly || '-' %></span></div>
+          <div class="row"><span class="l">ಸದಸ್ಯತ್ವ ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
         </div>
       </div>
       <div class="rjp-card-sign">
         <span class="rjp-card-sign-line">Authorised Signatory</span>
-        <span class="rjp-card-seal-mini">✓</span>
+        <div class="rjp-card-seal-block">
+          <span class="rjp-card-seal-mini">✓</span>
+          <span class="rjp-card-seal-text">ಹೊಸ ಚಿಂತನೆ...<br>ಹೊಸ ರಾಜಕೀಯ...<br>ಹೊಸ ಭವಿಷ್ಯ...</span>
+        </div>
       </div>
       <div class="rjp-card-foot">
         <span>rjpindia.com</span>

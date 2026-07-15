@@ -736,17 +736,19 @@
   .rjp-card-body{padding:24px 20px 14px; display:flex; gap:14px; align-items:flex-start;}
   .rjp-card-photo{width:84px; height:100px; border-radius:10px; object-fit:cover; border:3px solid var(--saffron); flex:none; background:#eef0f5;}
   .rjp-card-photo.placeholder{display:flex; align-items:center; justify-content:center; color:#9aa3b5; font-size:.68rem; text-align:center;}
-  .rjp-card-fields{display:grid; gap:6px; flex:1; min-width:0;}
-  .rjp-card-fields .row{display:flex; gap:6px; font-size:.78rem; align-items:baseline;}
-  .rjp-card-fields .l{color:#6b7280; min-width:70px; flex:none;}
+  .rjp-card-fields{display:grid; gap:5px; flex:1; min-width:0;}
+  .rjp-card-fields .row{display:flex; gap:6px; font-size:.72rem; align-items:baseline;}
+  .rjp-card-fields .l{color:#6b7280; min-width:96px; flex:none;}
   .rjp-card-fields .v{color:var(--navy); font-weight:700; overflow-wrap:anywhere;}
 
   .rjp-card-sign{display:flex; align-items:center; justify-content:space-between; padding:6px 20px 18px; gap:12px;}
   .rjp-card-sign-line{font-size:.64rem; color:#6b7280; border-top:1px solid var(--line); padding-top:6px; width:130px; text-align:center;}
+  .rjp-card-seal-block{display:flex; align-items:center; gap:8px;}
   .rjp-card-seal-mini{
     width:42px; height:42px; border-radius:50%; background:var(--green); color:#fff; flex:none;
     display:flex; align-items:center; justify-content:center; font-size:1.1rem; box-shadow:0 6px 14px -4px rgba(27,122,61,.5);
   }
+  .rjp-card-seal-text{font-size:.62rem; font-weight:700; color:var(--saffron); line-height:1.35; text-align:left;}
 
   .rjp-card-foot{
     background:var(--navy); color:#fff; padding:10px 20px; display:flex; align-items:center;

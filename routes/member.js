@@ -6,8 +6,7 @@ const db = require('../db');
 const { upload, paymentUpload, PHOTO_DIR, PAYMENT_DIR } = require('../lib/upload');
 const { nextApplicationNumber } = require('../lib/applicationNumber');
 const {
-  KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, KARNATAKA_ASSEMBLY_CONSTITUENCIES, KARNATAKA_PARLIAMENT_CONSTITUENCIES,
-  AREAS_OF_INTEREST, STATUS_ORDER, PAYMENT_FEE_AMOUNT
+  KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, AREAS_OF_INTEREST, STATUS_ORDER, PAYMENT_FEE_AMOUNT
 } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
@@ -41,8 +40,6 @@ router.get('/register', (req, res) => {
     meta: { title: 'Become a Member | RJP' },
     districts: KARNATAKA_DISTRICTS,
     taluks: KARNATAKA_TALUKS,
-    assemblies: KARNATAKA_ASSEMBLY_CONSTITUENCIES,
-    parliaments: KARNATAKA_PARLIAMENT_CONSTITUENCIES,
     interests: AREAS_OF_INTEREST,
     error: null,
     old: collectOld({})
@@ -63,8 +60,6 @@ router.post('/register', (req, res, next) => {
         meta: { title: 'Become a Member | RJP' },
         districts: KARNATAKA_DISTRICTS,
         taluks: KARNATAKA_TALUKS,
-        assemblies: KARNATAKA_ASSEMBLY_CONSTITUENCIES,
-        parliaments: KARNATAKA_PARLIAMENT_CONSTITUENCIES,
         interests: AREAS_OF_INTEREST,
         error: message,
         old

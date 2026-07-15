@@ -7,8 +7,7 @@ const db = require('../db');
 const { upload, PHOTO_DIR, ID_DIR, PAYMENT_DIR } = require('../lib/upload');
 const { SETTINGS_DEFAULTS, getAllSettings, setSettings } = require('../lib/settings');
 const {
-  KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, KARNATAKA_ASSEMBLY_CONSTITUENCIES, KARNATAKA_PARLIAMENT_CONSTITUENCIES,
-  AREAS_OF_INTEREST, ALL_STATUSES
+  KARNATAKA_DISTRICTS, KARNATAKA_TALUKS, AREAS_OF_INTEREST, ALL_STATUSES
 } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
@@ -232,8 +231,6 @@ router.get('/admin/members/:id/edit', asyncHandler(async (req, res) => {
     member,
     districts: KARNATAKA_DISTRICTS,
     taluks: KARNATAKA_TALUKS,
-    assemblies: KARNATAKA_ASSEMBLY_CONSTITUENCIES,
-    parliaments: KARNATAKA_PARLIAMENT_CONSTITUENCIES,
     interests: AREAS_OF_INTEREST,
     selectedInterests: (member.areas_of_interest || '').split(',').map((s) => s.trim()).filter(Boolean),
     statuses: ALL_STATUSES,
@@ -257,8 +254,6 @@ router.post('/admin/members/:id/edit', (req, res, next) => {
           member: { ...member, ...mapBodyToMemberFields(req.body) },
           districts: KARNATAKA_DISTRICTS,
           taluks: KARNATAKA_TALUKS,
-          assemblies: KARNATAKA_ASSEMBLY_CONSTITUENCIES,
-          parliaments: KARNATAKA_PARLIAMENT_CONSTITUENCIES,
           interests: AREAS_OF_INTEREST,
           selectedInterests: [].concat(req.body.areasOfInterest || []),
           statuses: ALL_STATUSES,

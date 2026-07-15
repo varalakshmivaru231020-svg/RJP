@@ -583,7 +583,9 @@ router.get('/admin/settings', asyncHandler(async (req, res) => {
     settings: await getAllSettings(),
     saved: req.query.saved === '1',
     logoSaved: req.query.logo === '1',
-    error: req.query.error || null
+    error: req.query.error || null,
+    passwordSaved: req.query.passwordSaved === '1',
+    passwordError: req.query.passwordError || null
   });
 }));
 
@@ -598,7 +600,9 @@ router.post('/admin/settings', asyncHandler(async (req, res) => {
       settings: { ...(await getAllSettings()), ...updates },
       saved: false,
       logoSaved: false,
-      error: 'Membership prefix must be 2-6 letters/numbers.'
+      error: 'Membership prefix must be 2-6 letters/numbers.',
+      passwordSaved: false,
+      passwordError: null
     });
   }
   if (!/^#[0-9A-Fa-f]{6}$/.test(updates.primary_color)) updates.primary_color = SETTINGS_DEFAULTS.primary_color;
@@ -614,5 +618,20 @@ router.post('/admin/settings/logo', (req, res) => {
     res.redirect('/admin/settings?logo=1');
   });
 });
+
+router.post('/admin/settings/password', asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+  const fail = (message) => res.redirect(`/admin/settings?passwordError=${encodeURIComponent(message)}`);
+
+  const admin = await db.get('SELECT * FROM admins WHERE id = ?', [req.session.adminId]);
+  if (!admin || !bcrypt.compareSync(currentPassword || '', admin.password_hash)) {
+    return fail('Current password is incorrect.');
+  }
+  if (!newPassword || newPassword.length < 8) return fail('New password must be at least 8 characters.');
+  if (newPassword !== confirmPassword) return fail('New passwords do not match.');
+
+  await db.run('UPDATE admins SET password_hash = ? WHERE id = ?', [bcrypt.hashSync(newPassword, 10), admin.id]);
+  res.redirect('/admin/settings?passwordSaved=1');
+}));
 
 module.exports = router;

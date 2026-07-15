@@ -11,6 +11,28 @@
 <% } %>
 
 <div class="admin-panel">
+  <h3>Change Password</h3>
+  <% if (passwordSaved) { %>
+    <p class="form-note" style="background:rgba(22,163,74,.1); color:#15803D; padding:10px 14px; border-radius:10px; display:inline-block; margin-bottom:12px;">✓ Password updated.</p>
+  <% } %>
+  <% if (passwordError) { %>
+    <p class="form-error"><%= passwordError %></p>
+  <% } %>
+  <form method="POST" action="/admin/settings/password" class="form-grid" style="grid-template-columns:1fr; max-width:360px;">
+    <label>Current Password
+      <input type="password" name="currentPassword" required autocomplete="current-password">
+    </label>
+    <label>New Password <span class="hint">(min 8 characters)</span>
+      <input type="password" name="newPassword" minlength="8" required autocomplete="new-password">
+    </label>
+    <label>Confirm New Password
+      <input type="password" name="confirmPassword" minlength="8" required autocomplete="new-password">
+    </label>
+    <button type="submit" class="btn btn-primary" style="justify-self:start;">Update Password</button>
+  </form>
+</div>
+
+<div class="admin-panel">
   <h3>Party Logo</h3>
   <% if (logoSaved) { %>
     <p class="form-note" style="background:rgba(27,122,61,.1); color:var(--green-deep); padding:10px 14px; border-radius:10px; display:inline-block; margin-bottom:12px;">✓ Logo updated.</p>

@@ -20,8 +20,10 @@
     </div>
   </div>
   <div class="admin-actions no-print">
-    <form method="POST" action="/admin/members/<%= member.id %>/approve"><button type="submit" class="primary">Approve</button></form>
-    <form method="POST" action="/admin/members/<%= member.id %>/reject"><button type="submit" class="danger">Reject</button></form>
+    <% if (!['Approved', 'Active'].includes(member.status)) { %>
+      <form method="POST" action="/admin/members/<%= member.id %>/approve"><button type="submit" class="primary">Approve</button></form>
+      <form method="POST" action="/admin/members/<%= member.id %>/reject"><button type="submit" class="danger">Reject</button></form>
+    <% } %>
     <button type="button" onclick="window.print()">Print</button>
     <a href="/admin/members/<%= member.id %>/card/pdf">Download PDF</a>
     <a href="/admin/members/<%= member.id %>/edit">Edit</a>

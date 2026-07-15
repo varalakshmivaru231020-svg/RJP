@@ -73,12 +73,14 @@
               <a href="/admin/members/<%= m.id %>">View</a>
               <a href="/admin/members/<%= m.id %>/edit">Edit</a>
               <a href="/admin/members/<%= m.id %>/card">Card</a>
-              <form method="POST" action="/admin/members/<%= m.id %>/approve" style="display:inline;">
-                <button type="submit" class="primary">Approve</button>
-              </form>
-              <form method="POST" action="/admin/members/<%= m.id %>/reject" style="display:inline;">
-                <button type="submit" class="danger">Reject</button>
-              </form>
+              <% if (!['Approved', 'Active'].includes(m.status)) { %>
+                <form method="POST" action="/admin/members/<%= m.id %>/approve" style="display:inline;">
+                  <button type="submit" class="primary">Approve</button>
+                </form>
+                <form method="POST" action="/admin/members/<%= m.id %>/reject" style="display:inline;">
+                  <button type="submit" class="danger">Reject</button>
+                </form>
+              <% } %>
               <form method="POST" action="/admin/members/<%= m.id %>/delete" style="display:inline;" data-confirm="Delete <%= m.full_name %>'s application permanently?">
                 <button type="submit" class="danger">Delete</button>
               </form>

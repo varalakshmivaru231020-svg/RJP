@@ -220,6 +220,19 @@ const PROFILE_EDIT_COLUMNS = {
   socialMedia: 'social_media'
 };
 
+router.post('/dashboard/resubmit', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
+  if (!member) return res.redirect('/login');
+  if (member.status === 'Rejected') {
+    await db.run("UPDATE members SET status = 'Pending Approval' WHERE id = ?", [member.id]);
+    await db.run(
+      'INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)',
+      [member.id, 'Resubmitted', 'Member resubmitted application after rejection']
+    );
+  }
+  res.redirect('/dashboard');
+}));
+
 router.get('/dashboard/notifications', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');

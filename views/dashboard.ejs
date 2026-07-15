@@ -29,7 +29,15 @@
     </div>
 
     <% if (isRejected) { %>
-      <div class="mp-rejected-banner">❌ Your application was not approved. Contact your booth coordinator or <a href="/contact" style="color:inherit;">reach out to us</a> for details.</div>
+      <div class="mp-rejected-banner">
+        <p style="margin:0 0 10px;">❌ Your application was not approved. You can update your details and resubmit for another review, or <a href="/contact" style="color:inherit;">contact us</a> for details.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="mp-cta-primary" href="/dashboard/profile">Update Profile →</a>
+          <form method="POST" action="/dashboard/resubmit">
+            <button type="submit" class="mp-cta-primary" style="background:var(--mp-danger);">Resubmit Application</button>
+          </form>
+        </div>
+      </div>
     <% } else if (member.payment_status === 'Not Paid') { %>
       <div class="mp-rejected-banner" style="background:#FFFBEB; color:#92400E; border-color:#FDE68A;">
         💳 Pay your ₹<%= paymentFee %> membership fee to unlock your digital card. <a href="/dashboard/payment" style="color:inherit; font-weight:700; text-decoration:underline;">Pay now →</a>

@@ -8,6 +8,7 @@ const { nextApplicationNumber } = require('../lib/applicationNumber');
 const { KARNATAKA_DISTRICTS, AREAS_OF_INTEREST, STATUS_ORDER } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
+const asyncHandler = require('../lib/asyncHandler');
 
 const router = express.Router();
 
@@ -41,8 +42,9 @@ router.get('/register', (req, res) => {
   });
 });
 
-router.post('/register', (req, res) => {
-  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }])(req, res, (uploadErr) => {
+router.post('/register', (req, res, next) => {
+  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }])(req, res, async (uploadErr) => {
+   try {
     const old = collectOld(req.body);
     const fail = (message) => {
       // Clean up any files saved before validation failed
@@ -69,63 +71,39 @@ router.post('/register', (req, res) => {
     if (password !== confirmPassword) return fail('Passwords do not match.');
     if (!declaration) return fail('You must accept the declaration to continue.');
 
-    const existing = db.prepare('SELECT id FROM members WHERE mobile = ?').get(mobile);
+    const existing = await db.get('SELECT id FROM members WHERE mobile = ?', [mobile]);
     if (existing) return fail('An application already exists with this mobile number. Please login instead.');
 
     const photoFile = req.files?.photo?.[0];
     const idFile = req.files?.idUpload?.[0];
 
-    const applicationNumber = nextApplicationNumber(db);
+    const applicationNumber = await nextApplicationNumber(db);
     const passwordHash = bcrypt.hashSync(password, 10);
 
-    try {
-      db.prepare(`
-        INSERT INTO members (
-          application_number, full_name, guardian_name, dob, gender, mobile, whatsapp, email, aadhaar, address,
-          state, district, taluk, assembly, parliament, ward, booth,
-          occupation, education, religion, caste, sub_caste, areas_of_interest, social_media,
-          photo_path, id_upload_path, declaration_accepted, password_hash, status
-        ) VALUES (
-          @application_number, @full_name, @guardian_name, @dob, @gender, @mobile, @whatsapp, @email, @aadhaar, @address,
-          @state, @district, @taluk, @assembly, @parliament, @ward, @booth,
-          @occupation, @education, @religion, @caste, @sub_caste, @areas_of_interest, @social_media,
-          @photo_path, @id_upload_path, @declaration_accepted, @password_hash, @status
-        )
-      `).run({
-        application_number: applicationNumber,
-        full_name: fullName.trim(),
-        guardian_name: old.guardianName || null,
-        dob: old.dob || null,
-        gender: old.gender || null,
-        mobile,
-        whatsapp: old.whatsapp || null,
-        email: old.email || null,
-        aadhaar: old.aadhaar || null,
-        address: old.address || null,
-        state: old.state || 'Karnataka',
-        district: old.district || null,
-        taluk: old.taluk || null,
-        assembly: old.assembly || null,
-        parliament: old.parliament || null,
-        ward: old.ward || null,
-        booth: old.booth || null,
-        occupation: old.occupation || null,
-        education: old.education || null,
-        religion: old.religion || null,
-        caste: old.caste || null,
-        sub_caste: old.subCaste || null,
-        areas_of_interest: old.areasOfInterest.join(', '),
-        social_media: old.socialMedia || null,
-        photo_path: photoFile ? path.basename(photoFile.path) : null,
-        id_upload_path: idFile ? path.basename(idFile.path) : null,
-        declaration_accepted: 1,
-        password_hash: passwordHash,
-        status: 'Pending Approval'
-      });
+    const columns = [
+      'application_number', 'full_name', 'guardian_name', 'dob', 'gender', 'mobile', 'whatsapp', 'email', 'aadhaar', 'address',
+      'state', 'district', 'taluk', 'assembly', 'parliament', 'ward', 'booth',
+      'occupation', 'education', 'religion', 'caste', 'sub_caste', 'areas_of_interest', 'social_media',
+      'photo_path', 'id_upload_path', 'declaration_accepted', 'password_hash', 'status'
+    ];
+    const values = [
+      applicationNumber, fullName.trim(), old.guardianName || null, old.dob || null, old.gender || null, mobile,
+      old.whatsapp || null, old.email || null, old.aadhaar || null, old.address || null,
+      old.state || 'Karnataka', old.district || null, old.taluk || null, old.assembly || null, old.parliament || null, old.ward || null, old.booth || null,
+      old.occupation || null, old.education || null, old.religion || null, old.caste || null, old.subCaste || null, old.areasOfInterest.join(', '), old.socialMedia || null,
+      photoFile ? path.basename(photoFile.path) : null, idFile ? path.basename(idFile.path) : null,
+      1, passwordHash, 'Pending Approval'
+    ];
 
-      const newMemberId = db.prepare('SELECT id FROM members WHERE application_number = ?').get(applicationNumber).id;
-      db.prepare('INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)')
-        .run(newMemberId, 'Application Submitted', 'Registered via public membership form');
+    try {
+      const result = await db.run(
+        `INSERT INTO members (${columns.join(', ')}) VALUES (${columns.map(() => '?').join(', ')})`,
+        values
+      );
+      await db.run(
+        'INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)',
+        [result.insertId, 'Application Submitted', 'Registered via public membership form']
+      );
     } catch (e) {
       return fail('Something went wrong saving your application. Please try again.');
     }
@@ -135,6 +113,9 @@ router.post('/register', (req, res) => {
       meta: { title: 'Application Submitted | RJP' },
       applicationNumber
     });
+   } catch (err) {
+     next(err);
+   }
   });
 });
 
@@ -143,9 +124,9 @@ router.get('/login', (req, res) => {
   res.render('login', { page: 'login', meta: { title: 'Member Login | RJP' }, error: null });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', asyncHandler(async (req, res) => {
   const { mobile, password } = req.body;
-  const member = db.prepare('SELECT * FROM members WHERE mobile = ?').get((mobile || '').trim());
+  const member = await db.get('SELECT * FROM members WHERE mobile = ?', [(mobile || '').trim()]);
 
   if (!member || !bcrypt.compareSync(password || '', member.password_hash)) {
     return res.status(401).render('login', {
@@ -157,14 +138,14 @@ router.post('/login', (req, res) => {
 
   req.session.memberId = member.id;
   res.redirect('/dashboard');
-});
+}));
 
 router.post('/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/'));
 });
 
-router.get('/dashboard', requireMemberAuth, (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.session.memberId);
+router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) {
     req.session.destroy(() => res.redirect('/login'));
     return;
@@ -182,16 +163,16 @@ router.get('/dashboard', requireMemberAuth, (req, res) => {
     member,
     progress
   });
-});
+}));
 
-router.get('/my-photo', requireMemberAuth, (req, res) => {
-  const member = db.prepare('SELECT photo_path FROM members WHERE id = ?').get(req.session.memberId);
+router.get('/my-photo', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT photo_path FROM members WHERE id = ?', [req.session.memberId]);
   if (!member || !member.photo_path) return res.status(404).end();
   res.sendFile(path.join(PHOTO_DIR, member.photo_path));
-});
+}));
 
-router.get('/dashboard/card', requireMemberAuth, async (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.session.memberId);
+router.get('/dashboard/card', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');
   const qrDataUrl = await cardQrDataUrl(req, member.application_number);
   res.render('member-card', {
@@ -202,25 +183,25 @@ router.get('/dashboard/card', requireMemberAuth, async (req, res) => {
     backUrl: '/dashboard',
     downloadPdfUrl: '/dashboard/card/pdf'
   });
-});
+}));
 
-router.get('/dashboard/card/pdf', requireMemberAuth, async (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.session.memberId);
+router.get('/dashboard/card/pdf', requireMemberAuth, asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');
   const qrBuffer = await cardQrBuffer(req, member.application_number);
-  streamCardPdf(res, member, qrBuffer);
-});
+  await streamCardPdf(res, member, qrBuffer);
+}));
 
-router.get('/verify/:applicationNumber', (req, res) => {
-  const member = db.prepare(`
+router.get('/verify/:applicationNumber', asyncHandler(async (req, res) => {
+  const member = await db.get(`
     SELECT application_number, full_name, district, assembly, status, created_at
     FROM members WHERE application_number = ?
-  `).get(req.params.applicationNumber);
+  `, [req.params.applicationNumber]);
   res.render('verify', {
     page: 'verify',
     meta: { title: 'Verify Membership | RJP' },
     member: member || null
   });
-});
+}));
 
 module.exports = router;

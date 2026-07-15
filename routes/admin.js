@@ -12,6 +12,7 @@ const { streamCardPdf } = require('../lib/cardPdf');
 const { streamReportPdf } = require('../lib/reportPdf');
 const { streamReportExcel, streamMembersExcel } = require('../lib/reportExcel');
 const { CMS_SECTIONS, CMS_KEYS, getCmsSection, saveCmsSection } = require('../lib/cms');
+const asyncHandler = require('../lib/asyncHandler');
 
 const router = express.Router();
 
@@ -25,9 +26,9 @@ router.get('/admin/login', (req, res) => {
   res.render('admin/login', { meta: { title: 'Admin Login | RJP' }, error: null });
 });
 
-router.post('/admin/login', (req, res) => {
+router.post('/admin/login', asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const admin = db.prepare('SELECT * FROM admins WHERE email = ?').get((email || '').trim().toLowerCase());
+  const admin = await db.get('SELECT * FROM admins WHERE email = ?', [(email || '').trim().toLowerCase()]);
 
   if (!admin || !bcrypt.compareSync(password || '', admin.password_hash)) {
     return res.status(401).render('admin/login', {
@@ -40,7 +41,7 @@ router.post('/admin/login', (req, res) => {
   req.session.adminEmail = admin.email;
   req.session.adminName = admin.name;
   res.redirect('/admin');
-});
+}));
 
 router.post('/admin/logout', (req, res) => {
   req.session.adminId = null;
@@ -65,46 +66,51 @@ function trend(curr, prev) {
   return { pct: Math.abs(pct), dir: pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat') };
 }
 
-router.get('/admin/dashboard', (req, res) => {
-  const total = db.prepare('SELECT COUNT(*) AS n FROM members').get().n;
-  const pending = db.prepare("SELECT COUNT(*) AS n FROM members WHERE status = 'Pending Approval'").get().n;
-  const approved = db.prepare("SELECT COUNT(*) AS n FROM members WHERE status IN ('Approved', 'Active')").get().n;
-  const rejected = db.prepare("SELECT COUNT(*) AS n FROM members WHERE status = 'Rejected'").get().n;
-  const today = db.prepare("SELECT COUNT(*) AS n FROM members WHERE date(created_at) = date('now')").get().n;
-  const underReview = db.prepare("SELECT COUNT(*) AS n FROM members WHERE status = 'Under Review'").get().n;
+async function count(sql, params) {
+  const row = await db.get(sql, params);
+  return row.n;
+}
 
-  const regsThisWeek = db.prepare("SELECT COUNT(*) AS n FROM members WHERE created_at >= datetime('now','-7 days')").get().n;
-  const regsPrevWeek = db.prepare("SELECT COUNT(*) AS n FROM members WHERE created_at >= datetime('now','-14 days') AND created_at < datetime('now','-7 days')").get().n;
-  const approvedThisWeek = db.prepare("SELECT COUNT(*) AS n FROM member_activity WHERE action='Approved' AND created_at >= datetime('now','-7 days')").get().n;
-  const approvedPrevWeek = db.prepare("SELECT COUNT(*) AS n FROM member_activity WHERE action='Approved' AND created_at >= datetime('now','-14 days') AND created_at < datetime('now','-7 days')").get().n;
-  const rejectedThisWeek = db.prepare("SELECT COUNT(*) AS n FROM member_activity WHERE action='Rejected' AND created_at >= datetime('now','-7 days')").get().n;
-  const rejectedPrevWeek = db.prepare("SELECT COUNT(*) AS n FROM member_activity WHERE action='Rejected' AND created_at >= datetime('now','-14 days') AND created_at < datetime('now','-7 days')").get().n;
-  const yesterday = db.prepare("SELECT COUNT(*) AS n FROM members WHERE date(created_at) = date('now','-1 day')").get().n;
+router.get('/admin/dashboard', asyncHandler(async (req, res) => {
+  const total = await count('SELECT COUNT(*) AS n FROM members');
+  const pending = await count("SELECT COUNT(*) AS n FROM members WHERE status = 'Pending Approval'");
+  const approved = await count("SELECT COUNT(*) AS n FROM members WHERE status IN ('Approved', 'Active')");
+  const rejected = await count("SELECT COUNT(*) AS n FROM members WHERE status = 'Rejected'");
+  const today = await count('SELECT COUNT(*) AS n FROM members WHERE DATE(created_at) = CURDATE()');
+  const underReview = await count("SELECT COUNT(*) AS n FROM members WHERE status = 'Under Review'");
 
-  const monthlyRows = db.prepare(`
-    SELECT strftime('%Y-%m', created_at) AS ym, COUNT(*) AS n
+  const regsThisWeek = await count("SELECT COUNT(*) AS n FROM members WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const regsPrevWeek = await count("SELECT COUNT(*) AS n FROM members WHERE created_at >= DATE_SUB(NOW(), INTERVAL 14 DAY) AND created_at < DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const approvedThisWeek = await count("SELECT COUNT(*) AS n FROM member_activity WHERE action='Approved' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const approvedPrevWeek = await count("SELECT COUNT(*) AS n FROM member_activity WHERE action='Approved' AND created_at >= DATE_SUB(NOW(), INTERVAL 14 DAY) AND created_at < DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const rejectedThisWeek = await count("SELECT COUNT(*) AS n FROM member_activity WHERE action='Rejected' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const rejectedPrevWeek = await count("SELECT COUNT(*) AS n FROM member_activity WHERE action='Rejected' AND created_at >= DATE_SUB(NOW(), INTERVAL 14 DAY) AND created_at < DATE_SUB(NOW(), INTERVAL 7 DAY)");
+  const yesterday = await count("SELECT COUNT(*) AS n FROM members WHERE DATE(created_at) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)");
+
+  const monthlyRows = (await db.all(`
+    SELECT DATE_FORMAT(created_at, '%Y-%m') AS ym, COUNT(*) AS n
     FROM members GROUP BY ym ORDER BY ym DESC LIMIT 6
-  `).all().reverse();
+  `)).reverse();
 
-  const districtRows = db.prepare(`
+  const districtRows = await db.all(`
     SELECT COALESCE(NULLIF(district, ''), 'Unspecified') AS label, COUNT(*) AS n
     FROM members GROUP BY label ORDER BY n DESC LIMIT 8
-  `).all();
+  `);
 
-  const genderRows = db.prepare(`
+  const genderRows = await db.all(`
     SELECT COALESCE(NULLIF(gender, ''), 'Not Specified') AS label, COUNT(*) AS n
     FROM members GROUP BY label ORDER BY n DESC
-  `).all();
+  `);
 
-  const occupationRows = db.prepare(`
+  const occupationRows = await db.all(`
     SELECT COALESCE(NULLIF(occupation, ''), 'Unspecified') AS label, COUNT(*) AS n
     FROM members GROUP BY label ORDER BY n DESC LIMIT 8
-  `).all();
+  `);
 
-  const recent = db.prepare(`
+  const recent = await db.all(`
     SELECT id, application_number, full_name, mobile, district, status, created_at, photo_path
     FROM members ORDER BY created_at DESC LIMIT 8
-  `).all();
+  `);
 
   res.render('admin/dashboard', {
     active: 'dashboard',
@@ -130,11 +136,13 @@ router.get('/admin/dashboard', (req, res) => {
       occupation: occupationRows
     }
   });
-});
+}));
 
-function logActivity(memberId, action, note, adminEmail) {
-  db.prepare('INSERT INTO member_activity (member_id, action, note, admin_email) VALUES (?, ?, ?, ?)')
-    .run(memberId, action, note || null, adminEmail || null);
+async function logActivity(memberId, action, note, adminEmail) {
+  await db.run(
+    'INSERT INTO member_activity (member_id, action, note, admin_email) VALUES (?, ?, ?, ?)',
+    [memberId, action, note || null, adminEmail || null]
+  );
 }
 
 function mapBodyToMemberFields(body) {
@@ -165,7 +173,7 @@ function mapBodyToMemberFields(body) {
   };
 }
 
-router.get('/admin/members', (req, res) => {
+router.get('/admin/members', asyncHandler(async (req, res) => {
   const { q = '', district = '', status = '' } = req.query;
   let sql = 'SELECT * FROM members WHERE 1=1';
   const params = [];
@@ -178,7 +186,7 @@ router.get('/admin/members', (req, res) => {
   if (status) { sql += ' AND status = ?'; params.push(status); }
   sql += ' ORDER BY created_at DESC';
 
-  const members = db.prepare(sql).all(...params);
+  const members = await db.all(sql, params);
 
   res.render('admin/members', {
     active: 'members',
@@ -188,21 +196,21 @@ router.get('/admin/members', (req, res) => {
     statuses: ALL_STATUSES,
     filters: { q, district, status }
   });
-});
+}));
 
-router.get('/admin/members/export.xlsx', async (req, res) => {
-  const members = db.prepare(`
+router.get('/admin/members/export.xlsx', asyncHandler(async (req, res) => {
+  const members = await db.all(`
     SELECT application_number, full_name, mobile, gender, district, assembly, occupation, religion, status, created_at
     FROM members ORDER BY created_at DESC
-  `).all();
+  `);
   const logoPath = path.join(__dirname, '..', 'assets', 'images', 'logo.jpg');
   await streamMembersExcel(res, members, logoPath);
-});
+}));
 
-router.get('/admin/members/:id', (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).render('404', { page: '', meta: { title: 'Not Found | RJP Admin' } });
-  const activity = db.prepare('SELECT * FROM member_activity WHERE member_id = ? ORDER BY created_at DESC, id DESC').all(member.id);
+  const activity = await db.all('SELECT * FROM member_activity WHERE member_id = ? ORDER BY created_at DESC, id DESC', [member.id]);
   res.render('admin/member-detail', {
     active: 'members',
     meta: { title: `${member.full_name} | RJP Admin` },
@@ -210,10 +218,10 @@ router.get('/admin/members/:id', (req, res) => {
     activity,
     interests: (member.areas_of_interest || '').split(',').map((s) => s.trim()).filter(Boolean)
   });
-});
+}));
 
-router.get('/admin/members/:id/edit', (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id/edit', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).render('404', { page: '', meta: { title: 'Not Found | RJP Admin' } });
   res.render('admin/member-edit', {
     active: 'members',
@@ -225,130 +233,115 @@ router.get('/admin/members/:id/edit', (req, res) => {
     statuses: ALL_STATUSES,
     error: null
   });
-});
+}));
 
-router.post('/admin/members/:id/edit', (req, res) => {
-  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }])(req, res, (uploadErr) => {
-    const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
-    if (!member) return res.status(404).render('404', { page: '', meta: { title: 'Not Found | RJP Admin' } });
+router.post('/admin/members/:id/edit', (req, res, next) => {
+  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }])(req, res, async (uploadErr) => {
+    try {
+      const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
+      if (!member) return res.status(404).render('404', { page: '', meta: { title: 'Not Found | RJP Admin' } });
 
-    const fail = (message) => {
-      for (const f of [].concat(req.files?.photo || [], req.files?.idUpload || [])) {
-        fs.unlink(f.path, () => {});
+      const fail = (message) => {
+        for (const f of [].concat(req.files?.photo || [], req.files?.idUpload || [])) {
+          fs.unlink(f.path, () => {});
+        }
+        return res.status(400).render('admin/member-edit', {
+          active: 'members',
+          meta: { title: `Edit ${member.full_name} | RJP Admin` },
+          member: { ...member, ...mapBodyToMemberFields(req.body) },
+          districts: KARNATAKA_DISTRICTS,
+          interests: AREAS_OF_INTEREST,
+          selectedInterests: [].concat(req.body.areasOfInterest || []),
+          statuses: ALL_STATUSES,
+          error: message
+        });
+      };
+
+      if (uploadErr) return fail(uploadErr.message);
+
+      const { fullName, mobile, status } = req.body;
+      if (!fullName || !fullName.trim()) return fail('Full name is required.');
+      if (!/^[0-9]{10}$/.test(mobile || '')) return fail('Enter a valid 10-digit mobile number.');
+      if (!ALL_STATUSES.includes(status)) return fail('Invalid status.');
+
+      const dup = await db.get('SELECT id FROM members WHERE mobile = ? AND id != ?', [mobile, member.id]);
+      if (dup) return fail('Another member already uses this mobile number.');
+
+      const photoFile = req.files?.photo?.[0];
+      const idFile = req.files?.idUpload?.[0];
+
+      let photoPath = member.photo_path;
+      if (photoFile) {
+        if (member.photo_path) fs.unlink(path.join(PHOTO_DIR, member.photo_path), () => {});
+        photoPath = path.basename(photoFile.path);
       }
-      return res.status(400).render('admin/member-edit', {
-        active: 'members',
-        meta: { title: `Edit ${member.full_name} | RJP Admin` },
-        member: { ...member, ...mapBodyToMemberFields(req.body) },
-        districts: KARNATAKA_DISTRICTS,
-        interests: AREAS_OF_INTEREST,
-        selectedInterests: [].concat(req.body.areasOfInterest || []),
-        statuses: ALL_STATUSES,
-        error: message
-      });
-    };
+      let idUploadPath = member.id_upload_path;
+      if (idFile) {
+        if (member.id_upload_path) fs.unlink(path.join(ID_DIR, member.id_upload_path), () => {});
+        idUploadPath = path.basename(idFile.path);
+      }
 
-    if (uploadErr) return fail(uploadErr.message);
+      const areasOfInterest = [].concat(req.body.areasOfInterest || []).join(', ');
 
-    const { fullName, mobile, status } = req.body;
-    if (!fullName || !fullName.trim()) return fail('Full name is required.');
-    if (!/^[0-9]{10}$/.test(mobile || '')) return fail('Enter a valid 10-digit mobile number.');
-    if (!ALL_STATUSES.includes(status)) return fail('Invalid status.');
+      await db.run(
+        `UPDATE members SET
+          full_name=?, guardian_name=?, dob=?, gender=?, mobile=?,
+          whatsapp=?, email=?, aadhaar=?, address=?,
+          state=?, district=?, taluk=?, assembly=?, parliament=?, ward=?, booth=?,
+          occupation=?, education=?, religion=?, caste=?, sub_caste=?,
+          areas_of_interest=?, social_media=?, status=?,
+          photo_path=?, id_upload_path=?
+        WHERE id=?`,
+        [
+          fullName.trim(), req.body.guardianName || null, req.body.dob || null, req.body.gender || null, mobile,
+          req.body.whatsapp || null, req.body.email || null, req.body.aadhaar || null, req.body.address || null,
+          req.body.state || null, req.body.district || null, req.body.taluk || null, req.body.assembly || null, req.body.parliament || null, req.body.ward || null, req.body.booth || null,
+          req.body.occupation || null, req.body.education || null, req.body.religion || null, req.body.caste || null, req.body.subCaste || null,
+          areasOfInterest, req.body.socialMedia || null, status,
+          photoPath, idUploadPath,
+          member.id
+        ]
+      );
 
-    const dup = db.prepare('SELECT id FROM members WHERE mobile = ? AND id != ?').get(mobile, member.id);
-    if (dup) return fail('Another member already uses this mobile number.');
+      if (status !== member.status) {
+        await logActivity(member.id, 'Status Changed', `${member.status} → ${status}`, req.session.adminEmail);
+      }
+      await logActivity(member.id, 'Profile Updated', null, req.session.adminEmail);
 
-    const photoFile = req.files?.photo?.[0];
-    const idFile = req.files?.idUpload?.[0];
-
-    let photoPath = member.photo_path;
-    if (photoFile) {
-      if (member.photo_path) fs.unlink(path.join(PHOTO_DIR, member.photo_path), () => {});
-      photoPath = path.basename(photoFile.path);
+      res.redirect(`/admin/members/${member.id}`);
+    } catch (err) {
+      next(err);
     }
-    let idUploadPath = member.id_upload_path;
-    if (idFile) {
-      if (member.id_upload_path) fs.unlink(path.join(ID_DIR, member.id_upload_path), () => {});
-      idUploadPath = path.basename(idFile.path);
-    }
-
-    const areasOfInterest = [].concat(req.body.areasOfInterest || []).join(', ');
-
-    db.prepare(`
-      UPDATE members SET
-        full_name=@full_name, guardian_name=@guardian_name, dob=@dob, gender=@gender, mobile=@mobile,
-        whatsapp=@whatsapp, email=@email, aadhaar=@aadhaar, address=@address,
-        state=@state, district=@district, taluk=@taluk, assembly=@assembly, parliament=@parliament, ward=@ward, booth=@booth,
-        occupation=@occupation, education=@education, religion=@religion, caste=@caste, sub_caste=@sub_caste,
-        areas_of_interest=@areas_of_interest, social_media=@social_media, status=@status,
-        photo_path=@photo_path, id_upload_path=@id_upload_path
-      WHERE id=@id
-    `).run({
-      id: member.id,
-      full_name: fullName.trim(),
-      guardian_name: req.body.guardianName || null,
-      dob: req.body.dob || null,
-      gender: req.body.gender || null,
-      mobile,
-      whatsapp: req.body.whatsapp || null,
-      email: req.body.email || null,
-      aadhaar: req.body.aadhaar || null,
-      address: req.body.address || null,
-      state: req.body.state || null,
-      district: req.body.district || null,
-      taluk: req.body.taluk || null,
-      assembly: req.body.assembly || null,
-      parliament: req.body.parliament || null,
-      ward: req.body.ward || null,
-      booth: req.body.booth || null,
-      occupation: req.body.occupation || null,
-      education: req.body.education || null,
-      religion: req.body.religion || null,
-      caste: req.body.caste || null,
-      sub_caste: req.body.subCaste || null,
-      areas_of_interest: areasOfInterest,
-      social_media: req.body.socialMedia || null,
-      status,
-      photo_path: photoPath,
-      id_upload_path: idUploadPath
-    });
-
-    if (status !== member.status) {
-      logActivity(member.id, 'Status Changed', `${member.status} → ${status}`, req.session.adminEmail);
-    }
-    logActivity(member.id, 'Profile Updated', null, req.session.adminEmail);
-
-    res.redirect(`/admin/members/${member.id}`);
   });
 });
 
-router.post('/admin/members/:id/approve', (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.post('/admin/members/:id/approve', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
-  db.prepare("UPDATE members SET status = 'Approved' WHERE id = ?").run(member.id);
-  logActivity(member.id, 'Approved', null, req.session.adminEmail);
+  await db.run("UPDATE members SET status = 'Approved' WHERE id = ?", [member.id]);
+  await logActivity(member.id, 'Approved', null, req.session.adminEmail);
   res.redirect(req.get('referer') || '/admin/members');
-});
+}));
 
-router.post('/admin/members/:id/reject', (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.post('/admin/members/:id/reject', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
-  db.prepare("UPDATE members SET status = 'Rejected' WHERE id = ?").run(member.id);
-  logActivity(member.id, 'Rejected', req.body.reason || null, req.session.adminEmail);
+  await db.run("UPDATE members SET status = 'Rejected' WHERE id = ?", [member.id]);
+  await logActivity(member.id, 'Rejected', req.body.reason || null, req.session.adminEmail);
   res.redirect(req.get('referer') || '/admin/members');
-});
+}));
 
-router.post('/admin/members/:id/delete', (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.post('/admin/members/:id/delete', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
   if (member.photo_path) fs.unlink(path.join(PHOTO_DIR, member.photo_path), () => {});
   if (member.id_upload_path) fs.unlink(path.join(ID_DIR, member.id_upload_path), () => {});
-  db.prepare('DELETE FROM members WHERE id = ?').run(member.id);
+  await db.run('DELETE FROM members WHERE id = ?', [member.id]);
   res.redirect('/admin/members');
-});
+}));
 
-router.get('/admin/members/:id/card', async (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id/card', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).render('404', { page: '', meta: { title: 'Not Found | RJP Admin' } });
   const qrDataUrl = await cardQrDataUrl(req, member.application_number);
   res.render('admin/member-card', {
@@ -357,26 +350,26 @@ router.get('/admin/members/:id/card', async (req, res) => {
     member,
     qrDataUrl
   });
-});
+}));
 
-router.get('/admin/members/:id/card/pdf', async (req, res) => {
-  const member = db.prepare('SELECT * FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id/card/pdf', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT * FROM members WHERE id = ?', [req.params.id]);
   if (!member) return res.status(404).end();
   const qrBuffer = await cardQrBuffer(req, member.application_number);
-  streamCardPdf(res, member, qrBuffer);
-});
+  await streamCardPdf(res, member, qrBuffer);
+}));
 
-router.get('/admin/members/:id/photo', (req, res) => {
-  const member = db.prepare('SELECT photo_path FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id/photo', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT photo_path FROM members WHERE id = ?', [req.params.id]);
   if (!member || !member.photo_path) return res.status(404).end();
   res.sendFile(path.join(PHOTO_DIR, member.photo_path));
-});
+}));
 
-router.get('/admin/members/:id/id-upload', (req, res) => {
-  const member = db.prepare('SELECT id_upload_path FROM members WHERE id = ?').get(req.params.id);
+router.get('/admin/members/:id/id-upload', asyncHandler(async (req, res) => {
+  const member = await db.get('SELECT id_upload_path FROM members WHERE id = ?', [req.params.id]);
   if (!member || !member.id_upload_path) return res.status(404).end();
   res.sendFile(path.join(ID_DIR, member.id_upload_path));
-});
+}));
 
 const REPORT_TYPES = {
   district: { title: 'District Wise', chartType: 'bar-h', column: "COALESCE(NULLIF(district,''),'Unspecified')" },
@@ -389,12 +382,12 @@ const REPORT_TYPES = {
 const REPORT_KEYS = Object.keys(REPORT_TYPES);
 
 const AGE_GROUPS = [
-  { key: 'below-18', label: 'Below 18', sql: "dob IS NOT NULL AND dob > date('now','-18 years')" },
-  { key: '18-25', label: '18-25', sql: "dob IS NOT NULL AND dob <= date('now','-18 years') AND dob > date('now','-26 years')" },
-  { key: '26-35', label: '26-35', sql: "dob IS NOT NULL AND dob <= date('now','-26 years') AND dob > date('now','-36 years')" },
-  { key: '36-45', label: '36-45', sql: "dob IS NOT NULL AND dob <= date('now','-36 years') AND dob > date('now','-46 years')" },
-  { key: '46-60', label: '46-60', sql: "dob IS NOT NULL AND dob <= date('now','-46 years') AND dob > date('now','-61 years')" },
-  { key: 'above-60', label: 'Above 60', sql: "dob IS NOT NULL AND dob <= date('now','-61 years')" }
+  { key: 'below-18', label: 'Below 18', sql: "dob IS NOT NULL AND dob > DATE_SUB(CURDATE(), INTERVAL 18 YEAR)" },
+  { key: '18-25', label: '18-25', sql: "dob IS NOT NULL AND dob <= DATE_SUB(CURDATE(), INTERVAL 18 YEAR) AND dob > DATE_SUB(CURDATE(), INTERVAL 26 YEAR)" },
+  { key: '26-35', label: '26-35', sql: "dob IS NOT NULL AND dob <= DATE_SUB(CURDATE(), INTERVAL 26 YEAR) AND dob > DATE_SUB(CURDATE(), INTERVAL 36 YEAR)" },
+  { key: '36-45', label: '36-45', sql: "dob IS NOT NULL AND dob <= DATE_SUB(CURDATE(), INTERVAL 36 YEAR) AND dob > DATE_SUB(CURDATE(), INTERVAL 46 YEAR)" },
+  { key: '46-60', label: '46-60', sql: "dob IS NOT NULL AND dob <= DATE_SUB(CURDATE(), INTERVAL 46 YEAR) AND dob > DATE_SUB(CURDATE(), INTERVAL 61 YEAR)" },
+  { key: 'above-60', label: 'Above 60', sql: "dob IS NOT NULL AND dob <= DATE_SUB(CURDATE(), INTERVAL 61 YEAR)" }
 ];
 const AGE_GROUP_MAP = Object.fromEntries(AGE_GROUPS.map((g) => [g.key, g]));
 
@@ -403,8 +396,8 @@ function buildReportFilters(q) {
   const params = [];
   const applied = [];
 
-  if (q.dateFrom) { clauses.push('date(created_at) >= ?'); params.push(q.dateFrom); applied.push(`From ${q.dateFrom}`); }
-  if (q.dateTo) { clauses.push('date(created_at) <= ?'); params.push(q.dateTo); applied.push(`To ${q.dateTo}`); }
+  if (q.dateFrom) { clauses.push('DATE(created_at) >= ?'); params.push(q.dateFrom); applied.push(`From ${q.dateFrom}`); }
+  if (q.dateTo) { clauses.push('DATE(created_at) <= ?'); params.push(q.dateTo); applied.push(`To ${q.dateTo}`); }
   if (q.district) { clauses.push('district = ?'); params.push(q.district); applied.push(`District: ${q.district}`); }
   if (q.assembly) { clauses.push('assembly = ?'); params.push(q.assembly); applied.push(`Assembly: ${q.assembly}`); }
   if (q.gender) {
@@ -423,8 +416,8 @@ function buildReportFilters(q) {
   return { whereSql: clauses.length ? ` AND ${clauses.join(' AND ')}` : '', params, applied };
 }
 
-function computeAgeBuckets(whereSql, params) {
-  const dobs = db.prepare(`SELECT dob FROM members WHERE 1=1 ${whereSql}`).all(...params);
+async function computeAgeBuckets(whereSql, params) {
+  const dobs = await db.all(`SELECT dob FROM members WHERE 1=1 ${whereSql}`, params);
   const order = ['Below 18', '18-25', '26-35', '36-45', '46-60', 'Above 60'];
   const buckets = Object.fromEntries(order.map((l) => [l, 0]));
   const now = new Date();
@@ -444,34 +437,40 @@ function computeAgeBuckets(whereSql, params) {
   return order.map((label) => ({ label, n: buckets[label] })).filter((r) => r.n > 0);
 }
 
-function getReportRows(type, whereSql, params) {
+async function getReportRows(type, whereSql, params) {
   if (type === 'age') return computeAgeBuckets(whereSql, params);
   if (type === 'assembly') {
-    return db.prepare(`
+    return db.all(`
       SELECT COALESCE(NULLIF(assembly,''),'Unspecified') AS label,
              COALESCE(NULLIF(district,''),'Unspecified') AS district,
              COUNT(*) AS n
       FROM members WHERE 1=1 ${whereSql}
       GROUP BY label, district ORDER BY n DESC
-    `).all(...params);
+    `, params);
   }
   const cfg = REPORT_TYPES[type];
   if (!cfg) return [];
-  return db.prepare(`
+  return db.all(`
     SELECT ${cfg.column} AS label, COUNT(*) AS n
     FROM members WHERE 1=1 ${whereSql}
     GROUP BY label ORDER BY n DESC
-  `).all(...params);
+  `, params);
 }
 
-function getFilterOptions() {
-  const distinctCol = (col) => db.prepare(`SELECT DISTINCT ${col} AS v FROM members WHERE ${col} IS NOT NULL AND ${col} != '' ORDER BY ${col}`).all().map((r) => r.v);
+async function getFilterOptions() {
+  const distinctCol = async (col) => {
+    const rows = await db.all(`SELECT DISTINCT ${col} AS v FROM members WHERE ${col} IS NOT NULL AND ${col} != '' ORDER BY ${col}`);
+    return rows.map((r) => r.v);
+  };
+  const [assemblies, occupations, religions] = await Promise.all([
+    distinctCol('assembly'), distinctCol('occupation'), distinctCol('religion')
+  ]);
   return {
     districts: KARNATAKA_DISTRICTS,
-    assemblies: distinctCol('assembly'),
+    assemblies,
     genders: ['Male', 'Female', 'Other', 'Not Specified'],
-    occupations: distinctCol('occupation'),
-    religions: distinctCol('religion'),
+    occupations,
+    religions,
     statuses: ALL_STATUSES,
     ageGroups: AGE_GROUPS
   };
@@ -491,11 +490,11 @@ function reportQueryFromReq(req) {
   };
 }
 
-router.get('/admin/reports', (req, res) => {
+router.get('/admin/reports', asyncHandler(async (req, res) => {
   const type = REPORT_KEYS.includes(req.query.type) ? req.query.type : 'district';
   const filterQuery = reportQueryFromReq(req);
   const { whereSql, params, applied } = buildReportFilters(filterQuery);
-  const rows = getReportRows(type, whereSql, params);
+  const rows = await getReportRows(type, whereSql, params);
   const total = rows.reduce((s, r) => s + r.n, 0);
 
   res.render('admin/reports', {
@@ -507,33 +506,33 @@ router.get('/admin/reports', (req, res) => {
     title: REPORT_TYPES[type].title,
     rows,
     total,
-    filterOptions: getFilterOptions(),
+    filterOptions: await getFilterOptions(),
     filterQuery,
     appliedFilters: applied
   });
-});
+}));
 
-router.get('/admin/reports/export.xlsx', async (req, res) => {
+router.get('/admin/reports/export.xlsx', asyncHandler(async (req, res) => {
   const type = REPORT_KEYS.includes(req.query.type) ? req.query.type : 'district';
   const filterQuery = reportQueryFromReq(req);
   const { whereSql, params, applied } = buildReportFilters(filterQuery);
-  const rows = getReportRows(type, whereSql, params);
+  const rows = await getReportRows(type, whereSql, params);
   const logoPath = path.join(__dirname, '..', 'assets', 'images', 'logo.jpg');
   await streamReportExcel(res, { title: REPORT_TYPES[type].title, rows, filters: applied, logoPath });
-});
+}));
 
-router.get('/admin/reports/export.pdf', (req, res) => {
+router.get('/admin/reports/export.pdf', asyncHandler(async (req, res) => {
   const type = REPORT_KEYS.includes(req.query.type) ? req.query.type : 'district';
   const filterQuery = reportQueryFromReq(req);
   const { whereSql, params, applied } = buildReportFilters(filterQuery);
-  const rows = getReportRows(type, whereSql, params);
+  const rows = await getReportRows(type, whereSql, params);
   const logoPath = path.join(__dirname, '..', 'assets', 'images', 'logo.jpg');
   streamReportPdf(res, { title: REPORT_TYPES[type].title, chartType: REPORT_TYPES[type].chartType, rows, filters: applied, logoPath });
-});
+}));
 
-router.get('/admin/cms', (req, res) => {
+router.get('/admin/cms', asyncHandler(async (req, res) => {
   const section = CMS_KEYS.includes(req.query.section) ? req.query.section : 'banner';
-  const data = getCmsSection(section);
+  const data = await getCmsSection(section);
 
   res.render('admin/cms', {
     active: 'cms',
@@ -545,9 +544,9 @@ router.get('/admin/cms', (req, res) => {
     data,
     saved: req.query.saved === '1'
   });
-});
+}));
 
-router.post('/admin/cms/:section', (req, res) => {
+router.post('/admin/cms/:section', asyncHandler(async (req, res) => {
   const { section } = req.params;
   if (!CMS_KEYS.includes(section)) return res.status(404).end();
 
@@ -560,9 +559,9 @@ router.post('/admin/cms/:section', (req, res) => {
     }
   });
 
-  saveCmsSection(section, data);
+  await saveCmsSection(section, data);
   res.redirect(`/admin/cms?section=${section}&saved=1`);
-});
+}));
 
 const logoUpload = multer({
   storage: multer.diskStorage({
@@ -577,18 +576,18 @@ const logoUpload = multer({
   limits: { fileSize: 2 * 1024 * 1024 }
 });
 
-router.get('/admin/settings', (req, res) => {
+router.get('/admin/settings', asyncHandler(async (req, res) => {
   res.render('admin/settings', {
     active: 'settings',
     meta: { title: 'Settings | RJP Admin' },
-    settings: getAllSettings(),
+    settings: await getAllSettings(),
     saved: req.query.saved === '1',
     logoSaved: req.query.logo === '1',
     error: req.query.error || null
   });
-});
+}));
 
-router.post('/admin/settings', (req, res) => {
+router.post('/admin/settings', asyncHandler(async (req, res) => {
   const updates = {};
   Object.keys(SETTINGS_DEFAULTS).forEach((k) => { updates[k] = String(req.body[k] || '').trim(); });
 
@@ -596,7 +595,7 @@ router.post('/admin/settings', (req, res) => {
     return res.status(400).render('admin/settings', {
       active: 'settings',
       meta: { title: 'Settings | RJP Admin' },
-      settings: { ...getAllSettings(), ...updates },
+      settings: { ...(await getAllSettings()), ...updates },
       saved: false,
       logoSaved: false,
       error: 'Membership prefix must be 2-6 letters/numbers.'
@@ -605,9 +604,9 @@ router.post('/admin/settings', (req, res) => {
   if (!/^#[0-9A-Fa-f]{6}$/.test(updates.primary_color)) updates.primary_color = SETTINGS_DEFAULTS.primary_color;
   if (!/^#[0-9A-Fa-f]{6}$/.test(updates.qr_color)) updates.qr_color = SETTINGS_DEFAULTS.qr_color;
 
-  setSettings(updates);
+  await setSettings(updates);
   res.redirect('/admin/settings?saved=1');
-});
+}));
 
 router.post('/admin/settings/logo', (req, res) => {
   logoUpload.single('logo')(req, res, (err) => {

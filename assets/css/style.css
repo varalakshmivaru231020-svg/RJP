@@ -640,6 +640,12 @@
   .status-pill{display:inline-block; padding:6px 16px; border-radius:999px; font-size:.8rem; font-weight:700;}
   .status-pill.pending{background:rgba(240,164,0,.16); color:var(--saffron-deep);}
   .status-pill.rejected{background:#fdecec; color:#b3261e;}
+  .status-pill.approved{background:rgba(27,122,61,.14); color:var(--green);}
+  .status-pill.active{background:rgba(27,122,61,.22); color:var(--green-deep);}
+
+  .detail-field{display:flex; flex-direction:column; gap:4px;}
+  .detail-field span.l{font-size:.76rem; text-transform:uppercase; letter-spacing:.05em; color:#8b93a5;}
+  .detail-field span.v{font-size:1.05rem; color:var(--navy); font-weight:600;}
 
   .dashboard-layout{display:grid; grid-template-columns:240px 1fr; gap:36px; align-items:start;}
   .dashboard-menu{

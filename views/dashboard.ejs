@@ -2,68 +2,226 @@
 <html lang="kn">
 <head>
 <%- include('partials/head') %>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/member.css">
 </head>
-<body>
+<body class="member-portal">
+<%
+  const statusBadgeClass = isRejected ? 'rejected' : (member.status === 'Active' ? 'active' : (member.status === 'Approved' ? 'approved' : (member.status === 'Under Review' ? 'review' : 'pending')));
+  const statusIcon = isRejected ? '🔴' : (member.status === 'Active' ? '🔵' : (member.status === 'Approved' ? '🟢' : '🟡'));
+  const needsPulse = !isRejected && member.status !== 'Active' && member.status !== 'Approved';
+%>
 
-<%- include('partials/header') %>
-
-<section class="join" style="padding-top:48px;">
-  <div class="wrap dashboard-layout">
-
-    <aside class="dashboard-menu">
-      <div class="dashboard-avatar">
+<header class="mp-topbar">
+  <button class="mp-menu-btn" id="mpMenuBtn" aria-label="Menu">☰</button>
+  <a class="mp-topbar-brand" href="/dashboard">
+    <img src="/images/logo.jpg" alt="RJP">
+    <b>RJP Member Portal</b>
+  </a>
+  <div class="mp-topbar-actions">
+    <button class="mp-bell" id="mpBell" aria-label="Notifications">
+      🔔
+      <% if (activity.length) { %><span class="dot"></span><% } %>
+    </button>
+    <div class="mp-profile">
+      <button class="mp-profile-btn" id="mpProfileBtn" aria-label="Account menu">
         <% if (member.photo_path) { %>
-          <img src="/my-photo" alt="<%= member.full_name %>">
+          <img class="mp-avatar" src="/my-photo" alt="<%= member.full_name %>">
         <% } else { %>
-          <span><%= member.full_name.charAt(0) %></span>
+          <span class="mp-avatar"><%= member.full_name.charAt(0) %></span>
         <% } %>
-      </div>
-      <b><%= member.full_name %></b>
-      <span class="form-note" style="margin:2px 0 18px;"><%= member.mobile %></span>
-      <nav class="dashboard-nav">
-        <a class="active" href="/dashboard">📊 Dashboard</a>
+      </button>
+      <div class="mp-profile-menu" id="mpProfileMenu">
+        <a href="/dashboard">📊 Dashboard</a>
         <a href="/dashboard/card">🪪 Membership Card</a>
+        <a href="/contact">☎ Help &amp; Support</a>
         <form method="POST" action="/logout"><button type="submit">🚪 Logout</button></form>
-      </nav>
-    </aside>
-
-    <div class="dashboard-main">
-      <h2 style="margin-bottom:24px;">ಸ್ವಾಗತ, <%= member.full_name %></h2>
-
-      <div class="dashboard-cards">
-        <div class="dash-card">
-          <span class="eyebrow">MEMBERSHIP ID</span>
-          <b><%= member.application_number %></b>
-        </div>
-        <div class="dash-card">
-          <span class="eyebrow">STATUS</span>
-          <span class="status-pill <%= member.status === 'Rejected' ? 'rejected' : 'pending' %>"><%= member.status %></span>
-        </div>
-        <div class="dash-card">
-          <span class="eyebrow">DISTRICT</span>
-          <b><%= member.district || '—' %></b>
-        </div>
-        <div class="dash-card">
-          <span class="eyebrow">ASSEMBLY</span>
-          <b><%= member.assembly || '—' %></b>
-        </div>
-        <div class="dash-card">
-          <span class="eyebrow">APPLICATION DATE</span>
-          <b><%= member.created_at.split(' ')[0] %></b>
-        </div>
       </div>
+    </div>
+  </div>
+</header>
 
-      <h3 style="margin-top:36px;">ಅರ್ಜಿಯ ಪ್ರಗತಿ</h3>
-      <ol class="progress-tracker">
-        <% progress.forEach(function(p){ %>
-          <li class="<%= p.done ? 'done' : '' %>"><span class="dot">✓</span><%= p.label %></li>
-        <% }); %>
-      </ol>
+<div class="mp-shell">
+  <aside class="mp-sidebar">
+    <div class="mp-sidebar-profile">
+      <% if (member.photo_path) { %>
+        <img class="mp-sidebar-avatar" src="/my-photo" alt="<%= member.full_name %>">
+      <% } else { %>
+        <div class="mp-sidebar-avatar"><%= member.full_name.charAt(0) %></div>
+      <% } %>
+      <b><%= member.full_name %></b>
+      <span><%= member.mobile %></span>
+    </div>
+    <nav>
+      <a href="/dashboard" class="active">📊 Dashboard</a>
+      <a href="#personal-info">👤 My Profile</a>
+      <a href="/dashboard/card">🪪 Membership Card</a>
+      <a href="/dashboard/card/pdf">⬇ Downloads</a>
+      <a href="#mp-notifications">📢 Notifications</a>
+      <a href="/contact">☎ Support</a>
+      <form method="POST" action="/logout"><button type="submit">🚪 Logout</button></form>
+    </nav>
+  </aside>
+
+  <main class="mp-main">
+
+    <div class="mp-banner mp-fade-in">
+      <h2>ಸ್ವಾಗತ, <%= member.full_name %> 👋</h2>
+      <p class="lede">Rashtriya Janahita Party — Membership Portal</p>
+      <div class="mp-banner-stats">
+        <div class="mp-banner-stat"><span class="l">Member ID</span><span class="v"><%= member.application_number %></span></div>
+        <div class="mp-banner-stat"><span class="l">Status</span><span class="v"><%= member.status %></span></div>
+      </div>
+      <div class="mp-banner-progress">
+        <div class="mp-banner-progress-head"><span>Profile Completion</span><span><span data-count="<%= profileCompletion %>">0</span>%</span></div>
+        <div class="mp-progress-track"><div class="mp-progress-fill" data-value="<%= profileCompletion %>"></div></div>
+      </div>
+      <a class="btn-cta" href="#personal-info">Complete Profile →</a>
     </div>
 
-  </div>
-</section>
+    <% if (isRejected) { %>
+      <div class="mp-rejected-banner">❌ Your application was not approved. Contact your booth coordinator or <a href="/contact" style="color:inherit;">reach out to us</a> for details.</div>
+    <% } %>
 
-<%- include('partials/footer') %>
+    <div class="mp-stats-grid">
+      <div class="mp-stat-card mp-fade-in"><span class="ic">🪪</span><span class="val"><%= member.application_number %></span><span class="lbl">Membership ID</span></div>
+      <div class="mp-stat-card mp-fade-in">
+        <span class="ic"><%= statusIcon %></span>
+        <span class="mp-badge <%= statusBadgeClass %><%= needsPulse ? ' pulse' : '' %>"><%= member.status %></span>
+        <span class="lbl" style="display:block; margin-top:6px;">Current Status</span>
+      </div>
+      <div class="mp-stat-card mp-fade-in"><span class="ic">📍</span><span class="val"><%= member.district || '—' %></span><span class="lbl">District</span></div>
+      <div class="mp-stat-card mp-fade-in"><span class="ic">🏛</span><span class="val"><%= member.assembly || '—' %></span><span class="lbl">Assembly</span></div>
+      <div class="mp-stat-card mp-fade-in"><span class="ic">📅</span><span class="val"><%= member.created_at.split(' ')[0] %></span><span class="lbl">Application Date</span></div>
+      <div class="mp-stat-card mp-fade-in"><span class="ic">📱</span><span class="val"><%= member.mobile %></span><span class="lbl">Mobile Number</span></div>
+    </div>
+
+    <div class="mp-panel">
+      <div class="mp-panel-head"><h3>📶 Membership Progress</h3></div>
+      <div class="mp-stepper">
+        <% progress.forEach(function(p, i){
+             let stateClass = '';
+             let showCheck = false;
+             if (isRejected) {
+               stateClass = i === 0 ? 'done' : '';
+               showCheck = i === 0;
+             } else if (i < statusIndex || (i === statusIndex && i === progress.length - 1)) {
+               stateClass = 'done'; showCheck = true;
+             } else if (i === statusIndex) {
+               stateClass = 'current';
+             }
+        %>
+          <div class="mp-step <%= stateClass %>">
+            <div class="node"><%= showCheck ? '✓' : (i + 1) %></div>
+            <span class="lbl"><%= p.label %></span>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="mp-panel">
+      <div class="mp-panel-head"><h3>⚡ Quick Actions</h3></div>
+      <div class="mp-quick-grid">
+        <a class="mp-quick-card" href="/dashboard/card"><span class="ic">🪪</span>Membership Card</a>
+        <a class="mp-quick-card" href="/dashboard/card/pdf"><span class="ic">⬇</span>Download Card</a>
+        <a class="mp-quick-card" href="/verify/<%= member.application_number %>" target="_blank" rel="noopener"><span class="ic">✅</span>Verify My Card</a>
+        <a class="mp-quick-card" href="/contact"><span class="ic">☎</span>Help &amp; Support</a>
+      </div>
+    </div>
+
+    <div class="mp-two-col" style="grid-template-columns:1.1fr 1fr;">
+      <div class="mp-panel">
+        <div class="mp-panel-head"><h3>✅ Profile Completion</h3><span style="font-weight:700; color:var(--mp-primary);"><%= profileCompletion %>%</span></div>
+        <div class="mp-progress-track"><div class="mp-progress-fill" data-value="<%= profileCompletion %>"></div></div>
+        <ul class="mp-checklist">
+          <% checklist.forEach(function(c){ %>
+            <li class="<%= c.done ? 'done' : 'pending' %>"><span class="mark"><%= c.done ? '✓' : '·' %></span><%= c.label %></li>
+          <% }); %>
+        </ul>
+        <a class="mp-cta-primary" style="margin-top:18px;" href="/contact">Request Profile Update</a>
+      </div>
+
+      <div class="mp-panel">
+        <div class="mp-panel-head"><h3>🪪 Membership Card</h3></div>
+        <div class="mp-card-preview">
+          <div class="mp-card-mini">
+            <div class="mini-name"><%= member.full_name %></div>
+            <div class="mini-id">ID: <%= member.application_number %></div>
+            <div class="mini-id">District: <%= member.district || '-' %></div>
+            <div class="mini-qr">▦</div>
+          </div>
+          <div class="mp-card-actions">
+            <a class="primary" href="/dashboard/card">View Full Card</a>
+            <a class="ghost" href="/dashboard/card/pdf">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mp-panel" id="personal-info">
+      <div class="mp-panel-head"><h3>👤 Personal Information</h3><a class="mp-link" href="/contact">Request Update →</a></div>
+      <% if (member.photo_path) { %>
+        <img class="mp-info-photo" src="/my-photo" alt="<%= member.full_name %>">
+      <% } %>
+      <div class="mp-info-grid">
+        <div class="mp-info-field"><span class="l">Full Name</span><span class="v"><%= member.full_name %></span></div>
+        <div class="mp-info-field"><span class="l">Membership ID</span><span class="v"><%= member.application_number %></span></div>
+        <div class="mp-info-field"><span class="l">Mobile</span><span class="v"><%= member.mobile %></span></div>
+        <div class="mp-info-field"><span class="l">Email</span><span class="v"><%= member.email || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">Gender</span><span class="v"><%= member.gender || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">Date of Birth</span><span class="v"><%= member.dob || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">District</span><span class="v"><%= member.district || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">Assembly</span><span class="v"><%= member.assembly || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">Taluk</span><span class="v"><%= member.taluk || '—' %></span></div>
+        <div class="mp-info-field"><span class="l">Occupation</span><span class="v"><%= member.occupation || '—' %></span></div>
+        <div class="mp-info-field" style="grid-column:1/-1;"><span class="l">Address</span><span class="v"><%= member.address || '—' %></span></div>
+      </div>
+    </div>
+
+    <div class="mp-two-col" style="grid-template-columns:1fr 1fr;" id="mp-notifications">
+      <div class="mp-panel">
+        <div class="mp-panel-head">
+          <h3>📢 Notifications</h3>
+          <% if (activity.length > 4) { %><button class="mp-link" id="mpActivityToggle" type="button">View All</button><% } %>
+        </div>
+        <% if (!activity.length) { %>
+          <div class="mp-empty"><span class="ic">🔔</span><p>No notifications yet.</p></div>
+        <% } else { %>
+          <ul class="mp-activity-list" id="mpActivityList" <%= activity.length > 4 ? 'data-collapsed' : '' %>>
+            <% activity.forEach(function(a){ %>
+              <li>
+                <span class="dot"></span>
+                <div>
+                  <b><%= a.action %></b>
+                  <span><%= a.created_at %><%= a.note ? ' · ' + a.note : '' %></span>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </div>
+
+      <div class="mp-panel">
+        <div class="mp-panel-head"><h3>📣 Latest Party Announcements</h3></div>
+        <% if (!announcements.length) { %>
+          <div class="mp-empty"><span class="ic">📭</span><p>No announcements yet. Check back soon.</p></div>
+        <% } else { %>
+          <ul class="mp-announce-list">
+            <% announcements.forEach(function(a){ %>
+              <li class="mp-announce-item">
+                <span><%= a.date %></span>
+                <b><%= a.title %></b>
+                <p><%= a.body %></p>
+              </li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="/js/member.js"></script>
 </body>
 </html>

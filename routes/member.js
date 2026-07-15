@@ -8,6 +8,7 @@ const { nextApplicationNumber } = require('../lib/applicationNumber');
 const { KARNATAKA_DISTRICTS, AREAS_OF_INTEREST, STATUS_ORDER } = require('../lib/constants');
 const { cardQrDataUrl, cardQrBuffer } = require('../lib/qr');
 const { streamCardPdf } = require('../lib/cardPdf');
+const { getCmsSection, parseLine } = require('../lib/cms');
 const asyncHandler = require('../lib/asyncHandler');
 
 const router = express.Router();
@@ -144,6 +145,17 @@ router.post('/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/'));
 });
 
+const PROFILE_CHECKLIST = [
+  { key: 'photo_path', label: 'Photo Upload' },
+  { key: 'id_upload_path', label: 'ID Upload' },
+  { key: 'whatsapp', label: 'WhatsApp Number' },
+  { key: 'email', label: 'Email' },
+  { key: 'aadhaar', label: 'Aadhaar Number' },
+  { key: 'occupation', label: 'Occupation' },
+  { key: 'social_media', label: 'Social Media' },
+  { key: 'guardian_name', label: 'Father/Mother Name' }
+];
+
 router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) {
@@ -151,17 +163,37 @@ router.get('/dashboard', requireMemberAuth, asyncHandler(async (req, res) => {
     return;
   }
 
-  const statusIndex = STATUS_ORDER.indexOf(member.status);
+  const isRejected = member.status === 'Rejected';
+  const statusIndex = isRejected ? 0 : STATUS_ORDER.indexOf(member.status);
   const progress = STATUS_ORDER.map((label, i) => ({
     label,
-    done: member.status === 'Rejected' ? i === 0 : i <= statusIndex
+    done: isRejected ? i === 0 : i <= statusIndex
   }));
+
+  const checklist = PROFILE_CHECKLIST.map((item) => ({ label: item.label, done: Boolean(member[item.key]) }));
+  const profileCompletion = Math.round((checklist.filter((c) => c.done).length / checklist.length) * 100);
+
+  const activity = await db.all(
+    'SELECT action, note, created_at FROM member_activity WHERE member_id = ? ORDER BY created_at DESC, id DESC LIMIT 10',
+    [member.id]
+  );
+
+  const newsSection = await getCmsSection('news');
+  const announcements = (newsSection.items || [])
+    .map((line) => parseLine(line, ['date', 'title', 'body']))
+    .slice(0, 3);
 
   res.render('dashboard', {
     page: 'dashboard',
     meta: { title: 'My Dashboard | RJP' },
     member,
-    progress
+    progress,
+    statusIndex,
+    isRejected,
+    checklist,
+    profileCompletion,
+    activity,
+    announcements
   });
 }));
 

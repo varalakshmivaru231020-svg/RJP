@@ -61,14 +61,14 @@
 
           <div class="rjp-card-sign">
             <div class="rjp-card-sign-block">
-              <img class="rjp-card-seal-img" src="/images/logo.jpg" alt="RJP ಅಧಿಕೃತ ಮುದ್ರೆ">
+              <img class="rjp-card-seal-img" src="/images/card-signature.jpg" alt="ಅಧಿಕೃತ ಸಹಿ">
               <div class="kn">ಅಧಿಕೃತ ಸಹಿ</div>
               <div class="en">Authorised Signatory</div>
             </div>
             <div class="rjp-card-sign-divider"></div>
             <div class="rjp-card-verify">
               <div class="rjp-card-verify-badge">
-                <img src="/images/logo.jpg" alt="RJP">
+                <img src="/images/card-verify-seal.jpg" alt="RJP ಪರಿಶೀಲಿತ ಮುದ್ರೆ">
               </div>
               <div class="rjp-card-verify-text">
                 <div class="l1">ಹೊಸ ಚಿಂತನೆ...</div>
@@ -209,9 +209,10 @@
     var stage = document.getElementById('rjpCardStage');
     var wrap = document.getElementById('rjpCardWrap');
     var CARD_W = 650;
+    var MAX_SCALE = 0.75;
 
     function fitCard() {
-      var scale = Math.min(1, stage.clientWidth / CARD_W);
+      var scale = Math.min(MAX_SCALE, stage.clientWidth / CARD_W);
       wrap.style.transform = 'scale(' + scale + ')';
       stage.style.height = (1000 * scale) + 'px';
     }

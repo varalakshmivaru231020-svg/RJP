@@ -153,6 +153,74 @@
             </label>
           </div>
 
+          <fieldset class="form-fieldset" style="margin-top:20px;">
+            <legend>ಸದಸ್ಯತ್ವ ಶುಲ್ಕ ಮತ್ತು ದೇಣಿಗೆ</legend>
+
+            <div class="fee-row">
+              <div>
+                <div class="fee-label">ಸದಸ್ಯತ್ವ ಶುಲ್ಕ *</div>
+                <div class="fee-caption">ಎಲ್ಲಾ ಸದಸ್ಯರಿಗೂ ಕಡ್ಡಾಯ</div>
+              </div>
+              <div class="fee-amount">₹<%= paymentFee %></div>
+            </div>
+
+            <div class="donation-section">
+              <div class="donation-section-title">ಐಚ್ಛಿಕ ದೇಣಿಗೆ</div>
+              <label class="checkbox-item">
+                <input type="checkbox" name="donationEnabled" id="donationEnabled" <%= old.donationEnabled ? 'checked' : '' %>>
+                ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷವನ್ನು ಬೆಂಬಲಿಸಲು ನಾನು ಹೆಚ್ಚುವರಿ ದೇಣಿಗೆ ನೀಡಲು ಬಯಸುತ್ತೇನೆ.
+              </label>
+              <div class="form-grid" id="donationAmountWrap" style="margin-top:14px; <%= old.donationEnabled ? '' : 'display:none;' %>">
+                <label class="span-2">ದೇಣಿಗೆ ಮೊತ್ತ
+                  <input type="number" name="donationAmount" id="donationAmount" min="<%= donationMin %>" step="1"
+                         value="<%= old.donationAmount %>" placeholder="0">
+                  <span class="hint">ಕನಿಷ್ಠ ದೇಣಿಗೆ: ₹<%= donationMin %></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="amount-summary">
+              <div class="amount-summary-title">ಮೊತ್ತದ ಸಾರಾಂಶ</div>
+              <div class="amount-summary-row">
+                <span>ಸದಸ್ಯತ್ವ ಶುಲ್ಕ</span>
+                <span>₹<%= paymentFee %></span>
+              </div>
+              <div class="amount-summary-row">
+                <span>ಹೆಚ್ಚುವರಿ ದೇಣಿಗೆ</span>
+                <span>₹<span id="regDonationLine">0</span></span>
+              </div>
+              <div class="amount-summary-row total">
+                <span>ಒಟ್ಟು ಪಾವತಿಸಬೇಕಾದ ಮೊತ್ತ</span>
+                <span>₹<span id="regTotalAmount"><%= paymentFee %></span></span>
+              </div>
+            </div>
+
+            <div style="margin-top:18px; border-top:1px solid var(--line); padding-top:16px;">
+              <p class="form-note" style="margin-top:0; margin-bottom:8px; font-weight:600; color:var(--navy);">ಬ್ಯಾಂಕ್ / UPI ವಿವರಗಳು</p>
+              <div class="contact-grid" style="gap:28px; align-items:center;">
+                <ul class="contact-list" style="margin:0;">
+                  <li><span class="ic">🏦</span> Rashtriya Janahita Party</li>
+                  <li><span class="ic">🏛️</span> City Union Bank — Vidyaranyapura Branch</li>
+                  <li><span class="ic">💳</span> Current Account: 510909010169682</li>
+                  <li><span class="ic">🔢</span> IFSC: CIUB0000567</li>
+                  <li><span class="ic">📲</span> UPI ID: EZE0437212@CUB</li>
+                </ul>
+
+                <div style="text-align:center;">
+                  <img src="/images/party-payment-qr.jpg" alt="RJP Scan & Pay QR code — City Union Bank" style="max-width:220px; width:100%; border-radius:12px; border:1px solid var(--line);">
+                  <p class="form-note">ಯಾವುದೇ UPI ಆ್ಯಪ್ (GPay, PhonePe, Paytm) ಮೂಲಕ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ ಪಾವತಿಸಿ.</p>
+                </div>
+              </div>
+
+              <div class="form-grid" style="margin-top:16px;">
+                <label class="span-2">ಪಾವತಿ ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ * <span class="hint">(ಪಾವತಿಯ ಸ್ಕ್ರೀನ್‌ಶಾಟ್/ರಶೀದಿ — JPG/PNG/PDF)</span>
+                  <input type="file" name="paymentProof" accept=".jpg,.jpeg,.png,.pdf" required>
+                </label>
+              </div>
+              <p class="form-note" style="font-weight:600; color:var(--navy);">ಮೇಲಿನ ವಿವರಗಳ ಮೂಲಕ ಪಾವತಿಸಿ, ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ನಂತರವೇ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ.</p>
+            </div>
+          </fieldset>
+
           <label class="checkbox-item declaration">
             <input type="checkbox" name="declaration" value="yes" required>
             ನಾನು ನೀಡಿದ ಎಲ್ಲಾ ಮಾಹಿತಿ ನಿಜವೆಂದು ಹಾಗೂ ಸರಿಯಾಗಿದೆ ಎಂದು ಘೋಷಿಸುತ್ತೇನೆ ಮತ್ತು ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷದ ಸಿದ್ಧಾಂತಗಳನ್ನು ಒಪ್ಪುತ್ತೇನೆ. *
@@ -174,5 +242,33 @@
 <%- include('partials/footer') %>
 <script>window.RJP_TALUKS = <%- JSON.stringify(taluks) %>;</script>
 <script src="/js/register.js"></script>
+<script>
+  (function () {
+    var fee = <%= paymentFee %>;
+    var min = <%= donationMin %>;
+    var checkbox = document.getElementById('donationEnabled');
+    var amountWrap = document.getElementById('donationAmountWrap');
+    var amountInput = document.getElementById('donationAmount');
+    var totalEl = document.getElementById('regTotalAmount');
+    var donationLineEl = document.getElementById('regDonationLine');
+
+    function recalc() {
+      var donation = 0;
+      if (checkbox.checked) {
+        amountWrap.style.display = '';
+        var val = parseInt(amountInput.value, 10);
+        donation = Number.isFinite(val) && val >= min ? val : 0;
+      } else {
+        amountWrap.style.display = 'none';
+      }
+      donationLineEl.textContent = donation;
+      totalEl.textContent = fee + donation;
+    }
+
+    checkbox.addEventListener('change', recalc);
+    amountInput.addEventListener('input', recalc);
+    recalc();
+  })();
+</script>
 </body>
 </html>

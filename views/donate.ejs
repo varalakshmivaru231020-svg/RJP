@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<section class="donation-page">
+  <div class="wrap donation-wrap">
+    <div class="donation-heading">
+      <span class="eyebrow">ಪಕ್ಷಕ್ಕೆ ದೇಣಿಗೆ ನೀಡಿ</span>
+      <h2>ಪ್ರಜಾಪ್ರಭುತ್ವವನ್ನು ಬಲಪಡಿಸುವ ನಿಮ್ಮ ಒಂದು ಹೆಜ್ಜೆ</h2>
+      <p>ನಿಮ್ಮ ಸ್ವಯಂಪ್ರೇರಿತ ದೇಣಿಗೆಯು ಪಕ್ಷದ ಸಂಘಟನಾ ಕಾರ್ಯ, ಜನಜಾಗೃತಿ ಮತ್ತು ಸಾಮಾಜಿಕ ಸೇವಾ ಚಟುವಟಿಕೆಗಳಿಗೆ ಬಳಕೆಯಾಗುತ್ತದೆ.</p>
+    </div>
+
+    <% if (success) { %>
+      <div class="donation-card donation-success">
+        <div class="success-badge">✓</div>
+        <h3>ದೇಣಿಗೆ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ.</h3>
+        <p>ನಮ್ಮ ತಂಡ ನಿಮ್ಮ ಪಾವತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ, ದೃಢೀಕರಣ ರಶೀದಿಯನ್ನು ನಿಮ್ಮ ನೋಂದಾಯಿತ ಇಮೇಲ್ ಮತ್ತು ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ.</p>
+        <a class="btn btn-primary" href="/donate">ಇನ್ನೊಂದು ದೇಣಿಗೆ ನೀಡಿ</a>
+      </div>
+    <% } else { %>
+
+      <% if (error) { %>
+        <p class="form-error"><%= error %></p>
+      <% } %>
+
+      <form id="donationForm" method="POST" action="/donate" enctype="multipart/form-data" novalidate>
+
+        <div class="donation-card">
+          <h3 class="donation-card-title">ದೇಣಿಗೆದಾರರ ವಿವರ</h3>
+          <div class="form-grid">
+            <label>ಪೂರ್ಣ ಹೆಸರು *
+              <input type="text" name="fullName" value="<%= old.fullName %>" required>
+            </label>
+            <label>ಇಮೇಲ್ ವಿಳಾಸ *
+              <input type="email" name="email" value="<%= old.email %>" required>
+            </label>
+            <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ *
+              <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" placeholder="10 ಅಂಕಿಗಳ ಸಂಖ್ಯೆ" value="<%= old.mobile %>" required>
+            </label>
+            <label>PAN ಸಂಖ್ಯೆ <span class="hint">(ಐಚ್ಛಿಕ)</span>
+              <input type="text" name="pan" maxlength="10" style="text-transform:uppercase;" placeholder="ABCDE1234F" value="<%= old.pan %>">
+            </label>
+          </div>
+
+          <div class="form-grid" style="margin-top:18px;">
+            <label class="span-2">ದೇಣಿಗೆ ಮೊತ್ತ (₹) *
+              <input type="number" name="amount" id="donationAmountInput" min="1" step="1" placeholder="ಮೊತ್ತ ನಮೂದಿಸಿ" value="<%= old.amount %>" required>
+            </label>
+          </div>
+          <div class="amount-quick-row" id="amountQuickRow">
+            <button type="button" class="amount-chip" data-amount="500">₹500</button>
+            <button type="button" class="amount-chip" data-amount="1000">₹1,000</button>
+            <button type="button" class="amount-chip" data-amount="5000">₹5,000</button>
+            <button type="button" class="amount-chip" data-amount="10000">₹10,000</button>
+            <button type="button" class="amount-chip" data-amount="custom">ಇತರೆ</button>
+          </div>
+
+          <div class="form-grid" style="margin-top:18px;">
+            <label class="span-2">ದೇಣಿಗೆಯ ಉದ್ದೇಶ
+              <select name="purpose" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+                <% purposes.forEach(function(p){ %>
+                  <option value="<%= p %>" <%= old.purpose===p ? 'selected' : '' %>><%= p %></option>
+                <% }); %>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="donation-card donation-payment-card">
+          <h3 class="donation-card-title">ಪಾವತಿ ವಿವರಗಳು</h3>
+          <div class="contact-grid" style="gap:28px; align-items:center;">
+            <ul class="contact-list copy-list" style="margin:0;">
+              <li><span class="ic">🏦</span> <span>Rashtriya Janahita Party</span></li>
+              <li><span class="ic">🏛️</span> <span>City Union Bank — Vidyaranyapura Branch</span></li>
+              <li>
+                <span class="ic">💳</span>
+                <span>Current Account: <b>510909010169682</b></span>
+                <button type="button" class="copy-btn" data-copy-value="510909010169682">Copy</button>
+              </li>
+              <li>
+                <span class="ic">🔢</span>
+                <span>IFSC: <b>CIUB0000567</b></span>
+                <button type="button" class="copy-btn" data-copy-value="CIUB0000567">Copy</button>
+              </li>
+              <li>
+                <span class="ic">📲</span>
+                <span>UPI ID: <b>EZE0437212@CUB</b></span>
+                <button type="button" class="copy-btn" data-copy-value="EZE0437212@CUB">Copy</button>
+              </li>
+            </ul>
+            <div style="text-align:center;">
+              <img src="/images/party-payment-qr.jpg" alt="RJP Scan & Pay QR code — City Union Bank" style="max-width:220px; width:100%; border-radius:12px; border:1px solid var(--line);">
+              <p class="form-note">ಯಾವುದೇ UPI ಆ್ಯಪ್ (GPay, PhonePe, Paytm) ಮೂಲಕ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ.</p>
+            </div>
+          </div>
+          <p class="donation-info-box">ಮೇಲಿನ ಬ್ಯಾಂಕ್ ಖಾತೆ ಅಥವಾ UPI ಐಡಿ ಬಳಸಿ ಪಾವತಿಸಿ. ಪಾವತಿ ಯಶಸ್ವಿಯಾದ ನಂತರ, ಪಾವತಿ ಪುರಾವೆಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ಟ್ರಾನ್ಸಾಕ್ಷನ್ ರೆಫರೆನ್ಸ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.</p>
+        </div>
+
+        <div class="donation-card">
+          <h3 class="donation-card-title">ಪಾವತಿ ಪುರಾವೆ</h3>
+          <label class="dropzone" id="dropzone" for="paymentProofInput">
+            <input type="file" name="paymentProof" id="paymentProofInput" accept=".jpg,.jpeg,.png,.pdf" required hidden>
+            <span class="dropzone-icon">📎</span>
+            <span class="dropzone-text" id="dropzoneText">ಫೈಲ್ ಎಳೆದು ಬಿಡಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ</span>
+            <span class="hint">JPG, PNG ಅಥವಾ PDF — 5MB ವರೆಗೆ</span>
+          </label>
+
+          <div class="form-grid" style="margin-top:18px;">
+            <label>ಟ್ರಾನ್ಸಾಕ್ಷನ್ ಐಡಿ / UTR ಸಂಖ್ಯೆ *
+              <input type="text" name="transactionId" value="<%= old.transactionId %>" required>
+            </label>
+            <label>ಪಾವತಿ ದಿನಾಂಕ *
+              <input type="date" name="paymentDate" value="<%= old.paymentDate %>" required>
+            </label>
+            <label class="span-2">ಹೆಚ್ಚುವರಿ ಟಿಪ್ಪಣಿ <span class="hint">(ಐಚ್ಛಿಕ)</span>
+              <textarea name="remarks" rows="3"><%= old.remarks %></textarea>
+            </label>
+          </div>
+        </div>
+
+        <label class="checkbox-item declaration">
+          <input type="checkbox" name="declaration" value="yes" required>
+          ಮೇಲಿನ ಮಾಹಿತಿ ನಿಜವೆಂದು ಹಾಗೂ ಈ ಪಾವತಿ ವಿವರಗಳ ಮೂಲಕ ನಾನು ಸ್ವಯಂಪ್ರೇರಿತವಾಗಿ ಈ ದೇಣಿಗೆ ನೀಡಿದ್ದೇನೆ ಎಂದು ಘೋಷಿಸುತ್ತೇನೆ. *
+        </label>
+
+        <div class="donation-submit-row">
+          <button type="submit" class="btn btn-primary donation-submit-btn" id="donationSubmitBtn">
+            <span class="btn-label">ದೇಣಿಗೆ ಸಲ್ಲಿಸಿ</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+<script src="/js/donate.js"></script>
+</body>
+</html>

@@ -63,12 +63,11 @@
   .nav-row{
     display:flex; align-items:center; justify-content:space-between;
     padding:12px 24px;
-    max-width:1180px; margin:0 auto;
   }
-  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
-  .brand img{width:46px; height:46px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px var(--white), 0 0 0 3px var(--saffron);}
-  .brand-text .kn{font-size:1.05rem; font-weight:700; color:var(--navy); line-height:1.1;}
-  .brand-text .en{font-family:'Fraunces',serif; font-size:.72rem; letter-spacing:.14em; color:var(--green-deep); text-transform:uppercase;}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; flex-shrink:0;}
+  .brand img{width:46px; height:46px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px var(--white), 0 0 0 3px var(--saffron); flex-shrink:0;}
+  .brand-text .kn{font-size:1.05rem; font-weight:700; color:var(--navy); line-height:1.1; white-space:nowrap;}
+  .brand-text .en{font-family:'Fraunces',serif; font-size:.72rem; letter-spacing:.14em; color:var(--green-deep); text-transform:uppercase; white-space:nowrap;}
 
   nav.links{display:flex; gap:20px; align-items:center;}
   nav.links a{
@@ -92,6 +91,16 @@
     font-weight:600 !important;
   }
   .nav-cta:hover{background:var(--green-deep); border-color:transparent !important;}
+  .nav-donate-btn{
+    background:var(--saffron);
+    color:var(--navy) !important;
+    padding:9px 18px !important;
+    border-radius:999px;
+    border-bottom:none !important;
+    white-space:nowrap;
+    font-weight:700 !important;
+  }
+  .nav-donate-btn:hover, .nav-donate-btn.active{background:var(--saffron-deep); border-color:transparent !important;}
 
   .menu-btn{display:none; background:none; border:none; font-size:1.6rem; color:var(--navy); cursor:pointer;}
 
@@ -427,7 +436,37 @@
   .contact-form button{
     justify-self:start;
   }
-  .form-note{font-size:.82rem; color:#6b7280; margin-top:-4px;}
+
+  /* ---------- Donate ---------- */
+  .donate-intro{max-width:760px;}
+  .donate-intro h2{margin-bottom:6px;}
+  .donate-intro p{color:#333c4a; font-size:1.05rem;}
+  .donate-tagline{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    color:var(--green-deep); font-size:1.15rem; margin-bottom:22px;
+  }
+  .donate-cta{
+    margin-top:36px; padding:32px; border-radius:var(--radius);
+    background:var(--navy); text-align:center;
+  }
+  .donate-cta p{
+    color:var(--white); font-size:1.2rem; font-weight:600; line-height:1.5; margin-bottom:22px;
+  }
+
+  /* ---------- Long-form article (press notes, leader messages) ---------- */
+  .article{max-width:760px; margin:0 auto;}
+  .article h2{margin-bottom:26px;}
+  .article p{color:#333c4a; font-size:1.05rem; margin-bottom:18px;}
+  .article-lede{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:var(--navy);}
+  .article-punch{font-weight:700; color:var(--green-deep); font-size:1.15rem;}
+  .article-tagline{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    color:var(--green-deep); font-size:1.15rem; margin-bottom:8px;
+  }
+  .article-signoff{margin-top:40px; padding-top:24px; border-top:1px solid var(--line);}
+  .article-signoff p{margin-bottom:4px; color:var(--navy);}
+  .article-signoff .name{font-size:1.1rem; font-weight:700;}
+  .form-note{font-size:.82rem; color:#6b7280; margin-top:6px;}
 
   /* ---------- Footer ---------- */
   footer{
@@ -466,9 +505,11 @@
     font-size:.85rem; color:#9fc2a7;
   }
 
-  @media (max-width: 940px){
+  @media (max-width: 1280px){
     nav.links{display:none;}
     .menu-btn{display:block;}
+  }
+  @media (max-width: 940px){
     .about-grid, .agenda-layout, .join-grid, .transparency, .contact-grid, .wings, .difference, .ideology-layout, .launch-grid{
       grid-template-columns:1fr !important;
     }
@@ -634,6 +675,25 @@
   .checkbox-item input{margin-top:3px;}
   .declaration{margin-top:22px; padding:14px 16px; background:var(--cream); border-radius:10px; border:1px solid var(--line); font-size:.88rem;}
 
+  .fee-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:14px 18px;
+  }
+  .fee-row .fee-label{font-weight:700; color:var(--navy); font-size:.95rem;}
+  .fee-row .fee-caption{font-weight:400; color:#6b7280; font-size:.78rem; margin-top:2px;}
+  .fee-row .fee-amount{font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; color:var(--green-deep); white-space:nowrap;}
+
+  .donation-section{margin-top:20px;}
+  .donation-section-title{font-weight:700; color:var(--navy); font-size:.9rem; margin-bottom:10px;}
+
+  .amount-summary{margin-top:18px; border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--white);}
+  .amount-summary-title{font-weight:700; color:var(--navy); font-size:.88rem; margin-bottom:10px;}
+  .amount-summary-row{display:flex; align-items:center; justify-content:space-between; font-size:.9rem; padding:6px 0; color:var(--ink);}
+  .amount-summary-row.total{
+    margin-top:6px; padding-top:12px; border-top:1px solid var(--line);
+    font-weight:700; color:var(--navy); font-size:1.05rem;
+  }
+
   .wizard-actions{display:flex; justify-content:space-between; align-items:center; margin-top:30px;}
 
   .form-error{background:#fdecec; color:#b3261e; border:1px solid #f3b9b4; padding:12px 16px; border-radius:10px; font-size:.9rem; margin-bottom:20px;}
@@ -653,6 +713,78 @@
   .detail-field{display:flex; flex-direction:column; gap:4px;}
   .detail-field span.l{font-size:.76rem; text-transform:uppercase; letter-spacing:.05em; color:#8b93a5;}
   .detail-field span.v{font-size:1.05rem; color:var(--navy); font-weight:600;}
+
+  /* ---------- Donation Form ---------- */
+  .donation-page{padding:48px 0 80px;}
+  .donation-wrap{max-width:800px;}
+  .donation-heading{text-align:center; margin-bottom:32px;}
+  .donation-heading h2{margin:10px 0 12px;}
+  .donation-heading p{color:#6b7280;}
+
+  .donation-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:28px 26px; margin-bottom:24px;
+    animation:donationCardIn .4s ease both;
+  }
+  .donation-card-title{font-size:1.05rem; color:var(--navy); margin:0 0 18px; font-family:'Fraunces',serif;}
+  .donation-payment-card{background:linear-gradient(180deg, var(--cream) 0%, var(--white) 60%); border-color:var(--saffron);}
+  .donation-info-box{
+    margin:20px 0 0; padding:14px 16px; background:rgba(240,164,0,.1); border:1px solid rgba(240,164,0,.35);
+    border-radius:10px; font-size:.88rem; color:var(--navy); line-height:1.55;
+  }
+  @keyframes donationCardIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+  .amount-quick-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+  .amount-chip{
+    padding:9px 18px; border-radius:999px; border:1.5px solid var(--line); background:var(--cream);
+    color:var(--navy); font-weight:600; font-size:.88rem; cursor:pointer; transition:all .15s ease;
+  }
+  .amount-chip:hover{border-color:var(--saffron);}
+  .amount-chip.active{background:var(--saffron); border-color:var(--saffron); color:var(--navy);}
+
+  .copy-list li{justify-content:space-between; flex-wrap:wrap;}
+  .copy-btn{
+    margin-left:auto; padding:6px 14px; border-radius:999px; border:1.5px solid var(--line);
+    background:var(--cream); color:var(--navy); font-size:.78rem; font-weight:700; cursor:pointer; transition:all .15s ease;
+  }
+  .copy-btn:hover{border-color:var(--green);}
+  .copy-btn.copied{background:var(--green); border-color:var(--green); color:var(--white);}
+
+  .dropzone{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:6px;
+    border:2px dashed var(--line); border-radius:14px; padding:32px 20px; cursor:pointer;
+    background:var(--cream); transition:all .15s ease;
+  }
+  .dropzone:hover, .dropzone.dragover{border-color:var(--saffron); background:rgba(240,164,0,.08);}
+  .dropzone.has-file{border-color:var(--green); background:rgba(27,122,61,.08);}
+  .dropzone-icon{font-size:1.8rem;}
+  .dropzone-text{font-weight:600; color:var(--navy); font-size:.95rem;}
+
+  .donation-submit-row{margin-top:8px;}
+  .donation-submit-btn{
+    width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:16px !important; font-size:1.02rem !important; border:none; cursor:pointer;
+  }
+  .donation-submit-btn .btn-spinner{
+    display:none; width:18px; height:18px; border-radius:50%;
+    border:2.5px solid rgba(255,255,255,.4); border-top-color:var(--white);
+    animation:donationSpin .7s linear infinite;
+  }
+  .donation-submit-btn.loading .btn-label{opacity:.7;}
+  .donation-submit-btn.loading .btn-spinner{display:inline-block;}
+  @keyframes donationSpin{to{transform:rotate(360deg);}}
+
+  .donation-success{text-align:center; padding:48px 32px;}
+  .donation-success h3{margin:0 0 10px; color:var(--navy);}
+  .donation-success p{color:#6b7280; margin-bottom:22px;}
+
+  @media (max-width: 640px){
+    .donation-submit-row{
+      position:sticky; bottom:0; background:var(--cream); padding:14px 0;
+      margin:0 -16px -1px; padding-left:16px; padding-right:16px;
+      border-top:1px solid var(--line);
+    }
+  }
 
   .dashboard-layout{display:grid; grid-template-columns:240px 1fr; gap:36px; align-items:start;}
   .dashboard-menu{
@@ -696,86 +828,162 @@
     .wizard-card{padding:24px 18px;}
   }
 
-  /* ---------- Digital Membership Card (front + back) ---------- */
-  .rjp-card-wrap{max-width:380px; margin:0 auto;}
-  .rjp-card-flip-btn{
-    display:block; margin:14px auto 0; background:var(--navy); color:#fff; border:none; border-radius:999px;
-    padding:10px 22px; font-weight:700; font-size:.88rem; cursor:pointer; font-family:inherit;
-  }
+  /* ---------- Digital Membership Card (front + back), 650x1000 print-ready ---------- */
+  .rjp-card-page{padding:8px 0 12px;}
+  .rjp-card-stage{width:100%; display:flex; justify-content:center; overflow:hidden;}
+  .rjp-card-wrap{width:650px; flex:none; transform-origin:top center; position:relative;}
+
   .rjp-card{
-    width:100%; border-radius:22px; overflow:hidden; background:var(--white);
-    box-shadow:0 30px 60px -28px rgba(11,20,50,.4); font-family:'Poppins','Noto Sans Kannada',sans-serif;
-    display:none;
+    width:650px; height:1000px; border-radius:24px; overflow:hidden; background:var(--white);
+    box-shadow:0 30px 70px -30px rgba(11,20,50,.45);
+    font-family:'Poppins','Noto Sans Kannada',sans-serif; color:#1a1a1a;
+    display:none; position:relative;
+    --c-green:#006B2D; --c-green-deep:#004B1E; --c-gold:#F6B300; --c-blue:#143D9B; --c-gray:#F5F5F5;
   }
-  .rjp-card.active{display:block;}
+  .rjp-card.active{display:flex; flex-direction:column;}
 
-  .rjp-card-header{
-    background:linear-gradient(120deg, #FBDD86 0%, #F0A400 45%, var(--green) 100%);
-    padding:22px 20px 44px; text-align:center; position:relative;
-    -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 180' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L340,0 L340,128 C265.2,168 197.2,118 122.4,142 C61.2,162 27.2,172 0,148 Z'/%3E%3C/svg%3E");
-    mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 340 180' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L340,0 L340,128 C265.2,168 197.2,118 122.4,142 C61.2,162 27.2,172 0,148 Z'/%3E%3C/svg%3E");
-    -webkit-mask-size:100% 100%; mask-size:100% 100%;
-    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  /* ---- Front: header ---- */
+  .rjp-card-header{position:relative; padding:26px 30px 0; flex:none;}
+  .rjp-card-header-wave{position:absolute; inset:0; z-index:0; pointer-events:none;}
+  .rjp-card-logo{
+    position:absolute; top:24px; left:28px; width:170px; height:170px; border-radius:50%;
+    background:var(--white); padding:7px; box-shadow:0 8px 22px rgba(0,0,0,.2); z-index:2;
   }
-  .rjp-card-seal{
-    width:72px; height:72px; border-radius:50%; background:#fff; padding:5px; margin:0 auto 8px;
-    box-shadow:0 6px 16px rgba(0,0,0,.22);
+  .rjp-card-logo img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;}
+  .rjp-card-title-block{position:relative; z-index:1; text-align:center; padding-top:10px; padding-left:210px;}
+  .rjp-card-title-rjp{font-weight:800; font-size:80px; color:var(--c-blue); line-height:1; letter-spacing:.01em;}
+  .rjp-card-title-kn{font-family:'Noto Sans Kannada',sans-serif; font-weight:700; font-size:29px; color:var(--c-blue); margin-top:10px;}
+  .rjp-card-title-en{font-weight:700; font-size:17px; letter-spacing:.08em; color:var(--c-green); text-transform:uppercase; margin-top:8px;}
+  .rjp-card-tagline{
+    display:flex; align-items:center; justify-content:center; gap:14px; margin-top:20px;
+    font-family:'Noto Sans Kannada',sans-serif; font-weight:600; color:var(--c-green-deep); font-size:16px;
   }
-  .rjp-card-seal img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;}
-  .rjp-card-brand-en{font-weight:800; font-size:1.5rem; color:var(--navy); letter-spacing:.01em; line-height:1.1;}
-  .rjp-card-brand-kn{font-weight:700; color:var(--navy); font-size:1rem; margin-top:3px;}
-  .rjp-card-brand-full{font-size:.68rem; color:#5a3d00; margin-top:2px; font-weight:600;}
-  .rjp-card-tagline{margin-top:8px; font-size:.7rem; color:var(--navy); font-weight:600;}
+  .rjp-card-tagline::before, .rjp-card-tagline::after{content:""; width:36px; height:3px; background:var(--c-green); border-radius:2px;}
 
+  .rjp-card-badge-row{position:relative; z-index:1; text-align:center; margin-top:28px; padding:0 30px;}
   .rjp-card-badge{
-    display:inline-block; margin-top:-16px; position:relative; z-index:2;
-    background:var(--green); color:#fff; font-weight:700; font-size:.78rem;
-    padding:8px 22px; border-radius:999px; box-shadow:0 10px 20px -6px rgba(27,122,61,.5);
+    display:inline-flex; align-items:center; justify-content:center; height:64px; padding:0 40px;
+    background:var(--c-green); color:var(--white); font-weight:700; font-size:29px; letter-spacing:.02em;
+    border-radius:999px; box-shadow:0 12px 22px -8px rgba(0,107,45,.55);
   }
 
-  .rjp-card-body{padding:24px 20px 14px; display:flex; gap:14px; align-items:flex-start;}
-  .rjp-card-photo{width:84px; height:100px; border-radius:10px; object-fit:cover; border:3px solid var(--saffron); flex:none; background:#eef0f5;}
-  .rjp-card-photo.placeholder{display:flex; align-items:center; justify-content:center; color:#9aa3b5; font-size:.68rem; text-align:center;}
-  .rjp-card-fields{display:grid; gap:5px; flex:1; min-width:0;}
-  .rjp-card-fields .row{display:flex; gap:6px; font-size:.72rem; align-items:baseline;}
-  .rjp-card-fields .l{color:#6b7280; min-width:96px; flex:none;}
-  .rjp-card-fields .v{color:var(--navy); font-weight:700; overflow-wrap:anywhere;}
-
-  .rjp-card-sign{display:flex; align-items:center; justify-content:space-between; padding:6px 20px 18px; gap:12px;}
-  .rjp-card-sign-line{font-size:.64rem; color:#6b7280; border-top:1px solid var(--line); padding-top:6px; width:130px; text-align:center;}
-  .rjp-card-seal-block{display:flex; align-items:center; gap:8px;}
-  .rjp-card-seal-mini{
-    width:42px; height:42px; border-radius:50%; background:var(--green); color:#fff; flex:none;
-    display:flex; align-items:center; justify-content:center; font-size:1.1rem; box-shadow:0 6px 14px -4px rgba(27,122,61,.5);
+  .rjp-card-body{position:relative; z-index:1; padding:34px 30px 0; display:flex; gap:24px; align-items:flex-start;}
+  .rjp-card-photo{
+    width:170px; height:220px; border-radius:14px; object-fit:cover; flex:none;
+    background:var(--c-gray); border:1px solid var(--line);
   }
-  .rjp-card-seal-text{font-size:.62rem; font-weight:700; color:var(--saffron); line-height:1.35; text-align:left;}
+  .rjp-card-photo.placeholder{display:flex; align-items:center; justify-content:center;}
+  .rjp-card-photo.placeholder svg{width:72px; height:72px; color:#c3c8d3;}
+  .rjp-card-fields{display:grid; gap:22px; flex:1; min-width:0; padding-top:16px;}
+  .rjp-card-fields .row{display:flex; gap:8px; font-size:17px; align-items:baseline;}
+  .rjp-card-fields .l{font-family:'Noto Sans Kannada',sans-serif; color:var(--c-green-deep); font-weight:700; min-width:160px; flex:none;}
+  .rjp-card-fields .v{color:#111; font-weight:600; overflow-wrap:anywhere;}
+  .rjp-card-fields .row.id .v{color:var(--c-green); font-weight:800;}
+
+  .rjp-card-sign{position:relative; z-index:1; display:flex; align-items:center; padding:44px 30px 0; gap:20px;}
+  .rjp-card-sign-block{width:170px; flex:none; text-align:center;}
+  .rjp-card-seal-img{
+    width:64px; height:64px; border-radius:50%; display:block; margin:0 auto;
+    opacity:.85; transform:rotate(-8deg); box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  .rjp-card-sign-block .kn{font-family:'Noto Sans Kannada',sans-serif; font-weight:700; font-size:14px; color:#1a1a1a; border-top:1px solid var(--line); padding-top:8px; margin-top:10px;}
+  .rjp-card-sign-block .en{font-size:12px; color:#6b7280; margin-top:2px;}
+  .rjp-card-sign-divider{width:1px; align-self:stretch; background:var(--line); flex:none;}
+  .rjp-card-verify{display:flex; align-items:center; gap:16px; flex:1; min-width:0; padding-left:8px;}
+  .rjp-card-verify-badge{
+    width:56px; height:56px; border-radius:50%; background:var(--c-green); flex:none; padding:4px;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 8px 16px -6px rgba(0,107,45,.55);
+  }
+  .rjp-card-verify-badge img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;}
+  .rjp-card-verify-text{font-family:'Noto Sans Kannada',sans-serif; font-weight:700; font-size:16px; line-height:1.6;}
+  .rjp-card-verify-text .l1{color:var(--c-blue);}
+  .rjp-card-verify-text .l2{color:var(--c-green);}
+  .rjp-card-verify-text .l3{color:#E27B00;}
+
+  .rjp-card-front-spacer{flex:1; min-height:14px;}
+
+  .rjp-card-bottom-wave{position:relative; z-index:1; height:34px; flex:none;}
 
   .rjp-card-foot{
-    background:var(--navy); color:#fff; padding:10px 20px; display:flex; align-items:center;
-    justify-content:space-between; font-size:.7rem; gap:10px;
+    position:relative; z-index:1; background:var(--c-green-deep); color:var(--white); flex:none;
+    padding:14px 30px; display:flex; align-items:center; justify-content:space-between; font-size:14px; font-weight:600;
   }
-  .rjp-card-foot .social{display:flex; gap:8px;}
-  .rjp-card-foot .social a{color:#fff; opacity:.85;}
-  .rjp-card-foot .social svg{width:14px; height:14px; display:block;}
+  .rjp-card-foot .site{display:flex; align-items:center; gap:8px;}
+  .rjp-card-foot .site svg{width:18px; height:18px;}
+  .rjp-card-foot .social{display:flex; gap:12px;}
+  .rjp-card-foot .social svg{width:18px; height:18px; display:block; color:var(--white);}
 
+  /* ---- Back ---- */
   .rjp-card-back-header{
-    background:linear-gradient(120deg, var(--green), var(--green-deep));
-    color:#fff; padding:22px 20px 18px; text-align:center;
+    position:relative; background:var(--c-green-deep); color:var(--white); flex:none;
+    padding:26px 30px 34px; text-align:center; overflow:hidden;
   }
-  .rjp-card-back-header .kn{font-weight:800; font-size:1.05rem;}
-  .rjp-card-back-header .en{font-size:.76rem; opacity:.9; margin-top:2px;}
-  .rjp-card-back-header .tag{font-size:.66rem; opacity:.85; margin-top:8px;}
+  .rjp-card-back-header-curve{position:absolute; left:0; right:0; bottom:-1px; height:26px; width:100%; display:block; z-index:0;}
+  .rjp-card-back-header > *:not(.rjp-card-back-header-curve){position:relative; z-index:1;}
+  .rjp-card-back-header .kn{font-family:'Noto Sans Kannada',sans-serif; font-weight:800; font-size:30px; color:var(--c-gold);}
+  .rjp-card-back-header .en{font-weight:700; font-size:17px; letter-spacing:.04em; margin-top:8px;}
+  .rjp-card-back-header .tag{
+    font-family:'Noto Sans Kannada',sans-serif; font-weight:600; font-size:14px; color:var(--c-gold);
+    display:flex; align-items:center; justify-content:center; gap:10px; margin-top:16px;
+  }
+  .rjp-card-back-header .tag::before, .rjp-card-back-header .tag::after{content:""; width:26px; height:2px; background:var(--c-gold); opacity:.8;}
 
-  .rjp-card-points{padding:18px 20px 6px; display:grid; gap:12px;}
-  .rjp-card-point{display:flex; gap:10px; align-items:flex-start; font-size:.78rem; color:var(--navy);}
-  .rjp-card-point .ic{
-    width:28px; height:28px; border-radius:50%; background:var(--cream); flex:none;
-    display:flex; align-items:center; justify-content:center; font-size:.9rem;
+  .rjp-card-benefits{position:relative; z-index:1; padding:30px 30px 6px; display:grid; gap:24px;}
+  .rjp-card-benefit{display:flex; align-items:center; gap:16px; font-family:'Noto Sans Kannada',sans-serif; font-weight:600; font-size:17px; color:#1a1a1a;}
+  .rjp-card-benefit .ic{
+    width:46px; height:46px; border-radius:50%; background:var(--c-green); border:2px solid var(--c-gold); flex:none;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .rjp-card-benefit .ic svg{width:23px; height:23px; color:var(--white);}
+
+  .rjp-card-back-graphic{
+    position:absolute; top:196px; right:0; width:250px; height:430px; z-index:0; pointer-events:none; overflow:hidden;
+    -webkit-mask-image:linear-gradient(to right, transparent, #000 40%);
+    mask-image:linear-gradient(to right, transparent, #000 40%);
+  }
+  .rjp-card-back-graphic img{width:100%; height:100%; object-fit:cover; object-position:top; opacity:.6; display:block;}
+
+  .rjp-card-qr-row{position:relative; z-index:1; display:flex; gap:20px; align-items:center; padding:28px 30px 0;}
+  .rjp-card-qr-box{
+    width:130px; height:130px; flex:none; background:var(--white); border:2px solid #1a1a1a; border-radius:12px;
+    padding:8px; display:flex; align-items:center; justify-content:center;
+  }
+  .rjp-card-qr-box img{width:100%; height:100%; object-fit:contain;}
+  .rjp-card-qr-text{font-family:'Noto Sans Kannada',sans-serif; font-size:15px; line-height:1.55;}
+  .rjp-card-qr-text .kn{color:#1a1a1a; font-weight:600;}
+  .rjp-card-qr-text .en{color:var(--c-green); font-weight:700; margin-top:8px; font-family:'Poppins',sans-serif;}
+
+  .rjp-card-terms{position:relative; z-index:1; padding:26px 30px 0; display:grid; gap:14px;}
+  .rjp-card-term{display:flex; gap:10px; align-items:flex-start; font-family:'Noto Sans Kannada',sans-serif; font-size:14px; color:#333; line-height:1.55;}
+  .rjp-card-term svg{width:18px; height:18px; color:var(--c-green); flex:none; margin-top:2px;}
+
+  .rjp-card-back-spacer{flex:1; min-height:12px;}
+
+  .rjp-card-foot-back{
+    position:relative; z-index:1; background:var(--c-green-deep); color:var(--white); flex:none;
+    padding:16px 30px; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .rjp-card-helpline{display:flex; align-items:center; gap:12px;}
+  .rjp-card-helpline svg{width:26px; height:26px; color:var(--c-gold); flex:none;}
+  .rjp-card-helpline .l{font-size:11px; letter-spacing:.06em; opacity:.85;}
+  .rjp-card-helpline .n{font-size:19px; font-weight:800; color:var(--c-gold);}
+  .rjp-card-foot-back-right{text-align:right;}
+  .rjp-card-foot-back-right .email{font-size:13px; font-weight:600;}
+  .rjp-card-foot-back-right .social{display:flex; gap:10px; justify-content:flex-end; margin-top:8px;}
+  .rjp-card-foot-back-right .social svg{width:17px; height:17px; color:var(--white);}
+
+  /* ---- Page chrome (buttons, not part of the printable card) ---- */
+  .rjp-card-actions{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:22px;}
+  .rjp-card-actions button, .rjp-card-actions a{font-family:inherit;}
+
+  @media (max-width: 720px){
+    .rjp-card-page{padding:8px 4px 12px;}
   }
 
-  .rjp-card-qr-row{display:flex; gap:14px; align-items:center; padding:6px 20px 16px;}
-  .rjp-card-qr-row img{width:72px; height:72px; border:2px solid var(--line); border-radius:8px; flex:none;}
-  .rjp-card-qr-row p{font-size:.7rem; color:var(--navy); font-weight:600; margin:0;}
-
-  .rjp-card-compliance{padding:0 20px 14px; display:grid; gap:6px; font-size:.68rem; color:#3a4152;}
-  .rjp-card-compliance .row{display:flex; gap:6px; align-items:flex-start;}
+  @media print{
+    header, footer, .rjp-card-page > .wrap > .eyebrow, .rjp-card-page > .wrap > h2, .rjp-card-actions, .floating-actions{display:none !important;}
+    body{background:var(--white) !important;}
+    .rjp-card-stage{overflow:visible; height:auto !important;}
+    .rjp-card-wrap{transform:none !important; width:650px; margin:0 auto;}
+    .rjp-card{display:flex !important; flex-direction:column !important; box-shadow:none; page-break-after:always; page-break-inside:avoid;}
+  }

@@ -8,6 +8,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const db = require('./db');
 const memberRoutes = require('./routes/member');
 const adminRoutes = require('./routes/admin');
+const donationRoutes = require('./routes/donations');
 const { getCmsSection, parseLine } = require('./lib/cms');
 const { getSetting } = require('./lib/settings');
 const asyncHandler = require('./lib/asyncHandler');
@@ -55,7 +56,9 @@ const PAGE_META = {
   transparency: { title: 'ಪಾರದರ್ಶಕತೆ | RJP' },
   gallery: { title: 'ಫೋಟೋ ಗ್ಯಾಲರಿ | RJP' },
   join: { title: 'Join RJP | ಸದಸ್ಯತ್ವ' },
-  contact: { title: 'ಸಂಪರ್ಕ | RJP' }
+  contact: { title: 'ಸಂಪರ್ಕ | RJP' },
+  'karnataka-president': { title: 'ಕರ್ನಾಟಕ ರಾಜ್ಯಾಧ್ಯಕ್ಷರ ನೇಮಕಾತಿ | RJP' },
+  'karnataka-president-message': { title: 'ನೂತನ ರಾಜ್ಯಾಧ್ಯಕ್ಷ ವೀರೇಂದ್ರಬಾಬು ನಂಜೇಗೌಡರ ಸಂದೇಶ | RJP' }
 };
 
 function renderPage(page) {
@@ -77,12 +80,15 @@ app.get('/wings', renderPage('wings'));
 app.get('/transparency', renderPage('transparency'));
 app.get('/gallery', renderPage('gallery'));
 app.get('/join', renderPage('join'));
+app.get('/karnataka-president', renderPage('karnataka-president'));
+app.get('/karnataka-president-message', renderPage('karnataka-president-message'));
 app.get('/contact', asyncHandler(async (req, res) => {
   res.render('contact', { page: 'contact', meta: PAGE_META.contact, contact: await getCmsSection('contact') });
 }));
 
 app.use('/', memberRoutes);
 app.use('/', adminRoutes);
+app.use('/', donationRoutes);
 
 app.use((req, res) => {
   res.status(404).render('404', { page: '', meta: { title: 'Page Not Found | RJP' } });

@@ -46,13 +46,62 @@
           </div>
         </div>
 
-        <form method="POST" action="/dashboard/payment" enctype="multipart/form-data">
+        <form method="POST" action="/dashboard/payment" enctype="multipart/form-data" id="paymentForm">
+          <div class="mp-donation-box">
+            <label class="mp-donation-toggle">
+              <input type="checkbox" name="donationEnabled" id="donationEnabled" <%= old.donationEnabled ? 'checked' : '' %>>
+              ಪಕ್ಷಕ್ಕೆ ಹೆಚ್ಚುವರಿ ದೇಣಿಗೆ ನೀಡಲು ಬಯಸುತ್ತೇನೆ
+            </label>
+            <div class="mp-donation-amount <%= old.donationEnabled ? 'show' : '' %>" id="donationAmountWrap">
+              <label for="donationAmount">ದೇಣಿಗೆ ಮೊತ್ತ (ಕನಿಷ್ಠ ₹<%= donationMin %>)</label>
+              <input type="number" name="donationAmount" id="donationAmount" min="<%= donationMin %>" step="1"
+                     value="<%= old.donationAmount %>" placeholder="<%= donationMin %>">
+            </div>
+          </div>
+
+          <div class="mp-amount-summary">
+            <span>ಒಟ್ಟು ಪಾವತಿಸಬೇಕಾದ ಮೊತ್ತ</span>
+            <b>₹<span id="totalAmount"><%= paymentFee %></span></b>
+          </div>
+
           <label class="mp-field" style="margin-bottom:16px;">
             <span>Upload Payment Proof (screenshot/receipt — JPG, PNG or PDF)</span>
             <input type="file" name="paymentProof" accept=".jpg,.jpeg,.png,.pdf" required style="border:1px solid var(--mp-border); background:var(--mp-bg); padding:10px 12px; border-radius:10px;">
           </label>
-          <button type="submit" class="mp-cta-primary">Submit Payment Proof</button>
+          <button type="submit" class="mp-cta-primary">Submit Payment Proof — ₹<span id="totalAmountBtn"><%= paymentFee %></span></button>
         </form>
+
+        <script>
+          (function () {
+            var fee = <%= paymentFee %>;
+            var min = <%= donationMin %>;
+            var checkbox = document.getElementById('donationEnabled');
+            var amountWrap = document.getElementById('donationAmountWrap');
+            var amountInput = document.getElementById('donationAmount');
+            var totalEl = document.getElementById('totalAmount');
+            var totalBtnEl = document.getElementById('totalAmountBtn');
+
+            function recalc() {
+              var donation = 0;
+              if (checkbox.checked) {
+                amountWrap.classList.add('show');
+                amountInput.disabled = false;
+                var val = parseInt(amountInput.value, 10);
+                donation = Number.isFinite(val) && val >= min ? val : 0;
+              } else {
+                amountWrap.classList.remove('show');
+                amountInput.disabled = true;
+              }
+              var total = fee + donation;
+              totalEl.textContent = total;
+              totalBtnEl.textContent = total;
+            }
+
+            checkbox.addEventListener('change', recalc);
+            amountInput.addEventListener('input', recalc);
+            recalc();
+          })();
+        </script>
       <% } %>
     </div>
 

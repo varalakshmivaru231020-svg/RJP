@@ -335,9 +335,43 @@
     .cover { border-bottom: 2px solid #000; }
     .chapter, .part { break-inside: avoid; }
   }
+
+  /* ---------- RJP site bar (links this document back to the main site) ---------- */
+  .rjp-sitebar{
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 12px 24px;
+    background: var(--navy); border-bottom: 1px solid rgba(217,185,105,0.35);
+  }
+  .rjp-sitebar-brand{
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    font-family: 'Noto Serif Kannada', serif; font-weight: 700; font-size: 15px; color: #fbf5e6;
+  }
+  .rjp-sitebar-brand img{ width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+  .rjp-sitebar-back{
+    text-decoration: none; color: #d9b969; font-size: 13.5px; font-weight: 600;
+    border: 1px solid rgba(217,185,105,0.5); border-radius: 999px; padding: 7px 16px;
+    white-space: nowrap; transition: background .2s ease;
+  }
+  .rjp-sitebar-back:hover{ background: rgba(217,185,105,0.12); }
+  @media print { .rjp-sitebar, .rjp-endbar { display: none; } }
+
+  .rjp-endbar{ text-align: center; padding: 30px 24px 50px; }
+  .rjp-endbar a{
+    text-decoration: none; color: var(--rust-deep); font-weight: 600; font-size: 14.5px;
+    border: 1px solid var(--rule); border-radius: 999px; padding: 10px 22px; display: inline-block;
+  }
+  .rjp-endbar a:hover{ background: var(--paper-deep); }
 </style>
 </head>
 <body>
+<div class="rjp-sitebar">
+  <a class="rjp-sitebar-brand" href="/">
+    <img src="/images/logo.jpg" alt="RJP ಲೋಗೋ">
+    <span>ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ</span>
+  </a>
+  <a class="rjp-sitebar-back" href="/">← RJP ಜಾಲತಾಣಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
+</div>
 <div id="top"></div>
 
 <header class="cover">
@@ -1813,6 +1847,10 @@
 </footer>
 
 <a href="#top" class="totop" aria-label="ಮೇಲಕ್ಕೆ ಹೋಗಿ">↑</a>
+
+<div class="rjp-endbar">
+  <a href="/">← RJP ಜಾಲತಾಣಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
+</div>
 
 </body>
 </html>

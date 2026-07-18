@@ -177,6 +177,24 @@ body.member-portal{background:var(--mp-bg); color:var(--mp-text); font-family:'I
 }
 .mp-form-actions{display:flex; gap:14px; align-items:center;}
 .mp-form-actions button.mp-link{font-size:.88rem;}
+
+/* ---------- Donation toggle + amount summary ---------- */
+.mp-donation-box{border:1px solid var(--mp-border); border-radius:14px; padding:16px 18px; background:var(--mp-bg); margin-bottom:20px;}
+.mp-donation-toggle{display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:600; font-size:.95rem; color:var(--mp-text);}
+.mp-donation-toggle input{width:18px; height:18px; accent-color:var(--mp-primary); cursor:pointer;}
+.mp-donation-amount{margin-top:14px; display:none; flex-direction:column; gap:6px;}
+.mp-donation-amount.show{display:flex;}
+.mp-donation-amount label{font-size:.74rem; text-transform:uppercase; letter-spacing:.05em; color:var(--mp-text-muted); font-weight:600;}
+.mp-donation-amount input{
+  font-family:inherit; font-size:.95rem; font-weight:600; color:var(--mp-text);
+  border:1px solid var(--mp-border); border-radius:10px; padding:10px 12px; background:var(--mp-card); max-width:220px;
+}
+.mp-amount-summary{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  border-radius:14px; padding:16px 18px; margin:20px 0; background:var(--mp-primary); color:#fff;
+}
+.mp-amount-summary span{font-size:.85rem; opacity:.9;}
+.mp-amount-summary b{font-size:1.4rem; font-family:'Poppins',sans-serif;}
 .mp-info-photo{width:88px; height:88px; border-radius:16px; object-fit:cover; border:1px solid var(--mp-border); margin-bottom:16px;}
 
 /* ---------- Activity / notifications ---------- */

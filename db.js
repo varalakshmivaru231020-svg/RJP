@@ -90,6 +90,22 @@ const SCHEMA = [
     section VARCHAR(50) PRIMARY KEY,
     data LONGTEXT NOT NULL,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+
+  `CREATE TABLE IF NOT EXISTS donations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    pan VARCHAR(20),
+    amount INT NOT NULL,
+    purpose VARCHAR(100) NOT NULL,
+    payment_proof_path VARCHAR(255) NOT NULL,
+    transaction_id VARCHAR(100) NOT NULL,
+    payment_date DATE NOT NULL,
+    remarks TEXT,
+    status VARCHAR(20) NOT NULL DEFAULT 'Submitted',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`
 ];
 
@@ -116,6 +132,7 @@ async function init() {
   await ensureColumn('members', 'payment_proof_path', 'VARCHAR(255)');
   await ensureColumn('members', 'payment_submitted_at', 'DATETIME NULL');
   await ensureColumn('members', 'approved_at', 'DATETIME NULL');
+  await ensureColumn('members', 'donation_amount', 'INT NOT NULL DEFAULT 0');
 
   const adminCount = await pool.get('SELECT COUNT(*) AS n FROM admins');
   if (adminCount.n === 0) {

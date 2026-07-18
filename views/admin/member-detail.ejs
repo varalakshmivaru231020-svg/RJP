@@ -113,7 +113,8 @@
 
   <div class="admin-tab-panel" data-tab="payment">
     <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap;">
-      <span class="status-pill <%= member.payment_status==='Verified' ? 'approved' : (member.payment_status==='Rejected' ? 'rejected' : (member.payment_status==='Submitted' ? 'under-review' : 'pending')) %>">₹100 — <%= member.payment_status %></span>
+      <span class="status-pill <%= member.payment_status==='Verified' ? 'approved' : (member.payment_status==='Rejected' ? 'rejected' : (member.payment_status==='Submitted' ? 'under-review' : 'pending')) %>">₹<%= 100 + (member.donation_amount || 0) %> — <%= member.payment_status %></span>
+      <% if (member.donation_amount > 0) { %><span class="form-note">₹100 membership + ₹<%= member.donation_amount %> donation</span><% } %>
       <% if (member.payment_submitted_at) { %><span class="form-note">Submitted <%= member.payment_submitted_at %></span><% } %>
       <% if (member.payment_status !== 'Verified') { %>
         <form method="POST" action="/admin/members/<%= member.id %>/payment/verify" style="display:inline;">

@@ -25,6 +25,8 @@ function collectOld(body) {
   const old = {};
   for (const key of FORM_FIELDS) old[key] = body[key] || '';
   old.areasOfInterest = [].concat(body.areasOfInterest || []);
+  old.donationEnabled = Boolean(body.donationEnabled);
+  old.donationAmount = body.donationAmount || '';
   return old;
 }
 
@@ -41,18 +43,20 @@ router.get('/register', (req, res) => {
     districts: KARNATAKA_DISTRICTS,
     taluks: KARNATAKA_TALUKS,
     interests: AREAS_OF_INTEREST,
+    paymentFee: PAYMENT_FEE_AMOUNT,
+    donationMin: DONATION_MIN_AMOUNT,
     error: null,
     old: collectOld({})
   });
 });
 
 router.post('/register', (req, res, next) => {
-  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }])(req, res, async (uploadErr) => {
+  upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }, { name: 'paymentProof', maxCount: 1 }])(req, res, async (uploadErr) => {
    try {
     const old = collectOld(req.body);
     const fail = (message) => {
       // Clean up any files saved before validation failed
-      for (const f of [].concat(req.files?.photo || [], req.files?.idUpload || [])) {
+      for (const f of [].concat(req.files?.photo || [], req.files?.idUpload || [], req.files?.paymentProof || [])) {
         fs.unlink(f.path, () => {});
       }
       return res.status(400).render('register', {
@@ -61,6 +65,8 @@ router.post('/register', (req, res, next) => {
         districts: KARNATAKA_DISTRICTS,
         taluks: KARNATAKA_TALUKS,
         interests: AREAS_OF_INTEREST,
+        paymentFee: PAYMENT_FEE_AMOUNT,
+        donationMin: DONATION_MIN_AMOUNT,
         error: message,
         old
       });
@@ -76,6 +82,12 @@ router.post('/register', (req, res, next) => {
     if (password !== confirmPassword) return fail('Passwords do not match.');
     if (!declaration) return fail('You must accept the declaration to continue.');
 
+    const donation = parseDonation(req.body);
+    if (donation.error) return fail(donation.error);
+
+    const paymentProofFile = req.files?.paymentProof?.[0];
+    if (!paymentProofFile) return fail('Please upload proof of payment (screenshot or receipt).');
+
     const existing = await db.get('SELECT id FROM members WHERE mobile = ?', [mobile]);
     if (existing) return fail('An application already exists with this mobile number. Please login instead.');
 
@@ -89,7 +101,8 @@ router.post('/register', (req, res, next) => {
       'application_number', 'full_name', 'guardian_name', 'dob', 'gender', 'mobile', 'whatsapp', 'email', 'aadhaar', 'address',
       'state', 'district', 'taluk', 'assembly', 'parliament', 'ward', 'booth',
       'occupation', 'education', 'religion', 'caste', 'sub_caste', 'areas_of_interest', 'social_media',
-      'photo_path', 'id_upload_path', 'declaration_accepted', 'password_hash', 'status'
+      'photo_path', 'id_upload_path', 'declaration_accepted', 'password_hash', 'status', 'donation_amount',
+      'payment_proof_path', 'payment_status', 'payment_submitted_at'
     ];
     const values = [
       applicationNumber, fullName.trim(), old.guardianName || null, old.dob || null, old.gender || null, mobile,
@@ -97,7 +110,8 @@ router.post('/register', (req, res, next) => {
       old.state || 'Karnataka', old.district || null, old.taluk || null, old.assembly || null, old.parliament || null, old.ward || null, old.booth || null,
       old.occupation || null, old.education || null, old.religion || null, old.caste || null, old.subCaste || null, old.areasOfInterest.join(', '), old.socialMedia || null,
       photoFile ? path.basename(photoFile.path) : null, idFile ? path.basename(idFile.path) : null,
-      1, passwordHash, 'Pending Approval'
+      1, passwordHash, 'Pending Approval', donation.amount,
+      path.basename(paymentProofFile.path), 'Submitted', new Date()
     ];
 
     let result;
@@ -120,7 +134,9 @@ router.post('/register', (req, res, next) => {
       page: 'register-success',
       meta: { title: 'Application Submitted | RJP' },
       applicationNumber,
-      paymentFee: PAYMENT_FEE_AMOUNT
+      paymentFee: PAYMENT_FEE_AMOUNT,
+      donationAmount: donation.amount,
+      totalAmount: PAYMENT_FEE_AMOUNT + donation.amount
     });
    } catch (err) {
      next(err);
@@ -274,6 +290,18 @@ router.post('/dashboard/profile', requireMemberAuth, asyncHandler(async (req, re
   res.redirect('/dashboard/profile?updated=1');
 }));
 
+const DONATION_MIN_AMOUNT = 100;
+
+function parseDonation(body) {
+  const enabled = Boolean(body.donationEnabled);
+  if (!enabled) return { enabled: false, amount: 0, error: null };
+  const amount = parseInt(body.donationAmount, 10);
+  if (!Number.isFinite(amount) || amount < DONATION_MIN_AMOUNT) {
+    return { enabled: true, amount: 0, error: `ದೇಣಿಗೆ ಮೊತ್ತ ಕನಿಷ್ಠ ₹${DONATION_MIN_AMOUNT} ಆಗಿರಬೇಕು.` };
+  }
+  return { enabled: true, amount, error: null };
+}
+
 router.get('/dashboard/payment', requireMemberAuth, asyncHandler(async (req, res) => {
   const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
   if (!member) return res.redirect('/login');
@@ -282,6 +310,11 @@ router.get('/dashboard/payment', requireMemberAuth, asyncHandler(async (req, res
     meta: { title: 'Membership Payment | RJP' },
     member,
     paymentFee: PAYMENT_FEE_AMOUNT,
+    donationMin: DONATION_MIN_AMOUNT,
+    old: {
+      donationEnabled: member.donation_amount > 0,
+      donationAmount: member.donation_amount > 0 ? member.donation_amount : ''
+    },
     submitted: req.query.submitted === '1'
   });
 }));
@@ -292,12 +325,16 @@ router.post('/dashboard/payment', requireMemberAuth, (req, res, next) => {
       const member = await db.get('SELECT * FROM members WHERE id = ?', [req.session.memberId]);
       if (!member) return res.redirect('/login');
 
+      const old = { donationEnabled: Boolean(req.body.donationEnabled), donationAmount: req.body.donationAmount || '' };
+
       if (uploadErr) {
         return res.status(400).render('dashboard-payment', {
           page: 'payment',
           meta: { title: 'Membership Payment | RJP' },
           member,
           paymentFee: PAYMENT_FEE_AMOUNT,
+          donationMin: DONATION_MIN_AMOUNT,
+          old,
           submitted: false,
           error: uploadErr.message
         });
@@ -308,8 +345,25 @@ router.post('/dashboard/payment', requireMemberAuth, (req, res, next) => {
           meta: { title: 'Membership Payment | RJP' },
           member,
           paymentFee: PAYMENT_FEE_AMOUNT,
+          donationMin: DONATION_MIN_AMOUNT,
+          old,
           submitted: false,
           error: 'Please upload proof of payment (screenshot or receipt).'
+        });
+      }
+
+      const donation = parseDonation(req.body);
+      if (donation.error) {
+        fs.unlink(req.file.path, () => {});
+        return res.status(400).render('dashboard-payment', {
+          page: 'payment',
+          meta: { title: 'Membership Payment | RJP' },
+          member,
+          paymentFee: PAYMENT_FEE_AMOUNT,
+          donationMin: DONATION_MIN_AMOUNT,
+          old,
+          submitted: false,
+          error: donation.error
         });
       }
 
@@ -318,12 +372,14 @@ router.post('/dashboard/payment', requireMemberAuth, (req, res, next) => {
       }
 
       await db.run(
-        `UPDATE members SET payment_proof_path = ?, payment_status = 'Submitted', payment_submitted_at = NOW() WHERE id = ?`,
-        [path.basename(req.file.path), member.id]
+        `UPDATE members SET payment_proof_path = ?, payment_status = 'Submitted', payment_submitted_at = NOW(), donation_amount = ? WHERE id = ?`,
+        [path.basename(req.file.path), donation.amount, member.id]
       );
+      const totalAmount = PAYMENT_FEE_AMOUNT + donation.amount;
+      const donationNote = donation.amount > 0 ? ` (₹${PAYMENT_FEE_AMOUNT} ಸದಸ್ಯತ್ವ ಶುಲ್ಕ + ₹${donation.amount} ದೇಣಿಗೆ)` : '';
       await db.run(
         'INSERT INTO member_activity (member_id, action, note) VALUES (?, ?, ?)',
-        [member.id, 'Payment Proof Submitted', `₹${PAYMENT_FEE_AMOUNT} membership fee — awaiting verification`]
+        [member.id, 'Payment Proof Submitted', `₹${totalAmount} received${donationNote} — awaiting verification`]
       );
 
       res.redirect('/dashboard/payment?submitted=1');

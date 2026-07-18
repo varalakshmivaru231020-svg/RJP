@@ -348,6 +348,26 @@
   .wing-card.women .icon{background:rgba(27,122,61,.14); color:var(--green);}
   .wing-card p{color:#4a5364;}
 
+  /* ---------- Leadership spotlight ---------- */
+  .leader-grid{
+    display:grid; grid-template-columns:.8fr 1.2fr; gap:48px; align-items:center;
+  }
+  .leader-photo{
+    width:100%; height:100%; min-height:320px; object-fit:cover;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .leader-name-en{margin-bottom:.2em;}
+  .leader-name-kn{font-family:'Noto Sans Kannada',sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy); margin:0 0 .6em;}
+  .leader-credentials{
+    display:inline-block; font-weight:700; letter-spacing:.04em; font-size:.85rem;
+    color:var(--green-deep); background:var(--cream); border:1px solid var(--line);
+    border-radius:999px; padding:6px 16px; margin-bottom:20px;
+  }
+  .leader-quote{
+    margin:0 0 24px; padding-left:20px; border-left:3px solid var(--saffron);
+    font-family:'Fraunces',serif; font-style:italic; color:#4a5364; font-size:1.08rem; line-height:1.6;
+  }
+
   /* ---------- Transparency ---------- */
   /* ---------- Launch event ---------- */
   .launch{
@@ -510,7 +530,7 @@
     .menu-btn{display:block;}
   }
   @media (max-width: 940px){
-    .about-grid, .agenda-layout, .join-grid, .transparency, .contact-grid, .wings, .difference, .ideology-layout, .launch-grid{
+    .about-grid, .agenda-layout, .join-grid, .transparency, .contact-grid, .wings, .difference, .ideology-layout, .launch-grid, .leader-grid{
       grid-template-columns:1fr !important;
     }
     .agenda-layout img{position:static;}

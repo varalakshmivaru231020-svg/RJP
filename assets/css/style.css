@@ -1026,6 +1026,10 @@
   }
 
   @media print{
+    /* Browsers drop background colors/images on print by default to save ink,
+       which silently blanks every green bar on the card (and washes out its
+       white text with it) unless colors are forced to print exactly. */
+    *{-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important;}
     header, footer, .rjp-card-page > .wrap > .eyebrow, .rjp-card-page > .wrap > h2, .rjp-card-actions, .floating-actions{display:none !important;}
     body{background:var(--white) !important;}
     .rjp-card-stage{overflow:visible; height:auto !important;}

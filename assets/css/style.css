@@ -660,7 +660,7 @@
   @media (max-width:600px){
     .floating-actions{right:14px; bottom:14px; gap:10px;}
     .fab{width:48px; height:48px;}
-    .fab-donate{padding:0 16px;}
+    .fab-donate{width:auto; padding:0 16px;}
     .fab-donate-label{font-size:.82rem;}
     .fab svg{width:24px; height:24px;}
     .hero-nav{width:36px; height:36px; font-size:1rem;}

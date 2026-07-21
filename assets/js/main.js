@@ -96,4 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
   }
+
+  // Scales any .rjp-card-stage (membership card preview, front and/or back)
+  // to fit its container width — shared by the dashboard card page and the
+  // public /join preview, which can each host one or more stages.
+  const CARD_W = 520;
+  function fitCardStage(stage) {
+    const wrap = stage.querySelector('.rjp-card-wrap');
+    if (!wrap) return;
+    const active = wrap.querySelector('.rjp-card.active') || wrap.querySelector('.rjp-card');
+    const cardHeight = active ? active.offsetHeight : 0;
+    const scale = Math.min(1, stage.clientWidth / CARD_W);
+    wrap.style.transform = 'scale(' + scale + ')';
+    stage.style.height = (cardHeight * scale) + 'px';
+  }
+  function fitCardStages() {
+    document.querySelectorAll('.rjp-card-stage').forEach(fitCardStage);
+  }
+  if (document.querySelector('.rjp-card-stage')) {
+    window.rjpFitCardStages = fitCardStages;
+    fitCardStages();
+    window.addEventListener('resize', fitCardStages);
+    window.addEventListener('beforeprint', () => {
+      document.querySelectorAll('.rjp-card-wrap').forEach((w) => { w.style.transform = 'none'; });
+      document.querySelectorAll('.rjp-card-stage').forEach((s) => { s.style.height = 'auto'; });
+    });
+    window.addEventListener('afterprint', fitCardStages);
+  }
 });

@@ -8,8 +8,6 @@
 
 <%- include('partials/header') %>
 
-<% const dateParts = member.created_at.split(' ')[0].split('-'); const joinDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0]; %>
-
 <section class="join rjp-card-page" style="padding-top:48px;">
   <div class="wrap" style="max-width:900px; text-align:center;">
     <span class="eyebrow">ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</span>
@@ -17,152 +15,7 @@
 
     <div class="rjp-card-stage" id="rjpCardStage">
       <div class="rjp-card-wrap" id="rjpCardWrap">
-
-        <!-- ===================== FRONT ===================== -->
-        <div class="rjp-card front active" id="rjpCardFront">
-          <div class="rjp-card-header">
-            <img src="/images/card-header-banner.png" alt="RJP ಲೋಗೋ ಮತ್ತು ಶೀರ್ಷಿಕೆ">
-          </div>
-
-          <div class="rjp-card-badge-row">
-            <span class="rjp-card-badge">Digital Membership Card</span>
-          </div>
-
-          <div class="rjp-card-body">
-            <% if (member.photo_path) { %>
-              <img class="rjp-card-photo" src="/my-photo" alt="<%= member.full_name %>">
-            <% } else { %>
-              <div class="rjp-card-photo placeholder">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12Zm0 2.4c-3.3 0-9.8 1.6-9.8 4.9v2.5h19.6v-2.5c0-3.3-6.5-4.9-9.8-4.9Z"/></svg>
-              </div>
-            <% } %>
-            <div class="rjp-card-fields">
-              <div class="rjp-card-field"><span class="l">ಸದಸ್ಯ ಹೆಸರು</span><span class="v">: <%= member.full_name %></span></div>
-              <div class="rjp-card-field id"><span class="l">ಸದಸ್ಯ ID</span><span class="v">: <%= member.application_number %></span></div>
-              <div class="rjp-card-field"><span class="l">ಜಿಲ್ಲೆ</span><span class="v">: <%= member.district || '-' %></span></div>
-              <div class="rjp-card-field"><span class="l">ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ</span><span class="v">: <%= member.assembly || '-' %></span></div>
-              <div class="rjp-card-field"><span class="l">ಸದಸ್ಯತ್ವ ದಿನಾಂಕ</span><span class="v">: <%= joinDate %></span></div>
-            </div>
-          </div>
-
-          <div class="rjp-card-front-spacer"></div>
-
-          <div class="rjp-card-sign">
-            <div class="rjp-card-sign-block">
-              <svg class="rjp-card-seal-img" viewBox="0 0 100 100" role="img" aria-label="Authorised Digital Verification">
-                <circle cx="50" cy="50" r="47" fill="none" stroke="#0B6B33" stroke-width="2" stroke-dasharray="2.6 3.6"/>
-                <circle cx="50" cy="50" r="21" fill="#0B6B33"/>
-                <path d="M40 51l7 7 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <div class="cap">AUTHORISED DIGITAL VERIFICATION</div>
-            </div>
-            <div class="rjp-card-sign-divider"></div>
-            <div class="rjp-card-verify">
-              <div class="rjp-card-verify-text">
-                <div>ಹೊಸ ಚಿಂತನೆ...</div>
-                <div>ಹೊಸ ರಾಜಕೀಯ...</div>
-                <div>ಹೊಸ ಭವಿಷ್ಯ...</div>
-              </div>
-            </div>
-          </div>
-
-          <svg class="rjp-card-bottom-wave" viewBox="0 0 366 22" preserveAspectRatio="none">
-            <path d="M0,4 C120,26 260,20 366,6 V22 H0 Z" fill="#0B6B33"></path>
-            <path d="M0,1.5 C120,23.5 260,17.5 366,3.5" fill="none" stroke="#F4B400" stroke-width="3"></path>
-          </svg>
-
-          <div class="rjp-card-foot">
-            <span class="site">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              www.rjpindia.com
-            </span>
-            <span class="social">
-              <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9H16l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg></a>
-              <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.7l-5.2-6.8L5 22H2l8.1-9.3L1.6 2h6.9l4.7 6.2L18.9 2z"/></svg></a>
-              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg></a>
-            </span>
-          </div>
-        </div>
-
-        <!-- ===================== BACK ===================== -->
-        <div class="rjp-card back" id="rjpCardBack">
-          <div class="rjp-card-back-header">
-            <svg class="rjp-card-back-header-wave" viewBox="0 0 366 98" preserveAspectRatio="none">
-              <path d="M0,0 H366 V70 C280,96 130,74 0,92 Z" fill="#175A35"></path>
-              <path d="M366,70 C280,96 130,74 0,92" fill="none" stroke="#E3A311" stroke-width="2.5"></path>
-            </svg>
-            <div class="rjp-card-back-header-content">
-              <div class="kn">ರಾಷ್ಟ್ರೀಯ ಜನಹಿತ ಪಕ್ಷ (RJP)</div>
-              <div class="en">RASHTRIYA JANAHITA PARTY</div>
-              <div class="tag">ಜನ ಮೊದಲು... ಅಧಿಕಾರ ನಂತರ</div>
-            </div>
-          </div>
-
-          <div class="rjp-card-back-body">
-            <div class="rjp-card-back-graphic">
-              <img src="/images/card-back-graphic.png" alt="">
-            </div>
-
-            <div class="rjp-card-benefits">
-              <div class="rjp-card-benefit">
-                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-                ಜನರೊಂದಿಗೆ... ಜನರಿಗಾಗಿ... ಜನಹಿತಕ್ಕಾಗಿ
-              </div>
-              <div class="rjp-card-benefit">
-                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-                ಪಾರದರ್ಶಕತೆ ನಮ್ಮ ಬದ್ಧತೆ
-              </div>
-              <div class="rjp-card-benefit">
-                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="5" y1="7" x2="19" y2="7"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/><line x1="8" y1="21" x2="16" y2="21"/></svg></span>
-                ನ್ಯಾಯ, ಸಮಾನತೆ, ಅಭಿವೃದ್ಧಿ ನಮ್ಮ ಗುರಿ
-              </div>
-              <div class="rjp-card-benefit">
-                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-                ಸೇವೆ ನಮ್ಮ ಧರ್ಮ
-              </div>
-              <div class="rjp-card-benefit">
-                <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
-                ಸಮೃದ್ಧ ಭಾರತ ನಮ್ಮ ಕನಸು
-              </div>
-            </div>
-
-            <div class="rjp-card-qr-row">
-              <div class="rjp-card-qr-box">
-                <img src="<%= qrDataUrl %>" alt="QR verification code">
-              </div>
-              <div class="rjp-card-qr-text">
-                <div class="kn">ನಿಮ್ಮ ಸದಸ್ಯತ್ವವನ್ನು ಪರಿಶೀಲಿಸಲು<br>QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</div>
-                <div class="en">Scan QR to Verify<br>Your Membership</div>
-              </div>
-            </div>
-
-            <div class="rjp-card-terms">
-              <div class="rjp-card-term"><span class="ck">✓</span> ಈ ಕಾರ್ಡ್ ನಮ್ಮ ಪಕ್ಷದ ಅಧಿಕೃತ ಸದಸ್ಯತ್ವದ ಆಧಾರವಾಗಿದೆ.</div>
-              <div class="rjp-card-term"><span class="ck">✓</span> ಈ ಕಾರ್ಡ್ ಅನ್ನು ಇತರರಿಗೆ ವರ್ಗಾಯಿಸುವುದು ಅಮಾನ್ಯ.</div>
-              <div class="rjp-card-term"><span class="ck">✓</span> ನಮ್ಮ ಪಕ್ಷದ ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳಲ್ಲಿ ಮತ್ತು ಸೇವೆಗಳಲ್ಲಿ ಬಳಸಬಹುದು. www.rjpindia.com ಗೆ ಭೇಟಿ ನೀಡಿ.</div>
-            </div>
-
-            <div class="rjp-card-back-spacer"></div>
-          </div>
-
-          <div class="rjp-card-foot-back">
-            <div class="rjp-card-helpline">
-              <span class="l">RJP HELPLINE</span>
-              <span class="n">9632527961</span>
-            </div>
-            <div class="rjp-card-foot-back-right">
-              <span class="email">info@rjpindia.com</span>
-              <span class="social">
-                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9H16l-.4 2.9h-2.1v7A10 10 0 0 0 22 12z"/></svg></a>
-                <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.7l-5.2-6.8L5 22H2l8.1-9.3L1.6 2h6.9l4.7 6.2L18.9 2z"/></svg></a>
-                <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-                <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg></a>
-              </span>
-            </div>
-          </div>
-        </div>
-
+        <%- include('partials/membership-card-faces', { member, qrDataUrl, frontId: 'rjpCardFront', backId: 'rjpCardBack', frontActive: true, backActive: false }) %>
       </div>
     </div>
 
@@ -178,32 +31,11 @@
 <%- include('partials/footer') %>
 <script>
   (function () {
-    var stage = document.getElementById('rjpCardStage');
-    var wrap = document.getElementById('rjpCardWrap');
-    var CARD_W = 520;
-    var MAX_SCALE = 1;
-
-    function fitCard() {
-      var active = wrap.querySelector('.rjp-card.active') || wrap.querySelector('.rjp-card');
-      var cardHeight = active ? active.offsetHeight : 900;
-      var scale = Math.min(MAX_SCALE, stage.clientWidth / CARD_W);
-      wrap.style.transform = 'scale(' + scale + ')';
-      stage.style.height = (cardHeight * scale) + 'px';
-    }
-    window.addEventListener('resize', fitCard);
-    fitCard();
-
-    window.addEventListener('beforeprint', function () {
-      wrap.style.transform = 'none';
-      stage.style.height = 'auto';
-    });
-    window.addEventListener('afterprint', fitCard);
-
     document.getElementById('rjpCardFlip').addEventListener('click', function () {
       document.getElementById('rjpCardFront').classList.toggle('active');
       document.getElementById('rjpCardBack').classList.toggle('active');
       this.textContent = document.getElementById('rjpCardBack').classList.contains('active') ? '🔄 Flip to Front' : '🔄 Flip to Back';
-      fitCard();
+      if (window.rjpFitCardStages) window.rjpFitCardStages();
     });
 
     document.getElementById('rjpCardPrint').addEventListener('click', function () {

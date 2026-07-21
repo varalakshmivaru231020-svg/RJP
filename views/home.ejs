@@ -240,7 +240,18 @@
 
 <section id="join" class="join">
   <div class="wrap join-grid">
-    <img src="/images/membership-card.jpg" alt="RJP ಡಿಜಿಟಲ್ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್">
+    <div class="rjp-card-preview-row">
+      <div class="rjp-card-stage">
+        <div class="rjp-card-wrap">
+          <%- include('partials/membership-card-faces', { member: previewMember, qrDataUrl: previewQrDataUrl, frontActive: true, backActive: false }) %>
+        </div>
+      </div>
+      <div class="rjp-card-stage">
+        <div class="rjp-card-wrap">
+          <%- include('partials/membership-card-faces', { member: previewMember, qrDataUrl: previewQrDataUrl, frontActive: false, backActive: true }) %>
+        </div>
+      </div>
+    </div>
     <div class="join-copy">
       <span class="eyebrow">ಚಳುವಳಿ ಸೇರಿ</span>
       <h2>ಇದು ಒಂದು ಪಕ್ಷವಲ್ಲ, ಒಂದು ಚಳುವಳಿ</h2>

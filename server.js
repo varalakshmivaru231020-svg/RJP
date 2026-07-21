@@ -11,6 +11,7 @@ const adminRoutes = require('./routes/admin');
 const donationRoutes = require('./routes/donations');
 const { getCmsSection, parseLine } = require('./lib/cms');
 const { getSetting } = require('./lib/settings');
+const { cardQrDataUrl } = require('./lib/qr');
 const asyncHandler = require('./lib/asyncHandler');
 
 const app = express();
@@ -65,12 +66,31 @@ function renderPage(page) {
   return (req, res) => res.render(page, { page, meta: PAGE_META[page] });
 }
 
+// Sample data for the membership card preview shown on the public home and
+// join pages (not a real member) — keeps that preview rendered from the
+// same partial as the real card, so it never drifts from the live design.
+const CARD_PREVIEW_MEMBER = {
+  full_name: 'Your Name',
+  application_number: 'RJP2024XXXXXX',
+  district: 'Your District',
+  assembly: 'Your Constituency',
+  created_at: '2024-00-00 00:00:00',
+  photo_path: null
+};
+async function cardPreviewLocals(req) {
+  return {
+    previewMember: CARD_PREVIEW_MEMBER,
+    previewQrDataUrl: await cardQrDataUrl(req, CARD_PREVIEW_MEMBER.application_number)
+  };
+}
+
 app.get('/', asyncHandler(async (req, res) => {
   const banner = await getCmsSection('banner');
   res.render('home', {
     page: 'home',
     meta: PAGE_META.home,
-    banner: { ...banner, slides: banner.slides.map((line) => parseLine(line, ['image', 'alt'])) }
+    banner: { ...banner, slides: banner.slides.map((line) => parseLine(line, ['image', 'alt'])) },
+    ...(await cardPreviewLocals(req))
   });
 }));
 app.get('/about', renderPage('about'));
@@ -79,7 +99,9 @@ app.get('/agenda', renderPage('agenda'));
 app.get('/wings', renderPage('wings'));
 app.get('/transparency', renderPage('transparency'));
 app.get('/gallery', renderPage('gallery'));
-app.get('/join', renderPage('join'));
+app.get('/join', asyncHandler(async (req, res) => {
+  res.render('join', { page: 'join', meta: PAGE_META.join, ...(await cardPreviewLocals(req)) });
+}));
 app.get('/karnataka-president', renderPage('karnataka-president'));
 app.get('/karnataka-president-message', renderPage('karnataka-president-message'));
 app.get('/contact', asyncHandler(async (req, res) => {

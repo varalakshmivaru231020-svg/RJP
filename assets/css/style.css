@@ -1018,6 +1018,11 @@
 
   @media (max-width: 720px){
     .rjp-card-page{padding:8px 4px 12px;}
+    .rjp-card-page > .wrap{padding:0 8px;}
+  }
+  @media (max-width: 480px){
+    .rjp-card-actions{flex-direction:column; align-items:stretch; gap:10px;}
+    .rjp-card-actions button, .rjp-card-actions a{width:100%; justify-content:center;}
   }
 
   @media print{

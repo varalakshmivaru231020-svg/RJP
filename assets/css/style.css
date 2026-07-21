@@ -412,13 +412,11 @@
   .join-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;
   }
-  .rjp-card-preview-row{
-    width:100%; min-height:320px; display:flex; flex-wrap:wrap; gap:20px;
-    justify-content:center; align-items:center;
-    background:var(--white); padding:24px;
+  .join-grid img{
+    width:100%; height:100%; min-height:320px; object-fit:contain;
+    background:var(--white); padding:20px;
     border-radius:var(--radius); box-shadow:var(--shadow);
   }
-  .rjp-card-preview-row .rjp-card-stage{flex:1 1 220px; width:auto; max-width:520px; min-width:0;}
   .join-copy h2{margin-bottom:.3em;}
   .join-steps{list-style:none; margin:24px 0; padding:0; counter-reset:step;}
   .join-steps li{
@@ -647,18 +645,24 @@
   .fab svg{width:28px; height:28px;}
   .fab-whatsapp{background:#25D366;}
   .fab-call{background:var(--green-deep);}
-  .fab-donate{
-    background:var(--saffron); color:var(--navy);
-    width:auto; padding:0 20px 0 16px; border-radius:28px; gap:8px;
+  .fab-donate{background:var(--saffron); position:relative; overflow:visible;}
+  .fab-donate-label{
+    position:absolute; right:100%; top:50%; transform:translateY(-50%);
+    margin-right:10px; background:var(--navy); color:var(--white);
+    padding:6px 14px; border-radius:999px; font-size:.85rem; font-weight:700;
+    white-space:nowrap; box-shadow:0 8px 18px -8px rgba(0,0,0,.5);
   }
-  .fab-donate svg{width:22px; height:22px; flex:none;}
-  .fab-donate .fab-label{font-size:.95rem; font-weight:700; white-space:nowrap;}
+  @media (prefers-reduced-motion: no-preference){
+    .fab-donate{animation:fabDonatePulse 1.8s ease-in-out infinite;}
+  }
+  @keyframes fabDonatePulse{
+    0%, 100%{transform:scale(1); box-shadow:0 12px 28px -10px rgba(0,0,0,.5);}
+    50%{transform:scale(1.12); box-shadow:0 14px 32px -8px rgba(240,164,0,.7);}
+  }
   @media (max-width:600px){
     .floating-actions{right:14px; bottom:14px; gap:10px;}
     .fab{width:48px; height:48px;}
-    .fab-donate{width:auto; padding:0 16px 0 12px; gap:6px;}
-    .fab-donate svg{width:18px; height:18px;}
-    .fab-donate .fab-label{font-size:.82rem;}
+    .fab-donate-label{font-size:.78rem; padding:5px 12px;}
     .fab svg{width:24px; height:24px;}
     .hero-nav{width:36px; height:36px; font-size:1rem;}
     .hero-nav.prev{left:8px;}

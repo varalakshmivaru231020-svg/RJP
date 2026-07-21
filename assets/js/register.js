@@ -65,4 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
       showStep(current - 1);
     });
   });
+
+  const errorStep = Number(document.querySelector('.wizard-card')?.dataset.errorStep);
+  if (errorStep > 1) {
+    showStep(errorStep);
+    const errorBanner = document.querySelector('.form-error');
+    if (errorBanner) window.scrollTo({ top: errorBanner.offsetTop - 100, behavior: 'smooth' });
+  }
 });

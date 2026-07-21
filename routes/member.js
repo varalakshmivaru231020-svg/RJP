@@ -46,6 +46,7 @@ router.get('/register', (req, res) => {
     paymentFee: PAYMENT_FEE_AMOUNT,
     donationMin: DONATION_MIN_AMOUNT,
     error: null,
+    errorStep: null,
     old: collectOld({})
   });
 });
@@ -54,7 +55,7 @@ router.post('/register', (req, res, next) => {
   upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'idUpload', maxCount: 1 }, { name: 'paymentProof', maxCount: 1 }])(req, res, async (uploadErr) => {
    try {
     const old = collectOld(req.body);
-    const fail = (message) => {
+    const fail = (message, step) => {
       // Clean up any files saved before validation failed
       for (const f of [].concat(req.files?.photo || [], req.files?.idUpload || [], req.files?.paymentProof || [])) {
         fs.unlink(f.path, () => {});
@@ -68,28 +69,29 @@ router.post('/register', (req, res, next) => {
         paymentFee: PAYMENT_FEE_AMOUNT,
         donationMin: DONATION_MIN_AMOUNT,
         error: message,
+        errorStep: step || 1,
         old
       });
     };
 
-    if (uploadErr) return fail(uploadErr.message);
+    if (uploadErr) return fail(uploadErr.message, 3);
 
     const { fullName, mobile, password, confirmPassword, declaration } = req.body;
 
-    if (!fullName || !fullName.trim()) return fail('Full name is required.');
-    if (!/^[0-9]{10}$/.test(mobile || '')) return fail('Enter a valid 10-digit mobile number.');
-    if (!password || password.length < 6) return fail('Password must be at least 6 characters.');
-    if (password !== confirmPassword) return fail('Passwords do not match.');
-    if (!declaration) return fail('You must accept the declaration to continue.');
+    if (!fullName || !fullName.trim()) return fail('Full name is required.', 1);
+    if (!/^[0-9]{10}$/.test(mobile || '')) return fail('Enter a valid 10-digit mobile number.', 1);
+    if (!password || password.length < 6) return fail('Password must be at least 6 characters.', 1);
+    if (password !== confirmPassword) return fail('Passwords do not match.', 1);
+    if (!declaration) return fail('You must accept the declaration to continue.', 3);
 
     const donation = parseDonation(req.body);
-    if (donation.error) return fail(donation.error);
+    if (donation.error) return fail(donation.error, 3);
 
     const paymentProofFile = req.files?.paymentProof?.[0];
-    if (!paymentProofFile) return fail('Please upload proof of payment (screenshot or receipt).');
+    if (!paymentProofFile) return fail('Please upload proof of payment (screenshot or receipt).', 3);
 
     const existing = await db.get('SELECT id FROM members WHERE mobile = ?', [mobile]);
-    if (existing) return fail('An application already exists with this mobile number. Please login instead.');
+    if (existing) return fail('An application already exists with this mobile number. Please login instead.', 1);
 
     const photoFile = req.files?.photo?.[0];
     const idFile = req.files?.idUpload?.[0];
@@ -125,7 +127,7 @@ router.post('/register', (req, res, next) => {
         [result.insertId, 'Application Submitted', 'Registered via public membership form']
       );
     } catch (e) {
-      return fail('Something went wrong saving your application. Please try again.');
+      return fail('Something went wrong saving your application. Please try again.', 3);
     }
 
     req.session.memberId = result.insertId;

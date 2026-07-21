@@ -12,7 +12,7 @@
     <span class="eyebrow">ಚಳುವಳಿ ಸೇರಿ</span>
     <h2 style="margin-bottom:28px;">ಸದಸ್ಯತ್ವ ನೋಂದಣಿ ಫಾರ್ಮ್</h2>
 
-    <div class="wizard-card">
+    <div class="wizard-card" data-error-step="<%= errorStep || '' %>">
       <ol class="wizard-steps" id="wizardSteps">
         <li class="active" data-step="1"><span class="num">1</span> ವೈಯಕ್ತಿಕ ವಿವರ</li>
         <li data-step="2"><span class="num">2</span> ರಾಜಕೀಯ ವಿವರ</li>
@@ -199,11 +199,11 @@
               <p class="form-note" style="margin-top:0; margin-bottom:8px; font-weight:600; color:var(--navy);">ಬ್ಯಾಂಕ್ / UPI ವಿವರಗಳು</p>
               <div class="contact-grid" style="gap:28px; align-items:center;">
                 <ul class="contact-list" style="margin:0;">
-                  <li><span class="ic">🏦</span> Rashtriya Janahita Party</li>
-                  <li><span class="ic">🏛️</span> City Union Bank — Vidyaranyapura Branch</li>
-                  <li><span class="ic">💳</span> Current Account: 510909010169682</li>
-                  <li><span class="ic">🔢</span> IFSC: CIUB0000567</li>
-                  <li><span class="ic">📲</span> UPI ID: EZE0437212@CUB</li>
+                  <li><span class="ic">🏦</span> <span>Rashtriya Janahita Party</span></li>
+                  <li><span class="ic">🏛️</span> <span>City Union Bank — Vidyaranyapura Branch</span></li>
+                  <li><span class="ic">💳</span> <span>Current Account: 510909010169682</span></li>
+                  <li><span class="ic">🔢</span> <span>IFSC: CIUB0000567</span></li>
+                  <li><span class="ic">📲</span> <span>UPI ID: EZE0437212@CUB</span></li>
                 </ul>
 
                 <div style="text-align:center;">

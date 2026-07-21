@@ -17,8 +17,7 @@ const DONATION_PURPOSES = [
 ];
 
 const EMPTY_OLD = {
-  fullName: '', email: '', mobile: '', pan: '', amount: '', purpose: '',
-  transactionId: '', paymentDate: '', remarks: ''
+  fullName: '', email: '', mobile: '', pan: '', amount: '', purpose: '', remarks: ''
 };
 
 function collectOld(body) {
@@ -56,7 +55,7 @@ router.post('/donate', (req, res, next) => {
 
       if (uploadErr) return fail(uploadErr.message);
 
-      const { fullName, email, mobile, pan, amount, purpose, transactionId, paymentDate, remarks, declaration } = req.body;
+      const { fullName, email, mobile, pan, amount, purpose, remarks, declaration } = req.body;
 
       if (!fullName || !fullName.trim()) return fail('ಪೂರ್ಣ ಹೆಸರು ನಮೂದಿಸಿ.');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '')) return fail('ಸರಿಯಾದ ಇಮೇಲ್ ವಿಳಾಸ ನಮೂದಿಸಿ.');
@@ -67,17 +66,15 @@ router.post('/donate', (req, res, next) => {
 
       if (!DONATION_PURPOSES.includes(purpose)) return fail('ದೇಣಿಗೆಯ ಉದ್ದೇಶ ಆಯ್ಕೆಮಾಡಿ.');
       if (!req.file) return fail('ಪಾವತಿ ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.');
-      if (!transactionId || !transactionId.trim()) return fail('ಟ್ರಾನ್ಸಾಕ್ಷನ್ ಐಡಿ / UTR ಸಂಖ್ಯೆ ನಮೂದಿಸಿ.');
-      if (!paymentDate) return fail('ಪಾವತಿ ದಿನಾಂಕ ನಮೂದಿಸಿ.');
       if (!declaration) return fail('ಮುಂದುವರಿಯಲು ಘೋಷಣೆಯನ್ನು ಒಪ್ಪಿಕೊಳ್ಳಬೇಕು.');
 
       await db.run(
         `INSERT INTO donations
-          (full_name, email, mobile, pan, amount, purpose, payment_proof_path, transaction_id, payment_date, remarks)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          (full_name, email, mobile, pan, amount, purpose, payment_proof_path, remarks)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           fullName.trim(), email.trim(), mobile, pan ? pan.trim().toUpperCase() : null, amt, purpose,
-          path.basename(req.file.path), transactionId.trim(), paymentDate, remarks ? remarks.trim() : null
+          path.basename(req.file.path), remarks ? remarks.trim() : null
         ]
       );
 

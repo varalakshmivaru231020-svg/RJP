@@ -101,8 +101,8 @@ const SCHEMA = [
     amount INT NOT NULL,
     purpose VARCHAR(100) NOT NULL,
     payment_proof_path VARCHAR(255) NOT NULL,
-    transaction_id VARCHAR(100) NOT NULL,
-    payment_date DATE NOT NULL,
+    transaction_id VARCHAR(100) NULL,
+    payment_date DATE NULL,
     remarks TEXT,
     status VARCHAR(20) NOT NULL DEFAULT 'Submitted',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -133,6 +133,8 @@ async function init() {
   await ensureColumn('members', 'payment_submitted_at', 'DATETIME NULL');
   await ensureColumn('members', 'approved_at', 'DATETIME NULL');
   await ensureColumn('members', 'donation_amount', 'INT NOT NULL DEFAULT 0');
+  await pool.query('ALTER TABLE donations MODIFY transaction_id VARCHAR(100) NULL');
+  await pool.query('ALTER TABLE donations MODIFY payment_date DATE NULL');
 
   const adminCount = await pool.get('SELECT COUNT(*) AS n FROM admins');
   if (adminCount.n === 0) {

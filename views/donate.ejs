@@ -42,7 +42,7 @@
             <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ *
               <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" placeholder="10 ಅಂಕಿಗಳ ಸಂಖ್ಯೆ" value="<%= old.mobile %>" required>
             </label>
-            <label>PAN ಸಂಖ್ಯೆ <span class="hint">(ಐಚ್ಛಿಕ)</span>
+            <label><span>PAN ಸಂಖ್ಯೆ <span class="hint">(ಐಚ್ಛಿಕ)</span></span>
               <input type="text" name="pan" maxlength="10" style="text-transform:uppercase;" placeholder="ABCDE1234F" value="<%= old.pan %>">
             </label>
           </div>
@@ -112,12 +112,6 @@
           </label>
 
           <div class="form-grid" style="margin-top:18px;">
-            <label>ಟ್ರಾನ್ಸಾಕ್ಷನ್ ಐಡಿ / UTR ಸಂಖ್ಯೆ *
-              <input type="text" name="transactionId" value="<%= old.transactionId %>" required>
-            </label>
-            <label>ಪಾವತಿ ದಿನಾಂಕ *
-              <input type="date" name="paymentDate" value="<%= old.paymentDate %>" required>
-            </label>
             <label class="span-2">ಹೆಚ್ಚುವರಿ ಟಿಪ್ಪಣಿ <span class="hint">(ಐಚ್ಛಿಕ)</span>
               <textarea name="remarks" rows="3"><%= old.remarks %></textarea>
             </label>

@@ -889,7 +889,7 @@
   .rjp-card-wrap{width:520px; flex:none; transform-origin:top center; position:relative;}
 
   .rjp-card{
-    width:520px; border-radius:20px; background:var(--white); border:1px solid #D7DBE3;
+    width:520px; height:720px; border-radius:20px; background:var(--white); border:1px solid #D7DBE3;
     box-shadow:0 20px 50px -22px rgba(11,20,50,.4); overflow:hidden;
     font-family:'Poppins','Noto Sans Kannada',sans-serif; color:#1a1a1a;
     display:none; position:relative;

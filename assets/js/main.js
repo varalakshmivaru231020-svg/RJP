@@ -99,14 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scales any .rjp-card-stage (membership card preview, front and/or back)
   // to fit its container width — shared by the dashboard card page and the
-  // public /join preview, which can each host one or more stages.
+  // public /join preview, which can each host one or more stages. Capped
+  // below 1 so the card renders at a smaller, more compact footprint even
+  // on wide screens rather than its full native 520px design width.
   const CARD_W = 520;
+  const MAX_SCALE = 0.82;
   function fitCardStage(stage) {
     const wrap = stage.querySelector('.rjp-card-wrap');
     if (!wrap) return;
     const active = wrap.querySelector('.rjp-card.active') || wrap.querySelector('.rjp-card');
     const cardHeight = active ? active.offsetHeight : 0;
-    const scale = Math.min(1, stage.clientWidth / CARD_W);
+    const scale = Math.min(MAX_SCALE, stage.clientWidth / CARD_W);
     wrap.style.transform = 'scale(' + scale + ')';
     stage.style.height = (cardHeight * scale) + 'px';
   }

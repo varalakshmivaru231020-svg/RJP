@@ -49,8 +49,12 @@
 
           <div class="rjp-card-sign">
             <div class="rjp-card-sign-block">
-              <img class="rjp-card-seal-img" src="/images/card-verify-seal.jpg" alt="ಅಧಿಕೃತ ಸಹಿ">
-              <div class="cap">ಅಧಿಕೃತ ಸಹಿ / Authorised Signatory</div>
+              <svg class="rjp-card-seal-img" viewBox="0 0 100 100" role="img" aria-label="Authorised Digital Verification">
+                <circle cx="50" cy="50" r="47" fill="none" stroke="#0B6B33" stroke-width="2" stroke-dasharray="2.6 3.6"/>
+                <circle cx="50" cy="50" r="21" fill="#0B6B33"/>
+                <path d="M40 51l7 7 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="cap">AUTHORISED DIGITAL VERIFICATION</div>
             </div>
             <div class="rjp-card-sign-divider"></div>
             <div class="rjp-card-verify">
@@ -145,7 +149,7 @@
           <div class="rjp-card-foot-back">
             <div class="rjp-card-helpline">
               <span class="l">RJP HELPLINE</span>
-              <span class="n">1800 123 2024</span>
+              <span class="n">9632527961</span>
             </div>
             <div class="rjp-card-foot-back-right">
               <span class="email">info@rjpindia.com</span>
@@ -177,7 +181,7 @@
     var stage = document.getElementById('rjpCardStage');
     var wrap = document.getElementById('rjpCardWrap');
     var CARD_W = 520;
-    var MAX_SCALE = 0.75;
+    var MAX_SCALE = 1;
 
     function fitCard() {
       var active = wrap.querySelector('.rjp-card.active') || wrap.querySelector('.rjp-card');

@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <%- include('partials/head') %>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <%- include('partials/sidebar') %>
+
+<% const dateParts = member.created_at.split(' ')[0].split('-'); const joinDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0]; %>
 
 <div class="admin-panel" style="text-align:center;">
   <div class="rjp-card-wrap" id="rjpCardWrap">
@@ -23,23 +25,29 @@
           </div>
         <% } %>
         <div class="rjp-card-fields">
-          <div class="rjp-card-field"><span class="l">ಸದಸ್ಯ ಹೆಸರು</span><span class="v"><%= member.full_name %></span></div>
-          <div class="rjp-card-field id"><span class="l">ಸದಸ್ಯ ID</span><span class="v"><%= member.application_number %></span></div>
-          <div class="rjp-card-field"><span class="l">ಜಿಲ್ಲೆ</span><span class="v"><%= member.district || '-' %></span></div>
-          <div class="rjp-card-field"><span class="l">ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ</span><span class="v"><%= member.assembly || '-' %></span></div>
-          <div class="rjp-card-field"><span class="l">ಸದಸ್ಯತ್ವ ದಿನಾಂಕ</span><span class="v"><%= member.created_at.split(' ')[0] %></span></div>
+          <div class="rjp-card-field"><span class="l">ಸದಸ್ಯ ಹೆಸರು</span><span class="v">: <%= member.full_name %></span></div>
+          <div class="rjp-card-field id"><span class="l">ಸದಸ್ಯ ID</span><span class="v">: <%= member.application_number %></span></div>
+          <div class="rjp-card-field"><span class="l">ಜಿಲ್ಲೆ</span><span class="v">: <%= member.district || '-' %></span></div>
+          <div class="rjp-card-field"><span class="l">ವಿಧಾನಸಭಾ ಕ್ಷೇತ್ರ</span><span class="v">: <%= member.assembly || '-' %></span></div>
+          <div class="rjp-card-field"><span class="l">ಸದಸ್ಯತ್ವ ದಿನಾಂಕ</span><span class="v">: <%= joinDate %></span></div>
         </div>
       </div>
       <div class="rjp-card-front-spacer"></div>
       <div class="rjp-card-sign">
         <div class="rjp-card-sign-block">
-          <img class="rjp-card-seal-img" src="/images/card-verify-seal.jpg" alt="ಅಧಿಕೃತ ಸಹಿ">
-          <div class="cap">ಅಧಿಕೃತ ಸಹಿ / Authorised Signatory</div>
+          <svg class="rjp-card-seal-img" viewBox="0 0 100 100" role="img" aria-label="Authorised Digital Verification">
+            <circle cx="50" cy="50" r="47" fill="none" stroke="#0B6B33" stroke-width="2" stroke-dasharray="2.6 3.6"/>
+            <circle cx="50" cy="50" r="21" fill="#0B6B33"/>
+            <path d="M40 51l7 7 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="cap">AUTHORISED DIGITAL VERIFICATION</div>
         </div>
+        <div class="rjp-card-sign-divider"></div>
         <div class="rjp-card-verify">
           <div class="rjp-card-verify-text">
-            <div>RJP ಪರಿಶೀಲಿತ ಸದಸ್ಯ</div>
-            <div>Verified Member</div>
+            <div>ಹೊಸ ಚಿಂತನೆ...</div>
+            <div>ಹೊಸ ರಾಜಕೀಯ...</div>
+            <div>ಹೊಸ ಭವಿಷ್ಯ...</div>
           </div>
         </div>
       </div>
@@ -102,21 +110,21 @@
         <div class="rjp-card-qr-row">
           <div class="rjp-card-qr-box"><img src="<%= qrDataUrl %>" alt="QR verification code"></div>
           <div class="rjp-card-qr-text">
-            <div>ನಿಮ್ಮ ಸದಸ್ಯತ್ವವನ್ನು ಪರಿಶೀಲಿಸಲು QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</div>
-            <div class="en">Scan QR to Verify Your Membership</div>
+            <div class="kn">ನಿಮ್ಮ ಸದಸ್ಯತ್ವವನ್ನು ಪರಿಶೀಲಿಸಲು<br>QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</div>
+            <div class="en">Scan QR to Verify<br>Your Membership</div>
           </div>
         </div>
         <div class="rjp-card-terms">
           <div class="rjp-card-term"><span class="ck">✓</span> ಈ ಕಾರ್ಡ್ ನಮ್ಮ ಪಕ್ಷದ ಅಧಿಕೃತ ಸದಸ್ಯತ್ವದ ಆಧಾರವಾಗಿದೆ.</div>
-          <div class="rjp-card-term"><span class="ck">✓</span> ಈ ಕಾರ್ಡ್ ಅನ್ನು ಇನ್ನೊಬ್ಬರಿಗೆ ವರ್ಗಾಯಿಸುವುದು ಅಮಾನ್ಯ.</div>
-          <div class="rjp-card-term"><span class="ck">✓</span> ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ www.rjpindia.com ಗೆ ಭೇಟಿ ನೀಡಿ.</div>
+          <div class="rjp-card-term"><span class="ck">✓</span> ಈ ಕಾರ್ಡ್ ಅನ್ನು ಇತರರಿಗೆ ವರ್ಗಾಯಿಸುವುದು ಅಮಾನ್ಯ.</div>
+          <div class="rjp-card-term"><span class="ck">✓</span> ನಮ್ಮ ಪಕ್ಷದ ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳಲ್ಲಿ ಮತ್ತು ಸೇವೆಗಳಲ್ಲಿ ಬಳಸಬಹುದು. www.rjpindia.com ಗೆ ಭೇಟಿ ನೀಡಿ.</div>
         </div>
         <div class="rjp-card-back-spacer"></div>
       </div>
       <div class="rjp-card-foot-back">
         <div class="rjp-card-helpline">
           <span class="l">RJP HELPLINE</span>
-          <span class="n">1800 123 2024</span>
+          <span class="n">9632527961</span>
         </div>
         <div class="rjp-card-foot-back-right">
           <span class="email">info@rjpindia.com</span>

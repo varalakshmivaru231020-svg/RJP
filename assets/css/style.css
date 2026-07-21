@@ -909,7 +909,7 @@
 
   .rjp-card-sign{flex:none; display:flex; align-items:center; gap:16px; padding:18px 22px 18px;}
   .rjp-card-sign-block{text-align:center; flex:none;}
-  .rjp-card-seal-img{width:74px; height:74px; object-fit:contain; display:block; margin:0 auto;}
+  .rjp-card-seal-img{width:92px; height:92px; object-fit:contain; display:block; margin:0 auto;}
   .rjp-card-sign-block .cap{width:120px; font-size:10.5px; color:var(--c-muted); font-weight:600; border-top:1px solid var(--c-line); padding-top:6px; margin-top:6px;}
   .rjp-card-sign-divider{width:1px; align-self:stretch; background:var(--c-line); flex:none;}
   .rjp-card-verify{display:flex; align-items:center; flex:1;}
